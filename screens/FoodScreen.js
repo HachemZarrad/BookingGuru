@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image} from 'react-native';
 import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking'
+import {baseUrl} from '../constants/networking';
+import Colors from '../constants/colors';
 
-const Hotels = () => {
+const Food = () => {
 
     const [hotels, setHotels] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 17
   },
   ParentContainer: {
-    backgroundColor: '#e6e6e6',
+    backgroundColor: Colors.background,
     justifyContent: 'center'
   },
   textContainer: {
@@ -86,4 +87,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Hotels; 
+export default Food; 

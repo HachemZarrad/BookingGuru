@@ -2,20 +2,21 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image} from 'react-native';
 import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking'
+import {baseUrl} from '../constants/networking';
+import Colors from '../constants/colors';
 
-const Hotels = () => {
+const Trains = () => {
 
-    const [hotels, setHotels] = useState([]);
+    const [trains, setTrains] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
     
-        fetch(`${baseUrl}hotels`, {method: 'get', signal: signal})
+        fetch(`${baseUrl}trains`, {method: 'get', signal: signal})
           .then((response) => response.json())
-          .then((json) => setHotels(json))
+          .then((json) => setTrains(json))
           .catch((error) => console.error(error))
           .finally(() => setLoading(false));
     
@@ -32,16 +33,16 @@ const Hotels = () => {
             {isLoading ? <ActivityIndicator/> : (
             <FlatList
               style={{marginBottom:80}}
-              data={hotels}
+              data={trains}
               keyExtractor={({ _id }) => _id.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity>
                     <View style={styles.container}>
-                        <Image source={{uri: item.thumbnailUrl}} style={styles.image}/> 
+                        <Image source={{uri: item.image}} style={styles.image}/> 
                         <View style={styles.textContainer}>
-                        <Text style={styles.hotelName}>{item.name}</Text>
-                        <Text style={styles.text}>starRating: {item.starRating}</Text>
-                        <Text style={styles.text}>Price: ${item.price}</Text>
+                        <Text style={styles.stationName}>{item.name}</Text>
+                        <Text style={styles.text}>Accuracy: {item.accuracy}</Text>
+                        <Text style={styles.text}>Distance: {item.distance} miles</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -67,17 +68,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden'
   },
-  hotelName: {
+  stationName: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 30,
     marginRight: 180
   },
   text: {
-    fontSize: 17
+    fontSize: 15
   },
   ParentContainer: {
-    backgroundColor: '#e6e6e6',
+    backgroundColor: Colors.background,
     justifyContent: 'center'
   },
   textContainer: {
@@ -86,4 +87,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Hotels; 
+export default Trains; 

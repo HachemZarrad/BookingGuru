@@ -1,28 +1,56 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text } from 'react-native';
+import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import  Colors  from '../constants/colors';
 
 const Icons = () => {
+    const navigation = useNavigation();
     return(
         <View style={styles.frame}>
+            <Text style={styles.title}>Pick Up You Plan Here</Text>
             <View style={styles.container}>
-                <Image 
-                    source={require('../assets/hotel.png')}
-                    style={styles.image}/>
-                <Image 
-                    source={require('../assets/airplane.png')}
-                    style={styles.image}/>
-                <Image 
-                    source={require('../assets/loc1.png')}
-                    style={styles.image}/>
-                <Image 
-                    source={require('../assets/train.png')}
-                    style={styles.image}/>
+                <TouchableOpacity onPress={()=> navigation.navigate('Hotels')}>
+                    <Image 
+                        source={require('../assets/hotel.png')}
+                        style={styles.image}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('Food')}> 
+                    <Image 
+                        source={require('../assets/food.png')}
+                        style={styles.image}/>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=> navigation.navigate('Flights')}>
+                    <Image 
+                        source={require('../assets/airplane.png')}
+                        style={styles.image}/>
+                </TouchableOpacity>
             </View>
             <View style={styles.container}>
                 <Text>Hotel</Text>
+                <Text>Food</Text>
                 <Text>Flight</Text>
-                <Text>City</Text>
+            </View>
+            <View style={styles.container}>
+              <TouchableOpacity onPress={()=> navigation.navigate('Trains')}>
+                <Image 
+                    source={require('../assets/train.png')}
+                    style={styles.image}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> navigation.navigate('Buses')}>
+                <Image 
+                    source={require('../assets/bus.png')}
+                    style={styles.image}/>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> navigation.navigate('Taxis')}>
+                <Image 
+                    source={require('../assets/taxi.png')}
+                    style={styles.image}/>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.container}>
                 <Text>Train</Text>
+                <Text>Bus</Text>
+                <Text>Taxi</Text>
             </View>
         </View>
     );
@@ -31,21 +59,32 @@ const Icons = () => {
 
 const styles = StyleSheet.create({
     image: {
-        width: 60,
-        height: 60,
+        width: 65,
+        height: 65,
     },
     container: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginBottom: 10
+        marginBottom: 6
     },
     icon: {
         flexDirection: 'column'
     },
     frame: {
-        width: 300,
-        marginLeft: 44
-    }
+        height: 200,
+        width: 340,
+        borderRadius: 10,
+        marginLeft: 10,
+        marginBottom: 80
+      
+    },
+    title: {
+        fontWeight:'bold',
+        fontStyle:'italic',
+        fontSize: 20,
+        marginLeft: 5,
+        marginBottom: 15
+      }
 });
 
 export default Icons;

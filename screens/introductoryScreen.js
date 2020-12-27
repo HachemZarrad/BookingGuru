@@ -1,16 +1,18 @@
 import React from 'react';
-import {Text, StyleSheet, View, Button, Image} from 'react-native';
+import {Text, StyleSheet, View, Button, Image, ScrollView} from 'react-native';
 import Colors from '../constants/colors';
 import Toolbar from '../components/toolbar';
 
-const IntroductoryScreen = () => {
+
+const Introductory = () => {
     return (
         <View style={styles.imageContainer}>
+          <ScrollView>
             <Toolbar/>
             <Image 
                 source={require('../assets/introPic.jpg')}/>
             
-            <Text>IntroductoryScreen</Text>
+            <Text>Introductory</Text>
             <Text>ensuring that annual activity reports and declarations 
                 present a consistent assessment of supervisory and control
                  systems which is compatible with the reservations 
@@ -21,7 +23,9 @@ const IntroductoryScreen = () => {
                     color={Colors.primary}
                     title={'Show Details'}
                 />
+              
             </View>
+          </ScrollView>
         </View>
     );
 }
@@ -51,4 +55,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default IntroductoryScreen;
+export default Introductory;

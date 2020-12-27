@@ -2,20 +2,21 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image} from 'react-native';
 import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking'
+import {baseUrl} from '../constants/networking';
+import Colors from '../constants/colors';
 
-const Hotels = () => {
+const Taxis = () => {
 
-    const [hotels, setHotels] = useState([]);
+    const [taxis, setTaxis] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
     
-        fetch(`${baseUrl}hotels`, {method: 'get', signal: signal})
+        fetch(`${baseUrl}taxis`, {method: 'get', signal: signal})
           .then((response) => response.json())
-          .then((json) => setHotels(json))
+          .then((json) => setTaxis(json))
           .catch((error) => console.error(error))
           .finally(() => setLoading(false));
     
@@ -32,16 +33,16 @@ const Hotels = () => {
             {isLoading ? <ActivityIndicator/> : (
             <FlatList
               style={{marginBottom:80}}
-              data={hotels}
+              data={taxis}
               keyExtractor={({ _id }) => _id.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity>
                     <View style={styles.container}>
-                        <Image source={{uri: item.thumbnailUrl}} style={styles.image}/> 
+                        <Image source={require('../assets/taxiPic.jpg')} style={styles.image}/> 
                         <View style={styles.textContainer}>
-                        <Text style={styles.hotelName}>{item.name}</Text>
-                        <Text style={styles.text}>starRating: {item.starRating}</Text>
-                        <Text style={styles.text}>Price: ${item.price}</Text>
+                          <Text style={styles.bold}>Distance: {item.distance_desc}</Text>
+                          <Text style={styles.bold}>Duration: {item.duration}</Text>
+                          <Text style={styles.text}>{item.text}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -67,17 +68,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden'
   },
-  hotelName: {
-    fontSize: 20,
+  bold: {
+    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 30,
-    marginRight: 180
+    marginRight: 100,
+    marginBottom: 10
   },
   text: {
-    fontSize: 17
+    fontSize: 17,
+    marginRight: 160
   },
   ParentContainer: {
-    backgroundColor: '#e6e6e6',
+    backgroundColor: Colors.background,
     justifyContent: 'center'
   },
   textContainer: {
@@ -86,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Hotels; 
+export default Taxis; 

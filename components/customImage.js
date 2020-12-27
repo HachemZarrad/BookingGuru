@@ -5,7 +5,7 @@ const CustomImage = () => {
     return(
         <View style={styles.container}>
             <Image 
-                source={require('../assets/sk.png')}
+                source={require('../assets/vacation.jpg')}
                 style={styles.image}/>
         </View>
     );
@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
         height: 200,
         width: 340,
         borderRadius: 10,
-        marginTop: 80,
-        marginBottom: 50
+        marginTop: 10,
+        marginBottom: 30
     },
     container: {
         alignItems: 'center',

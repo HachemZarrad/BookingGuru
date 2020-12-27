@@ -15,14 +15,15 @@ const Toolbar = () => {
 
 const styles = StyleSheet.create({
     toolbar: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.toolbarColor,
         alignItems: 'center',
-        height: 150
-
+        height: 130,
+        marginBottom: 30
     },
     image: {
-        width: 120,
-        height: 100
+        width: 124,
+        height: 100,
+        margin: 20
     }
 });
 
