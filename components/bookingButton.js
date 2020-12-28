@@ -6,7 +6,7 @@ const BookingButton = props => {
     return(
         <View style={styles.container} >
             <View style={styles.priceContainer}>
-                <Text style={styles.price}>{props.price}</Text>
+                <Text style={styles.price}>${props.price}</Text>
             </View>
             <TouchableOpacity style={styles.buttonContainer} >
                  <Text style={styles.textButton}>Booking</Text>

@@ -1,21 +1,23 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text} from 'react-native';
 import Colors from '../constants/colors';
+import HotelStars from '../components/hotelStars';
+
 
 const RatingCard = props => {
     return(
         <View style={styles.container}>
             <View style={styles.magazine}>
                 <Image 
-                    source={require('../assets/busPic.jpg')}
+                    source={{uri: props.hotel.thumbnailUrl}}
                     style={styles.image}/> 
                 <View style={styles.textNextToImage}>
-                    <Text style={styles.bold}>name</Text>
-                    <Text style={styles.text}>Airport</Text>
+                    <Text style={styles.bold}>{props.hotel.name}</Text>
+                    <HotelStars rating={props.hotel.starRating}/>
                 </View>
             </View>
-            <Text>This is a fucking paragraph to test this fucking shit not anything else
-                you stupid son of bitch, 
+            <Text style={styles.text}>A place where you can shill, have fun, maybe gather with your friends and family,
+                we have plenty of services and activities here. Our slogan is enjoy yourself.
             </Text>
         </View>
     );
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
       },
       text: {
-        fontSize: 15
+        fontSize: 11
       },
       image: {
           width: 70,
