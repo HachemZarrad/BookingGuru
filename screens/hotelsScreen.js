@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
-    ActivityIndicator, Image} from 'react-native';
+    ActivityIndicator, Image, TextInput, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Toolbar from '../components/toolbar';
 import {baseUrl} from '../constants/networking';
 import HotelStars from '../components/hotelStars';
 import  { createFilter } from 'react-native-search-filter'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-const KEYS_TO_FILTERS = ['name'];
-import { Avatar } from 'react-native-elements';
+import Colors from '../constants/colors';
+const KEYS_TO_FILTERS = ['name', 'locality'];
+import { Avatar, Accessory } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Hotels = () => {
 
@@ -48,7 +49,8 @@ const Hotels = () => {
             <TextInput
               onChangeText={(term) => { setSearchTerm(term); showHotels(true) }} 
               placeholder = "search down here" style = {{width: 300, height:50,
-              backgroundColor: "#e4e6eb", borderRadius: 20, marginLeft: 16}}
+               borderRadius: 20, backgroundColor: 'white', marginLeft: 30, marginTop: 10,
+              backgroundColor: 'white', borderColor: Colors.toolbarColor, borderWidth: 4}}
               value = {searchTerm}>
             </TextInput>
           </View>
@@ -57,8 +59,8 @@ const Hotels = () => {
           <ScrollView>
           {filteredHotels.map(hotel => {
             return (
-              <TouchableOpacity onPress={()=> {gethotelId(hotel.id); showHotels(false); setSearchTerm('')}} key={hotel.id}>
-                <View style={{flexDirection: 'row',  backgroundColor: '#e4e6eb'}}>
+              <TouchableOpacity onPress={()=> navigation.navigate('HotelDetails', hotel)} key={hotel._id}>
+                <View style={{flexDirection: 'row',  backgroundColor: '', margin: 6}}>
                   <Avatar
                       source={{
                         uri: hotel.thumbnailUrl,

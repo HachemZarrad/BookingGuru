@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image, ActivityIndicator,
    ScrollView, TouchableOpacity} from 'react-native';
 import {baseUrl} from '../constants/networking';
+import { useNavigation } from '@react-navigation/native';
 
 const Destinations = () => {
-
+  
     const [destinations, setDestinations] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const navigation = useNavigation();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -32,7 +34,9 @@ const Destinations = () => {
               <ScrollView horizontal={true} >
               {destinations.map(destination => {
                 return (
-                  <TouchableOpacity key={destination._id} style={styles.container}>
+                  <TouchableOpacity key={destination._id} 
+                    style={styles.container}
+                    onPress={()=> navigation.navigate('FiltredHotels', destination)}>
                     <View>
                       <Image
                           source={{

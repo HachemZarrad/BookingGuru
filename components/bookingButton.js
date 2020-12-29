@@ -1,14 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Button} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity,
+     Button, Alert} from 'react-native';
 import Colors from '../constants/colors';
+import { useNavigation } from '@react-navigation/native';
+
 
 const BookingButton = props => {
+    const navigation = useNavigation();
+
+    const createTwoButtonAlert = () =>
+    Alert.alert(
+      "Title",
+      "Thank you for booking with us you will receive a notification once verified by our team",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => navigation.navigate('Home') }
+      ],
+      { cancelable: false }
+    );
+    
     return(
         <View style={styles.container} >
             <View style={styles.priceContainer}>
                 <Text style={styles.price}>${props.price}</Text>
             </View>
-            <TouchableOpacity style={styles.buttonContainer} >
+            <TouchableOpacity style={styles.buttonContainer} 
+                                onPress={() => createTwoButtonAlert()}>
                  <Text style={styles.textButton}>Booking</Text>
             </TouchableOpacity>
         </View>

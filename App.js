@@ -16,7 +16,7 @@ import Taxis from './screens/TaxisScreen';
 import TaxiDetails from './screens/details/taxiDetails';
 import Buses from './screens/BusesScreen';
 import BusDetails from './screens/details/busDetails';
-import HotelStars from './components/hotelStars';
+import FiltredHotels from './screens/filteredHotels';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,8 +25,9 @@ export default function App() {
     <NavigationContainer>
         
         <Drawer.Navigator>
-            <Drawer.Screen name="Logo" component={Home}/>
+            <Drawer.Screen name="Logo" component={LogoScreen}/>
             <Drawer.Screen name="Home" component={Home}/>
+            <Drawer.Screen name="FiltredHotels" component={FiltredHotels}/>
             <Drawer.Screen name="Flights" component={Flights} />
             <Drawer.Screen name="Hotels" component={Hotels}/>
             <Drawer.Screen name="Buses" component={Buses} />

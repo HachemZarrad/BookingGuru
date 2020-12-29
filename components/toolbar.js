@@ -12,14 +12,14 @@ const Toolbar = () => {
     return( 
         <View style={styles.toolbar}>
             <TouchableOpacity>
-                <Icon name="bars" size={30} color="#000000"
+                <Icon name="bars" size={25} color="#000000"
                     onPress={openMenu}/>
             </TouchableOpacity>
             <Image 
                 source={require('../assets/guruLogo.png')}
                 style={styles.image}/>
             <TouchableOpacity>
-                <Icon name="bell" size={30} color="#000000"/>
+                <Icon name="bell" size={25} color="#000000"/>
             </TouchableOpacity>
         </View>
     );
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     image: {
-        width: 124,
-        height: 100,
+        width: 100,
+        height: 80,
         margin: 20
     }
 });
