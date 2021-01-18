@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../constants/colors';
@@ -28,7 +28,7 @@ const Toolbar = () => {
 
 const styles = StyleSheet.create({
     toolbar: {
-        backgroundColor: Colors.toolbarColor,
+        backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : 'white',
         alignItems: 'center',
         flexDirection: 'row',
         height: 130,
