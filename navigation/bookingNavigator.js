@@ -33,81 +33,39 @@ import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
 
 
-const bookingStackNavigator = createStackNavigator();
-
-export const BookingNavigator = () => {
-    return(
-        <bookingStackNavigator.Navigator>
-            <bookingStackNavigator.Screen 
-                name='Home'
-                component={HomeNavigator}/>
-            <bookingStackNavigator.Screen 
-                name='Hotels'
-                component={HotelsNavigator}/>
-            <bookingStackNavigator.Screen 
-                name='Flights'
-                component={Flights}/>
-            <bookingStackNavigator.Screen 
-                name='Taxis'
-                component={TaxisNavigator}/>
-            <bookingStackNavigator.Screen 
-                name='Trains'
-                component={TrainsNavigator}/>
-            <bookingStackNavigator.Screen 
-                name='Food'
-                component={FoodNavigator}/>
-            <bookingStackNavigator.Screen 
-                name='Buses'
-                component={BusesNavigator}/>    
-        </bookingStackNavigator.Navigator>
-    )
-}
-
-const homeStackNavigator = createStackNavigator();
-
-export const HomeNavigator = () => {
-    return(
-        <homeStackNavigator.Navigator>
-            <homeStackNavigator.Screen name="Logo" component={LogoScreen}/>
-            <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen}/>
-            <homeStackNavigator.Screen name="HomePage" component={Home}/>
-        </homeStackNavigator.Navigator>
-  );
-}
-
 const bookingDrawerNavigator = createDrawerNavigator();
 
 export const BookingDrawer = () => {
-   return(
-       <bookingDrawerNavigator.Navigator>
-           <bookingDrawerNavigator.Screen
-                name="HomePage" 
-                component={Home} 
-                options={{
-                drawerIcon: props => (
-                <Ionicons
-                    name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                    size={23}
-                    color={props.color}
-                    />
-                    )
-                }}
-            />
-           <bookingDrawerNavigator.Screen 
-                name="HotelsOverview" 
-                component={Hotels}
+    return(
+        <bookingDrawerNavigator.Navigator>
+            <bookingDrawerNavigator.Screen 
+                name='Home'
+                component={HomeNavigator}
                 options={{
                     drawerIcon: props => (
                     <Ionicons
                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                         size={23}
                         color={props.color}
-                    />
-                    )
-                 }}
+                        />
+                        )
+                    }}
             />
-           <bookingDrawerNavigator.Screen
-                name="FlightsOverview" 
+            <bookingDrawerNavigator.Screen 
+                name='Hotels'
+                component={HotelsNavigator}
+                options={{
+                    drawerIcon: props => (
+                    <Ionicons
+                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        size={23}
+                        color={props.color}
+                        />
+                        )
+                    }}
+            />
+            <bookingDrawerNavigator.Screen 
+                name='Flights'
                 component={Flights}
                 options={{
                     drawerIcon: props => (
@@ -115,71 +73,183 @@ export const BookingDrawer = () => {
                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                         size={23}
                         color={props.color}
-                     />
-                    )
-                }}
+                        />
+                        )
+                    }}
             />
-           <bookingDrawerNavigator.Screen 
-                name="TrainsOverview"
-                component={Trains}
+            <bookingDrawerNavigator.Screen 
+                name='Taxis'
+                component={TaxisNavigator}
                 options={{
                     drawerIcon: props => (
                     <Ionicons
                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                         size={23}
                         color={props.color}
-                    />
-                    )
-                }}
+                        />
+                        )
+                    }}
             />
-           <bookingDrawerNavigator.Screen
-                name="TaxisOverview"
-                component={Taxis}
+            <bookingDrawerNavigator.Screen 
+                name='Trains'
+                component={TrainsNavigator}
                 options={{
                     drawerIcon: props => (
                     <Ionicons
                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                         size={23}
                         color={props.color}
-                    />
-                    )
-                 }}
+                        />
+                        )
+                    }}
             />
-           <bookingDrawerNavigator.Screen
-                name="BusesOverview"
-                component={Buses}
+            <bookingDrawerNavigator.Screen 
+                name='Food'
+                component={FoodNavigator}
                 options={{
                     drawerIcon: props => (
                     <Ionicons
                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                         size={23}
                         color={props.color}
-                    />
-                    )
-                }}
+                        />
+                        )
+                    }}
             />
-            <bookingDrawerNavigator.Screen
-                name="FoodOverview"
-                component={Food}
+            <bookingDrawerNavigator.Screen 
+                name='Buses'
+                component={BusesNavigator}
                 options={{
                     drawerIcon: props => (
                     <Ionicons
                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
                         size={23}
                         color={props.color}
-                    />
-                    )
-                }}
-            />
-       </bookingDrawerNavigator.Navigator>
-   );
+                        />
+                        )
+                    }}
+            />    
+        </bookingDrawerNavigator.Navigator>
+    )
 }
+
+const homeStackNavigator = createStackNavigator();
+
+export const HomeNavigator = () => {
+    return(
+        <homeStackNavigator.Navigator screenOptions={{headerShown: false}} >
+            <homeStackNavigator.Screen name="Logo" component={LogoScreen}/>
+            <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen}/>
+            <homeStackNavigator.Screen name="HomePage" component={Home}/>
+        </homeStackNavigator.Navigator>
+  );
+}
+
+// const bookingDrawerNavigator1 = createDrawerNavigator();
+
+// export const BookingDrawer1 = () => {
+//    return(
+//        <bookingDrawerNavigator.Navigator>
+//            <bookingDrawerNavigator.Screen
+//                 name="HomePage" 
+//                 component={Home} 
+//                 options={{
+//                 drawerIcon: props => (
+//                 <Ionicons
+//                     name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                     size={23}
+//                     color={props.color}
+//                     />
+//                     )
+//                 }}
+//             />
+//            <bookingDrawerNavigator.Screen 
+//                 name="HotelsOverview" 
+//                 component={Hotels}
+//                 options={{
+//                     drawerIcon: props => (
+//                     <Ionicons
+//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                         size={23}
+//                         color={props.color}
+//                     />
+//                     )
+//                  }}
+//             />
+//            <bookingDrawerNavigator.Screen
+//                 name="FlightsOverview" 
+//                 component={Flights}
+//                 options={{
+//                     drawerIcon: props => (
+//                     <Ionicons
+//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                         size={23}
+//                         color={props.color}
+//                      />
+//                     )
+//                 }}
+//             />
+//            <bookingDrawerNavigator.Screen 
+//                 name="TrainsOverview"
+//                 component={Trains}
+//                 options={{
+//                     drawerIcon: props => (
+//                     <Ionicons
+//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                         size={23}
+//                         color={props.color}
+//                     />
+//                     )
+//                 }}
+//             />
+//            <bookingDrawerNavigator.Screen
+//                 name="TaxisOverview"
+//                 component={Taxis}
+//                 options={{
+//                     drawerIcon: props => (
+//                     <Ionicons
+//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                         size={23}
+//                         color={props.color}
+//                     />
+//                     )
+//                  }}
+//             />
+//            <bookingDrawerNavigator.Screen
+//                 name="BusesOverview"
+//                 component={Buses}
+//                 options={{
+//                     drawerIcon: props => (
+//                     <Ionicons
+//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                         size={23}
+//                         color={props.color}
+//                     />
+//                     )
+//                 }}
+//             />
+//             <bookingDrawerNavigator.Screen
+//                 name="FoodOverview"
+//                 component={Food}
+//                 options={{
+//                     drawerIcon: props => (
+//                     <Ionicons
+//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+//                         size={23}
+//                         color={props.color}
+//                     />
+//                     )
+//                 }}
+//             />
+//        </bookingDrawerNavigator.Navigator>
+//    );
+// }
 
 const hotelsStackNavigator = createStackNavigator();
 
 export const HotelsNavigator = () => {
     return(
-        <hotelsStackNavigator.Navigator>
+        <hotelsStackNavigator.Navigator screenOptions={{headerShown: false}}>
             <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels}/>
             <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails}/>
         </hotelsStackNavigator.Navigator>
@@ -190,7 +260,7 @@ const flightsStackNavigator = createStackNavigator();
 
 export const FlightsNavigator = () => {
     return(
-        <flightsStackNavigator.Navigator>
+        <flightsStackNavigator.Navigator screenOptions={{headerShown: false}}>
             <flightsStackNavigator.Screen name="FlightsOverview" component={Flights}/>
             <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails}/>
         </flightsStackNavigator.Navigator>
@@ -201,7 +271,7 @@ const taxisStackNavigator = createStackNavigator();
 
 export const TaxisNavigator = () => {
     return(
-        <taxisStackNavigator.Navigator>
+        <taxisStackNavigator.Navigator screenOptions={{headerShown: false}}>
             <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis}/>
             <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails}/>
         </taxisStackNavigator.Navigator>
@@ -212,7 +282,7 @@ const trainsStackNavigator = createStackNavigator();
 
 export const TrainsNavigator = () => {
     return(
-        <trainsStackNavigator.Navigator>
+        <trainsStackNavigator.Navigator screenOptions={{headerShown: false}}>
             <trainsStackNavigator.Screen name="TrainsOverview" component={Trains}/>
             <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails}/>
         </trainsStackNavigator.Navigator>
@@ -223,7 +293,7 @@ const busesStackNavigator = createStackNavigator();
 
 export const BusesNavigator = () => {
     return(
-        <busesStackNavigator.Navigator>
+        <busesStackNavigator.Navigator screenOptions={{headerShown: false}}>
             <busesStackNavigator.Screen name="BusesOverview" component={Buses}/>
             <busesStackNavigator.Screen name="BusDetails" component={BusDetails}/>
         </busesStackNavigator.Navigator>
@@ -234,7 +304,7 @@ const foodStackNavigator = createStackNavigator();
 
 export const FoodNavigator = () => {
      return(
-        <foodStackNavigator.Navigator>
+        <foodStackNavigator.Navigator screenOptions={{headerShown: false}}>
             <foodStackNavigator.Screen name="FoodOverview" component={Food}/>
             <foodStackNavigator.Screen name="DishDetails" component={DishDetails}/>
         </foodStackNavigator.Navigator>
@@ -245,7 +315,7 @@ const AuthStackNavigator = createStackNavigator();
 
 export const AuthNavigator = () => {
     return (
-        <AuthStackNavigator.Navigator>
+        <AuthStackNavigator.Navigator screenOptions={{headerShown: false}}>
         <AuthStackNavigator.Screen
             name="Auth"
             component={AuthScreen}
