@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image} from 'react-native';
-import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking';
-import Colors from '../constants/colors';
+import Toolbar from '../../components/toolbar';
+import { baseUrl } from '../../constants/networking';
+import Colors from '../../constants/colors';
 
 const Taxis = () => {
 
@@ -38,7 +38,7 @@ const Taxis = () => {
               renderItem={({ item }) => (
                 <TouchableOpacity>
                     <View style={styles.container}>
-                        <Image source={require('../assets/taxiPic.jpg')} style={styles.image}/> 
+                        <Image source={require('../../assets/taxiPic.jpg')} style={styles.image}/> 
                         <View style={styles.textContainer}>
                           <Text style={styles.bold}>Distance: {item.distance_desc}</Text>
                           <Text style={styles.bold}>Duration: {item.duration}</Text>

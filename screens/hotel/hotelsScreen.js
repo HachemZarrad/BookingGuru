@@ -2,14 +2,18 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image, TextInput, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking';
-import HotelStars from '../components/hotelStars';
-import  { createFilter } from 'react-native-search-filter'
-import Colors from '../constants/colors';
-const KEYS_TO_FILTERS = ['name', 'locality'];
+
+import Toolbar from '../../components/toolbar';
+import { baseUrl } from '../../constants/networking';
+import HotelStars from '../../components/hotelStars';
+import Colors from '../../constants/colors';
+
 import { Avatar, Accessory } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import  { createFilter } from 'react-native-search-filter'
+const KEYS_TO_FILTERS = ['name', 'locality'];
+
 
 const Hotels = () => {
 

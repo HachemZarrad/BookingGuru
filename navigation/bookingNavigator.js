@@ -7,48 +7,81 @@ import IntroductoryScreen from '../screens/introductoryScreen';
 import Home from '../screens/homeScreen';
 import LogoScreen from '../screens/logoScreen';
 
-import Flights from '../screens/flightsScreen';
-import FlightDetails from '../screens/details/flightDetails';
+import Flights from '../screens/flight/flightsScreen';
+import FlightDetails from '../screens/flight/flightDetails';
 
-import Hotels from  '../screens/hotelsScreen';
-import HotelDetails from '../screens/details/hotelDetails';
+import Hotels from  '../screens/hotel/hotelsScreen';
+import HotelDetails from '../screens/hotel/hotelDetails';
 
-import Food from '../screens/FoodScreen';
-import DishDetails from '../screens/details/dishDetails';
+import Food from '../screens/food/foodScreen';
+import DishDetails from '../screens/food/dishDetails';
 
-import Trains from '../screens/trainsScreen';
-import TrainDetails from '../screens/details/trainDetails';
+import Trains from '../screens/train/trainsScreen';
+import TrainDetails from '../screens/train/trainDetails';
 
-import Taxis from '../screens/TaxisScreen';
-import TaxiDetails from '../screens/details/taxiDetails';
+import Taxis from '../screens/taxi/taxisScreen';
+import TaxiDetails from '../screens/taxi/taxiDetails';
 
-import Buses from '../screens/BusesScreen';
-import BusDetails from '../screens/details/busDetails';
+import Buses from '../screens/bus/busesScreen';
+import BusDetails from '../screens/bus/busDetails';
 
 import FiltredHotels from '../screens/filteredHotels';
 
 import AuthScreen from '../screens/authScreen';
 
+import ReservationsList from '../screens/admin/reservationsList';
+import ReservationDetails from '../screens/admin/reservationDetails';
+
+
+const bookingStackNavigator = createStackNavigator();
+
+export const BookingNavigator = () => {
+    return(
+        <bookingStackNavigator.Navigator>
+            <bookingStackNavigator.Screen 
+                name='Home'
+                component={HomeNavigator}/>
+            <bookingStackNavigator.Screen 
+                name='Hotels'
+                component={HotelsNavigator}/>
+            <bookingStackNavigator.Screen 
+                name='Flights'
+                component={Flights}/>
+            <bookingStackNavigator.Screen 
+                name='Taxis'
+                component={TaxisNavigator}/>
+            <bookingStackNavigator.Screen 
+                name='Trains'
+                component={TrainsNavigator}/>
+            <bookingStackNavigator.Screen 
+                name='Food'
+                component={FoodNavigator}/>
+            <bookingStackNavigator.Screen 
+                name='Buses'
+                component={BusesNavigator}/>    
+        </bookingStackNavigator.Navigator>
+    )
+}
 
 const homeStackNavigator = createStackNavigator();
 
-export const homeNavigator = () => {
+export const HomeNavigator = () => {
     return(
         <homeStackNavigator.Navigator>
             <homeStackNavigator.Screen name="Logo" component={LogoScreen}/>
             <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen}/>
-            <homeStackNavigator.Screen name="Home" component={Home}/>
+            <homeStackNavigator.Screen name="HomePage" component={Home}/>
         </homeStackNavigator.Navigator>
   );
 }
 
 const bookingDrawerNavigator = createDrawerNavigator();
 
-export const bookingDrawer = () => {
+export const BookingDrawer = () => {
    return(
        <bookingDrawerNavigator.Navigator>
            <bookingDrawerNavigator.Screen
-                name="Home" 
+                name="HomePage" 
                 component={Home} 
                 options={{
                 drawerIcon: props => (
@@ -61,7 +94,7 @@ export const bookingDrawer = () => {
                 }}
             />
            <bookingDrawerNavigator.Screen 
-                name="Hotels" 
+                name="HotelsOverview" 
                 component={Hotels}
                 options={{
                     drawerIcon: props => (
@@ -74,7 +107,7 @@ export const bookingDrawer = () => {
                  }}
             />
            <bookingDrawerNavigator.Screen
-                name="Flights" 
+                name="FlightsOverview" 
                 component={Flights}
                 options={{
                     drawerIcon: props => (
@@ -87,7 +120,7 @@ export const bookingDrawer = () => {
                 }}
             />
            <bookingDrawerNavigator.Screen 
-                name="Trains"
+                name="TrainsOverview"
                 component={Trains}
                 options={{
                     drawerIcon: props => (
@@ -100,7 +133,7 @@ export const bookingDrawer = () => {
                 }}
             />
            <bookingDrawerNavigator.Screen
-                name="Taxis"
+                name="TaxisOverview"
                 component={Taxis}
                 options={{
                     drawerIcon: props => (
@@ -113,7 +146,7 @@ export const bookingDrawer = () => {
                  }}
             />
            <bookingDrawerNavigator.Screen
-                name="Buses"
+                name="BusesOverview"
                 component={Buses}
                 options={{
                     drawerIcon: props => (
@@ -126,7 +159,7 @@ export const bookingDrawer = () => {
                 }}
             />
             <bookingDrawerNavigator.Screen
-                name="Food"
+                name="FoodOverview"
                 component={Food}
                 options={{
                     drawerIcon: props => (
@@ -144,10 +177,10 @@ export const bookingDrawer = () => {
 
 const hotelsStackNavigator = createStackNavigator();
 
-export const hotelsNavigator = () => {
+export const HotelsNavigator = () => {
     return(
         <hotelsStackNavigator.Navigator>
-            <hotelsStackNavigator.Screen name="Hotels" component={Hotels}/>
+            <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels}/>
             <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails}/>
         </hotelsStackNavigator.Navigator>
     );
@@ -155,10 +188,10 @@ export const hotelsNavigator = () => {
 
 const flightsStackNavigator = createStackNavigator();
 
-export const flightsNavigator = () => {
+export const FlightsNavigator = () => {
     return(
         <flightsStackNavigator.Navigator>
-            <flightsStackNavigator.Screen name="Flights" component={Flights}/>
+            <flightsStackNavigator.Screen name="FlightsOverview" component={Flights}/>
             <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails}/>
         </flightsStackNavigator.Navigator>
     );
@@ -166,10 +199,10 @@ export const flightsNavigator = () => {
 
 const taxisStackNavigator = createStackNavigator();
 
-export const taxisNavigator = () => {
+export const TaxisNavigator = () => {
     return(
         <taxisStackNavigator.Navigator>
-            <taxisStackNavigator.Screen name="Taxis" component={Taxis}/>
+            <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis}/>
             <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails}/>
         </taxisStackNavigator.Navigator>
     );
@@ -177,10 +210,10 @@ export const taxisNavigator = () => {
 
 const trainsStackNavigator = createStackNavigator();
 
-export const trainsNavigator = () => {
+export const TrainsNavigator = () => {
     return(
         <trainsStackNavigator.Navigator>
-            <trainsStackNavigator.Screen name="Trains" component={Trains}/>
+            <trainsStackNavigator.Screen name="TrainsOverview" component={Trains}/>
             <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails}/>
         </trainsStackNavigator.Navigator>
     );  
@@ -188,10 +221,10 @@ export const trainsNavigator = () => {
 
 const busesStackNavigator = createStackNavigator();
 
-export const busesNavigator = () => {
+export const BusesNavigator = () => {
     return(
         <busesStackNavigator.Navigator>
-            <busesStackNavigator.Screen name="Buses" component={Buses}/>
+            <busesStackNavigator.Screen name="BusesOverview" component={Buses}/>
             <busesStackNavigator.Screen name="BusDetails" component={BusDetails}/>
         </busesStackNavigator.Navigator>
     );
@@ -199,10 +232,10 @@ export const busesNavigator = () => {
 
 const foodStackNavigator = createStackNavigator();
 
-export const foodNavigator = () => {
+export const FoodNavigator = () => {
      return(
         <foodStackNavigator.Navigator>
-            <foodStackNavigator.Screen name="Food" component={Food}/>
+            <foodStackNavigator.Screen name="FoodOverview" component={Food}/>
             <foodStackNavigator.Screen name="DishDetails" component={DishDetails}/>
         </foodStackNavigator.Navigator>
     );
@@ -212,12 +245,29 @@ const AuthStackNavigator = createStackNavigator();
 
 export const AuthNavigator = () => {
     return (
-        <AuthStackNavigator.Navigator screenOptions={}>
+        <AuthStackNavigator.Navigator>
         <AuthStackNavigator.Screen
             name="Auth"
             component={AuthScreen}
         />
         </AuthStackNavigator.Navigator>
+  );
+};
+
+const AdminStackNavigator = createStackNavigator();
+
+export const AdminNavigator = () => {
+    return (
+        <AdminStackNavigator.Navigator>
+        <AdminStackNavigator.Screen
+            name="ReservationsList"
+            component={ReservationsList}
+        />
+        <AdminStackNavigator.Screen
+            name="ReservationDetails"
+            component={ReservationDetails}
+        />
+        </AdminStackNavigator.Navigator>
   );
 };
 

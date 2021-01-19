@@ -9,7 +9,7 @@ const logoScreen = () => {
 
   const navigation = useNavigation();
   const temp = () => {
-    navigation.navigate('Home');
+    navigation.navigate('HomePage');
   }
 
   return(

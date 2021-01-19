@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image} from 'react-native';
-import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking';
-import Colors from '../constants/colors';
+import Toolbar from '../../components/toolbar';
+import {baseUrl} from '../../constants/networking';
+import Colors from '../../constants/colors';
 
-const Food = () => {
+const Flights = () => {
 
-    const [hotels, setHotels] = useState([]);
+    const [flights, setFlights] = useState([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
     
-        fetch(`${baseUrl}hotels`, {method: 'get', signal: signal})
+        fetch(`${baseUrl}flights`, {method: 'get', signal: signal})
           .then((response) => response.json())
-          .then((json) => setHotels(json))
+          .then((json) => setFlights(json))
           .catch((error) => console.error(error))
           .finally(() => setLoading(false));
     
@@ -31,18 +31,17 @@ const Food = () => {
         <View style={styles.ParentContainer}>
             <Toolbar/>
             {isLoading ? <ActivityIndicator/> : (
-            <FlatList
+            <FlatList 
               style={{marginBottom:80}}
-              data={hotels}
+              data={flights}
               keyExtractor={({ _id }) => _id.toString()}
               renderItem={({ item }) => (
                 <TouchableOpacity>
                     <View style={styles.container}>
-                        <Image source={{uri: item.thumbnailUrl}} style={styles.image}/> 
+                        <Image source={{uri: item.image}} style={styles.image}/> 
                         <View style={styles.textContainer}>
-                        <Text style={styles.hotelName}>{item.name}</Text>
-                        <Text style={styles.text}>starRating: {item.starRating}</Text>
-                        <Text style={styles.text}>Price: ${item.price}</Text>
+                          <Text style={styles.bold}>{item.destination}</Text>
+                          <Text style={styles.bold}>Airport: {item.name}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -68,14 +67,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden'
   },
-  hotelName: {
-    fontSize: 20,
+  bold: {
+    fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 30,
     marginRight: 180
   },
   text: {
-    fontSize: 17
+    fontSize: 10
   },
   ParentContainer: {
     backgroundColor: Colors.background,
@@ -87,4 +86,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Food; 
+export default Flights; 
