@@ -10,7 +10,6 @@ const FiltredHotels = ({route}) => {
 
     const [hotels, setHotels] = useState([]);
     const destination = route.params; 
-    console.log("dsd", destination);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {

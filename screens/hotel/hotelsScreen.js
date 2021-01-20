@@ -52,7 +52,7 @@ const Hotels = () => {
             }
             <TextInput
               onChangeText={(term) => { setSearchTerm(term); showHotels(true) }} 
-              placeholder = "search down here" style = {{width: 300, height:50,
+              placeholder = "search down here" placeholderTextColor= "black" style = {{width: 300, height:50,
                borderRadius: 20, backgroundColor: 'white', marginLeft: 30, marginTop: 10,
               backgroundColor: 'white', borderColor: Colors.toolbarColor, borderWidth: 4}}
               value = {searchTerm}>
