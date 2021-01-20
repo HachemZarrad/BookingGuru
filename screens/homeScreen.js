@@ -8,22 +8,26 @@ import Destinations from '../components/destinations';
 
 const Home = () => {
     return(
-        <ScrollView>
-          <View style={styles.container}>
+      <View style={styles.container}>
             <Toolbar/>
-            <CustomImage/>
-            <Icon/>
-            <Destinations/>
+            <ScrollView style={styles.scroller}>
+              <CustomImage/>
+              <Icon/>
+              <Destinations/>
+            </ScrollView>
           </View>
-        </ScrollView>
     );
     
 }
 
 const styles = StyleSheet.create({
     container: {
-       backgroundColor: Colors.background
-    }
+       backgroundColor: Colors.background,
+       flex: 1
+    },
+    scroller: {
+     
+      }
 });
 
 export default Home;
