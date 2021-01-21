@@ -56,7 +56,7 @@ const Hotels = () => {
             </TextInput>
           </View>
 
-          {loading || !shown ? <ActivityIndicator/> : (
+          {loading || !shown ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
           <ScrollView>
           {filteredHotels.map(hotel => {
             return (
@@ -80,7 +80,7 @@ const Hotels = () => {
 
             
           )}
-            {loading || shown ? <ActivityIndicator style={{borderColor: Colors.Toolbar}}/> : (
+            {loading || shown ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
             <FlatList
               style={{marginBottom:60}}
               data={hotels}
@@ -137,6 +137,11 @@ const styles = StyleSheet.create({
   textContainer: {
     margin: 10,
     justifyContent: 'center'
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
