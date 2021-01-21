@@ -2,13 +2,10 @@ import { combineReducers, applyMiddleware, createStore } from 'redux';
 import Thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
-import { HotelsReducer} from './reducers/hotels';
+import hotelsReducer from './reducers/hotels';
 
+const rootReducer = combineReducers({
+    hotels: hotelsReducer
+});
 
-export const store = () => {
-    const rootReducer = combineReducers({
-        hotels: HotelsReducer
-    });
-        
-    createStore(rootReducer);
-}
+export const store = createStore(rootReducer, applyMiddleware(Thunk, logger));

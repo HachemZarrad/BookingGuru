@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image, TextInput, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Toolbar from '../../components/toolbar';
-import { baseUrl } from '../../constants/networking';
 import HotelStars from '../../components/hotelStars';
 import Colors from '../../constants/colors';
 
@@ -14,33 +13,31 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import  { createFilter } from 'react-native-search-filter'
 const KEYS_TO_FILTERS = ['name', 'locality'];
 
+import * as hotelsActions from '../../store/actions/hotels';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Hotels = () => {
 
-    const [hotels, setHotels] = useState([]);
-    const [isLoading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [shown, showHotels] = useState(false);
+    const dispatch = useDispatch();
+    const hotels = useSelector(state => state.hotels.hotels);
+    const loading = useSelector(state => state.hotels.loading);
+    const error = useSelector(state => state.hotels.error); 
     const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS));
     const navigation = useNavigation();
+
+    
+    const loadHotels = useCallback(() => {
+        dispatch(hotelsActions.fetchHotels())
+    },[dispatch]);
+
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
-    
-        fetch(`${baseUrl}hotels`, {method: 'get', signal: signal})
-          .then((response) => response.json())
-          .then((json) => setHotels(json))
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
-    
-          return function cleanUp(){
-            console.log('Now aborting');
-            // Abort.
-            controller.abort()
-          }
-    
-      },[]);
-    return(
+        loadHotels();
+    },[loadHotels]);
+          
+        return(
         <View style={styles.ParentContainer}>
             <Toolbar/>
             <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 7}}>
@@ -59,7 +56,7 @@ const Hotels = () => {
             </TextInput>
           </View>
 
-          {isLoading || !shown ? <ActivityIndicator/> : (
+          {loading || !shown ? <ActivityIndicator/> : (
           <ScrollView>
           {filteredHotels.map(hotel => {
             return (
@@ -83,7 +80,7 @@ const Hotels = () => {
 
             
           )}
-            {isLoading || shown ? <ActivityIndicator style={{borderColor: Colors.Toolbar}}/> : (
+            {loading || shown ? <ActivityIndicator style={{borderColor: Colors.Toolbar}}/> : (
             <FlatList
               style={{marginBottom:60}}
               data={hotels}
