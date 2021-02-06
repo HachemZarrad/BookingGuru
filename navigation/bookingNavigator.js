@@ -145,105 +145,6 @@ export const HomeNavigator = () => {
   );
 }
 
-// const bookingDrawerNavigator1 = createDrawerNavigator();
-
-// export const BookingDrawer1 = () => {
-//    return(
-//        <bookingDrawerNavigator.Navigator>
-//            <bookingDrawerNavigator.Screen
-//                 name="HomePage" 
-//                 component={Home} 
-//                 options={{
-//                 drawerIcon: props => (
-//                 <Ionicons
-//                     name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                     size={23}
-//                     color={props.color}
-//                     />
-//                     )
-//                 }}
-//             />
-//            <bookingDrawerNavigator.Screen 
-//                 name="HotelsOverview" 
-//                 component={Hotels}
-//                 options={{
-//                     drawerIcon: props => (
-//                     <Ionicons
-//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                         size={23}
-//                         color={props.color}
-//                     />
-//                     )
-//                  }}
-//             />
-//            <bookingDrawerNavigator.Screen
-//                 name="FlightsOverview" 
-//                 component={Flights}
-//                 options={{
-//                     drawerIcon: props => (
-//                     <Ionicons
-//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                         size={23}
-//                         color={props.color}
-//                      />
-//                     )
-//                 }}
-//             />
-//            <bookingDrawerNavigator.Screen 
-//                 name="TrainsOverview"
-//                 component={Trains}
-//                 options={{
-//                     drawerIcon: props => (
-//                     <Ionicons
-//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                         size={23}
-//                         color={props.color}
-//                     />
-//                     )
-//                 }}
-//             />
-//            <bookingDrawerNavigator.Screen
-//                 name="TaxisOverview"
-//                 component={Taxis}
-//                 options={{
-//                     drawerIcon: props => (
-//                     <Ionicons
-//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                         size={23}
-//                         color={props.color}
-//                     />
-//                     )
-//                  }}
-//             />
-//            <bookingDrawerNavigator.Screen
-//                 name="BusesOverview"
-//                 component={Buses}
-//                 options={{
-//                     drawerIcon: props => (
-//                     <Ionicons
-//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                         size={23}
-//                         color={props.color}
-//                     />
-//                     )
-//                 }}
-//             />
-//             <bookingDrawerNavigator.Screen
-//                 name="FoodOverview"
-//                 component={Food}
-//                 options={{
-//                     drawerIcon: props => (
-//                     <Ionicons
-//                         name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//                         size={23}
-//                         color={props.color}
-//                     />
-//                     )
-//                 }}
-//             />
-//        </bookingDrawerNavigator.Navigator>
-//    );
-// }
 
 const hotelsStackNavigator = createStackNavigator();
 
@@ -316,10 +217,10 @@ const AuthStackNavigator = createStackNavigator();
 export const AuthNavigator = () => {
     return (
         <AuthStackNavigator.Navigator screenOptions={{headerShown: false}}>
-        <AuthStackNavigator.Screen
-            name="Auth"
-            component={AuthScreen}
-        />
+            <AuthStackNavigator.Screen
+                name="Auth"
+                component={AuthScreen}
+            />
         </AuthStackNavigator.Navigator>
   );
 };
@@ -329,14 +230,14 @@ const AdminStackNavigator = createStackNavigator();
 export const AdminNavigator = () => {
     return (
         <AdminStackNavigator.Navigator>
-        <AdminStackNavigator.Screen
-            name="ReservationsList"
-            component={ReservationsList}
-        />
-        <AdminStackNavigator.Screen
-            name="ReservationDetails"
-            component={ReservationDetails}
-        />
+            <AdminStackNavigator.Screen
+                name="ReservationsList"
+                component={ReservationsList}
+            />
+            <AdminStackNavigator.Screen
+                name="ReservationDetails"
+                component={ReservationDetails}
+            />
         </AdminStackNavigator.Navigator>
   );
 };

@@ -5,6 +5,8 @@ import Toolbar from './toolbar';
 import BookingButton from './bookingButton';
 import RatingCard from './ratingCard';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const BookingTemplate = props => {
@@ -13,6 +15,9 @@ const BookingTemplate = props => {
             <Toolbar/>
             <ScrollView>
                 <View style={styles.container}>
+                    <TouchableOpacity>
+                        <FontAwesome name='heart-o' size={30} color = 'red'/>
+                    </TouchableOpacity>
                     <Image 
                         source={{uri: props.hotel.thumbnailUrl}}
                         style={styles.image}/>

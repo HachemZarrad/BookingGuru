@@ -4,8 +4,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const HotelStars = props => {
 
-    const [starsNumber, setStarsNumber] = useState(props.rating);
-
+    const starsNumber = props.rating;
     const Rating = () => {
         let starts=[];
         let integer = starsNumber % 1 === 0;
