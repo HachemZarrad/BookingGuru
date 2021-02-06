@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView} from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, ScrollView} from 'react-native';
 import Colors from '../constants/colors';
 import Toolbar from './toolbar';
 import BookingButton from './bookingButton';
@@ -15,15 +15,16 @@ const BookingTemplate = props => {
             <Toolbar/>
             <ScrollView>
                 <View style={styles.container}>
-                    <TouchableOpacity>
-                        <FontAwesome name='heart-o' size={30} color = 'red'/>
-                    </TouchableOpacity>
-                    <Image 
+                    <ImageBackground 
                         source={{uri: props.hotel.thumbnailUrl}}
-                        style={styles.image}/>
-                    <View style={styles.card}>
-                        <RatingCard hotel={props.hotel}/>
-                    </View>
+                        style={styles.image}>
+                            <TouchableOpacity style={styles.heart}>
+                                <FontAwesome name='heart-o' size={30} color = 'red'/>
+                            </TouchableOpacity>
+                            <View style={styles.card}>
+                                <RatingCard hotel={props.hotel}/>
+                            </View>
+                    </ImageBackground>
                     <View style={styles.location}>
                         <Ionicons name="location" size={80} color="orange" />
                         <View >
@@ -47,6 +48,11 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.background,
     },
+    heart: {
+        alignItems: 'flex-end',
+        marginTop: 10,
+        marginRight: 10
+    },
     text: {
         fontWeight: 'bold'
     },
@@ -54,7 +60,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: 'center',
         flexDirection: 'row',
-        marginTop: -60,
+        marginTop: 60,
         marginBottom: 20
     },
     book: {
@@ -63,12 +69,11 @@ const styles = StyleSheet.create({
     },
     card: {
         marginLeft:40,
-        marginTop: -70
+        marginTop: 170
     },
     image: {
         width: '100%',
-        height: 300,
-        
+        height: 300,        
     }
 });
 
