@@ -21,12 +21,12 @@ export const init = () => {
     return promise;
 };
 
-export const addFavorite = (id, name, thumbnailUrl, starRating, address, guestReviews, price, features) => {
+export const addFavorite = (name, thumbnailUrl, starRating, address, guestReviews, price, features) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'INSERT INTO favorites (id, name, thumbnailUrl, starRating, address, guestReviews, price, features) VALUES (?,?,?,?,?,?,?,?);',
-                [id, name, thumbnailUrl, starRating, address, guestReviews, price, features],
+                'INSERT INTO favorites (name, thumbnailUrl, starRating, address, guestReviews, price, features) VALUES (?,?,?,?,?,?,?);',
+                [name, thumbnailUrl, starRating, address, guestReviews, price, features],
                 (_,result) => {
                     resolve(result);
                 },

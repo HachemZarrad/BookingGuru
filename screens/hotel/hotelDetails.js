@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Button, StyleSheet} from 'react-native';
 import BookingTemplate from '../../components/bookingTemplate';
-import BookingButton from '../../components/bookingButton';
 
 const HotelDetails = ({route}) => {
     const hotel = route.params;

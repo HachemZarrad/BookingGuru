@@ -1,6 +1,5 @@
 import * as ActionTypes from '../actions/actionTypes'; 
 import { baseUrl } from '../../constants/networking';
-import { useDispatch } from 'react-redux'
 
 
 export const fetchHotels = () => (dispatch) => {
