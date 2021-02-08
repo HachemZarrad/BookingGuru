@@ -1,5 +1,5 @@
 import * as ActionTypes from '../actions/actionTypes'; 
-import { fetchFavorites, addFavorite } from '../../db/favoriteHotels';
+import { fetchFavorites, addFavorite, deleteFavorite, deleteFavorites } from '../../db/favoriteHotels';
 
 
 export const getFavorites = () => (dispatch) => {
@@ -8,7 +8,14 @@ export const getFavorites = () => (dispatch) => {
      .catch((error) => dispatch({type: ActionTypes.FAVORITES_FAILED, payload: error}))
 };
 
+export const formatFavorites = () => (dispatch) => {
+    return deleteFavorites()
+     .then(() => dispatch({type: ActionTypes.deleteFavorites}))
+     .catch((error) => dispatch({type: ActionTypes.DELETE_FAVS_FAILED, payload: error}))
+};
+
 export const newFavorite = (
+    id,
     name,
     thumbnailUrl,
     starRating,
@@ -17,9 +24,9 @@ export const newFavorite = (
     price,
     features
     ) => (dispatch) => {
-    addFavorite(name,thumbnailUrl,starRating,address,guestReviews,price,features)
-     .then((favorite) => {dispatch({type: ActionTypes.ADD_FAVORITE, payload: {
-        id: favorite.insertId,
+    addFavorite(id,name,thumbnailUrl,starRating,address,guestReviews,price,features)
+     .then(() => {dispatch({type: ActionTypes.ADD_FAVORITE, payload: {
+        id: id,
         name: name,
         thumbnailUrl: thumbnailUrl,
         starRating: starRating,
@@ -28,7 +35,15 @@ export const newFavorite = (
         price: price,
         features: features}
      });
-     console.log('favorite mine',favorite);
+
     })
      .catch((error) => dispatch({type: ActionTypes.ADD_FAV_FAILED, payload: error}))
+};
+
+export const removeFavorite = (id) => (dispatch) => {
+    return deleteFavorite(id)
+     .then(() => {
+        dispatch({type: ActionTypes.deleteFavorite, payload: id})
+     })
+     .catch((error) => dispatch({type: ActionTypes.DELETE_FAV_FAILED, payload: error}))
 };

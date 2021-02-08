@@ -2,7 +2,7 @@ import React from 'react';
 import { AppNavigator } from './navigation/appNavigator';
 import { Provider } from 'react-redux';
 import {store} from './store/configureStore';
-import { init, fetchFavorites, addFavorite } from './db/favoriteHotels';
+import { init, fetchFavorites, addFavorite, deleteFavorites, deleteFavorite} from './db/favoriteHotels';
 
 init()
   .then(() => {
@@ -13,7 +13,24 @@ init()
     console.log(err);
   });
 
-// addFavorite('new fav', 'thumbnailUrl', 4, 'new address', 7.5 , '$521', 'new features')
+  // deleteFavorites()
+  //   .then(() => {
+  //     console.log('data deleted');
+  //   })
+  //   .catch((err) =>{
+  //     console.log('dont touch that',err);
+  //   } )
+
+  // deleteFavorite('463496764676')
+  //   .then((result) => {
+  //     console.log('your result', result);
+  //     console.log('data deleted');
+  //   })
+  //   .catch((err) =>{
+  //     console.log('dont touch that',err);
+  //   } )
+
+// addFavorite('463496764676','new fav1', 'thumbnailUrl', 4, 'new address', 7.5 , '$521', 'new features')
 //   .then((favorite) => {
 //     console.log('my favorite',favorite);
 //     console.log('easy peasy lemon squeezy');

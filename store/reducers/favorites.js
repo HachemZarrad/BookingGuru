@@ -27,7 +27,14 @@ export default (state = initialState, action) => {
             return { favorites: state.favorites.concat(newFavorite) };
             
         case (ActionTypes.ADD_FAV_FAILED):
-            return { ...state, favorites: [], error: action.payload };
+            return { ...state, error: action.payload };
+        
+        case (ActionTypes.DELETE_FAVORITE):
+            const elementToDelete = favorites.filter((element) => element.id === action.payload)[0];
+            return { favorites: state.favorites.splice(favorites.indexOf(elementToDelete),1) };
+
+        case (ActionTypes.DELETE_FAV_FAILED):
+            return { ...state, error: action.payload};
 
         default:
             return state;

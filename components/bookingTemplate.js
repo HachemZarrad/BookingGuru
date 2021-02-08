@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, ScrollView} from 'react-native';
 import Colors from '../constants/colors';
 import Toolbar from './toolbar';
@@ -6,28 +6,22 @@ import BookingButton from './bookingButton';
 import RatingCard from './ratingCard';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { useDispatch } from 'react-redux';
-import { newFavorite } from '../store/actions/favorites';
+import { useDispatch, useSelector } from 'react-redux';
+import { newFavorite, removeFavorite } from '../store/actions/favorites';
 import { fetchFavorites } from '../db/favoriteHotels';
 
 const BookingTemplate = props => {
     const [favorite, setFavorite] = useState('heart-o');
 
     const dispatch = useDispatch();
+    const favorites = useSelector(state => state.favorites.favorites);
     const hotel = props.hotel;
-
-    const track = fetchFavorites()
-    .then((db) => {
-      console.log('hey baby 1',db);
-    })
-    .catch(err =>{
-      console.log('error type 2',err);
-    });
 
     const addToFavorite = () => {
         if (favorite === 'heart-o'){
-            setFavorite('heart');
+            setFavorite('heart')
             dispatch(newFavorite(
+                    hotel._id,
                     hotel.name,
                     hotel.thumbnailUrl,
                     hotel.starRating,
@@ -36,13 +30,30 @@ const BookingTemplate = props => {
                     hotel.price,
                     JSON.stringify(hotel.features)
                     ));
+            console.log(hotel._id,
+                hotel.name,
+                hotel.thumbnailUrl,
+                hotel.starRating,
+                JSON.stringify(hotel.address),
+                hotel.guestReviews,
+                hotel.price,
+                JSON.stringify(hotel.features));      
         }
         else {
             setFavorite('heart-o');
+            dispatch(removeFavorite(hotel._id));
         }
-      console.log('hey baby',track);
+        fetchFavorites()
+          .then((db) => {
+            console.log('lahna',db);
+          })
+          .catch(err =>{
+            console.log('error type 2',err);
+          });
     }
-    
+
+    // useEffect(() => {},[addToFavorite]);
+
     return(
         <View style={{flex:1}}>
             <Toolbar/>

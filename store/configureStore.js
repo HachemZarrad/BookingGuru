@@ -10,4 +10,4 @@ const rootReducer = combineReducers({
     favorites: favoritesReducer
 });
 
-export const store = createStore(rootReducer, applyMiddleware(Thunk, logger));
+export const store = createStore(rootReducer, applyMiddleware(Thunk));

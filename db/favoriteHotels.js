@@ -6,7 +6,7 @@ export const init = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS favorites (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL, thumbnailUrl TEXT NOT NULL, starRating REAL NOT NULL, address TEXT NOT NULL, guestReviews REAL NOT NULL, price REAL NOT NULL, features TEXT NOT NULL);',
+                'CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, thumbnailUrl TEXT NOT NULL, starRating REAL NOT NULL, address TEXT NOT NULL, guestReviews REAL NOT NULL, price REAL NOT NULL, features TEXT NOT NULL);',
                 [],
                 () => {
                     resolve();
@@ -21,12 +21,48 @@ export const init = () => {
     return promise;
 };
 
-export const addFavorite = (name, thumbnailUrl, starRating, address, guestReviews, price, features) => {
+export const addFavorite = (id, name, thumbnailUrl, starRating, address, guestReviews, price, features) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'INSERT INTO favorites (name, thumbnailUrl, starRating, address, guestReviews, price, features) VALUES (?,?,?,?,?,?,?);',
-                [name, thumbnailUrl, starRating, address, guestReviews, price, features],
+                'INSERT INTO favorites (id, name, thumbnailUrl, starRating, address, guestReviews, price, features) VALUES (?,?,?,?,?,?,?,?);',
+                [id, name, thumbnailUrl, starRating, address, guestReviews, price, features],
+                (_,result) => {
+                    resolve(result);
+                },
+                (_,err) => {
+                    reject(err);
+                }
+            );
+        }) 
+    });    
+    return promise;
+};
+
+export const deleteFavorite = (id) => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                `DELETE FROM favorites WHERE id = ${id}`,
+                [],
+                (_,result) => {
+                    resolve(result);
+                },
+                (_,err) => {
+                    reject(err);
+                }
+            );
+        }) 
+    });    
+    return promise;
+};
+
+export const deleteFavorites = () => {
+    const promise = new Promise((resolve, reject) => {
+        db.transaction(tx => {
+            tx.executeSql(
+                'DELETE FROM favorites',
+                [],
                 (_,result) => {
                     resolve(result);
                 },
