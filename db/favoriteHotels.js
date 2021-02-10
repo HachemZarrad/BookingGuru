@@ -1,12 +1,12 @@
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabase('favorites.db');
+const db = SQLite.openDatabase('bookmarks.db');
 
 export const init = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, name TEXT NOT NULL, thumbnailUrl TEXT NOT NULL, starRating REAL NOT NULL, address TEXT NOT NULL, guestReviews REAL NOT NULL, price REAL NOT NULL, features TEXT NOT NULL);',
+                'CREATE TABLE IF NOT EXISTS bookmarks (id INTEGER PRIMARY KEY NOT NULL, longId TEXT NOT NULL, name TEXT NOT NULL, thumbnailUrl TEXT NOT NULL, starRating REAL NOT NULL, address TEXT NOT NULL, guestReviews REAL NOT NULL, price REAL NOT NULL, features TEXT NOT NULL);',
                 [],
                 () => {
                     resolve();
@@ -21,12 +21,12 @@ export const init = () => {
     return promise;
 };
 
-export const addFavorite = (id, name, thumbnailUrl, starRating, address, guestReviews, price, features) => {
+export const addFavorite = (longId, name, thumbnailUrl, starRating, address, guestReviews, price, features) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'INSERT INTO favorites (id, name, thumbnailUrl, starRating, address, guestReviews, price, features) VALUES (?,?,?,?,?,?,?,?);',
-                [id, name, thumbnailUrl, starRating, address, guestReviews, price, features],
+                'INSERT INTO bookmarks (longId, name, thumbnailUrl, starRating, address, guestReviews, price, features) VALUES (?,?,?,?,?,?,?,?);',
+                [longId, name, thumbnailUrl, starRating, address, guestReviews, price, features],
                 (_,result) => {
                     resolve(result);
                 },
@@ -39,11 +39,11 @@ export const addFavorite = (id, name, thumbnailUrl, starRating, address, guestRe
     return promise;
 };
 
-export const deleteFavorite = (id) => {
+export const deleteFavorite = (id = id.toString()) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                `DELETE FROM favorites WHERE id = ${id}`,
+                `DELETE FROM bookmarks WHERE name = ${id}`,
                 [],
                 (_,result) => {
                     resolve(result);
@@ -61,7 +61,7 @@ export const deleteFavorites = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'DELETE FROM favorites',
+                'DELETE FROM bookmarks',
                 [],
                 (_,result) => {
                     resolve(result);
@@ -79,7 +79,7 @@ export const fetchFavorites = () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                'SELECT * FROM favorites;',
+                'SELECT * FROM bookmarks;',
                 [],
                 (_,result) => {
                     resolve(result);

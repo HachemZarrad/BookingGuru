@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
         case (ActionTypes.ADD_FAVORITE):
             const newFavorite = new Hotel (
                 action.payload.id.toString(),
+                action.payload.longId,
                 action.payload.name,
                 action.payload.thumbnailUrl,
                 action.payload.starRating, 
@@ -30,7 +31,7 @@ export default (state = initialState, action) => {
             return { ...state, error: action.payload };
         
         case (ActionTypes.DELETE_FAVORITE):
-            const elementToDelete = favorites.filter((element) => element.id === action.payload)[0];
+            const elementToDelete = favorites.filter((element) => element.longId === action.payload)[0];
             return { favorites: state.favorites.splice(favorites.indexOf(elementToDelete),1) };
 
         case (ActionTypes.DELETE_FAV_FAILED):

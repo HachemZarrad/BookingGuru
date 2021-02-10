@@ -14,19 +14,11 @@ export const formatFavorites = () => (dispatch) => {
      .catch((error) => dispatch({type: ActionTypes.DELETE_FAVS_FAILED, payload: error}))
 };
 
-export const newFavorite = (
-    id,
-    name,
-    thumbnailUrl,
-    starRating,
-    address,
-    guestReviews,
-    price,
-    features
-    ) => (dispatch) => {
-    addFavorite(id,name,thumbnailUrl,starRating,address,guestReviews,price,features)
-     .then(() => {dispatch({type: ActionTypes.ADD_FAVORITE, payload: {
-        id: id,
+export const newFavorite = (longId,name,thumbnailUrl,starRating,address,guestReviews,price,features) => (dispatch) => {
+    addFavorite(longId,name,thumbnailUrl,starRating,address,guestReviews,price,features)
+     .then((favorite) => {dispatch({type: ActionTypes.ADD_FAVORITE, payload: {
+        id: favorite.insertId,
+        longId: longId,
         name: name,
         thumbnailUrl: thumbnailUrl,
         starRating: starRating,

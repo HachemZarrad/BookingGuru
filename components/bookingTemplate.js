@@ -19,7 +19,7 @@ const BookingTemplate = props => {
 
     const addToFavorite = () => {
         if (favorite === 'heart-o'){
-            setFavorite('heart')
+            setFavorite('heart');
             dispatch(newFavorite(
                     hotel._id,
                     hotel.name,
@@ -30,15 +30,7 @@ const BookingTemplate = props => {
                     hotel.price,
                     JSON.stringify(hotel.features)
                     ));
-            console.log(hotel._id,
-                hotel.name,
-                hotel.thumbnailUrl,
-                hotel.starRating,
-                JSON.stringify(hotel.address),
-                hotel.guestReviews,
-                hotel.price,
-                JSON.stringify(hotel.features));      
-        }
+            }
         else {
             setFavorite('heart-o');
             dispatch(removeFavorite(hotel._id));

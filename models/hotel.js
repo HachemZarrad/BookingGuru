@@ -1,7 +1,8 @@
  export class Hotel {
-    constructor(id, name, thumbnailUrl, starRating, address,
+    constructor(id, longId, name, thumbnailUrl, starRating, address,
          guestReviews, price, features){
             this.id = id;
+            this.longId = longId;
             this.name = name; 
             this.thumbnailUrl = thumbnailUrl;
             this.starRating = starRating;
