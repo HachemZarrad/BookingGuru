@@ -1,25 +1,24 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground,
+     ScrollView} from 'react-native';
 import Colors from '../constants/colors';
 import Toolbar from './toolbar';
 import BookingButton from './bookingButton';
 import RatingCard from './ratingCard';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { newFavorite, removeFavorite } from '../store/actions/favorites';
-import { fetchFavorites } from '../db/favoriteHotels';
 
 const BookingTemplate = props => {
-    const [favorite, setFavorite] = useState('heart-o');
-
-    const dispatch = useDispatch();
-    const favorites = useSelector(state => state.favorites.favorites);
+    const [favorite, setFavorite] = useState(props.icon);
     const hotel = props.hotel;
+    const dispatch = useDispatch();
+
 
     const addToFavorite = () => {
         if (favorite === 'heart-o'){
-            setFavorite('heart');
+            setFavorite(() => 'heart');
             dispatch(newFavorite(
                     hotel._id,
                     hotel.name,
@@ -30,19 +29,17 @@ const BookingTemplate = props => {
                     hotel.price,
                     JSON.stringify(hotel.features)
                     ));
+
             }
+            
         else {
-            setFavorite('heart-o');
+            setFavorite(() => 'heart-o');
             dispatch(removeFavorite(hotel._id));
+            
         }
-        fetchFavorites()
-          .then((db) => {
-            console.log('lahna',db);
-          })
-          .catch(err =>{
-            console.log('error type 2',err);
-          });
-    }
+ }
+
+ 
 
     // useEffect(() => {},[addToFavorite]);
 

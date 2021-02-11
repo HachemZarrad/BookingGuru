@@ -4,7 +4,7 @@ import { fetchFavorites, addFavorite, deleteFavorite, deleteFavorites } from '..
 
 export const getFavorites = () => (dispatch) => {
     return fetchFavorites()
-     .then((favorites) => dispatch({type: ActionTypes.GET_FAVORITES, payload: favorites}))
+     .then((favorites) => dispatch({type: ActionTypes.GET_FAVORITES, payload: favorites.rows._array}))
      .catch((error) => dispatch({type: ActionTypes.FAVORITES_FAILED, payload: error}))
 };
 

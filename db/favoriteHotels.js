@@ -39,11 +39,11 @@ export const addFavorite = (longId, name, thumbnailUrl, starRating, address, gue
     return promise;
 };
 
-export const deleteFavorite = (id = id.toString()) => {
+export const deleteFavorite = (id) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
-                `DELETE FROM bookmarks WHERE name = ${id}`,
+                `DELETE FROM bookmarks WHERE longId = '${id}'`,
                 [],
                 (_,result) => {
                     resolve(result);

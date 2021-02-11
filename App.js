@@ -21,14 +21,14 @@ init()
   //     console.log('dont touch that',err);
   //   } )
 
-  deleteFavorite("Riviera Hotel")
-    .then((result) => {
-      console.log('your result', result);
-      console.log('data deleted');
-    })
-    .catch((err) =>{
-      console.log('dont touch that',err);
-    } )
+  // deleteFavorite("Riviera Hotel")
+  //   .then((result) => {
+  //     console.log('your result', result);
+  //     console.log('data deleted');
+  //   })
+  //   .catch((err) =>{
+  //     console.log('dont touch that',err);
+  //   } )
 
 // addFavorite("5fe98103a1da4127f80a40bf",'new fav1', 'thumbnailUrl', 4, 'new address', 7.5 , '$521', 'new features')
 //   .then((favorite) => {
@@ -39,13 +39,13 @@ init()
 //     console.log('ass kicked',err);
 //   })
 
-fetchFavorites()
-  .then((db) => {
-    console.log('lahna',db);
-  })
-  .catch(err =>{
-    console.log('error type 2',err);
-  });
+// fetchFavorites()
+//   .then((db) => {
+//     console.log('lahna',db);
+//   })
+//   .catch(err =>{
+//     console.log('error type 2',err);
+//   });
 
 export default function App() {
   return (

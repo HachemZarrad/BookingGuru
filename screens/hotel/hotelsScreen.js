@@ -19,24 +19,33 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Hotels = () => {
 
-    const [searchTerm, setSearchTerm] = useState('');
-    const [shown, showHotels] = useState(false);
-    const dispatch = useDispatch();
-    const hotels = useSelector(state => state.hotels.hotels);
-    const loading = useSelector(state => state.hotels.loading);
-    const error = useSelector(state => state.hotels.error); 
-    const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS));
-    const navigation = useNavigation();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [shown, showHotels] = useState(false);
+  const dispatch = useDispatch();
+  const hotels = useSelector(state => state.hotels.hotels);
+  const loading = useSelector(state => state.hotels.loading);
+  const error = useSelector(state => state.hotels.error); 
+  const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS));
+  const navigation = useNavigation();
 
     
     const loadHotels = useCallback(() => {
         dispatch(hotelsActions.fetchHotels())
     },[dispatch]);
-
+    
     useEffect(() => {
         loadHotels();
     },[loadHotels]);
-          
+
+    // const loadFavorites = useCallback(() => {
+    //     dispatch(favoritesActions.getFavorites())
+    // },[dispatch]);
+  
+    // useEffect(() => {
+    //     loadFavorites();
+    // },[loadFavorites]);
+  
+
         return(
         <View style={styles.ParentContainer}>
             <Toolbar/>
@@ -86,7 +95,7 @@ const Hotels = () => {
               data={hotels}
               keyExtractor={({ _id }) => _id.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={()=> navigation.navigate('HotelDetails', item)}>
+                <TouchableOpacity onPress={()=> navigation.navigate('HotelDetails',  item)}>
                     <View style={styles.container}>
                         <Image source={{uri: item.thumbnailUrl}} style={styles.image}/> 
                         <View style={styles.textContainer}>
