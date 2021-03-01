@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity,
-     Button, Alert} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, Alert} from 'react-native';
 import Colors from '../constants/colors';
 import { useNavigation } from '@react-navigation/native';
 
@@ -29,8 +28,8 @@ const BookingButton = props => {
                 <Text style={styles.price}>${props.price}</Text>
             </View>
             <TouchableOpacity style={styles.buttonContainer} 
-                                onPress={() => createTwoButtonAlert()}>
-                 <Text style={styles.textButton}>Booking</Text>
+                                  onPress={() => navigation.navigate(props.nextStep, props.price)}>
+                 <Text style={styles.textButton}>{props.title}</Text>
             </TouchableOpacity>
         </View>
     );

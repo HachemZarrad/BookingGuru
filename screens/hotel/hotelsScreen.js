@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
-    ActivityIndicator, Image, TextInput, ScrollView} from 'react-native';
+    ActivityIndicator, Image, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Toolbar from '../../components/toolbar';
 import HotelStars from '../../components/hotelStars';
+import InputBar from '../../components/inputBar';
 import Colors from '../../constants/colors';
 
 import { Avatar, Accessory } from 'react-native-elements';
@@ -56,13 +57,11 @@ const Hotels = () => {
               </TouchableOpacity>
               : null
             }
-            <TextInput
+            <InputBar
               onChangeText={(term) => { setSearchTerm(term); showHotels(true) }} 
-              placeholder = "     search down here" placeholderTextColor= "black" style = {{width: 300, height:50,
-               borderRadius: 20, backgroundColor: 'white', marginLeft: 30, marginTop: 10,
-              backgroundColor: 'white', borderColor: Colors.toolbarColor, borderWidth: 4}}
+              placeholder = "     search down here" 
               value = {searchTerm}>
-            </TextInput>
+            </InputBar>
           </View>
 
           {loading || !shown ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (

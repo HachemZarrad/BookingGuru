@@ -1,7 +1,9 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { Platform } from 'react-native';
+import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../constants/colors';
 
 import IntroductoryScreen from '../screens/introductoryScreen';
 import Home from '../screens/homeScreen';
@@ -12,6 +14,9 @@ import FlightDetails from '../screens/flight/flightDetails';
 
 import Hotels from  '../screens/hotel/hotelsScreen';
 import HotelDetails from '../screens/hotel/hotelDetails';
+import FiltredHotels from '../screens/hotel/filteredHotels';
+import ReservationScreen from '../screens/hotel/reservationScreen';
+import ValidateReservationScreen from '../screens/hotel/validateReservationScreen';
 
 import Food from '../screens/food/foodScreen';
 import DishDetails from '../screens/food/dishDetails';
@@ -25,14 +30,20 @@ import TaxiDetails from '../screens/taxi/taxiDetails';
 import Buses from '../screens/bus/busesScreen';
 import BusDetails from '../screens/bus/busDetails';
 
-import FiltredHotels from '../screens/filteredHotels';
-
 import AuthScreen from '../screens/authScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
 
+const navigationOptions = {
+    headerShown: false,
+    headerStyle: {
+      backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : ''
+    },
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor
+  };
 
+  
 const bookingDrawerNavigator = createDrawerNavigator();
 
 export const BookingDrawer = () => {
@@ -137,7 +148,7 @@ const homeStackNavigator = createStackNavigator();
 
 export const HomeNavigator = () => {
     return(
-        <homeStackNavigator.Navigator screenOptions={{headerShown: false}} >
+        <homeStackNavigator.Navigator screenOptions={navigationOptions} >
             <homeStackNavigator.Screen name="Logo" component={LogoScreen}/>
             <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen}/>
             <homeStackNavigator.Screen name="HomePage" component={Home}/>
@@ -150,9 +161,12 @@ const hotelsStackNavigator = createStackNavigator();
 
 export const HotelsNavigator = () => {
     return(
-        <hotelsStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <hotelsStackNavigator.Navigator screenOptions={navigationOptions}>
             <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels}/>
             <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails}/>
+            <hotelsStackNavigator.Screen name="FiltredHotels" component={FiltredHotels}/>
+            <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info'}}/>
+            <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure'}}/>
         </hotelsStackNavigator.Navigator>
     );
 }
@@ -161,7 +175,7 @@ const flightsStackNavigator = createStackNavigator();
 
 export const FlightsNavigator = () => {
     return(
-        <flightsStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <flightsStackNavigator.Navigator screenOptions={navigationOptions}>
             <flightsStackNavigator.Screen name="FlightsOverview" component={Flights}/>
             <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails}/>
         </flightsStackNavigator.Navigator>
@@ -172,7 +186,7 @@ const taxisStackNavigator = createStackNavigator();
 
 export const TaxisNavigator = () => {
     return(
-        <taxisStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <taxisStackNavigator.Navigator screenOptions={navigationOptions}>
             <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis}/>
             <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails}/>
         </taxisStackNavigator.Navigator>
@@ -183,7 +197,7 @@ const trainsStackNavigator = createStackNavigator();
 
 export const TrainsNavigator = () => {
     return(
-        <trainsStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <trainsStackNavigator.Navigator screenOptions={navigationOptions}>
             <trainsStackNavigator.Screen name="TrainsOverview" component={Trains}/>
             <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails}/>
         </trainsStackNavigator.Navigator>
@@ -194,7 +208,7 @@ const busesStackNavigator = createStackNavigator();
 
 export const BusesNavigator = () => {
     return(
-        <busesStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <busesStackNavigator.Navigator screenOptions={navigationOptions}>
             <busesStackNavigator.Screen name="BusesOverview" component={Buses}/>
             <busesStackNavigator.Screen name="BusDetails" component={BusDetails}/>
         </busesStackNavigator.Navigator>
@@ -205,7 +219,7 @@ const foodStackNavigator = createStackNavigator();
 
 export const FoodNavigator = () => {
      return(
-        <foodStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <foodStackNavigator.Navigator screenOptions={navigationOptions}>
             <foodStackNavigator.Screen name="FoodOverview" component={Food}/>
             <foodStackNavigator.Screen name="DishDetails" component={DishDetails}/>
         </foodStackNavigator.Navigator>
@@ -216,7 +230,7 @@ const AuthStackNavigator = createStackNavigator();
 
 export const AuthNavigator = () => {
     return (
-        <AuthStackNavigator.Navigator screenOptions={{headerShown: false}}>
+        <AuthStackNavigator.Navigator screenOptions={navigationOptions}>
             <AuthStackNavigator.Screen
                 name="Auth"
                 component={AuthScreen}

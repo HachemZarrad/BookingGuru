@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity,
     ActivityIndicator, Image} from 'react-native';
-import Toolbar from '../components/toolbar';
-import {baseUrl} from '../constants/networking';
-import Colors from '../constants/colors';
-import HotelStars from '../components/hotelStars';
+import Toolbar from '../../components/toolbar';
+import {baseUrl} from '../../constants/networking';
+import HotelStars from '../../components/hotelStars';
 
 const FiltredHotels = ({route}) => {
 

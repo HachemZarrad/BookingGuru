@@ -40,7 +40,6 @@ const BookingTemplate = props => {
  }
 
  
-
     // useEffect(() => {},[addToFavorite]);
 
     return(
@@ -68,7 +67,7 @@ const BookingTemplate = props => {
                     </View>
                
                     <View style={styles.book}>
-                        <BookingButton price={hotel.price}/>
+                        <BookingButton price={hotel.price} title={'Booking'} nextStep={'ReservationScreen'}/>
                     </View>
                 </View>
             </ScrollView>
