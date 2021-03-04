@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native';
-import Colors from '../../constants/colors';
 import InputBar from '../../components/inputBar';
 import BookingButton from '../../components/bookingButton';
 
@@ -14,7 +13,7 @@ const ReservationScreen = ({route}) => {
             <InputBar placeholder="     Country/Region"></InputBar>
             <InputBar placeholder="     Phone Number"></InputBar>
             <View style={styles.book}>
-                <BookingButton  price={price} nextStep={'ValidateReservationScreen'} title={'ADD INFO'}/>
+                <BookingButton  price={price} nextStep={'PickUpRoomScreen'} title={'ADD INFO'}/>
             </View>
         </View>
     )

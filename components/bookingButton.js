@@ -23,15 +23,17 @@ const BookingButton = props => {
     );
     
     return(
-        <View style={styles.container} >
-            <View style={styles.priceContainer}>
-                <Text style={styles.price}>${props.price}</Text>
-            </View>
-            <TouchableOpacity style={styles.buttonContainer} 
-                                  onPress={() => navigation.navigate(props.nextStep, props.price)}>
-                 <Text style={styles.textButton}>{props.title}</Text>
-            </TouchableOpacity>
-        </View>
+      <View style={styles.position}>
+          <View style={styles.container} >
+              <View style={styles.priceContainer}>
+                  <Text style={styles.price}>${props.price}</Text>
+              </View>
+              <TouchableOpacity style={styles.buttonContainer} 
+                                    onPress={() => navigation.navigate(props.nextStep, props.price)}>
+                  <Text style={styles.textButton}>{props.title}</Text>
+              </TouchableOpacity>
+          </View>
+      </View>
     );
 }
 
@@ -67,7 +69,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
         color: 'white'
+    },
+    position: {
+      alignItems: 'center',
+      marginTop: 40
     }
+  
 });
 
 export default BookingButton;

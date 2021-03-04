@@ -16,6 +16,7 @@ import Hotels from  '../screens/hotel/hotelsScreen';
 import HotelDetails from '../screens/hotel/hotelDetails';
 import FiltredHotels from '../screens/hotel/filteredHotels';
 import ReservationScreen from '../screens/hotel/reservationScreen';
+import PickUpRoomScreen from '../screens/hotel/pickUpRoomScreen';
 import ValidateReservationScreen from '../screens/hotel/validateReservationScreen';
 
 import Food from '../screens/food/foodScreen';
@@ -166,6 +167,7 @@ export const HotelsNavigator = () => {
             <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails}/>
             <hotelsStackNavigator.Screen name="FiltredHotels" component={FiltredHotels}/>
             <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info'}}/>
+            <hotelsStackNavigator.Screen name="PickUpRoomScreen" component={PickUpRoomScreen} options={{ headerShown: true, headerTitle: "What's your plan"}}/>
             <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure'}}/>
         </hotelsStackNavigator.Navigator>
     );
