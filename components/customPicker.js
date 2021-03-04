@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     picker: {
-        height: 40,
+        height: 50,
         width: 300
     }
    

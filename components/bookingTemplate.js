@@ -43,15 +43,15 @@ const BookingTemplate = props => {
     // useEffect(() => {},[addToFavorite]);
 
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1, backgroundColor: Colors.background}}>
             <Toolbar/>
             <ScrollView>
-                <View style={styles.container}>
+                <View>
                     <ImageBackground 
                         source={{uri: hotel.thumbnailUrl}}
                         style={styles.image}>
                             <TouchableOpacity style={styles.heart}>
-                                <FontAwesome name={favorite} onPress={() => addToFavorite()} size={30} color = 'red'/>
+                                <FontAwesome name={favorite} onPress={() => addToFavorite()} size={40} color = 'red'/>
                             </TouchableOpacity>
                             <View style={styles.card}>
                                 <RatingCard hotel={hotel}/>
@@ -64,22 +64,16 @@ const BookingTemplate = props => {
                             <Text style={styles.text}>Postal Code: {hotel.address.postalCode}</Text>
                             <Text style={styles.text}>Street Address: {hotel.address.streetAddress}</Text>
                         </View>
-                    </View>
-               
-                    <View style={styles.book}>
-                        <BookingButton price={hotel.price} title={'Booking'} nextStep={'ReservationScreen'}/>
-                    </View>
+                    </View>        
                 </View>
             </ScrollView>
+            <BookingButton price={hotel.price} title={'Booking'} nextStep={'ReservationScreen'}/>
         </View>
     );
   
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.background,
-    },
     heart: {
         alignItems: 'flex-end',
         marginTop: 10,
@@ -95,13 +89,9 @@ const styles = StyleSheet.create({
         marginTop: 60,
         marginBottom: 20
     },
-    book: {
-        alignItems: 'center',
-        marginBottom: 10
-    },
     card: {
         marginLeft:40,
-        marginTop: 170
+        marginTop: 150
     },
     image: {
         width: '100%',

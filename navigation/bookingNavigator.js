@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import Colors from '../constants/colors';
 
 import IntroductoryScreen from '../screens/introductoryScreen';
@@ -56,7 +57,7 @@ export const BookingDrawer = () => {
                 options={{
                     drawerIcon: props => (
                     <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        name={'home'}
                         size={23}
                         color={props.color}
                         />
@@ -69,7 +70,7 @@ export const BookingDrawer = () => {
                 options={{
                     drawerIcon: props => (
                     <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        name={'train'}
                         size={23}
                         color={props.color}
                         />
@@ -81,11 +82,10 @@ export const BookingDrawer = () => {
                 component={Flights}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-                        size={23}
-                        color={props.color}
-                        />
+                        <MaterialIcons 
+                            name="flight" 
+                            size={24} 
+                            color={props.color} />
                         )
                     }}
             />
@@ -95,7 +95,7 @@ export const BookingDrawer = () => {
                 options={{
                     drawerIcon: props => (
                     <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        name={'car'}
                         size={23}
                         color={props.color}
                         />
@@ -108,7 +108,7 @@ export const BookingDrawer = () => {
                 options={{
                     drawerIcon: props => (
                     <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        name={'train'}
                         size={23}
                         color={props.color}
                         />
@@ -121,7 +121,7 @@ export const BookingDrawer = () => {
                 options={{
                     drawerIcon: props => (
                     <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        name={'restaurant'}
                         size={23}
                         color={props.color}
                         />
@@ -134,7 +134,7 @@ export const BookingDrawer = () => {
                 options={{
                     drawerIcon: props => (
                     <Ionicons
-                        name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                        name={'bus'}
                         size={23}
                         color={props.color}
                         />

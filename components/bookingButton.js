@@ -23,7 +23,7 @@ const BookingButton = props => {
     );
     
     return(
-      <View style={styles.position}>
+      <View {...props} style={{...styles.position, ...props.style}}>
           <View style={styles.container} >
               <View style={styles.priceContainer}>
                   <Text style={styles.price}>${props.price}</Text>
@@ -40,7 +40,7 @@ const BookingButton = props => {
 const styles = StyleSheet.create({
     container: {
         width: 320,
-        height: 60,
+        height: 70,
         borderRadius: 10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     },
    
     buttonContainer: {
-       width: '40%',
+       width: '60%',
        height: '90%',
        margin: 3,
        borderRadius: 10,
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: 'white'
+        color: 'white',
+        marginRight: -60
     },
     priceContainer: {
       marginRight: 100,
@@ -72,7 +73,8 @@ const styles = StyleSheet.create({
     },
     position: {
       alignItems: 'center',
-      marginTop: 40
+      marginBottom: 10,
+      // marginTop: 20,
     }
   
 });
