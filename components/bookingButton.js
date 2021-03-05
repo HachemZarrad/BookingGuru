@@ -40,7 +40,7 @@ const BookingButton = props => {
 const styles = StyleSheet.create({
     container: {
         width: 320,
-        height: 70,
+        height: 60,
         borderRadius: 10,
         flexDirection: 'row',
         justifyContent: 'flex-end',
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     position: {
       alignItems: 'center',
       marginBottom: 10,
-      // marginTop: 20,
     }
   
 });
