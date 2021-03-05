@@ -1,7 +1,7 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, SafeAreaView, Button, View } from 'react-native';
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import Colors from '../constants/colors';
@@ -50,7 +50,32 @@ const bookingDrawerNavigator = createDrawerNavigator();
 
 export const BookingDrawer = () => {
     return(
-        <bookingDrawerNavigator.Navigator>
+        <bookingDrawerNavigator.Navigator
+                drawerStyle={{
+                    backgroundColor: Colors.toolbarColor,
+                    width: 240,
+                    }}
+                drawerContent={props => {
+                    return (
+                    <View style={{ flex: 1, paddingTop: 20 }}>
+                        <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+                        <DrawerItemList {...props} />
+                        <Button
+                            title="Logout"
+                            color={Colors.primary}
+                            onPress={() => {
+                            dispatch(authActions.logout());
+                            // props.navigation.navigate('Auth');
+                            }}
+                        />
+                        </SafeAreaView>
+                    </View>
+                    );
+                }}
+                drawerContentOptions={{
+                    activeTintColor: Colors.primary
+                }}
+            >
             <bookingDrawerNavigator.Screen 
                 name='Home'
                 component={HomeNavigator}
@@ -69,11 +94,10 @@ export const BookingDrawer = () => {
                 component={HotelsNavigator}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={'train'}
-                        size={23}
-                        color={props.color}
-                        />
+                        <MaterialIcons 
+                            name="hotel" 
+                            size={24} 
+                            color={props.color} />
                         )
                     }}
             />
