@@ -1,9 +1,14 @@
 import React from 'react';
-import { Platform, SafeAreaView, Button, View } from 'react-native';
+import { Platform, SafeAreaView, Button, View, ScrollView } from 'react-native';
+
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
-import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
+import { Drawer } from 'react-native-paper';
+
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import Colors from '../constants/colors';
 import ProfileAvatar from '../components/profileAvatar';
@@ -16,7 +21,7 @@ import LogoScreen from '../screens/logoScreen';
 import Flights from '../screens/flight/flightsScreen';
 import FlightDetails from '../screens/flight/flightDetails';
 
-import Hotels from  '../screens/hotel/hotelsScreen';
+import Hotels from '../screens/hotel/hotelsScreen';
 import HotelDetails from '../screens/hotel/hotelDetails';
 import FiltredHotels from '../screens/hotel/filteredHotels';
 import ReservationScreen from '../screens/hotel/reservationScreen';
@@ -39,145 +44,189 @@ import AuthScreen from '../screens/authScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
-import { Drawer } from 'react-native-paper';
 
 const navigationOptions = {
     headerShown: false,
     headerStyle: {
-      backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : ''
+        backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : ''
     },
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor
-  };
+};
 
-  
+
 const bookingDrawerNavigator = createDrawerNavigator();
 
 export const BookingDrawer = () => {
-    return(
+    return (
         <bookingDrawerNavigator.Navigator
-                drawerStyle={{
-                    backgroundColor: Colors.toolbarColor,
-                    width: 300,
-                    }}
-                drawerContent={props => {
-                    return (
+            drawerStyle={{
+                backgroundColor: Colors.background,
+                width: 300,
+            }}
+            drawerContent={props => {
+                return (
                     <View style={{ flex: 1, paddingTop: 20 }}>
                         <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-                            <View style={{ flexDirection: 'row'}}>
-                                <ProfileAvatar/>
-                                <Title title={'Hachem Zarrad'} style={{marginTop: 30}} />
-                            </View>
-                            <Drawer.Section>
-                                <DrawerItemList {...props} />
-                            </Drawer.Section>
-                            <Drawer.Section>
-                                <DrawerItemList {...props} />
-                            </Drawer.Section>
-                            <Button
-                                title="Logout"
-                                color={Colors.primary}
-                                onPress={() => {
-                                // dispatch(authActions.logout());
-                                // props.navigation.navigate('Auth');
-                                }}
-                            />
+                            <ScrollView>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <ProfileAvatar />
+                                    <Title title={'Hachem Zarrad'} style={{ marginTop: 30 }} />
+                                </View>
+                                <DrawerItem
+                                        icon={() => (
+                                            <AntDesign
+                                                name="login"
+                                                size={24}
+                                                color="black" />
+                                        )}
+                                        label="Login"
+                                        onPress={() => { props.navigation.navigate('Home') }}
+                                    />
+                                <Drawer.Section>
+                                    <DrawerItemList {...props} />
+                                </Drawer.Section>
+                                <Drawer.Section>
+                                    <DrawerItem
+                                        icon={({ color, size }) => (
+                                            <Ionicons
+                                                name="heart"
+                                                color='red'
+                                                size={size}
+                                            />
+                                        )}
+                                        label="Favorites"
+                                        onPress={() => { props.navigation.navigate('Home') }}
+                                    />
+                                    <DrawerItem
+                                        icon={({ color, size }) => (
+                                            <Ionicons
+                                                name="settings"
+                                                color={color}
+                                                size={size}
+                                            />
+                                        )}
+                                        label="Settings"
+                                        onPress={() => { props.navigation.navigate('Home') }}
+                                    />
+                                    <DrawerItem
+                                        icon={() => (
+                                            <MaterialIcons
+                                                name="feedback"
+                                                size={24}
+                                                color={props.color} />
+                                        )}
+                                        label="Rate Us"
+                                        onPress={() => { props.navigation.navigate('Home') }}
+                                    />
+                                    <DrawerItem
+                                        icon={() => (
+                                            <SimpleLineIcons
+                                                name="logout"
+                                                size={24}
+                                                color="black" />
+                                        )}
+                                        label="Logout"
+                                        onPress={() => { props.navigation.navigate('Home') }}
+                                    />
+                                </Drawer.Section>
+                            </ScrollView>
                         </SafeAreaView>
                     </View>
-                    );
-                }}
-                drawerContentOptions={{
-                    activeTintColor: Colors.primary
-                }}
-            >
-            <bookingDrawerNavigator.Screen 
+                );
+            }}
+            drawerContentOptions={{
+                activeTintColor: Colors.primary
+            }}
+        >
+            <bookingDrawerNavigator.Screen
                 name='Home'
                 component={HomeNavigator}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={'home'}
-                        size={23}
-                        color={props.color}
+                        <Ionicons
+                            name={'home'}
+                            size={23}
+                            color={props.color}
                         />
-                        )
-                    }}
+                    )
+                }}
             />
-            <bookingDrawerNavigator.Screen 
+            <bookingDrawerNavigator.Screen
                 name='Hotels'
                 component={HotelsNavigator}
                 options={{
                     drawerIcon: props => (
-                        <MaterialIcons 
-                            name="hotel" 
-                            size={24} 
+                        <MaterialIcons
+                            name="hotel"
+                            size={24}
                             color={props.color} />
-                        )
-                    }}
+                    )
+                }}
             />
-            <bookingDrawerNavigator.Screen 
+            <bookingDrawerNavigator.Screen
                 name='Flights'
                 component={Flights}
                 options={{
                     drawerIcon: props => (
-                        <MaterialIcons 
-                            name="flight" 
-                            size={24} 
+                        <MaterialIcons
+                            name="flight"
+                            size={24}
                             color={props.color} />
-                        )
-                    }}
+                    )
+                }}
             />
-            <bookingDrawerNavigator.Screen 
+            <bookingDrawerNavigator.Screen
                 name='Taxis'
                 component={TaxisNavigator}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={'car'}
-                        size={23}
-                        color={props.color}
+                        <Ionicons
+                            name={'car'}
+                            size={23}
+                            color={props.color}
                         />
-                        )
-                    }}
+                    )
+                }}
             />
-            <bookingDrawerNavigator.Screen 
+            <bookingDrawerNavigator.Screen
                 name='Trains'
                 component={TrainsNavigator}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={'train'}
-                        size={23}
-                        color={props.color}
+                        <Ionicons
+                            name={'train'}
+                            size={23}
+                            color={props.color}
                         />
-                        )
-                    }}
+                    )
+                }}
             />
-            <bookingDrawerNavigator.Screen 
+            <bookingDrawerNavigator.Screen
                 name='Food'
                 component={FoodNavigator}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={'restaurant'}
-                        size={23}
-                        color={props.color}
+                        <Ionicons
+                            name={'restaurant'}
+                            size={23}
+                            color={props.color}
                         />
-                        )
-                    }}
+                    )
+                }}
             />
-            <bookingDrawerNavigator.Screen 
+            <bookingDrawerNavigator.Screen
                 name='Buses'
                 component={BusesNavigator}
                 options={{
                     drawerIcon: props => (
-                    <Ionicons
-                        name={'bus'}
-                        size={23}
-                        color={props.color}
+                        <Ionicons
+                            name={'bus'}
+                            size={23}
+                            color={props.color}
                         />
-                        )
-                    }}
-            />    
+                    )
+                }}
+            />
         </bookingDrawerNavigator.Navigator>
     )
 }
@@ -185,27 +234,27 @@ export const BookingDrawer = () => {
 const homeStackNavigator = createStackNavigator();
 
 export const HomeNavigator = () => {
-    return(
+    return (
         <homeStackNavigator.Navigator screenOptions={navigationOptions} >
-            <homeStackNavigator.Screen name="Logo" component={LogoScreen}/>
-            <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen}/>
-            <homeStackNavigator.Screen name="HomePage" component={Home}/>
+            <homeStackNavigator.Screen name="Logo" component={LogoScreen} />
+            <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen} />
+            <homeStackNavigator.Screen name="HomePage" component={Home} />
         </homeStackNavigator.Navigator>
-  );
+    );
 }
 
 
 const hotelsStackNavigator = createStackNavigator();
 
 export const HotelsNavigator = () => {
-    return(
+    return (
         <hotelsStackNavigator.Navigator screenOptions={navigationOptions}>
-            <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels}/>
-            <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails}/>
-            <hotelsStackNavigator.Screen name="FiltredHotels" component={FiltredHotels}/>
-            <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info'}}/>
-            <hotelsStackNavigator.Screen name="PickUpRoomScreen" component={PickUpRoomScreen} options={{ headerShown: true, headerTitle: "What's your plan"}}/>
-            <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure'}}/>
+            <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels} />
+            <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails} />
+            <hotelsStackNavigator.Screen name="FiltredHotels" component={FiltredHotels} />
+            <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info' }} />
+            <hotelsStackNavigator.Screen name="PickUpRoomScreen" component={PickUpRoomScreen} options={{ headerShown: true, headerTitle: "What's your plan" }} />
+            <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure' }} />
         </hotelsStackNavigator.Navigator>
     );
 }
@@ -213,10 +262,10 @@ export const HotelsNavigator = () => {
 const flightsStackNavigator = createStackNavigator();
 
 export const FlightsNavigator = () => {
-    return(
+    return (
         <flightsStackNavigator.Navigator screenOptions={navigationOptions}>
-            <flightsStackNavigator.Screen name="FlightsOverview" component={Flights}/>
-            <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails}/>
+            <flightsStackNavigator.Screen name="FlightsOverview" component={Flights} />
+            <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails} />
         </flightsStackNavigator.Navigator>
     );
 }
@@ -224,10 +273,10 @@ export const FlightsNavigator = () => {
 const taxisStackNavigator = createStackNavigator();
 
 export const TaxisNavigator = () => {
-    return(
+    return (
         <taxisStackNavigator.Navigator screenOptions={navigationOptions}>
-            <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis}/>
-            <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails}/>
+            <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis} />
+            <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails} />
         </taxisStackNavigator.Navigator>
     );
 }
@@ -235,21 +284,21 @@ export const TaxisNavigator = () => {
 const trainsStackNavigator = createStackNavigator();
 
 export const TrainsNavigator = () => {
-    return(
+    return (
         <trainsStackNavigator.Navigator screenOptions={navigationOptions}>
-            <trainsStackNavigator.Screen name="TrainsOverview" component={Trains}/>
-            <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails}/>
+            <trainsStackNavigator.Screen name="TrainsOverview" component={Trains} />
+            <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails} />
         </trainsStackNavigator.Navigator>
-    );  
+    );
 }
 
 const busesStackNavigator = createStackNavigator();
 
 export const BusesNavigator = () => {
-    return(
+    return (
         <busesStackNavigator.Navigator screenOptions={navigationOptions}>
-            <busesStackNavigator.Screen name="BusesOverview" component={Buses}/>
-            <busesStackNavigator.Screen name="BusDetails" component={BusDetails}/>
+            <busesStackNavigator.Screen name="BusesOverview" component={Buses} />
+            <busesStackNavigator.Screen name="BusDetails" component={BusDetails} />
         </busesStackNavigator.Navigator>
     );
 }
@@ -257,10 +306,10 @@ export const BusesNavigator = () => {
 const foodStackNavigator = createStackNavigator();
 
 export const FoodNavigator = () => {
-     return(
+    return (
         <foodStackNavigator.Navigator screenOptions={navigationOptions}>
-            <foodStackNavigator.Screen name="FoodOverview" component={Food}/>
-            <foodStackNavigator.Screen name="DishDetails" component={DishDetails}/>
+            <foodStackNavigator.Screen name="FoodOverview" component={Food} />
+            <foodStackNavigator.Screen name="DishDetails" component={DishDetails} />
         </foodStackNavigator.Navigator>
     );
 }
@@ -275,7 +324,7 @@ export const AuthNavigator = () => {
                 component={AuthScreen}
             />
         </AuthStackNavigator.Navigator>
-  );
+    );
 };
 
 const AdminStackNavigator = createStackNavigator();
@@ -292,7 +341,7 @@ export const AdminNavigator = () => {
                 component={ReservationDetails}
             />
         </AdminStackNavigator.Navigator>
-  );
+    );
 };
 
 
