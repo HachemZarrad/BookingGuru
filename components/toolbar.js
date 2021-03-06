@@ -11,14 +11,14 @@ const Toolbar = () => {
     }
     return( 
         <View style={styles.toolbar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openMenu}>
                 <Icon name="bars" size={25} color="#000000"
-                    onPress={openMenu}/>
+                    />
             </TouchableOpacity>
             <Image 
                 source={require('../assets/guruLogo.png')}
-                style={styles.image}/>
-            <TouchableOpacity>
+                style={styles.logo}/>
+            <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
                 <Icon name="bell" size={25} color="#000000"/>
             </TouchableOpacity>
         </View>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         height: 130,
         justifyContent: 'space-around'
     },
-    image: {
+    logo: {
         width: 100,
         height: 80,
         margin: 20

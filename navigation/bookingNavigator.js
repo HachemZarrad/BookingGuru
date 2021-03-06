@@ -40,6 +40,8 @@ import TaxiDetails from '../screens/taxi/taxiDetails';
 import Buses from '../screens/bus/busesScreen';
 import BusDetails from '../screens/bus/busDetails';
 
+import FavoriteScreen from '../screens/favoritesScreen';
+
 import AuthScreen from '../screens/authScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
@@ -50,7 +52,7 @@ const navigationOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : ''
     },
-    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor,
 };
 
 
@@ -60,7 +62,7 @@ export const BookingDrawer = () => {
     return (
         <bookingDrawerNavigator.Navigator
             drawerStyle={{
-                backgroundColor: Colors.background,
+                // backgroundColor: Colors.background,
                 width: 300,
             }}
             drawerContent={props => {
@@ -68,25 +70,30 @@ export const BookingDrawer = () => {
                     <View style={{ flex: 1, paddingTop: 20 }}>
                         <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
                             <ScrollView>
-                                <View style={{ flexDirection: 'row' }}>
+                                {/* <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
                                     <ProfileAvatar />
                                     <Title title={'Hachem Zarrad'} style={{ marginTop: 30 }} />
-                                </View>
+                                </View> */}
                                 <DrawerItem
+                                        inactiveTintColor= 'black'
+                                        style={{marginTop:30}}
                                         icon={() => (
                                             <AntDesign
                                                 name="login"
                                                 size={24}
                                                 color="black" />
                                         )}
-                                        label="Login"
+                                        label="Login Or Create Account"
                                         onPress={() => { props.navigation.navigate('Home') }}
                                     />
-                                <Drawer.Section>
-                                    <DrawerItemList {...props} />
+                                <Drawer.Section >
+                                    <Title title='Services' style={{fontSize: 17, margin: 10}}/>
+                                    <DrawerItemList {...props}  />
                                 </Drawer.Section>
                                 <Drawer.Section>
+                                    <Title title='Favorites and Settings' style={{fontSize: 17, margin: 10}}/>
                                     <DrawerItem
+                                        inactiveTintColor= 'black'
                                         icon={({ color, size }) => (
                                             <Ionicons
                                                 name="heart"
@@ -95,9 +102,10 @@ export const BookingDrawer = () => {
                                             />
                                         )}
                                         label="Favorites"
-                                        onPress={() => { props.navigation.navigate('Home') }}
+                                        onPress={() => { props.navigation.navigate('Favorites') }}
                                     />
                                     <DrawerItem
+                                        inactiveTintColor= 'black'
                                         icon={({ color, size }) => (
                                             <Ionicons
                                                 name="settings"
@@ -108,7 +116,11 @@ export const BookingDrawer = () => {
                                         label="Settings"
                                         onPress={() => { props.navigation.navigate('Home') }}
                                     />
+                                </Drawer.Section>
+                                <Drawer.Section>
+                                    <Title title='Your Feedback Matters' style={{fontSize: 17, margin: 10}}/>
                                     <DrawerItem
+                                        inactiveTintColor= 'black'
                                         icon={() => (
                                             <MaterialIcons
                                                 name="feedback"
@@ -118,16 +130,19 @@ export const BookingDrawer = () => {
                                         label="Rate Us"
                                         onPress={() => { props.navigation.navigate('Home') }}
                                     />
+                                </Drawer.Section>
+                                <Drawer.Section style={{marginTop: 20}}>
                                     <DrawerItem
-                                        icon={() => (
-                                            <SimpleLineIcons
-                                                name="logout"
-                                                size={24}
-                                                color="black" />
-                                        )}
-                                        label="Logout"
-                                        onPress={() => { props.navigation.navigate('Home') }}
-                                    />
+                                            inactiveTintColor= 'black'
+                                            icon={() => (
+                                                <SimpleLineIcons
+                                                    name="logout"
+                                                    size={24}
+                                                    color="black" />
+                                            )}
+                                            label="Logout"
+                                            onPress={() => { props.navigation.navigate('Home') }}
+                                        />
                                 </Drawer.Section>
                             </ScrollView>
                         </SafeAreaView>
@@ -135,7 +150,8 @@ export const BookingDrawer = () => {
                 );
             }}
             drawerContentOptions={{
-                activeTintColor: Colors.primary
+                activeTintColor: Colors.toolbarColor,
+                inactiveTintColor: 'black'
             }}
         >
             <bookingDrawerNavigator.Screen
@@ -239,6 +255,7 @@ export const HomeNavigator = () => {
             <homeStackNavigator.Screen name="Logo" component={LogoScreen} />
             <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen} />
             <homeStackNavigator.Screen name="HomePage" component={Home} />
+            <homeStackNavigator.Screen name="Favorites" component={FavoriteScreen} />
         </homeStackNavigator.Navigator>
     );
 }
