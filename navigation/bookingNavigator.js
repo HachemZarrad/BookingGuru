@@ -4,7 +4,10 @@ import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import Colors from '../constants/colors';
+import ProfileAvatar from '../components/profileAvatar';
+import Title from '../components/title';
 
 import IntroductoryScreen from '../screens/introductoryScreen';
 import Home from '../screens/homeScreen';
@@ -36,6 +39,7 @@ import AuthScreen from '../screens/authScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
+import { Drawer } from 'react-native-paper';
 
 const navigationOptions = {
     headerShown: false,
@@ -53,21 +57,30 @@ export const BookingDrawer = () => {
         <bookingDrawerNavigator.Navigator
                 drawerStyle={{
                     backgroundColor: Colors.toolbarColor,
-                    width: 240,
+                    width: 300,
                     }}
                 drawerContent={props => {
                     return (
                     <View style={{ flex: 1, paddingTop: 20 }}>
                         <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-                        <DrawerItemList {...props} />
-                        <Button
-                            title="Logout"
-                            color={Colors.primary}
-                            onPress={() => {
-                            dispatch(authActions.logout());
-                            // props.navigation.navigate('Auth');
-                            }}
-                        />
+                            <View style={{ flexDirection: 'row'}}>
+                                <ProfileAvatar/>
+                                <Title title={'Hachem Zarrad'} style={{marginTop: 30}} />
+                            </View>
+                            <Drawer.Section>
+                                <DrawerItemList {...props} />
+                            </Drawer.Section>
+                            <Drawer.Section>
+                                <DrawerItemList {...props} />
+                            </Drawer.Section>
+                            <Button
+                                title="Logout"
+                                color={Colors.primary}
+                                onPress={() => {
+                                // dispatch(authActions.logout());
+                                // props.navigation.navigate('Auth');
+                                }}
+                            />
                         </SafeAreaView>
                     </View>
                     );
