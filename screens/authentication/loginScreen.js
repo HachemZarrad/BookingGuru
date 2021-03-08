@@ -1,14 +1,16 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import InputBar from '../../components/inputBar';
 import CustomButton from '../../components/customButton';
+import Title from '../../components/title';
 
 const LoginScreen = () => {
     return (
         <View style={styles.screen}>
-            <InputBar/>
-            <InputBar/>
-            <CustomButton/>
+            <Title title='Login'/>
+            <InputBar placeholder='    Email'/>
+            <InputBar placeholder='    Password'/>
+            <CustomButton style={styles.button}/>
         </View>
     )
 }
@@ -21,13 +23,7 @@ const styles = StyleSheet.create({
        justifyContent: 'center',
        alignItems: 'center'
     },
-    inputBar: {
-        backgroundColor: 'white', 
-        width: '75%', 
-        height: 50,
-        margin: 10,
-        borderRadius: 20, 
-        borderWidth: 4,
-        borderColor: 'black', 
+    button:{
+
     }   
 })

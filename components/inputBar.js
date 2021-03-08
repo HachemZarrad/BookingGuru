@@ -14,7 +14,7 @@ export default inputBar
 
 const styles = StyleSheet.create({
     container: {
-        width: '75%',
+        width: '80%',
         height: 50,
         backgroundColor: 'white', 
         borderRadius: 20, 
