@@ -4,7 +4,7 @@ import Colors from '../constants/colors';
 import { useNavigation } from '@react-navigation/native';
 
 
-const BookingButton = props => {
+const CustomButton = props => {
     const navigation = useNavigation();
 
     const createTwoButtonAlert = () =>
@@ -26,7 +26,7 @@ const BookingButton = props => {
       <View {...props} style={{...styles.position, ...props.style}}>
           <View style={styles.container} >
               <View style={styles.priceContainer}>
-                  <Text style={styles.price}>${props.price}</Text>
+                  <Text style={styles.price}>{props.price}</Text>
               </View>
               <TouchableOpacity style={styles.buttonContainer} 
                                     onPress={() => navigation.navigate(props.nextStep, props.price)}>
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default BookingButton;
+export default CustomButton;

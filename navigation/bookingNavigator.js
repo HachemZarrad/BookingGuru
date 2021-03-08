@@ -1,13 +1,11 @@
 import React from 'react';
-import { Platform, SafeAreaView, Button, View, ScrollView } from 'react-native';
+import { Platform, SafeAreaView, View, ScrollView } from 'react-native';
 
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { Drawer } from 'react-native-paper';
 
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons, SimpleLineIcons, AntDesign } from '@expo/vector-icons';
 
 import Colors from '../constants/colors';
 import ProfileAvatar from '../components/profileAvatar';
@@ -40,8 +38,10 @@ import Buses from '../screens/bus/busesScreen';
 import BusDetails from '../screens/bus/busDetails';
 
 import FavoriteScreen from '../screens/favoritesScreen';
+import NotificationsScreen from '../screens/notificationsScreen';
 
-import AuthScreen from '../screens/authScreen';
+import SignUpScreen from '../screens/authentication/signUpScreen';
+import LoginScreen from '../screens/authentication/loginScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
@@ -69,13 +69,13 @@ export const BookingDrawer = () => {
                     <View style={{ flex: 1, paddingTop: 20 }}>
                         <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
                             <ScrollView>
-                                <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
+                                {/* <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
                                     <ProfileAvatar />
                                     <Title title={'Hachem Zarrad'} style={{ marginTop: 30 }} />
-                                </View>
-                                {/* <DrawerItem
+                                </View> */}
+                                <DrawerItem
                                         inactiveTintColor= 'black'
-                                        style={{marginTop:30}}
+                                        // style={{marginTop:30}}
                                         icon={() => (
                                             <AntDesign
                                                 name="login"
@@ -83,8 +83,8 @@ export const BookingDrawer = () => {
                                                 color="black" />
                                         )}
                                         label="Login Or Create Account"
-                                        onPress={() => { props.navigation.navigate('Home') }}
-                                    /> */}
+                                        onPress={() => { props.navigation.navigate('Authentication') }}
+                                    />
                                 <Drawer.Section >
                                     <Title title='Services' style={{fontSize: 17, margin: 10}}/>
                                     <DrawerItemList {...props}  />
@@ -254,7 +254,9 @@ export const HomeNavigator = () => {
             <homeStackNavigator.Screen name="Logo" component={LogoScreen} />
             <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen} />
             <homeStackNavigator.Screen name="HomePage" component={Home} />
-            <homeStackNavigator.Screen name="Favorites" component={FavoriteScreen} />
+            <homeStackNavigator.Screen name="Authentication" component={AuthenticationNavigator} />
+            <homeStackNavigator.Screen name="Favorites" component={FavoriteScreen} options={{headerShown: true, headerTitle: 'Favorites'}}/>
+            <homeStackNavigator.Screen name="Notifications" component={NotificationsScreen} options={{headerShown: true, headerTitle: 'We Keep You Notified'}} />
         </homeStackNavigator.Navigator>
     );
 }
@@ -332,12 +334,18 @@ export const FoodNavigator = () => {
 
 const AuthStackNavigator = createStackNavigator();
 
-export const AuthNavigator = () => {
+export const AuthenticationNavigator = () => {
     return (
         <AuthStackNavigator.Navigator screenOptions={navigationOptions}>
             <AuthStackNavigator.Screen
-                name="Auth"
-                component={AuthScreen}
+                name="Login"
+                component={LoginScreen}
+                options={{headerShown: true, headerTitle: 'Login'}}
+            />
+            <AuthStackNavigator.Screen
+                name="SignUp"
+                component={SignUpScreen}
+                options={{headerShown: true, headerTitle: 'Sign Up'}}
             />
         </AuthStackNavigator.Navigator>
     );

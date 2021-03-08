@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image} from 'react-native';
+import { StyleSheet, View, Image} from 'react-native';
 
 const CustomImage = () => {
     return(
@@ -15,14 +15,13 @@ const CustomImage = () => {
 const styles = StyleSheet.create({
     image: {
         height: 200,
-        width: 340,
+        width: '96%',
         borderRadius: 10,
         marginTop: 10,
         marginBottom: 30
     },
     container: {
         alignItems: 'center',
-        justifyContent: 'center',
     }
 });
 

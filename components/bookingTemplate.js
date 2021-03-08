@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, ImageBackground,
      ScrollView} from 'react-native';
 import Colors from '../constants/colors';
 import Toolbar from './toolbar';
-import BookingButton from './bookingButton';
+import CustomButton from './customButton';
 import RatingCard from './ratingCard';
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -67,7 +67,7 @@ const BookingTemplate = props => {
                     </View>        
                 </View>
             </ScrollView>
-            <BookingButton price={hotel.price} title={'Booking'} nextStep={'ReservationScreen'}/>
+            <CustomButton price={hotel.price} title={'Booking'} nextStep={'ReservationScreen'}/>
         </View>
     );
   

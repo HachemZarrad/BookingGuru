@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import BookingButton from '../../components/bookingButton';
+import CustomButton from '../../components/customButton';
 
 
 
@@ -9,7 +9,7 @@ const ValidateReservationScreen = ({route}) => {
     return (
         <View>
             <Text>Here's the thing</Text>
-            <BookingButton price={price} nextStep={'ValidateReservationScreen'} title={'Validate'}/>
+            <CustomButton price={price} nextStep={'ValidateReservationScreen'} title={'Validate'}/>
         </View>
     )
 }

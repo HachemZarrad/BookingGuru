@@ -4,7 +4,7 @@ import DatePicker from 'react-native-datepicker'
 
 import Colors from '../../constants/colors';
 import InputBar from '../../components/inputBar';
-import BookingButton from '../../components/bookingButton';
+import CustomButton from '../../components/customButton';
 import CustomPicker from '../../components/customPicker';
 import Title from '../../components/title';
 import Caution from '../../components/caution';
@@ -14,8 +14,6 @@ const PickUpRoomScreen = ({ route }) => {
     const price = route.params;
     const minDate = new Date();
     const maxDate = new Date(`${minDate.getFullYear()+2}`);
-    console.log('min',minDate);
-    console.log('max',maxDate);
     const [selectedDate, setSelectedDate] = useState(null);
     return (
         <View style={styles.container}>
@@ -58,7 +56,7 @@ const PickUpRoomScreen = ({ route }) => {
                 <Title title={'Any Comments ?'} />
                 <InputBar numberOfLines={4} style={styles.commentBox } />
             </ScrollView>
-            <BookingButton price={price} nextStep={'ValidateReservationScreen'} title={'Pick Up Plan'} />
+            <CustomButton price={price} nextStep={'ValidateReservationScreen'} title={'Pick Up Plan'} />
         </View>
     )
 }
@@ -71,11 +69,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     picker: {
-        marginBottom: 20,
-        marginTop: -5
+        alignSelf: 'center'
     },
     commentBox: {
         height: 90,
-        marginBottom: 70
+        alignSelf: 'center'
     }
 })

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Text, Image, ActivityIndicator,
    ScrollView, TouchableOpacity} from 'react-native';
 import {baseUrl} from '../constants/networking';
-import Title from './title';
 import { useNavigation } from '@react-navigation/native';
 
 const Destinations = () => {
@@ -30,7 +29,6 @@ const Destinations = () => {
 
       return(
         <View>
-             <Title title={'Popular Destinations'} style={styles.title}/>
              {isLoading ? <ActivityIndicator/> : (
               <ScrollView horizontal={true} >
               {destinations.map(destination => {
@@ -69,9 +67,6 @@ const styles = StyleSheet.create({
       width: 120,
       height: 80,
       borderRadius: 10
-    },
-    title: {
-      marginLeft: 15
     },
     placeName: {
       fontWeight:'bold',

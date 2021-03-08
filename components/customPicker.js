@@ -26,18 +26,18 @@ export default CustomPicker
 
 const styles = StyleSheet.create({
     border: {
-        width: 300,
+        width: '75%',
         height: 50,
         backgroundColor: 'white', 
         borderRadius: 20, 
         borderWidth: 4,
         borderColor: Colors.toolbarColor, 
-        marginLeft: 30, 
-        marginTop: 10
+        marginBottom: 20
     },
     picker: {
         height: 50,
-        width: 300
+        width: '100%',
+        marginTop: -6
     }
    
 })

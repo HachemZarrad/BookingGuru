@@ -4,7 +4,7 @@ import Colors from '../constants/colors';
 
 const inputBar = props => {
     return (
-        <View>
+        <View style={{...styles.container, ...props.style}}>
             <TextInput {...props}  placeholderTextColor="black" style={{...styles.inputBar, ...props.style}}></TextInput>
         </View>
     )
@@ -13,14 +13,13 @@ const inputBar = props => {
 export default inputBar
 
 const styles = StyleSheet.create({
-    inputBar: {
-        width: 300,
+    container: {
+        width: '75%',
         height: 50,
         backgroundColor: 'white', 
         borderRadius: 20, 
         borderWidth: 4,
+        margin: 5,
         borderColor: Colors.toolbarColor, 
-        marginLeft: 30, 
-        marginTop: 10
     }
 })

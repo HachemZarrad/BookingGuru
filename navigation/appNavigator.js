@@ -15,7 +15,7 @@ export const AppNavigator = () => {
                     backgroundColor={Colors.toolbarColor}
                  />    
             </SafeAreaView>
-             <BookingDrawer/>
+            <BookingDrawer/>
         </NavigationContainer>
     )
 }

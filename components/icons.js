@@ -1,14 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Title from './title';
 
 
 const Icons = () => {
     const navigation = useNavigation();
     return(
         <View style={styles.frame}>
-            <Title title={'Pick Up You Plan Here'} style={{marginTop:-10}}/>
             <View style={styles.container}>
                 <TouchableOpacity onPress={()=> navigation.navigate('Hotels')}>
                     <Image 
@@ -65,19 +63,18 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
+        marginBottom: 6,
+        // alignItems: 'center',
         justifyContent: 'space-around',
-        marginBottom: 6
     },
     icon: {
         flexDirection: 'column'
     },
     frame: {
         height: 200,
-        width: 340,
+        width: '90%',
         borderRadius: 10,
-        marginLeft: 10,
-        marginBottom: 40
-      
+        
     }
 });
 

@@ -88,7 +88,7 @@ const Hotels = () => {
 
             
           )}
-            {loading || shown ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
+            {loading ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
             <FlatList
               style={{marginBottom:60}}
               data={hotels}
@@ -123,11 +123,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 250, 
     backgroundColor: 'white',
-    marginBottom: 10,
-    marginLeft: 10,
+    margin: 10,
     width: 340, 
     borderRadius: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   hotelName: {
     fontSize: 20,
@@ -140,7 +139,9 @@ const styles = StyleSheet.create({
   },
   ParentContainer: {
     backgroundColor: '#e6e6e6',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
   },
   textContainer: {
     margin: 10,
