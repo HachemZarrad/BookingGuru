@@ -8,7 +8,6 @@ import { Drawer } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 
 import Colors from '../constants/colors';
 import ProfileAvatar from '../components/profileAvatar';
@@ -70,11 +69,11 @@ export const BookingDrawer = () => {
                     <View style={{ flex: 1, paddingTop: 20 }}>
                         <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
                             <ScrollView>
-                                {/* <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
+                                <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
                                     <ProfileAvatar />
                                     <Title title={'Hachem Zarrad'} style={{ marginTop: 30 }} />
-                                </View> */}
-                                <DrawerItem
+                                </View>
+                                {/* <DrawerItem
                                         inactiveTintColor= 'black'
                                         style={{marginTop:30}}
                                         icon={() => (
@@ -85,7 +84,7 @@ export const BookingDrawer = () => {
                                         )}
                                         label="Login Or Create Account"
                                         onPress={() => { props.navigation.navigate('Home') }}
-                                    />
+                                    /> */}
                                 <Drawer.Section >
                                     <Title title='Services' style={{fontSize: 17, margin: 10}}/>
                                     <DrawerItemList {...props}  />

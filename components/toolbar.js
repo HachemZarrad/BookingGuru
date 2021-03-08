@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : 'white',
         alignItems: 'center',
         flexDirection: 'row',
-        height: 130,
+        height: '18%',
         justifyContent: 'space-around'
     },
     logo: {

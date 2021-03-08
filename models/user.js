@@ -1,10 +1,10 @@
 class User {
-    constructor(id, firstname, lastname, admin, username){
+    constructor(id, firstname, lastname, admin, email){
             this.id = id;
             this.firstname = firstname;
             this.lastname = lastname;
             this.admin = admin;
-            this.username = username; 
+            this.email = email; 
         }
     }
 

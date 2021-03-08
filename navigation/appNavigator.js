@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar, SafeAreaView } from 'react-native';
+import Colors from '../constants/colors';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { BookingDrawer, AuthNavigator,
@@ -7,7 +9,13 @@ import { BookingDrawer, AuthNavigator,
 export const AppNavigator = () => {
     return(
         <NavigationContainer>
-            <BookingDrawer/>
+            <SafeAreaView>
+                <StatusBar
+                    animated={true}
+                    backgroundColor={Colors.toolbarColor}
+                 />    
+            </SafeAreaView>
+             <BookingDrawer/>
         </NavigationContainer>
     )
 }

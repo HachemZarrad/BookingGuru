@@ -8,7 +8,7 @@ const Icons = () => {
     const navigation = useNavigation();
     return(
         <View style={styles.frame}>
-            <Title title={'Pick Up You Plan Here'}/>
+            <Title title={'Pick Up You Plan Here'} style={{marginTop:-10}}/>
             <View style={styles.container}>
                 <TouchableOpacity onPress={()=> navigation.navigate('Hotels')}>
                     <Image 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         width: 340,
         borderRadius: 10,
         marginLeft: 10,
-        marginBottom: 80
+        marginBottom: 40
       
     }
 });
