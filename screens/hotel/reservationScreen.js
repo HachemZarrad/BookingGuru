@@ -12,7 +12,7 @@ const ReservationScreen = ({route}) => {
                 <InputBar placeholder="     Email Address"></InputBar>
                 <InputBar placeholder="     Country/Region"></InputBar>
                 <InputBar placeholder="     Phone Number"></InputBar>
-                <CustomButton  price={price} nextStep={'PickUpRoomScreen'} title={'ADD INFO'} style={{marginTop: 10}}/>
+                <CustomButton  price={price} nextStep={'PickUpRoomScreen'} title={'ADD INFO'} style={styles.button}/>
         </View>         
     )
 }
@@ -21,9 +21,11 @@ export default ReservationScreen
 
 const styles = StyleSheet.create({
     screen: {
-        marginTop: 40,
         flex: 1,
-        // justifyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
+    },
+    button: {
+        marginTop: 30
     }
 })

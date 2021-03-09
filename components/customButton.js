@@ -23,16 +23,14 @@ const CustomButton = props => {
     );
     
     return(
-          <View style={styles.container} >
-              <View style={styles.pricePosition}>
+          <View style={{...styles.container, ...props.style}} >
+              <View style={styles.frame}>
                 <Text style={styles.price}>${props.price}</Text>
-              </View>
-              <View style={styles.buttonPosition}>
                 <TouchableOpacity 
                     style={styles.button} 
                     onPress={() => navigation.navigate(props.nextStep, props.price)}
                     >
-                   <Text style={styles.textButton}>{props.title}</Text>
+                    <Text style={styles.textButton}>{props.title}</Text>
                 </TouchableOpacity>
               </View>
           </View>
@@ -43,12 +41,16 @@ const CustomButton = props => {
     container: {
       width: '80%',
       height: 60,
-      // flexShrink: 1,
       borderRadius: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: Colors.buttonContainer
+    },
+    frame: {
+      height: 60,
+      width: '97%',
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-around',
-      backgroundColor: Colors.buttonContainer
     },
     textButton: {
         fontWeight: 'bold',
@@ -56,27 +58,20 @@ const CustomButton = props => {
         color: 'white',
     },
     button: {
-       width: '100%',
        height: '90%',
-      //  marginLeft: 10,
+       flex: 0.9,
        borderRadius: 10,
        justifyContent: 'center',
        alignItems: 'center',
        backgroundColor: Colors.button,
     },
-    buttonPostion: {
-        // flex: 1,
-
-    },
     price: {
         fontSize: 24,
+        flex: 0.5,
         fontWeight: 'bold',
         color: 'white',
     },
-    pricePosition: {
-      flex:1
-    },
-  
+    
 });
 
 export default CustomButton;

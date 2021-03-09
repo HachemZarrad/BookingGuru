@@ -5,8 +5,7 @@ import Colors from '../constants/colors';
 import Toolbar from './toolbar';
 import CustomButton from './customButton';
 import RatingCard from './ratingCard';
-import { Ionicons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
 import { newFavorite, removeFavorite } from '../store/actions/favorites';
 

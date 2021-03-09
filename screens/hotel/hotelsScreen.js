@@ -4,7 +4,7 @@ import {StyleSheet, View, Text, FlatList, TouchableOpacity,
 import { useNavigation } from '@react-navigation/native';
 
 import Toolbar from '../../components/toolbar';
-import HotelStars from '../../components/hotelStars';
+import CustomList from '../../components/customList'; 
 import InputBar from '../../components/inputBar';
 import Colors from '../../constants/colors';
 
@@ -15,6 +15,7 @@ import  { createFilter } from 'react-native-search-filter'
 const KEYS_TO_FILTERS = ['name', 'locality'];
 
 import * as hotelsActions from '../../store/actions/hotels';
+import * as ActionTypes from '../../store/actions/actionTypes';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -89,23 +90,7 @@ const Hotels = () => {
             
           )}
             {loading ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
-            <FlatList
-              style={{marginBottom:60}}
-              data={hotels}
-              keyExtractor={({ _id }) => _id.toString()}
-              renderItem={({ item }) => (
-                <TouchableOpacity onPress={()=> navigation.navigate('HotelDetails',  item)}>
-                    <View style={styles.container}>
-                        <Image source={{uri: item.thumbnailUrl}} style={styles.image}/> 
-                        <View style={styles.textContainer}>
-                        <Text style={styles.hotelName}>{item.name}</Text>
-                        <HotelStars rating={item.starRating}/>
-                        <Text style={styles.text}>Price: ${item.price}</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-              )}
-            />
+            <CustomList data={hotels} pressedElement='HotelDetails' service={ActionTypes.GET_HOTELS}/>
           )}
         </View>
     );
