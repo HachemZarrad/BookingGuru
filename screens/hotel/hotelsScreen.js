@@ -97,13 +97,11 @@ const Hotels = () => {
 
 const styles = StyleSheet.create({
   ParentContainer: {
-    backgroundColor: '#e6e6e6',
-    justifyContent: 'center',
+    backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
-    flex: 1
+    flex: 1,
   },
   spinner: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   }

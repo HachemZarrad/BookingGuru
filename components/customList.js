@@ -75,13 +75,13 @@ const DisplayAccordingToService = ({service,item}) => {
 const CustomList = props => {
     const navigation = useNavigation();
     return (
-        <View>
+        <View style={{flex: 1}}>
             <FlatList
               {...props}
-              style={{marginBottom:60}}
+              // style={{}}
               keyExtractor={({ _id }) => _id.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity onPress={()=> navigation.navigate(props.pressedElement,  item)}>
+                <TouchableOpacity onPress={()=> navigation.navigate(props.pressedElement, item)}>
                     <DisplayAccordingToService item={item} service={props.service}/>                    
                 </TouchableOpacity>
               )}
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
         margin: 10,
         width: 340, 
         borderRadius: 10,
+        flex:1,
         overflow: 'hidden',
       },
     hotelName: {
@@ -132,12 +133,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 30,
         marginRight: 180
-      },
-    ParentContainer: {
-        backgroundColor: '#e6e6e6',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
       },
     textContainer: {
         margin: 10,

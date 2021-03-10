@@ -21,6 +21,7 @@ import FlightDetails from '../screens/flight/flightDetails';
 import Hotels from '../screens/hotel/hotelsScreen';
 import HotelDetails from '../screens/hotel/hotelDetails';
 import FiltredHotels from '../screens/hotel/filteredHotels';
+
 import ReservationScreen from '../screens/hotel/reservationScreen';
 import PickUpRoomScreen from '../screens/hotel/pickUpRoomScreen';
 import ValidateReservationScreen from '../screens/hotel/validateReservationScreen';
@@ -62,7 +63,7 @@ export const BookingDrawer = () => {
         <bookingDrawerNavigator.Navigator
             drawerStyle={{
                 // backgroundColor: Colors.background,
-                width: 300,
+                width: '83%',
             }}
             drawerContent={props => {
                 return (
@@ -180,7 +181,7 @@ export const BookingDrawer = () => {
             />
             <bookingDrawerNavigator.Screen
                 name='Flights'
-                component={Flights}
+                component={FlightsNavigator}
                 options={{
                     drawerIcon: props => (
                         <MaterialIcons

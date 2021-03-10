@@ -44,7 +44,8 @@ const Trains = () => {
 const styles = StyleSheet.create({
   ParentContainer: {
     backgroundColor: Colors.background,
-    justifyContent: 'center'
+    alignItems: 'center',
+    flex: 1,
   },
 });
 
