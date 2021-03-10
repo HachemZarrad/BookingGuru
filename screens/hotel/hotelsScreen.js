@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {StyleSheet, View, Text, FlatList, TouchableOpacity,
-    ActivityIndicator, Image, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity,ActivityIndicator, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Toolbar from '../../components/toolbar';
@@ -97,40 +96,11 @@ const Hotels = () => {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 150,
-    height: 260
-  },
-  stars:{
-    
-  },
-  container: {
-    flexDirection: 'row',
-    height: 250, 
-    backgroundColor: 'white',
-    margin: 10,
-    width: 340, 
-    borderRadius: 10,
-    overflow: 'hidden',
-  },
-  hotelName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 30,
-    marginRight: 180
-  },
-  text: {
-    fontSize: 17
-  },
   ParentContainer: {
     backgroundColor: '#e6e6e6',
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1
-  },
-  textContainer: {
-    margin: 10,
-    justifyContent: 'center'
   },
   spinner: {
     flex: 1,

@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView} from 'react-native';
-import BookingTemplate from '../../components/bookingTemplate';
+import { StyleSheet, Text} from 'react-native';
 
 const BusDetails = () => {
     return(
-        <BookingTemplate/>
+        <Text>Bus Details</Text>
     );
   
 }
