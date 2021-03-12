@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : 'white',
         alignItems: 'center',
         flexDirection: 'row',
+        width: '100%',
         height: 110,
         justifyContent: 'space-around',
     },

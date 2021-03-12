@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text} from 'react-native';
+import HotelStars from './hotelStars';
 
 
 const RatingCard = props => {

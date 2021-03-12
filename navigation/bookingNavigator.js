@@ -41,6 +41,7 @@ import FavoriteScreen from '../screens/favoritesScreen';
 import NotificationsScreen from '../screens/notificationsScreen';
 
 import SignUpScreen from '../screens/authentication/signUpScreen';
+import PasswordScreen from '../screens/authentication/passwordScreen';
 import LoginScreen from '../screens/authentication/loginScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
@@ -344,6 +345,11 @@ export const AuthenticationNavigator = () => {
             <AuthStackNavigator.Screen
                 name="SignUp"
                 component={SignUpScreen}
+                options={{headerShown: true, headerTitle: 'Sign Up'}}
+            />
+            <AuthStackNavigator.Screen
+                name="Password"
+                component={PasswordScreen}
                 options={{headerShown: true, headerTitle: 'Sign Up'}}
             />
         </AuthStackNavigator.Navigator>
