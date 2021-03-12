@@ -9,6 +9,7 @@ const Destinations = () => {
     const [destinations, setDestinations] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const navigation = useNavigation();
+    // const filter = true;
 
     useEffect(() => {
         const controller = new AbortController();
@@ -35,7 +36,12 @@ const Destinations = () => {
                 return (
                   <TouchableOpacity key={destination._id} 
                     style={styles.container}
-                    onPress={()=> navigation.navigate('FiltredHotels', destination)}>
+                    onPress={()=> navigation.navigate('Hotels',
+                    {
+                      screen: 'HotelsOverview',
+                      params: {object : {destination: destination.name, filter: true}},
+                    })
+                      }>
                     <View>
                       <Image
                           source={{

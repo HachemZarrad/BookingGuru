@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, Platform} from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../constants/colors';
@@ -9,21 +9,20 @@ const Toolbar = () => {
     const openMenu = () => {
         navigation.openDrawer();
     }
-    return( 
+    return (
         <View style={styles.toolbar}>
             <TouchableOpacity onPress={openMenu}>
-                <Icon name="bars" size={25} color="#000000"
-                    />
+                <Icon name="bars" size={25} color="#000000" />
             </TouchableOpacity>
-            <Image 
+            <Image
                 source={require('../assets/guruLogo.png')}
-                style={styles.logo}/>
+                style={styles.logo} />
             <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                <Icon name="bell" size={25} color="#000000"/>
+                <Icon name="bell" size={25} color="#000000" />
             </TouchableOpacity>
         </View>
     );
-    
+
 }
 
 const styles = StyleSheet.create({
@@ -36,8 +35,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     logo: {
-        width: 100,
-        height: 80,
+        width: '30%',
+        height: '80%',
         margin: 20
     }
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, SafeAreaView, View, ScrollView } from 'react-native';
+import { Platform, SafeAreaView, View, ScrollView, Image, Button } from 'react-native';
 
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
@@ -10,6 +10,7 @@ import { Ionicons, MaterialIcons, SimpleLineIcons, AntDesign } from '@expo/vecto
 import Colors from '../constants/colors';
 import ProfileAvatar from '../components/profileAvatar';
 import Title from '../components/title';
+import LoginScreenHeader from '../components/loginScreenHeader';
 
 import IntroductoryScreen from '../screens/introductoryScreen';
 import Home from '../screens/homeScreen';
@@ -20,7 +21,6 @@ import FlightDetails from '../screens/flight/flightDetails';
 
 import Hotels from '../screens/hotel/hotelsScreen';
 import HotelDetails from '../screens/hotel/hotelDetails';
-import FiltredHotels from '../screens/hotel/filteredHotels';
 
 import ReservationScreen from '../screens/hotel/reservationScreen';
 import PickUpRoomScreen from '../screens/hotel/pickUpRoomScreen';
@@ -270,7 +270,6 @@ export const HotelsNavigator = () => {
         <hotelsStackNavigator.Navigator screenOptions={navigationOptions}>
             <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels} />
             <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails} />
-            <hotelsStackNavigator.Screen name="FiltredHotels" component={FiltredHotels} />
             <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info' }} />
             <hotelsStackNavigator.Screen name="PickUpRoomScreen" component={PickUpRoomScreen} options={{ headerShown: true, headerTitle: "What's your plan" }} />
             <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure' }} />
@@ -341,7 +340,7 @@ export const AuthenticationNavigator = () => {
             <AuthStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}
-                options={{headerShown: true, headerTitle: 'Login'}}
+                
             />
             <AuthStackNavigator.Screen
                 name="SignUp"

@@ -18,8 +18,10 @@ import * as ActionTypes from '../../store/actions/actionTypes';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const Hotels = () => {
+const Hotels = ({route}) => {
 
+  const destination = route.params.object.destination;
+  const filter = route.params.object.filter;
   const [searchTerm, setSearchTerm] = useState('');
   const [shown, showHotels] = useState(false);
   const dispatch = useDispatch();
@@ -31,8 +33,9 @@ const Hotels = () => {
 
     
     const loadHotels = useCallback(() => {
-        dispatch(hotelsActions.fetchHotels())
-    },[dispatch]);
+        if(filter) dispatch(hotelsActions.fetchHotelsAccordingToDestination(destination));
+        else dispatch(hotelsActions.fetchHotels());
+    },[dispatch, filter, destination]);
     
     useEffect(() => {
         loadHotels();
@@ -64,7 +67,7 @@ const Hotels = () => {
             </InputBar>
           </View>
 
-          {loading || !shown ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
+          {loading || !shown ? <View style={styles.spinner}>{/* <ActivityIndicator color={Colors.toolbarColor}/> */}</View> : (
           <ScrollView>
           {filteredHotels.map(hotel => {
             return (
@@ -90,7 +93,7 @@ const Hotels = () => {
           )}
             {loading ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor}/></View> : (
             <CustomList data={hotels} pressedElement='HotelDetails' service={ActionTypes.GET_HOTELS}/>
-          )}
+              )}
         </View>
     );
 }

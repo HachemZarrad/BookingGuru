@@ -13,7 +13,7 @@ const logoScreen = () => {
   }
 
   return(
-    <TouchableOpacity onPress={() => setTimeout(temp, 4000)} 
+    <TouchableOpacity onPress={() => temp()} 
       style={styles.imageContainer}>
         <Image 
             source={require('../assets/introLogo.png')}
@@ -21,11 +21,7 @@ const logoScreen = () => {
           <ActivityIndicator size="large" color="#00ff00" />
     </TouchableOpacity>
   );
-  
-       
-    
 
-  
 }
 
 const styles = StyleSheet.create({
@@ -38,7 +34,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.toolbarColor
       },
     image: {
-        width: '100%',
+        width: '95%',
         height: '40%'
       }
 });

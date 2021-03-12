@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text} from 'react-native';
-import Colors from '../constants/colors';
-import HotelStars from '../components/hotelStars';
 
 
 const RatingCard = props => {

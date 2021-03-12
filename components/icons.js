@@ -5,10 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 
 const Icons = () => {
     const navigation = useNavigation();
+    const destination = 'no one cares';
     return(
         <View style={styles.frame}>
             <View style={styles.container}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Hotels')}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Hotels',
+                 {
+                    screen: 'HotelsOverview',
+                    params: {object : {destination: null, filter: false}},
+                  })
+                }>
                     <Image 
                         source={require('../assets/hotel.png')}
                         style={styles.image}/>
