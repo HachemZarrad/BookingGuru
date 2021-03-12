@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 
 import InputBar from '../../components/inputBar';
-import CustomButton from '../../components/customButton';
+import NormalButton from '../../components/normalButton';
 import Title from '../../components/title';
 
 import Colors from '../../constants/colors';
@@ -14,20 +14,22 @@ const LoginScreen = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.background}>
-            <TouchableOpacity style={styles.backButton} onPress={() => {navigation.navigate('Home', {screen: 'HomePage'})}} >
-                <Icon name="arrow-left" size={22} color="black"/>
-            </TouchableOpacity>
-            <View style={styles.logoContainer}>
-                <Image 
-                    source={require('../../assets/guruLogo.png')}
-                    style={styles.logo}/>
+            <View style={styles.topBar}>
+                <TouchableOpacity style={styles.backButton} onPress={() => {navigation.navigate('Home', {screen: 'HomePage'})}} >
+                    <Icon name="arrow-left" size={22} color="black"/>
+                </TouchableOpacity>
+                <View style={styles.logoContainer}>
+                    <Image 
+                        source={require('../../assets/loginScreenLogo.png')}
+                        style={styles.logo}/>
+                </View>
             </View>
-            <View style={styles.screen}>
-                <Title title='Login'/>
+            <View style={styles.loginForm}>
+                <Title title='Login' style={{fontSize:35}}/>
                 <InputBar placeholder='    Email'/>
                 <InputBar placeholder='    Password'/>
-                <CustomButton style={styles.button}/>
-                <CustomButton />
+                <NormalButton style={styles.button} title='Login'/>
+                <NormalButton title='Sign Up' nextScreen='SignUp'/>
             </View>
         </View>
     )
@@ -40,25 +42,29 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.toolbarColor,
     },
+    topBar: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        height: '40%',
+        marginTop: 20,
+    },
     logoContainer: {
         alignItems: 'center',
-        height: '50%',
+        flex: 1,
     },
     logo:{
-        width: '50%',
-        height: '50%',
+        marginRight: 20,
     },
-    screen:{
+    loginForm:{
        flex: 1,
        alignItems: 'center',
        justifyContent: 'center',
        backgroundColor: Colors.background,
-       borderTopStartRadius: 40,
-       borderTopEndRadius: 40,
+       borderTopEndRadius: 90,
        elevation: 40,
        borderColor: Colors.background,
        borderWidth: 4,
-       marginTop: '-30%',
+       marginTop: '-20%',
     },
     button:{
         marginTop: 20,
@@ -66,6 +72,5 @@ const styles = StyleSheet.create({
     },
     backButton: {
         marginLeft: 10,
-        marginTop: 20,
     },
 })

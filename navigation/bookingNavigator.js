@@ -10,7 +10,6 @@ import { Ionicons, MaterialIcons, SimpleLineIcons, AntDesign } from '@expo/vecto
 import Colors from '../constants/colors';
 import ProfileAvatar from '../components/profileAvatar';
 import Title from '../components/title';
-import LoginScreenHeader from '../components/loginScreenHeader';
 
 import IntroductoryScreen from '../screens/introductoryScreen';
 import Home from '../screens/homeScreen';

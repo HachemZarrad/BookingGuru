@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.toolbarColor
       },
     image: {
-        width: '95%',
-        height: '40%'
+        // width: 345, no need for specific dimensions they ruin the image 
+        // height: 235,
       }
 });
 

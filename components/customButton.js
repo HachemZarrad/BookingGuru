@@ -44,7 +44,7 @@ const CustomButton = props => {
       borderRadius: 10,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: Colors.buttonContainer
+      backgroundColor: Colors.buttonContainer,
     },
     frame: {
       height: 60,
@@ -63,7 +63,7 @@ const CustomButton = props => {
        borderRadius: 10,
        justifyContent: 'center',
        alignItems: 'center',
-       backgroundColor: Colors.button,
+       backgroundColor: Colors.toolbarColor,
     },
     price: {
         fontSize: 24,
