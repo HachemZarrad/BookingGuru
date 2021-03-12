@@ -18,7 +18,7 @@ const PickUpRoomScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             <ScrollView >
-                <Caution caution={'Extra Fees Will Be Added According To Your Choices'} />
+                <Caution style={styles.caution} caution={'Extra Fees Will Be Added According To Your Choices'} />
                 <Title title={'Arrival Date ?'} />
                 <DatePicker
                     style={{width: 200, marginBottom: 15}}
@@ -74,5 +74,8 @@ const styles = StyleSheet.create({
     commentBox: {
         height: 90,
         alignSelf: 'center'
+    },
+    caution:{
+        height: 50,
     }
 })

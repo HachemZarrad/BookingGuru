@@ -5,8 +5,10 @@ import { Octicons } from '@expo/vector-icons';
 const Caution = props => {
     return (
         <View {...props} style={{...styles.container, ...props.style}}>
-            <Octicons name="stop" size={24} color="black" />
-            <Text style={styles.caution} >{props.caution}</Text>
+            <Octicons name="stop" size={24} color="black" style={styles.icon} />
+            <View style={styles.cautionContainer}>
+                <Text numberOfLines={6}  style={styles.caution} >{props.caution}</Text>
+            </View>
         </View>
     )
 }
@@ -18,14 +20,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'pink',
         flexDirection: 'row',
         width: '100%',
-        height: 50,
+        height: 80,
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        marginBottom: 20
+    },
+    cautionContainer: {
+        flex: 1,
     },
     caution: {
         fontStyle: 'italic',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: 20
+    },
+    icon: {
+        marginLeft: 15,
     }
 
 })
