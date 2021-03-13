@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 
 const Caution = props => {
     return (
-        <View {...props} style={{...styles.container, ...props.style}}>
+        <View {...props} style={{...styles.container, ...props.style.container}}>
             {props.type == 'standar' ?
                  <Octicons name="stop" size={24} color="black" style={styles.icon} />
             : props.bingo ? 
@@ -15,7 +15,7 @@ const Caution = props => {
             :   <Feather name="x-circle" size={24} color="red" style={styles.icon} />
             }
             <View style={styles.cautionContainer}>
-                <Text numberOfLines={6}  style={styles.caution} >{props.caution}</Text>
+                <Text {...props} numberOfLines={6}  style={{...styles.caution, ...props.style.caution}} >{props.caution}</Text>
             </View>
         </View>
     )

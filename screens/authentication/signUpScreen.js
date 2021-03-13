@@ -5,10 +5,13 @@ import InputBar from '../../components/inputBar';
 import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
 
+import Colors from '../../constants/colors';
+
+
 const SignUpScreen = () => {
     return (
         <View style={styles.screen}>
-            <Caution type='standar' style={styles.caution} caution='Only your email is required for the moment but please consider
+            <Caution type='standar' style={{container:styles.caution}} caution='Only your email is required for the moment but please consider
                 filling other fields to get full advantage of our services. Once registred you can alter those details in settings section'/>
             <View style={styles.form}>
                 <InputBar placeholder="     First Name"></InputBar>
@@ -27,6 +30,7 @@ export default SignUpScreen
 const styles = StyleSheet.create({
     screen: {
         flex:1,
+        backgroundColor: Colors.background
     },
     form: {
         justifyContent: 'center',
