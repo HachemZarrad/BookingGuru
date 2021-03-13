@@ -8,7 +8,7 @@ import Caution from '../../components/caution';
 const SignUpScreen = () => {
     return (
         <View style={styles.screen}>
-            <Caution style={styles.caution} caution='Only your email is required for the moment but please consider
+            <Caution type='standar' style={styles.caution} caution='Only your email is required for the moment but please consider
                 filling other fields to get full advantage of our services. Once registred you can alter those details in settings section'/>
             <View style={styles.form}>
                 <InputBar placeholder="     First Name"></InputBar>
