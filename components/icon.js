@@ -46,4 +46,8 @@ const Icon = ({library, name, color='black', size=25, style, onPress}) => {
 
 export default Icon
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    icon: {
+
+    },
+})

@@ -7,6 +7,7 @@ import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
 
 import Colors from '../../constants/colors';
+import iconLibrary from '../../constants/iconLibrary';
 
 
 const PasswordScreen = () => {
@@ -16,14 +17,26 @@ const PasswordScreen = () => {
             <Title title='Create a password according to our security standars'/>
             <View style={styles.labelAndInput}>
                 <Text style={{...styles.label , color: bingo ? 'green' : 'red'}}>Password</Text>
-                <InputBar style={styles.input}/>
+                <InputBar
+                    leftIconLibrary={IconLibrary.AntDesign} 
+                    leftIconName='lock'
+                    RightIconLibrary={IconLibrary.AntDesign}
+                    RightIconName='eye'
+                    style={styles.input}
+                />
             </View>
             <Caution type='password' bingo={bingo} style={{container: styles.container, caution: styles.caution}} caution='Your password must be at least 10 characters'/>
             <Caution type='password' bingo={bingo} style={{container: styles.container, caution: styles.caution}} caution='Your password must include at least one number'/>
             <Caution type='password' bingo={bingo} style={{container: styles.container, caution: styles.caution}} caution='Your password must include at least one Capital letter'/>
             <View style={styles.labelAndInput}>
                 <Text style={{...styles.label , color: bingo ? 'green' : 'red', marginTop:10}}>Confirm Password</Text>
-                <InputBar style={styles.input}/>
+                <InputBar
+                    leftIconLibrary={IconLibrary.AntDesign} 
+                    leftIconName='lock'
+                    RightIconLibrary={IconLibrary.AntDesign}
+                    RightIconName='eye'
+                    style={styles.input}
+                />
             </View>
             <NormalButton title='Register' nextScreen='Home' style={styles.button}/>
         </View>
