@@ -28,15 +28,13 @@ const LoginScreen = () => {
             <View style={styles.loginForm}>
                 <Title title='Login' style={{fontSize:35}}/>
                 <InputBar
-                    placeholder='    Email'
+                    placeholder='Email'
                     leftIconLibrary={IconLibrary.AntDesign} 
                     leftIconName='lock'
-                    rightIconLibrary={IconLibrary.AntDesign}
-                    rightIconName='eye'
                     style={styles.input}
                 />
                 <InputBar
-                    placeholder='     Password'
+                    placeholder='Password'
                     leftIconLibrary={IconLibrary.AntDesign} 
                     leftIconName='lock'
                     rightIconLibrary={IconLibrary.AntDesign}

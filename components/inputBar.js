@@ -13,7 +13,7 @@ const InputBar = props => {
                 name={props.leftIconName}
                 color={props.leftIconColor} 
                 size={props.leftIconSize} 
-                style={styles.icon} 
+                style={styles.leftIcon} 
             />
             <TextInput {...props} placeholderTextColor="black" style={{ ...styles.inputBar, ...props.style }}></TextInput>
             <Icon 
@@ -21,7 +21,7 @@ const InputBar = props => {
                 name={props.rightIconName}
                 color={props.rightIconColor} 
                 size={props.rightIconSize} 
-                style={styles.icon} 
+                style={styles.rightIcon} 
             />
         </View>
     )
@@ -32,6 +32,8 @@ export default InputBar
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         width: '80%',
         height: 50,
         backgroundColor: 'white',
@@ -39,5 +41,14 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         margin: 5,
         borderColor: Colors.toolbarColor,
+    },
+    inputBar: {
+        flex: 1
+    },
+    leftIcon: {
+        margin: 5
+    },
+    rightIcon: {
+         marginRight: 5
     }
 })

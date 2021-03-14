@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import IconLibrary from '../constants/iconLibrary';
 
@@ -40,6 +40,10 @@ const Icon = ({library, name, color='black', size=25, style, onPress}) => {
         case(IconLibrary.SimpleLineIcons):
             return (
                <SimpleLineIcons  name={name} onPress={onPress} size={size} color={color} style={{...styles.icon, ...style}}/>
+            );
+        default:
+            return(
+                <View></View>
             );
     }
 }
