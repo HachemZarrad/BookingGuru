@@ -29,17 +29,18 @@ const LoginScreen = () => {
                 <Title title='Login' style={{fontSize:35}}/>
                 <InputBar
                     placeholder='Email'
-                    leftIconLibrary={IconLibrary.AntDesign} 
-                    leftIconName='lock'
-                    style={styles.input}
+                    leftIconLibrary={IconLibrary.MaterialIcons} 
+                    leftIconName='email'
+                    leftIconColor={Colors.buttonContainer}
                 />
                 <InputBar
                     placeholder='Password'
-                    leftIconLibrary={IconLibrary.AntDesign} 
+                    leftIconLibrary={IconLibrary.Entypo} 
                     leftIconName='lock'
+                    leftIconColor={Colors.buttonContainer}
                     rightIconLibrary={IconLibrary.AntDesign}
                     rightIconName='eye'
-                    style={styles.input}
+                    rightIconColor={Colors.buttonContainer}
                 />
                 <NormalButton style={styles.button} title='Login'/>
                 <NormalButton title='Sign Up' nextScreen='SignUp'/>

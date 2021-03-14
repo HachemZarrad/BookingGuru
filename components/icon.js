@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native'
 import IconLibrary from '../constants/iconLibrary';
 
 import { AntDesign, Octicons,FontAwesome, FontAwesome5, Feather, Ionicons,
-     MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
+     MaterialIcons, SimpleLineIcons, Entypo } from '@expo/vector-icons';
 
 
 const Icon = ({library, name, color='black', size=25, style, onPress}) => {
@@ -16,6 +16,10 @@ const Icon = ({library, name, color='black', size=25, style, onPress}) => {
         case(IconLibrary.Ionicons):
             return (
                <Ionicons  name={name} onPress={onPress} size={size} color={color} style={{...styles.icon, ...style}} />
+            );
+        case(IconLibrary.Entypo):
+            return (
+               <Entypo  name={name} onPress={onPress} size={size} color={color} style={{...styles.icon, ...style}} />
             );
         case(IconLibrary.Feather):
             return (

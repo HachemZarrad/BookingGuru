@@ -6,6 +6,7 @@ import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
 
 import Colors from '../../constants/colors';
+import IconLibrary from '../../constants/iconLibrary';
 
 
 const SignUpScreen = () => {
@@ -14,11 +15,40 @@ const SignUpScreen = () => {
             <Caution type='standar' style={{container:styles.caution}} caution='Only your email is required for the moment but please consider
                 filling other fields to get full advantage of our services. Once registred you can alter those details in settings section'/>
             <View style={styles.form}>
-                <InputBar placeholder="     First Name"></InputBar>
-                <InputBar placeholder="     Last Name"></InputBar>
-                <InputBar placeholder="     Email Address"></InputBar>
-                <InputBar placeholder="     Country/Region"></InputBar>
-                <InputBar placeholder="     Phone Number"></InputBar>
+                <InputBar 
+                    placeholder="First Name"
+                    leftIconLibrary={IconLibrary.Entypo} 
+                    leftIconName='user'
+                    leftIconColor={Colors.buttonContainer}
+                    
+                />
+                <InputBar 
+                    placeholder="Last Name"
+                    leftIconLibrary={IconLibrary.Entypo} 
+                    leftIconName='user'
+                    leftIconColor={Colors.buttonContainer}
+                    
+                />
+                <InputBar 
+                    placeholder="Email Address"
+                    leftIconLibrary={IconLibrary.MaterialIcons} 
+                    leftIconName='email'
+                    leftIconColor={Colors.buttonContainer}
+                    
+                />
+                <InputBar 
+                    placeholder="Country/Region"
+                    leftIconLibrary={IconLibrary.MaterialIcons} 
+                    leftIconName='place'
+                    leftIconColor={Colors.buttonContainer}
+                    
+                />
+                <InputBar 
+                    placeholder="Phone Number"
+                    leftIconLibrary={IconLibrary.MaterialIcons} 
+                    leftIconName='phone-android'
+                    leftIconColor={Colors.buttonContainer}
+                />  
                 <NormalButton  title='Sign Up' style={styles.button} nextScreen='Password'/>
             </View>
         </View>         

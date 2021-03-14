@@ -7,7 +7,7 @@ import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
 
 import Colors from '../../constants/colors';
-import iconLibrary from '../../constants/iconLibrary';
+import IconLibrary from '../../constants/iconLibrary';
 
 
 const PasswordScreen = () => {
@@ -18,10 +18,12 @@ const PasswordScreen = () => {
             <View style={styles.labelAndInput}>
                 <Text style={{...styles.label , color: bingo ? 'green' : 'red'}}>Password</Text>
                 <InputBar
-                    leftIconLibrary={IconLibrary.AntDesign} 
+                    leftIconLibrary={IconLibrary.Entypo} 
                     leftIconName='lock'
-                    RightIconLibrary={IconLibrary.AntDesign}
-                    RightIconName='eye'
+                    leftIconColor={Colors.buttonContainer}
+                    rightIconLibrary={IconLibrary.AntDesign}
+                    rightIconName='eye'
+                    rightIconColor={Colors.buttonContainer}
                     style={styles.input}
                 />
             </View>
@@ -31,10 +33,12 @@ const PasswordScreen = () => {
             <View style={styles.labelAndInput}>
                 <Text style={{...styles.label , color: bingo ? 'green' : 'red', marginTop:10}}>Confirm Password</Text>
                 <InputBar
-                    leftIconLibrary={IconLibrary.AntDesign} 
+                    leftIconLibrary={IconLibrary.Entypo} 
                     leftIconName='lock'
-                    RightIconLibrary={IconLibrary.AntDesign}
-                    RightIconName='eye'
+                    leftIconColor={Colors.buttonContainer}
+                    rightIconLibrary={IconLibrary.AntDesign}
+                    rightIconName='eye'
+                    rightIconColor={Colors.buttonContainer}
                     style={styles.input}
                 />
             </View>
