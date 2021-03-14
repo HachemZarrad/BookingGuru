@@ -5,8 +5,9 @@ import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { Drawer } from 'react-native-paper';
 
-import { Ionicons, MaterialIcons, SimpleLineIcons, AntDesign } from '@expo/vector-icons';
+import Icon from '../components/icon';
 
+import IconLibrary from '../constants/iconLibrary';
 import Colors from '../constants/colors';
 import ProfileAvatar from '../components/profileAvatar';
 import Title from '../components/title';
@@ -46,6 +47,7 @@ import LoginScreen from '../screens/authentication/loginScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
+import iconLibrary from '../constants/iconLibrary';
 
 const navigationOptions = {
     headerShown: false,
@@ -78,10 +80,9 @@ export const BookingDrawer = () => {
                                         inactiveTintColor= 'black'
                                         // style={{marginTop:30}}
                                         icon={() => (
-                                            <AntDesign
-                                                name="login"
-                                                size={24}
-                                                color="black" />
+                                            <Icon
+                                                library={IconLibrary.AntDesign}
+                                                name="login" />
                                         )}
                                         label="Login Or Create Account"
                                         onPress={() => { props.navigation.navigate('Authentication') }}
@@ -94,11 +95,11 @@ export const BookingDrawer = () => {
                                     <Title title='Favorites and Settings' style={{fontSize: 17, margin: 10}}/>
                                     <DrawerItem
                                         inactiveTintColor= 'black'
-                                        icon={({ color, size }) => (
-                                            <Ionicons
+                                        icon={() => (
+                                            <Icon
+                                                library={IconLibrary.Ionicons}
                                                 name="heart"
                                                 color='red'
-                                                size={size}
                                             />
                                         )}
                                         label="Favorites"
@@ -106,11 +107,10 @@ export const BookingDrawer = () => {
                                     />
                                     <DrawerItem
                                         inactiveTintColor= 'black'
-                                        icon={({ color, size }) => (
-                                            <Ionicons
+                                        icon={() => (
+                                            <Icon
+                                                library={IconLibrary.Ionicons}
                                                 name="settings"
-                                                color={color}
-                                                size={size}
                                             />
                                         )}
                                         label="Settings"
@@ -122,10 +122,10 @@ export const BookingDrawer = () => {
                                     <DrawerItem
                                         inactiveTintColor= 'black'
                                         icon={() => (
-                                            <MaterialIcons
+                                            <Icon
+                                                library={IconLibrary.MaterialIcons}
                                                 name="feedback"
-                                                size={24}
-                                                color={props.color} />
+                                             />
                                         )}
                                         label="Rate Us"
                                         onPress={() => { props.navigation.navigate('Home') }}
@@ -135,10 +135,10 @@ export const BookingDrawer = () => {
                                     <DrawerItem
                                             inactiveTintColor= 'black'
                                             icon={() => (
-                                                <SimpleLineIcons
+                                                <Icon
+                                                    library={IconLibrary.SimpleLineIcons}
                                                     name="logout"
-                                                    size={24}
-                                                    color="black" />
+                                                 />
                                             )}
                                             label="Logout"
                                             onPress={() => { props.navigation.navigate('Home') }}
@@ -159,10 +159,9 @@ export const BookingDrawer = () => {
                 component={HomeNavigator}
                 options={{
                     drawerIcon: props => (
-                        <Ionicons
-                            name={'home'}
-                            size={23}
-                            color={props.color}
+                        <Icon
+                            library={IconLibrary.Ionicons}
+                            name='home'
                         />
                     )
                 }}
@@ -172,10 +171,10 @@ export const BookingDrawer = () => {
                 component={HotelsNavigator}
                 options={{
                     drawerIcon: props => (
-                        <MaterialIcons
+                        <Icon
+                            library={IconLibrary.MaterialIcons}
                             name="hotel"
-                            size={24}
-                            color={props.color} />
+                         />
                     )
                 }}
             />
@@ -184,10 +183,10 @@ export const BookingDrawer = () => {
                 component={FlightsNavigator}
                 options={{
                     drawerIcon: props => (
-                        <MaterialIcons
+                        <Icon
+                            library={IconLibrary.MaterialIcons}
                             name="flight"
-                            size={24}
-                            color={props.color} />
+                         />
                     )
                 }}
             />
@@ -196,10 +195,9 @@ export const BookingDrawer = () => {
                 component={TaxisNavigator}
                 options={{
                     drawerIcon: props => (
-                        <Ionicons
+                        <Icon
+                            library={IconLibrary.Ionicons}
                             name={'car'}
-                            size={23}
-                            color={props.color}
                         />
                     )
                 }}
@@ -209,10 +207,9 @@ export const BookingDrawer = () => {
                 component={TrainsNavigator}
                 options={{
                     drawerIcon: props => (
-                        <Ionicons
+                        <Icon
+                            library={IconLibrary.Ionicons}
                             name={'train'}
-                            size={23}
-                            color={props.color}
                         />
                     )
                 }}
@@ -222,10 +219,9 @@ export const BookingDrawer = () => {
                 component={FoodNavigator}
                 options={{
                     drawerIcon: props => (
-                        <Ionicons
+                        <Icon
+                            library={IconLibrary.Ionicons}
                             name={'restaurant'}
-                            size={23}
-                            color={props.color}
                         />
                     )
                 }}
@@ -235,10 +231,9 @@ export const BookingDrawer = () => {
                 component={BusesNavigator}
                 options={{
                     drawerIcon: props => (
-                        <Ionicons
+                        <Icon
+                            library={iconLibrary.Ionicons}
                             name={'bus'}
-                            size={23}
-                            color={props.color}
                         />
                     )
                 }}

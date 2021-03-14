@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ImageBackground,
      ScrollView} from 'react-native';
+     
+import IconLibrary from '../constants/iconLibrary';
+
+import Icon from '../components/icon';
 import Colors from '../constants/colors';
 import Toolbar from './toolbar';
 import CustomButton from './customButton';
 import RatingCard from './ratingCard';
+
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
+
 import { useDispatch } from 'react-redux';
 import { newFavorite, removeFavorite } from '../store/actions/favorites';
 
@@ -50,14 +56,14 @@ const BookingTemplate = props => {
                         source={{uri: hotel.thumbnailUrl}}
                         style={styles.image}>
                             <TouchableOpacity style={styles.heart}>
-                                <FontAwesome name={favorite} onPress={() => addToFavorite()} size={40} color = 'red'/>
+                                <Icon library={IconLibrary.FontAwesome} name={favorite} onPress={() => addToFavorite()} size={40} color = 'red'/>
                             </TouchableOpacity>
                             <View style={styles.card}>
                                 <RatingCard hotel={hotel}/>
                             </View>
                     </ImageBackground>
                     <View style={styles.location}>
-                        <Ionicons name="location" size={80} color="orange" />
+                        <Icon library={IconLibrary.Ionicons} name="location" size={80} color="orange" />
                         <View >
                             <Text style={styles.text}>Locality: {hotel.address.locality}</Text>
                             <Text style={styles.text}>Postal Code: {hotel.address.postalCode}</Text>

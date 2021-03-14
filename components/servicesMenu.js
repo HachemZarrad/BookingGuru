@@ -3,9 +3,8 @@ import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-const Icons = () => {
+const ServicesMenu = () => {
     const navigation = useNavigation();
-    const destination = 'no one cares';
     return(
         <View style={styles.frame}>
             <View style={styles.container}>
@@ -84,4 +83,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Icons;
+export default ServicesMenu;

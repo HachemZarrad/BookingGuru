@@ -1,18 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { Octicons } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+
+import Icon from '../components/icon';
+import IconLibrary from '../constants/iconLibrary';
+
 
 
 const Caution = props => {
     return (
         <View {...props} style={{...styles.container, ...props.style.container}}>
             {props.type == 'standar' ?
-                 <Octicons name="stop" size={24} color="black" style={styles.icon} />
+                 <Icon library={IconLibrary.Octicons} name="stop" style={styles.icon} />
             : props.bingo ? 
-                <FontAwesome5 name="check-circle" size={24} color="green" style={styles.icon} />
-            :   <Feather name="x-circle" size={24} color="red" style={styles.icon} />
+                <Icon library={IconLibrary.FontAwesome5} name="check-circle"  color="green" style={styles.icon} />
+            :   <Icon library={IconLibrary.Feather} name="x-circle"  color="red" style={styles.icon} />
             }
             <View style={styles.cautionContainer}>
                 <Text {...props} numberOfLines={6}  style={{...styles.caution, ...props.style.caution}} >{props.caution}</Text>

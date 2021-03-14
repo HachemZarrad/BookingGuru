@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { useNavigation } from '@react-navigation/native';
 
 import InputBar from '../../components/inputBar';
 import NormalButton from '../../components/normalButton';
 import Title from '../../components/title';
+import Icon from '../../components/icon';
 
+import IconLibrary from '../../constants/iconLibrary';
 import Colors from '../../constants/colors';
 
 const LoginScreen = () => {
@@ -16,7 +17,7 @@ const LoginScreen = () => {
         <View style={styles.background}>
             <View style={styles.topBar}>
                 <TouchableOpacity style={styles.backButton} onPress={() => {navigation.navigate('Home', {screen: 'HomePage'})}} >
-                    <Icon name="arrow-left" size={22} color="black"/>
+                    <Icon library={IconLibrary.FontAwesome} name="arrow-left" size={22}/>
                 </TouchableOpacity>
                 <View style={styles.logoContainer}>
                     <Image 

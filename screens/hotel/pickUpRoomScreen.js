@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
-import DatePicker from 'react-native-datepicker'
+import { StyleSheet, View, ScrollView } from 'react-native';
+
+import DatePicker from 'react-native-datepicker';
 
 import Colors from '../../constants/colors';
+
 import InputBar from '../../components/inputBar';
 import CustomButton from '../../components/customButton';
 import CustomPicker from '../../components/customPicker';

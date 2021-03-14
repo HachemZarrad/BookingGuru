@@ -7,7 +7,6 @@ import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
 
 import Colors from '../../constants/colors';
-import { color } from 'react-native-reanimated';
 
 
 const PasswordScreen = () => {

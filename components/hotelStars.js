@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+
+import IconLibrary from '../constants/iconLibrary';
+import Icon from './icon';
 
 const HotelStars = props => {
 
@@ -25,8 +27,10 @@ const HotelStars = props => {
            
             starts.push(
                 <View key={x}>
-                    <FontAwesome name={starType} size={30} 
-                    color="gold" 
+                    <Icon library={IconLibrary.FontAwesome}
+                          name={starType} 
+                          size={30} 
+                          color="gold" 
                     />
                 </View>
             )

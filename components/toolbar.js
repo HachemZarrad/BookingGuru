@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Platform } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+
+import Icon from '../components/icon';
+
+import IconLibrary from '../constants/iconLibrary';
 import Colors from '../constants/colors';
 
 const Toolbar = () => {
@@ -9,16 +13,17 @@ const Toolbar = () => {
     const openMenu = () => {
         navigation.openDrawer();
     }
+
     return (
         <View style={styles.toolbar}>
             <TouchableOpacity onPress={openMenu}>
-                <Icon name="bars" size={25} color="#000000" />
+                <Icon library={IconLibrary.FontAwesome5} name="bars" />
             </TouchableOpacity>
             <Image
                 source={require('../assets/guruLogo.png')}
                 style={styles.logo} />
             <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                <Icon name="bell" size={25} color="#000000" />
+                <Icon library={IconLibrary.FontAwesome5} name="bell" />
             </TouchableOpacity>
         </View>
     );
