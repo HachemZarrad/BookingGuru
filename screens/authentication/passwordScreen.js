@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useReducer} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import Title from '../../components/title';
@@ -9,9 +9,67 @@ import Caution from '../../components/caution';
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
 
+const PRIMARYCOLOR = 'black';
+
+const Actions = {
+    SET_PASSWORD_INPUT_DIRTY: 'SET_PASSWORD_INPUT_DIRTY',
+    SHOW_PASSWORD: 'SHOW_PASSWORD',
+    VALIDATE_TEN_CHARACTERS: 'VALIDATE_TEN_CHARACTERS',
+    VALIDATE_ONE_NUMBER: 'VALIDATE_ONE_NUMBER',
+    VALIDATE_ONE_CAPITAL: 'VALIDATE_ONE_CAPITAL',
+    ACCEPT_PASSWORD: 'ACCEPT_PASSWORD',
+    CONFRIM_PASSWORD_MATCH: 'CONFRIM_PASSWORD_MATCH'
+};
+
+const reducer = (state,action) => {
+    switch(action.type) {
+        case(Actions.SET_PASSWORD_INPUT_DIRTY): 
+            return  {...state, pristine: false};
+        case(Actions.ACCEPT_PASSWORD): 
+            return  {...state, pristine: !pristine};
+        case(Actions.SHOW_PASSWORD): 
+            return  {...state, passwordHidden: !passwordHidden};
+        case(Actions.VALIDATE_TEN_CHARACTERS): 
+            return  {...state, tenCharacters: !tenCharacters};
+            case(Actions.VALIDATE_ONE_NUMBER): 
+            return  {...state, oneNumber: !oneNumber};
+            case(Actions.VALIDATE_ONE_CAPITAL): 
+            return  {...state, oneCapital: !oneCapital};
+        case(Actions.ACCEPT_PASSWORD): 
+            return  {...state, pristine: !pristine};
+        // case(Actions.SET_PASSWORD_INPUT_DIRTY): 
+        //     return  {...state, pristine: !pristine};
+        default: 
+            return state;
+    }
+};
 
 const PasswordScreen = () => {
-    var [bingo, setBingo] = useState(true);
+    const [bingo, setBingo] = useState(true);
+    const [state, dispatch] = useReducer(reducer, {
+        pristine: true,
+        password: '',
+        passwordHidden: true,
+        tenCharacters: false,
+        tenCharactersColor: PRIMARYCOLOR,
+        oneNumber: false,
+        oneNumberColor: PRIMARYCOLOR,
+        oneCapital: false,
+        oneCapitalColor: PRIMARYCOLOR,
+        passwordAccepted: false,
+        passwordLabelColor: PRIMARYCOLOR,
+        retypedPassword: '',
+        retypedPasswordLabel: PRIMARYCOLOR,
+        passwordMatchConfirmed: false,
+
+    });
+
+    const manageColors = (pristine, condition) => {
+        if(pristine) {
+
+        }
+
+    }
     return (
         <View style={styles.screen}>
             <Title title='Create a password according to our security standars'/>
