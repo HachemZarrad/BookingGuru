@@ -21,6 +21,7 @@ const InputBar = props => {
                 name={props.rightIconName}
                 color={props.rightIconColor} 
                 size={props.rightIconSize} 
+                onPress={props.rightIconFeature}
                 style={styles.rightIcon} 
             />
         </View>

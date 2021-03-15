@@ -11,7 +11,7 @@ const NormalButton = props => {
         <TouchableOpacity 
             {...props} 
             style={{...styles.button, ...props.style}}
-            onPress={() => navigation.navigate(props.nextScreen)}
+            onPress={props.nextScreen ? () => navigation.navigate(props.nextScreen) : props.onPress}
         >
             <Text style={styles.textButton}>{props.title}</Text>
         </TouchableOpacity>
