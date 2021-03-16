@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import Title from '../../components/title';
 import InputBar from '../../components/inputBar';
@@ -9,6 +9,8 @@ import Caution from '../../components/caution';
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
 
+const CAPITALlLETTERS = /[A-Z]/g;
+const DIGITS = /\d/g;
 
 const Actions = {
     SET_PASSWORD_INPUT_DIRTY: 'SET_PASSWORD_INPUT_DIRTY',
@@ -25,20 +27,24 @@ const reducer = (state, action) => {
     switch (action.type) {
         case (Actions.SET_PASSWORD_INPUT_DIRTY):
             return {...state, pristine: false};
-        case (Actions.ACCEPT_PASSWORD):
-            return { ...state, pristine: !pristine };
         case (Actions.SHOW_PASSWORD):
             return { ...state, passwordHidden: !state.passwordHidden };
         case (Actions.VALIDATE_TEN_CHARACTERS):
-            return { ...state, tenCharacters: !state.tenCharacters, tenCharactersColor: tenCharacters ? 'green' : state.tenCharactersColor };
+            let confirmTenCharacters = false;
+            if(action.payload.length >= 10) confirmTenCharacters = true;   
+            return { ...state, tenCharacters: confirmTenCharacters, tenCharactersColor: state.tenCharacters ? 'green' : 'red'};
         case (Actions.VALIDATE_ONE_NUMBER):
-            return { ...state, oneNumber: !state.oneNumber, oneNumberColor: oneNumber ? 'green' : state.oneNumberColor };
+            let confirmOneNumber = false;
+            if(action.payload.match(DIGITS)) confirmOneNumber = true;
+            return { ...state, oneNumber: confirmOneNumber, oneNumberColor: state.oneNumber ? 'green' : 'red'};
         case (Actions.VALIDATE_ONE_CAPITAL):
-            return { ...state, oneCapital: !state.oneCapital, oneCapitalColor: oneCapital ? 'green' : state.oneCapitalColor };
+            let confirmOneCapital = false;
+            if(action.payload.match(CAPITALlLETTERS)) confirmOneCapital = true;
+            return { ...state, oneCapital: confirmOneCapital, oneCapitalColor: state.oneCapital ? 'green' : 'red'};
         case (Actions.SHOW_RETYPED_PASSWORD):
             return { ...state, retypedPasswordHiddden: !state.retypedPasswordHiddden };
-        case (Actions.ACCEPT_PASSWORD):
-            return { ...state, password: payload.password };
+        // case (Actions.ACCEPT_PASSWORD):
+        //     return { ...state, password: action.payload.password };
         case(Actions.CONFRIM_PASSWORD_MATCH): 
             return  {...state, passwordMatchConfirmed: true};
         default:
@@ -47,7 +53,6 @@ const reducer = (state, action) => {
 };
 
 const PasswordScreen = () => {
-    const [bingo, setBingo] = useState(true);
     const [state, dispatch] = useReducer(reducer, {
         pristine: true,
         password: '',
@@ -68,13 +73,13 @@ const PasswordScreen = () => {
     });
     
     const manageColors = (password) => {
-        dispatch({ type: Actions.SET_PASSWORD_INPUT_DIRTY });
-        if(password.length >= 10) dispatch({type: Actions.VALIDATE_TEN_CHARACTERS});
-        if('')  dispatch({type: Actions.VALIDATE_ONE_NUMBER});
-        if('') dispatch({type: Actions.VALIDATE_ONE_CAPITAL});
-        if(state.tenCharacters && state.oneNumber && state.oneCapital) {
-            dispatch({type: Actions.ACCEPT_PASSWORD, payload: password});
-        }
+        dispatch({type: Actions.SET_PASSWORD_INPUT_DIRTY});
+        dispatch({type: Actions.VALIDATE_TEN_CHARACTERS, payload: password});
+        dispatch({type: Actions.VALIDATE_ONE_NUMBER, payload: password});
+        dispatch({type: Actions.VALIDATE_ONE_CAPITAL, payload: password});
+        // if(state.tenCharacters && state.oneNumber && state.oneCapital) {
+        //     dispatch({type: Actions.ACCEPT_PASSWORD, payload: password});
+        // }
     }
 
     const manageConfirmPassword = (retypedPassword) => {
