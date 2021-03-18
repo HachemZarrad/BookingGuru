@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,38 +14,42 @@ import Colors from '../../constants/colors';
 const LoginScreen = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.background}>
+        <KeyboardAvoidingView
+            style={styles.background}
+            keyboardVerticalOffset={10}
+            behavior='height'
+        >
             <View style={styles.topBar}>
-                <TouchableOpacity style={styles.backButton} onPress={() => {navigation.navigate('Home', {screen: 'HomePage'})}} >
-                    <Icon library={IconLibrary.FontAwesome5} name="arrow-left" size={22}/>
+                <TouchableOpacity style={styles.backButton} onPress={() => { navigation.navigate('Home', { screen: 'HomePage' }) }} >
+                    <Icon library={IconLibrary.FontAwesome5} name="arrow-left" size={22} />
                 </TouchableOpacity>
                 <View style={styles.logoContainer}>
-                    <Image 
+                    <Image
                         source={require('../../assets/loginScreenLogo.png')}
-                        style={styles.logo}/>
+                        style={styles.logo} />
                 </View>
             </View>
             <View style={styles.loginForm}>
-                <Title title='Login' style={styles.title}/>
+                <Title title='Login' style={styles.title} />
                 <InputBar
                     placeholder='Email'
-                    leftIconLibrary={IconLibrary.MaterialIcons} 
+                    leftIconLibrary={IconLibrary.MaterialIcons}
                     leftIconName='email'
                     leftIconColor={Colors.buttonContainer}
                 />
                 <InputBar
                     placeholder='Password'
-                    leftIconLibrary={IconLibrary.Entypo} 
+                    leftIconLibrary={IconLibrary.Entypo}
                     leftIconName='lock'
                     leftIconColor={Colors.buttonContainer}
                     rightIconLibrary={IconLibrary.AntDesign}
                     rightIconName='eye'
                     rightIconColor={Colors.buttonContainer}
                 />
-                <NormalButton style={styles.button} title='Login'/>
-                <NormalButton title='Sign Up' nextScreen='SignUp'/>
+                <NormalButton style={styles.button} title='Login' />
+                <NormalButton title='Sign Up' nextScreen='SignUp' />
             </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -66,21 +70,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
     },
-    logo:{
+    logo: {
         marginRight: 20,
     },
-    loginForm:{
-       flex: 1,
-       alignItems: 'center',
-       justifyContent: 'center',
-       backgroundColor: Colors.background,
-       borderTopEndRadius: 90,
-       elevation: 40,
-       borderColor: Colors.background,
-       borderWidth: 4,
-       marginTop: '-20%',
+    loginForm: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: Colors.background,
+        borderTopEndRadius: 90,
+        elevation: 40,
+        borderColor: Colors.background,
+        borderWidth: 4,
+        marginTop: '-20%',
     },
-    button:{
+    button: {
         marginTop: 20,
         marginBottom: 5
     },
@@ -88,6 +92,6 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     title: {
-        fontSize:35,
+        fontSize: 35,
     }
 })

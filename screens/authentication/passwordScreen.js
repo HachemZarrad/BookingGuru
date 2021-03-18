@@ -108,7 +108,7 @@ const PasswordScreen = () => {
                     rightIconColor={Colors.buttonContainer}
                     rightIconFeature={() => dispatch({ type: Actions.SHOW_PASSWORD })}
                     secureTextEntry={state.passwordHidden}
-                    onChangeText={(password) => manageColors(password)}
+                    onChangeText={manageColors}
                     style={styles.input}
                 />
             </View>
@@ -126,7 +126,7 @@ const PasswordScreen = () => {
                     rightIconColor={Colors.buttonContainer}
                     rightIconFeature={() => dispatch({ type: Actions.SHOW_RETYPED_PASSWORD })}
                     secureTextEntry={state.retypedPasswordHiddden}
-                    onChangeText={(retypedPassword) => manageConfirmPassword(retypedPassword)}
+                    onChangeText={manageConfirmPassword}
                     style={styles.input}
                 />
             </View>

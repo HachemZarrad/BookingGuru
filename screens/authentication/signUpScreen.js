@@ -1,5 +1,5 @@
-import React, {useReducer} from 'react'
-import { StyleSheet, View, ScrollView } from 'react-native';
+import React, { useReducer } from 'react'
+import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 
 import InputBar from '../../components/inputBar';
 import NormalButton from '../../components/normalButton';
@@ -12,60 +12,64 @@ const Actions = {
 
 }
 
-const reducer = (state,action) => {
+const reducer = (state, action) => {
 }
 
 const SignUpScreen = () => {
     const [state, dispatch] = useReducer(reducer, {})
     return (
-        <View style={styles.screen}>
-            <Caution type='standar' style={{container:styles.caution}} caution='Only your email is required for the moment but please consider
+        <KeyboardAvoidingView
+            style={styles.screen}
+            keyboardVerticalOffset={10}
+            behavior='height'
+        >
+            <Caution type='standar' style={{ container: styles.caution }} caution='Only your email is required for the moment but please consider
                 filling other fields to get full advantage of our services. Once registred you can alter those details in settings section.'/>
-                <ScrollView >
-            <View style={styles.form}>
-                <InputBar 
-                    placeholder="First Name"
-                    leftIconLibrary={IconLibrary.Entypo} 
-                    leftIconName='user'
-                    leftIconColor={Colors.buttonContainer}
-                    
-                />
-                <InputBar 
-                    placeholder="Last Name"
-                    leftIconLibrary={IconLibrary.Entypo} 
-                    leftIconName='user'
-                    error= 'Screw You'
-                    leftIconColor={Colors.buttonContainer}
-                    
-                />
-                <InputBar 
-                    placeholder="Email Address"
-                    leftIconLibrary={IconLibrary.MaterialIcons} 
-                    leftIconName='email'
-                    leftIconColor={Colors.buttonContainer}
-                    rightIconLibrary={IconLibrary.Foundation} 
-                    rightIconSize={15}
-                    rightIconName='asterisk'
-                    rightIconColor='red'
-                    
-                />
-                <InputBar 
-                    placeholder="Country/Region"
-                    leftIconLibrary={IconLibrary.MaterialIcons} 
-                    leftIconName='place'
-                    leftIconColor={Colors.buttonContainer}
-                    
-                />
-                <InputBar 
-                    placeholder="Phone Number"
-                    leftIconLibrary={IconLibrary.MaterialIcons} 
-                    leftIconName='phone-android'
-                    leftIconColor={Colors.buttonContainer}
-                />  
-                <NormalButton  title='Sign Up' style={styles.button} nextScreen='Password'/>
-            </View>
-                </ScrollView>
-        </View>         
+            <ScrollView >
+                <View style={styles.form}>
+                    <InputBar
+                        placeholder="First Name"
+                        leftIconLibrary={IconLibrary.Entypo}
+                        leftIconName='user'
+                        leftIconColor={Colors.buttonContainer}
+
+                    />
+                    <InputBar
+                        placeholder="Last Name"
+                        leftIconLibrary={IconLibrary.Entypo}
+                        leftIconName='user'
+                        error='Screw You'
+                        leftIconColor={Colors.buttonContainer}
+
+                    />
+                    <InputBar
+                        placeholder="Email Address"
+                        leftIconLibrary={IconLibrary.MaterialIcons}
+                        leftIconName='email'
+                        leftIconColor={Colors.buttonContainer}
+                        rightIconLibrary={IconLibrary.Foundation}
+                        rightIconSize={15}
+                        rightIconName='asterisk'
+                        rightIconColor='red'
+
+                    />
+                    <InputBar
+                        placeholder="Country/Region"
+                        leftIconLibrary={IconLibrary.MaterialIcons}
+                        leftIconName='place'
+                        leftIconColor={Colors.buttonContainer}
+
+                    />
+                    <InputBar
+                        placeholder="Phone Number"
+                        leftIconLibrary={IconLibrary.MaterialIcons}
+                        leftIconName='phone-android'
+                        leftIconColor={Colors.buttonContainer}
+                    />
+                </View>
+            </ScrollView>
+            <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />
+        </KeyboardAvoidingView>
     )
 }
 
@@ -73,7 +77,7 @@ export default SignUpScreen
 
 const styles = StyleSheet.create({
     screen: {
-        flex:1,
+        flex: 1,
         backgroundColor: Colors.background
     },
     form: {
@@ -81,7 +85,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        marginTop: 30
+        alignSelf: 'center',
+        // marginTop: 20,
+        marginVertical: 10,
     },
     caution: {
         marginBottom: 20,
