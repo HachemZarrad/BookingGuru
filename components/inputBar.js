@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput } from 'react-native'
+import { StyleSheet, View, TextInput, Text } from 'react-native'
 
 import Icon from './icon'
 
@@ -7,23 +7,30 @@ import Colors from '../constants/colors'
 
 const InputBar = props => {
     return (
-        <View style={{ ...styles.container, ...props.style }}>
-            <Icon
-                library={props.leftIconLibrary} 
-                name={props.leftIconName}
-                color={props.leftIconColor} 
-                size={props.leftIconSize} 
-                style={styles.leftIcon} 
-            />
-            <TextInput {...props} placeholderTextColor="black" style={{ ...styles.inputBar, ...props.style }}></TextInput>
-            <Icon 
-                library={props.rightIconLibrary} 
-                name={props.rightIconName}
-                color={props.rightIconColor} 
-                size={props.rightIconSize} 
-                onPress={props.rightIconFeature}
-                style={styles.rightIcon} 
-            />
+        <View>
+            <View style={{ ...styles.container, ...props.style }}>
+                <Icon
+                    library={props.leftIconLibrary}
+                    name={props.leftIconName}
+                    color={props.leftIconColor}
+                    size={props.leftIconSize}
+                    style={styles.leftIcon}
+                />
+                <TextInput {...props} placeholderTextColor="black" style={{ ...styles.inputBar, ...props.style }}></TextInput>
+                <Icon
+                    library={props.rightIconLibrary}
+                    name={props.rightIconName}
+                    color={props.rightIconColor}
+                    size={props.rightIconSize}
+                    onPress={props.rightIconFeature}
+                    style={styles.rightIcon}
+                />
+            </View>
+            {
+                <View style={styles.errorContainer}>
+                    <Text style={styles.error}>{props.error}</Text>
+                </View>
+            }
         </View>
     )
 }
@@ -50,6 +57,15 @@ const styles = StyleSheet.create({
         margin: 5
     },
     rightIcon: {
-         marginRight: 5
-    }
+        marginRight: 5
+    },
+    error: {
+        marginLeft: 10,
+        fontSize: 13,
+        color: 'red',
+
+    },
+    errorContainer: {
+        marginVertical: 5
+      },
 })

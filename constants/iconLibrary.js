@@ -5,6 +5,7 @@ export default {
     Feather: 'Feather',
     FontAwesome: 'FontAwesome',
     FontAwesome5: 'FontAwesome5',
+    Foundation: 'Foundation',
     MaterialIcons: 'MaterialIcons',
     Octicons: 'Octicons',
     SimpleLineIcons: 'SimpleLineIcons',

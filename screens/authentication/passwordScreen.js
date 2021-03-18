@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import Title from '../../components/title';
@@ -9,7 +9,7 @@ import Caution from '../../components/caution';
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
 
-const CAPITALlLETTERS = /[A-Z]/g;
+const CAPITALLETTERS = /[A-Z]/g;
 const DIGITS = /\d/g;
 
 const Actions = {
@@ -21,7 +21,7 @@ const Actions = {
     ACCEPT_PASSWORD: 'ACCEPT_PASSWORD',
     CANCEL_PASSWORD :'CANCEL_PASSWORD',
     SHOW_RETYPED_PASSWORD: 'SHOW_RETYPED_PASSWORD',
-    CONFRIM_PASSWORD_MATCH: 'CONFRIM_PASSWORD_MATCH'
+    CONFIRM_PASSWORD_MATCH: 'CONFIRM_PASSWORD_MATCH'
 };
 
 const reducer = (state, action) => {
@@ -40,7 +40,7 @@ const reducer = (state, action) => {
             return { ...state, oneNumber: confirmOneNumber, oneNumberColor: confirmOneNumber ? 'green' : 'red'};
         case (Actions.VALIDATE_ONE_CAPITAL):
             let confirmOneCapital = false;
-            if(action.payload.match(CAPITALlLETTERS)) confirmOneCapital = true;
+            if(action.payload.match(CAPITALLETTERS)) confirmOneCapital = true;
             return { ...state, oneCapital: confirmOneCapital, oneCapitalColor: confirmOneCapital ? 'green' : 'red'};
         case (Actions.SHOW_RETYPED_PASSWORD):
             return { ...state, retypedPasswordHiddden: !state.retypedPasswordHiddden };
@@ -48,7 +48,7 @@ const reducer = (state, action) => {
             return { ...state, password: action.payload };
         case (Actions.CANCEL_PASSWORD):
             return { ...state, password: '', passwordAccepted: false };
-        case(Actions.CONFRIM_PASSWORD_MATCH): 
+        case(Actions.CONFIRM_PASSWORD_MATCH): 
             let confirmPasswordMatch = false;
             if (action.payload === state.password) confirmPasswordMatch = true;
             return  {...state, passwordMatchConfirmed: confirmPasswordMatch, retypedPassword: action.payload};
@@ -87,11 +87,11 @@ const PasswordScreen = () => {
     }
 
     const manageConfirmPassword = (retypedPassword) => {
-        dispatch({type: Actions.CONFRIM_PASSWORD_MATCH, payload: retypedPassword});
+        dispatch({type: Actions.CONFIRM_PASSWORD_MATCH, payload: retypedPassword});
     }
 
     const manageSignUp = () => {
-        
+
     }
 
     return (

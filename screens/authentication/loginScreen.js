@@ -17,7 +17,7 @@ const LoginScreen = () => {
         <View style={styles.background}>
             <View style={styles.topBar}>
                 <TouchableOpacity style={styles.backButton} onPress={() => {navigation.navigate('Home', {screen: 'HomePage'})}} >
-                    <Icon library={IconLibrary.FontAwesome} name="arrow-left" size={22}/>
+                    <Icon library={IconLibrary.FontAwesome5} name="arrow-left" size={22}/>
                 </TouchableOpacity>
                 <View style={styles.logoContainer}>
                     <Image 
@@ -26,7 +26,7 @@ const LoginScreen = () => {
                 </View>
             </View>
             <View style={styles.loginForm}>
-                <Title title='Login' style={{fontSize:35}}/>
+                <Title title='Login' style={styles.title}/>
                 <InputBar
                     placeholder='Email'
                     leftIconLibrary={IconLibrary.MaterialIcons} 
@@ -87,4 +87,7 @@ const styles = StyleSheet.create({
     backButton: {
         marginLeft: 10,
     },
+    title: {
+        fontSize:35,
+    }
 })

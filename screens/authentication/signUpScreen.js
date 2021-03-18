@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, View} from 'react-native';
+import React, {useReducer} from 'react'
+import { StyleSheet, View, ScrollView } from 'react-native';
 
 import InputBar from '../../components/inputBar';
 import NormalButton from '../../components/normalButton';
@@ -8,12 +8,20 @@ import Caution from '../../components/caution';
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
 
+const Actions = {
+
+}
+
+const reducer = (state,action) => {
+}
 
 const SignUpScreen = () => {
+    const [state, dispatch] = useReducer(reducer, {})
     return (
         <View style={styles.screen}>
             <Caution type='standar' style={{container:styles.caution}} caution='Only your email is required for the moment but please consider
-                filling other fields to get full advantage of our services. Once registred you can alter those details in settings section'/>
+                filling other fields to get full advantage of our services. Once registred you can alter those details in settings section.'/>
+                <ScrollView >
             <View style={styles.form}>
                 <InputBar 
                     placeholder="First Name"
@@ -26,6 +34,7 @@ const SignUpScreen = () => {
                     placeholder="Last Name"
                     leftIconLibrary={IconLibrary.Entypo} 
                     leftIconName='user'
+                    error= 'Screw You'
                     leftIconColor={Colors.buttonContainer}
                     
                 />
@@ -34,6 +43,10 @@ const SignUpScreen = () => {
                     leftIconLibrary={IconLibrary.MaterialIcons} 
                     leftIconName='email'
                     leftIconColor={Colors.buttonContainer}
+                    rightIconLibrary={IconLibrary.Foundation} 
+                    rightIconSize={15}
+                    rightIconName='asterisk'
+                    rightIconColor='red'
                     
                 />
                 <InputBar 
@@ -51,6 +64,7 @@ const SignUpScreen = () => {
                 />  
                 <NormalButton  title='Sign Up' style={styles.button} nextScreen='Password'/>
             </View>
+                </ScrollView>
         </View>         
     )
 }
