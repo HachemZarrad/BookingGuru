@@ -8,57 +8,13 @@ import Caution from '../../components/caution';
 
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
+import passwordCreationReducer from '../../constants/passwordCreationReducer';
+import passwordCreationActions from '../../constants/passwordCreationActions'
 
-const CAPITALLETTERS = /[A-Z]/g;
-const DIGITS = /\d/g;
 
-const Actions = {
-    SET_PASSWORD_INPUT_DIRTY: 'SET_PASSWORD_INPUT_DIRTY',
-    SHOW_PASSWORD: 'SHOW_PASSWORD',
-    VALIDATE_TEN_CHARACTERS: 'VALIDATE_TEN_CHARACTERS',
-    VALIDATE_ONE_NUMBER: 'VALIDATE_ONE_NUMBER',
-    VALIDATE_ONE_CAPITAL: 'VALIDATE_ONE_CAPITAL',
-    ACCEPT_PASSWORD: 'ACCEPT_PASSWORD',
-    CANCEL_PASSWORD :'CANCEL_PASSWORD',
-    SHOW_RETYPED_PASSWORD: 'SHOW_RETYPED_PASSWORD',
-    CONFIRM_PASSWORD_MATCH: 'CONFIRM_PASSWORD_MATCH'
-};
-
-const reducer = (state, action) => {
-    switch (action.type) {
-        case (Actions.SET_PASSWORD_INPUT_DIRTY):
-            return {...state, pristine: false};
-        case (Actions.SHOW_PASSWORD):
-            return { ...state, passwordHidden: !state.passwordHidden };
-        case (Actions.VALIDATE_TEN_CHARACTERS):
-            let confirmTenCharacters = false;
-            if(action.payload.length >= 10) confirmTenCharacters = true;   
-            return { ...state, tenCharacters: confirmTenCharacters, tenCharactersColor: confirmTenCharacters ? 'green' : 'red'};
-        case (Actions.VALIDATE_ONE_NUMBER):
-            let confirmOneNumber = false;
-            if(action.payload.match(DIGITS)) confirmOneNumber = true;
-            return { ...state, oneNumber: confirmOneNumber, oneNumberColor: confirmOneNumber ? 'green' : 'red'};
-        case (Actions.VALIDATE_ONE_CAPITAL):
-            let confirmOneCapital = false;
-            if(action.payload.match(CAPITALLETTERS)) confirmOneCapital = true;
-            return { ...state, oneCapital: confirmOneCapital, oneCapitalColor: confirmOneCapital ? 'green' : 'red'};
-        case (Actions.SHOW_RETYPED_PASSWORD):
-            return { ...state, retypedPasswordHiddden: !state.retypedPasswordHiddden };
-        case (Actions.ACCEPT_PASSWORD):
-            return { ...state, password: action.payload };
-        case (Actions.CANCEL_PASSWORD):
-            return { ...state, password: '', passwordAccepted: false };
-        case(Actions.CONFIRM_PASSWORD_MATCH): 
-            let confirmPasswordMatch = false;
-            if (action.payload === state.password) confirmPasswordMatch = true;
-            return  {...state, passwordMatchConfirmed: confirmPasswordMatch, retypedPassword: action.payload};
-        default:
-            return state;
-    }
-};
 
 const PasswordScreen = () => {
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, dispatch] = useReducer(passwordCreationReducer, {
         pristine: true,
         password: '',
         passwordHidden: true,
@@ -76,18 +32,18 @@ const PasswordScreen = () => {
     });
     
     const manageColors = (password) => {
-        dispatch({type: Actions.SET_PASSWORD_INPUT_DIRTY});
-        dispatch({type: Actions.VALIDATE_TEN_CHARACTERS, payload: password});
-        dispatch({type: Actions.VALIDATE_ONE_NUMBER, payload: password});
-        dispatch({type: Actions.VALIDATE_ONE_CAPITAL, payload: password});
+        dispatch({type: passwordCreationActions.SET_PASSWORD_INPUT_DIRTY});
+        dispatch({type: passwordCreationActions.VALIDATE_TEN_CHARACTERS, payload: password});
+        dispatch({type: passwordCreationActions.VALIDATE_ONE_NUMBER, payload: password});
+        dispatch({type: passwordCreationActions.VALIDATE_ONE_CAPITAL, payload: password});
         if(state.tenCharacters && state.oneNumber && state.oneCapital) {
-            dispatch({type: Actions.ACCEPT_PASSWORD, payload: password});
+            dispatch({type: passwordCreationActions.ACCEPT_PASSWORD, payload: password});
         }
-        else dispatch({type: Actions.CANCEL_PASSWORD});
+        else dispatch({type: passwordCreationActions.CANCEL_PASSWORD});
     }
 
     const manageConfirmPassword = (retypedPassword) => {
-        dispatch({type: Actions.CONFIRM_PASSWORD_MATCH, payload: retypedPassword});
+        dispatch({type: passwordCreationActions.CONFIRM_PASSWORD_MATCH, payload: retypedPassword});
     }
 
     const manageSignUp = () => {
@@ -106,8 +62,9 @@ const PasswordScreen = () => {
                     rightIconLibrary={IconLibrary.Ionicons}
                     rightIconName={state.passwordHidden ? 'eye-off' : 'eye'}
                     rightIconColor={Colors.buttonContainer}
-                    rightIconFeature={() => dispatch({ type: Actions.SHOW_PASSWORD })}
+                    rightIconFeature={() => dispatch({ type: passwordCreationActions.SHOW_PASSWORD })}
                     secureTextEntry={state.passwordHidden}
+                    passwordCreation
                     onChangeText={manageColors}
                     style={styles.input}
                 />
@@ -124,8 +81,9 @@ const PasswordScreen = () => {
                     rightIconLibrary={IconLibrary.Ionicons}
                     rightIconName={state.retypedPasswordHiddden ? 'eye-off' : 'eye'}
                     rightIconColor={Colors.buttonContainer}
-                    rightIconFeature={() => dispatch({ type: Actions.SHOW_RETYPED_PASSWORD })}
+                    rightIconFeature={() => dispatch({ type: passwordCreationActions.SHOW_RETYPED_PASSWORD })}
                     secureTextEntry={state.retypedPasswordHiddden}
+                    passwordCreation
                     onChangeText={manageConfirmPassword}
                     style={styles.input}
                 />

@@ -1,6 +1,11 @@
 //THIS FILE HAS NO RELATION TO REDUX. THE MAIN USE IS USEREDUCER HOOK 
 
-export const passwordCreationReducer = (state, action) => {
+import Actions from './passwordCreationActions';
+
+const CAPITALLETTERS = /[A-Z]/g;
+const DIGITS = /\d/g;
+
+export default (state, action) => {
     switch (action.type) {
         case (Actions.SET_PASSWORD_INPUT_DIRTY):
             return {...state, pristine: false};

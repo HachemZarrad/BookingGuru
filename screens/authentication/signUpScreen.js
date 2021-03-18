@@ -8,15 +8,15 @@ import Caution from '../../components/caution';
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
 
-const Actions = {
+// const Actions = {
 
-}
+// }
 
-const reducer = (state, action) => {
-}
+// const reducer = (state, action) => {
+// }
 
 const SignUpScreen = () => {
-    const [state, dispatch] = useReducer(reducer, {})
+    // const [state, dispatch] = useReducer(reducer, {})
     return (
         <KeyboardAvoidingView
             style={styles.screen}
@@ -46,6 +46,9 @@ const SignUpScreen = () => {
                         placeholder="Email Address"
                         leftIconLibrary={IconLibrary.MaterialIcons}
                         leftIconName='email'
+                        required
+                        email
+                        error="Please enter a valid email address."
                         leftIconColor={Colors.buttonContainer}
                         rightIconLibrary={IconLibrary.Foundation}
                         rightIconSize={15}
