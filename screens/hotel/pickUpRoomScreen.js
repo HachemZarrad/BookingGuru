@@ -11,6 +11,10 @@ import CustomPicker from '../../components/customPicker';
 import Title from '../../components/title';
 import Caution from '../../components/caution';
 
+
+const RESIDENCECHOICE = ['All Inclusive', 'Half Board']; 
+const BEDCHOICE = ['1 Bed', '2 Beds'];
+
 const PickUpRoomScreen = ({ route }) => {
 
     const price = route.params;
@@ -52,9 +56,9 @@ const PickUpRoomScreen = ({ route }) => {
                     onDateChange={date => setSelectedDate(date)}
                 />
                 <Title title={'Single Or Twin Room ?'} />
-                <CustomPicker style={styles.picker} firstValue={'1 Bed'} secondValue={'2 Beds'} />
+                <CustomPicker style={styles.picker} list={BEDCHOICE} />
                 <Title title={'All Inclusive Or Half Board ?'} />
-                <CustomPicker style={styles.picker} firstValue={'All Inclusive'} secondValue={'Half Board'} />
+                <CustomPicker style={styles.picker} list={RESIDENCECHOICE} />
                 <Title title={'Any Comments ?'} />
                 <InputBar numberOfLines={4} style={styles.commentBox } />
             </ScrollView>

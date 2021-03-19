@@ -1,22 +1,26 @@
 import React, { useState } from 'react'
-import { StyleSheet, View} from 'react-native'
-import {Picker} from '@react-native-picker/picker';
+import { StyleSheet, View } from 'react-native'
+import { Picker } from '@react-native-picker/picker';
 import Colors from '../constants/colors';
 
 
 const CustomPicker = props => {
-    const [selectedValue, setSelectedValue] = useState(props.firstValue);
+    const valuesList = props.list;
+    const [selectedValue, setSelectedValue] = useState(valuesList[0]);
     return (
-        <View style={{...styles.border, ...props.style}}>
+        <View style={{ ...styles.border, ...props.style }}>
             <Picker
                 {...props}
                 selectedValue={selectedValue}
-                style={{...styles.picker, ...props.style}}
+                style={{ ...styles.picker, ...props.style }}
                 mode='dropdown'
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                >
-                <Picker.Item label= {props.firstValue} value={props.firstValue} />
-                <Picker.Item label={props.secondValue} value={props.secondValue} />
+            >
+                {valuesList.map(value => {
+                    return(
+                    <Picker.Item label={value} value={value} />
+                    )
+                })}
             </Picker>
         </View>
     )
@@ -28,10 +32,10 @@ const styles = StyleSheet.create({
     border: {
         width: '75%',
         height: 50,
-        backgroundColor: 'white', 
-        borderRadius: 20, 
+        backgroundColor: 'white',
+        borderRadius: 20,
         borderWidth: 4,
-        borderColor: Colors.toolbarColor, 
+        borderColor: Colors.toolbarColor,
         marginBottom: 20
     },
     picker: {
@@ -39,5 +43,5 @@ const styles = StyleSheet.create({
         width: '100%',
         marginTop: -6
     }
-   
+
 })

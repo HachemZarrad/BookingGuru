@@ -69,14 +69,17 @@ const Hotels = ({route}) => {
                 <InputBar
                   onChangeText={(term) => { setSearchTerm(term); showHotels(true) }} 
                   placeholder = "search down here" 
+                  keyboardType= 'default'
                   leftIconLibrary={IconLibrary.FontAwesome} 
                   leftIconName='search'
                   leftIconColor={Colors.buttonContainer}
                   leftIconSize={20}
                   value = {searchTerm}
+                  searchBar
+                  style={styles.input}
                 />
               }
-          </View>
+            </View>
 
           {loading || !shown ? <View style={styles.spinner}>{/* <ActivityIndicator color={Colors.toolbarColor}/> */}</View> : (
           <ScrollView>
@@ -123,10 +126,13 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   searchBar: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
+    // flexDirection: 'row', 
+    alignItems: 'center',
     paddingBottom: 7
   },
+  input: {
+    // width: 200
+  }
 });
 
 export default Hotels; 

@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     },
     button: {
         alignSelf: 'center',
-        // marginTop: 20,
         marginVertical: 10,
     },
     caution: {
