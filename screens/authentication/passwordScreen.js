@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,  KeyboardAvoidingView } from 'react-native'
 
 import Title from '../../components/title';
 import InputBar from '../../components/inputBar';

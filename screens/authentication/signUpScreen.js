@@ -21,7 +21,6 @@ const SignUpScreen = () => {
         <KeyboardAvoidingView
             style={styles.screen}
             keyboardVerticalOffset={10}
-            behavior='height'
         >
             <Caution type='standar' style={{ container: styles.caution }} caution='Only your email is required for the moment but please consider
                 filling other fields to get full advantage of our services. Once registred you can alter those details in settings section.'/>
@@ -32,16 +31,21 @@ const SignUpScreen = () => {
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
                         leftIconColor={Colors.buttonContainer}
+                        keyboardType='default'
+                        error='Firstname must be at least three characters long'
+                        minLength={3}
 
                     />
                     <InputBar
                         placeholder="Last Name"
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
-                        error='Screw You'
                         leftIconColor={Colors.buttonContainer}
-
+                        keyboardType='default'
+                        error='Lastname must be at least three characters long'
+                        minLength={3}
                     />
+
                     <InputBar
                         placeholder="Email Address"
                         leftIconLibrary={IconLibrary.MaterialIcons}
