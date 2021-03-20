@@ -1,12 +1,17 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect, useCallback } from 'react'
 import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 
 import InputBar from '../../components/inputBar';
+import CustomPicker from '../../components/customPicker';
 import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
 
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
+
+import * as ActionTypes from '../../store/actions/actionTypes';
+import  fetchCountriesAndCallingCodes from '../../store/actions/countriesAndCode';
+import { useDispatch, useSelector } from 'react-redux';
 
 // const Actions = {
 
@@ -17,6 +22,21 @@ import IconLibrary from '../../constants/iconLibrary';
 
 const SignUpScreen = () => {
     // const [state, dispatch] = useReducer(reducer, {})
+    const dispatch = useDispatch();
+    const countriesAndCodes = useSelector(state => state.countriesAndCodes.countries);
+    let countries = [];
+    countriesAndCodes.map(country => {
+        countries.push(country.name);
+    })
+
+    const loadCountriesAndCodes = useCallback(() => {
+        dispatch(fetchCountriesAndCallingCodes());        
+    },[dispatch]);
+
+    useEffect(() => {
+        loadCountriesAndCodes();
+    },[loadCountriesAndCodes])
+
     return (
         <KeyboardAvoidingView
             style={styles.screen}
@@ -60,12 +80,13 @@ const SignUpScreen = () => {
                         rightIconColor='red'
 
                     />
-                    <InputBar
-                        placeholder="Country/Region"
-                        leftIconLibrary={IconLibrary.MaterialIcons}
-                        leftIconName='place'
-                        leftIconColor={Colors.buttonContainer}
-
+                    
+                    <CustomPicker
+                        list={countries}
+                        iconLibrary={IconLibrary.MaterialIcons}
+                        iconName='place'
+                        iconColor={Colors.buttonContainer}
+                        
                     />
                     <InputBar
                         placeholder="Phone Number"

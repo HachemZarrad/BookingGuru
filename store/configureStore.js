@@ -9,7 +9,7 @@ import countriesReducer from './reducers/countriesAndCode';
 const rootReducer = combineReducers({
     hotels: hotelsReducer,
     favorites: favoritesReducer,
-    countriesAndCode: countriesReducer,
+    countriesAndCodes: countriesReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(Thunk));
