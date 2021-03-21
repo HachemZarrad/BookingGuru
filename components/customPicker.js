@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     border: {
         flex: 1,
         flexDirection: 'row',
-        width: '80%',
+        width: '90%',
         height: 50,
         backgroundColor: 'white',
         borderRadius: 20,
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     },
     picker: {
         height: 50,
-        // width: '80%',
         flex: 1,
         marginTop: -6
     },

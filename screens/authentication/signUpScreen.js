@@ -9,9 +9,9 @@ import Caution from '../../components/caution';
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
 
-import * as ActionTypes from '../../store/actions/actionTypes';
-import  fetchCountriesAndCallingCodes from '../../store/actions/countriesAndCode';
+import fetchCountriesAndCallingCodes from '../../store/actions/countriesAndCode';
 import { useDispatch, useSelector } from 'react-redux';
+import countriesAndCode from '../../store/actions/countriesAndCode';
 
 // const Actions = {
 
@@ -23,19 +23,22 @@ import { useDispatch, useSelector } from 'react-redux';
 const SignUpScreen = () => {
     // const [state, dispatch] = useReducer(reducer, {})
     const dispatch = useDispatch();
-    const countriesAndCodes = useSelector(state => state.countriesAndCodes.countries);
+    const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes);
     let countries = [];
     countriesAndCodes.map(country => {
+        // console.log('name', country.name)
+        // console.log('flag', country.flag)
+        // console.log('callingCode', country.callingCodes[0])
         countries.push(country.name);
     })
 
     const loadCountriesAndCodes = useCallback(() => {
-        dispatch(fetchCountriesAndCallingCodes());        
-    },[dispatch]);
+        dispatch(fetchCountriesAndCallingCodes());
+    }, [dispatch]);
 
     useEffect(() => {
         loadCountriesAndCodes();
-    },[loadCountriesAndCodes])
+    }, [loadCountriesAndCodes])
 
     return (
         <KeyboardAvoidingView
@@ -80,23 +83,32 @@ const SignUpScreen = () => {
                         rightIconColor='red'
 
                     />
-                    
+
                     <CustomPicker
                         list={countries}
                         iconLibrary={IconLibrary.MaterialIcons}
                         iconName='place'
                         iconColor={Colors.buttonContainer}
-                        
+
                     />
-                    <InputBar
-                        placeholder="Phone Number"
-                        leftIconLibrary={IconLibrary.MaterialIcons}
-                        leftIconName='phone-android'
-                        leftIconColor={Colors.buttonContainer}
-                    />
+                    {/* <View> */}
+                        {/* <CustomPicker
+                            list={countries}
+                        /> */}
+
+                        <InputBar
+                            placeholder="Phone Number"
+                            leftIconLibrary={IconLibrary.MaterialIcons}
+                            leftIconName='phone-android'
+                            leftIconColor={Colors.buttonContainer}
+                            style={{width: '80%'}}
+                        />
+
+                    {/* </View> */}
                 </View>
             </ScrollView>
             <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />
+            <NormalButton title='Experience' style={styles.button} payload={countriesAndCodes} nextScreen='callingCodes' />
         </KeyboardAvoidingView>
     )
 }

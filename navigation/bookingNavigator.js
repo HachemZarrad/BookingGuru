@@ -44,6 +44,8 @@ import NotificationsScreen from '../screens/notificationsScreen';
 import SignUpScreen from '../screens/authentication/signUpScreen';
 import PasswordScreen from '../screens/authentication/passwordScreen';
 import LoginScreen from '../screens/authentication/loginScreen';
+import SettingsScreen from '../screens/authentication/settingsScreen';
+import CallingCodesScreen from '../screens/authentication/callingCodeScreen';
 
 import ReservationsList from '../screens/admin/reservationsList';
 import ReservationDetails from '../screens/admin/reservationDetails';
@@ -346,6 +348,16 @@ export const AuthenticationNavigator = () => {
                 name="Password"
                 component={PasswordScreen}
                 options={{headerShown: true, headerTitle: 'Sign Up'}}
+            />
+            <AuthStackNavigator.Screen
+                name="callingCodes"
+                component={CallingCodesScreen}
+                options={{headerShown: true, headerTitle: 'Calling Code'}}
+            />
+            <AuthStackNavigator.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{headerShown: true, headerTitle: 'Settings'}}
             />
         </AuthStackNavigator.Navigator>
     );

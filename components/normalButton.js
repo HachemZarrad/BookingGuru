@@ -11,7 +11,7 @@ const NormalButton = props => {
         <TouchableOpacity 
             {...props} 
             style={{...styles.button, ...props.style}}
-            onPress={props.nextScreen ? () => navigation.navigate(props.nextScreen) : props.onPress}
+            onPress={props.nextScreen ? () => navigation.navigate(props.nextScreen, props.payload) : props.onPress}
         >
             <Text style={styles.textButton}>{props.title}</Text>
         </TouchableOpacity>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     button: {
-        width: '80%',
+        width: '90%',
         height: 60,
         borderRadius: 10,
         borderColor: 'black',
