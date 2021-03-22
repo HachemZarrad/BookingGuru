@@ -5,14 +5,11 @@ import InputBar from '../../components/inputBar';
 import CustomPicker from '../../components/customPicker';
 import NormalButton from '../../components/normalButton';
 import Caution from '../../components/caution';
+import PhoneNumber from '../../components/phoneNumber';
 
 import Colors from '../../constants/colors';
 import IconLibrary from '../../constants/iconLibrary';
-
-import fetchCountriesAndCallingCodes from '../../store/actions/countriesAndCode';
-import { useDispatch, useSelector } from 'react-redux';
-import countriesAndCode from '../../store/actions/countriesAndCode';
-
+import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
 // const Actions = {
 
 // }
@@ -22,23 +19,18 @@ import countriesAndCode from '../../store/actions/countriesAndCode';
 
 const SignUpScreen = () => {
     // const [state, dispatch] = useReducer(reducer, {})
-    const dispatch = useDispatch();
-    const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes);
-    let countries = [];
+ 
+    let callingCodes = [];
+    // let ids = [];
     countriesAndCodes.map(country => {
-        // console.log('name', country.name)
-        // console.log('flag', country.flag)
-        // console.log('callingCode', country.callingCodes[0])
-        countries.push(country.name);
+        callingCodes.push(country.dialling_code)
+        // ids.push(country._id)
     })
-
-    const loadCountriesAndCodes = useCallback(() => {
-        dispatch(fetchCountriesAndCallingCodes());
-    }, [dispatch]);
-
-    useEffect(() => {
-        loadCountriesAndCodes();
-    }, [loadCountriesAndCodes])
+    // const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+    // for(id of ids){
+    //     if(countOccurrences(ids,id) >1) console.log('help', id)
+    // }
+   
 
     return (
         <KeyboardAvoidingView
@@ -55,6 +47,7 @@ const SignUpScreen = () => {
                         leftIconName='user'
                         leftIconColor={Colors.buttonContainer}
                         keyboardType='default'
+                        default=''
                         error='Firstname must be at least three characters long'
                         minLength={3}
 
@@ -65,6 +58,7 @@ const SignUpScreen = () => {
                         leftIconName='user'
                         leftIconColor={Colors.buttonContainer}
                         keyboardType='default'
+                        default=''
                         error='Lastname must be at least three characters long'
                         minLength={3}
                     />
@@ -85,7 +79,7 @@ const SignUpScreen = () => {
                     />
 
                     <CustomPicker
-                        list={countries}
+                        list={callingCodes}
                         iconLibrary={IconLibrary.MaterialIcons}
                         iconName='place'
                         iconColor={Colors.buttonContainer}
@@ -102,6 +96,7 @@ const SignUpScreen = () => {
                             leftIconName='phone-android'
                             leftIconColor={Colors.buttonContainer}
                             style={{width: '80%'}}
+                            default=''
                         />
 
                     {/* </View> */}

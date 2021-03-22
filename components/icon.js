@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 
 import IconLibrary from '../constants/iconLibrary';
 
+import FlagIcon from 'react-native-ico-flags';
 import { AntDesign, Octicons,FontAwesome, FontAwesome5, Feather, Ionicons,
      MaterialIcons, SimpleLineIcons, Entypo, Foundation } from '@expo/vector-icons';
 
@@ -48,6 +49,10 @@ const Icon = ({library, name, color='black', size=25, style, onPress}) => {
         case(IconLibrary.SimpleLineIcons):
             return (
                <SimpleLineIcons  name={name} onPress={onPress} size={size} color={color} style={{...styles.icon, ...style}}/>
+            );
+        case(IconLibrary.Flags):
+            return(
+                <FlagIcon name={name} height="40" width="40" />
             );
         default:
             return(

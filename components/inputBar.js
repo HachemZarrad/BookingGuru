@@ -26,7 +26,7 @@ const InputBar = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
         pristine: true,
         isValid: props.isValid,
-        value: props.value
+        value: props.value ? props.value : props.default
         
     });
     
@@ -63,8 +63,8 @@ const InputBar = props => {
                     {...props} 
                     placeholderTextColor="black" 
                     style={{ ...styles.inputBar, ...props.style }}
-                    onBlur={!props.passwordCreation ? makeDirty : props.onBlur}
-                    // onChangeText={!props.passwordCreation || !props.searchBar ? textChangeHandler: props.onChangeText}
+                    onBlur={makeDirty}
+                    onChangeText={!props.passwordCreation || !props.searchBar ? textChangeHandler: props.onChangeText}
                 >
                 </TextInput>
                 <Icon

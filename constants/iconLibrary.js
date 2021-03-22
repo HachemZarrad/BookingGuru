@@ -9,4 +9,5 @@ export default {
     MaterialIcons: 'MaterialIcons',
     Octicons: 'Octicons',
     SimpleLineIcons: 'SimpleLineIcons',
+    Flags: 'Flags',
 };

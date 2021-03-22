@@ -1,12 +1,17 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 
-import Svg, { Rect, SvgUri } from 'react-native-svg';
+// import Svg, { Rect, SvgUri } from 'react-native-svg';
 
 import { useNavigation } from '@react-navigation/native';
 
 import * as ActionTypes from '../store/actions/actionTypes';
 import HotelStars from './hotelStars';
+import Icon from './icon';
+
+import IconLibrary from '../constants/iconLibrary';
+import Colors from '../constants/colors';
+import iconLibrary from '../constants/iconLibrary';
 
 
 const DisplayAccordingToService = ({ service, item }) => {
@@ -72,13 +77,9 @@ const DisplayAccordingToService = ({ service, item }) => {
     case (ActionTypes.GET_COUNTRIES):
       return (
         <View style={styles.country}>
-          <SvgUri
-            width= {80}
-            height= {40}
-            uri={item.flag}
-          />
-          <Text style={styles.countryName}>{item.name}</Text>
-          <Text style={styles.callingCode}>{item.callingCodes[0]}</Text>
+          <Icon library={iconLibrary.Flags} name={item.country_name.toLowerCase()} />
+          <Text style={styles.countryName}>{item.country_name}</Text>
+          <Text style={styles.callingCode}>{item.dialling_code}</Text>
         </View>
       )
     default:
@@ -93,7 +94,7 @@ const CustomList = props => {
       <FlatList
         {...props}
         // style={{}}
-        keyExtractor={({ name }) => name.toString()}
+        keyExtractor={({ _id }) => _id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => navigation.navigate(props.pressedElement, item)}>
             <DisplayAccordingToService item={item} service={props.service} />
@@ -154,10 +155,16 @@ const styles = StyleSheet.create({
   },
   country: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    margin: 10,
   },
   flag: {
-    height: 20,
-    width: 40,
+    // flex: 1,
+    // height: 40,
+    // width: 70,
+    // alignSelf: 'center'
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // height: 160,
   }
 })
