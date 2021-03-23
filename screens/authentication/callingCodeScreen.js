@@ -1,14 +1,11 @@
-import React, { useEffect, useCallback } from 'react'
-import { StyleSheet, View, Text, ActivityIndicator } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
-import Colors from '../../constants/colors'
 import * as ActionTypes from '../../store/actions/actionTypes'
 import CustomList from '../../components/customList'
 import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
 
-const CallingCodeScreen = ({ route }) => {
-    // countriesAndCodes = route.params;
-
+const CallingCodeScreen = () => {
 
     return (
         <View style={styles.container}>
@@ -26,8 +23,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex:1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
         backgroundColor: 'white',
     }
 })

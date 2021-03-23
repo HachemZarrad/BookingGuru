@@ -1,11 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 
-// import Svg, { Rect, SvgUri } from 'react-native-svg';
-
 import { useNavigation } from '@react-navigation/native';
 
 import * as ActionTypes from '../store/actions/actionTypes';
+
 import HotelStars from './hotelStars';
 import Icon from './icon';
 
@@ -77,8 +76,10 @@ const DisplayAccordingToService = ({ service, item }) => {
     case (ActionTypes.GET_COUNTRIES):
       return (
         <View style={styles.country}>
-          <Icon library={iconLibrary.Flags} name={item.country_name.toLowerCase()} />
-          <Text style={styles.countryName}>{item.country_name.replace(/-/g,' ')}</Text>
+          <View style={styles.flag}>
+            <Icon library={iconLibrary.Flags} name={item.country_name.toLowerCase()} />
+            <Text style={styles.countryName}>{item.country_name.replace(/-/g, ' ')}</Text>
+          </View>
           <Text style={styles.callingCode}>{item.dialling_code}</Text>
         </View>
       )
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
   },
   country: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
     alignSelf: 'center',
     width: '80%',
@@ -163,4 +164,13 @@ const styles = StyleSheet.create({
     borderBottomColor: 'black',
     borderBottomWidth: 0.4
   },
+  flag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 10,
+    flex: 1,
+  },
+  countryName: {
+    marginLeft: 10,
+  }
 })

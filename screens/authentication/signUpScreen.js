@@ -19,18 +19,10 @@ import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
 
 const SignUpScreen = () => {
     // const [state, dispatch] = useReducer(reducer, {})
- 
     let callingCodes = [];
-    // let ids = [];
     countriesAndCodes.map(country => {
         callingCodes.push(country.dialling_code)
-        // ids.push(country._id)
     })
-    // const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
-    // for(id of ids){
-    //     if(countOccurrences(ids,id) >1) console.log('help', id)
-    // }
-   
 
     return (
         <KeyboardAvoidingView
@@ -85,25 +77,21 @@ const SignUpScreen = () => {
                         iconColor={Colors.buttonContainer}
 
                     />
-                    {/* <View> */}
-                        {/* <CustomPicker
-                            list={countries}
-                        /> */}
+                    <PhoneNumber/>
 
-                        <InputBar
+                    {/* <InputBar
                             placeholder="Phone Number"
                             leftIconLibrary={IconLibrary.MaterialIcons}
                             leftIconName='phone-android'
                             leftIconColor={Colors.buttonContainer}
                             style={{width: '80%'}}
                             default=''
-                        />
+                        /> */}
 
-                    {/* </View> */}
                 </View>
             </ScrollView>
             <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />
-            <NormalButton title='Experience' style={styles.button} payload={countriesAndCodes} nextScreen='callingCodes' />
+            {/* <NormalButton title='Experience' style={styles.button} payload={countriesAndCodes} nextScreen='callingCodes' /> */}
         </KeyboardAvoidingView>
     )
 }
