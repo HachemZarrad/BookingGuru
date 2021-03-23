@@ -78,7 +78,7 @@ const DisplayAccordingToService = ({ service, item }) => {
       return (
         <View style={styles.country}>
           <Icon library={iconLibrary.Flags} name={item.country_name.toLowerCase()} />
-          <Text style={styles.countryName}>{item.country_name}</Text>
+          <Text style={styles.countryName}>{item.country_name.replace(/-/g,' ')}</Text>
           <Text style={styles.callingCode}>{item.dialling_code}</Text>
         </View>
       )
@@ -155,16 +155,12 @@ const styles = StyleSheet.create({
   },
   country: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: '80%',
     margin: 10,
+    borderBottomColor: 'black',
+    borderBottomWidth: 0.4
   },
-  flag: {
-    // flex: 1,
-    // height: 40,
-    // width: 70,
-    // alignSelf: 'center'
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // height: 160,
-  }
 })
