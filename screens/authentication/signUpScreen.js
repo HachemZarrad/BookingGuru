@@ -19,9 +19,10 @@ import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
 
 const SignUpScreen = () => {
     // const [state, dispatch] = useReducer(reducer, {})
-    let callingCodes = [];
+    
+    let countries = [];
     countriesAndCodes.map(country => {
-        callingCodes.push(country.dialling_code)
+        countries.push(country.country_name)
     })
 
     return (
@@ -67,11 +68,10 @@ const SignUpScreen = () => {
                         rightIconSize={15}
                         rightIconName='asterisk'
                         rightIconColor='red'
-
                     />
 
                     <CustomPicker
-                        list={callingCodes}
+                        list={countries}
                         iconLibrary={IconLibrary.MaterialIcons}
                         iconName='place'
                         iconColor={Colors.buttonContainer}

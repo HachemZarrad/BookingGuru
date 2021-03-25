@@ -39,7 +39,7 @@ const Destinations = () => {
                     onPress={()=> navigation.navigate('Hotels',
                     {
                       screen: 'HotelsOverview',
-                      params: {object : {destination: destination.name, filter: true}},
+                      params: {destination: destination.name, filter: true},
                     })
                       }>
                     <View>

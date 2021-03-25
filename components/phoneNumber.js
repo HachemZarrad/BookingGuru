@@ -15,8 +15,10 @@ const PhoneNumber = props => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.flagAndCode} onPress={() => navigation.navigate('callingCodes')}>
-                <Icon library={IconLibrary.Flags} name='tunisia' />
-                <Text style={styles.callingCode}>(+216)</Text>
+                <View style={styles.kkk}>
+                    <Text style={styles.callingCode}>(+216)</Text>
+                    <Icon library={IconLibrary.Flags} name='tunisia' />
+                </View>
                 <Icon library={IconLibrary.AntDesign} name='caretdown' size={12} />
             </TouchableOpacity>
             <View style={styles.input}>
@@ -47,8 +49,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         height: 45,
-        borderBottomWidth: 2,
-        borderBottomColor: Colors.toolbarColor,
+        // borderBottomWidth: 2,
+        // borderBottomColor: Colors.toolbarColor,
         flex: 0.4
     },
     flag: {

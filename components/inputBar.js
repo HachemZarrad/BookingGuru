@@ -63,8 +63,9 @@ const InputBar = props => {
                     {...props} 
                     placeholderTextColor="black" 
                     style={{ ...styles.inputBar, ...props.style }}
+                    value={inputState.value}
                     onBlur={makeDirty}
-                    onChangeText={!props.passwordCreation || !props.searchBar ? textChangeHandler: props.onChangeText}
+                    onChangeText={props.searchBar ? props.onChangeText: textChangeHandler}
                 >
                 </TextInput>
                 <Icon
