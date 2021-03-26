@@ -10,7 +10,6 @@ import Toolbar from './toolbar';
 import CustomButton from './customButton';
 import RatingCard from './ratingCard';
 
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import { useDispatch } from 'react-redux';
 import { newFavorite, removeFavorite } from '../store/actions/favorites';
@@ -45,8 +44,6 @@ const BookingTemplate = props => {
  }
 
  
-    // useEffect(() => {},[addToFavorite]);
-
     return(
         <View style={{flex:1, backgroundColor: Colors.background}}>
             <Toolbar/>

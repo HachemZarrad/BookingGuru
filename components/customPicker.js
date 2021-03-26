@@ -1,16 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 
-import { Picker } from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker'
 
-import Colors from '../constants/colors';
-import IconLibrary from '../constants/iconLibrary';
+import Colors from '../constants/colors'
 import Icon from './icon'
 
 
 const CustomPicker = props => {
-    const valuesList = props.list;
-    const [selectedValue, setSelectedValue] = useState(valuesList[2]);
+    const valuesList = props.list
+    const [selectedValue, setSelectedValue] = useState('Tunisia')
+    const selectedElementAccordingToOtherFactors = props.selectedElementAccordingToOtherFactors
+
+    useEffect(() => {
+       if(selectedElementAccordingToOtherFactors) setSelectedValue(selectedElementAccordingToOtherFactors) 
+    },[selectedElementAccordingToOtherFactors])
+    
     return (
         <View style={{ ...styles.border, ...props.style }}>
             <Icon

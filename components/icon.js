@@ -52,7 +52,7 @@ const Icon = ({library, name, color='black', size=25, style, onPress}) => {
             );
         case(IconLibrary.Flags):
             return(
-                <FlagIcon name={name} height="35" width="35" />
+                <FlagIcon name={name} height="30" width="30" />
             );
         default:
             return(

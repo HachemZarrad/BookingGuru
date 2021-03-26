@@ -1,15 +1,15 @@
-import React, { useReducer, useEffect, useCallback } from 'react'
-import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native';
+import React, { useReducer, useEffect, useCallback, useState } from 'react'
+import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native'
 
-import InputBar from '../../components/inputBar';
-import CustomPicker from '../../components/customPicker';
-import NormalButton from '../../components/normalButton';
-import Caution from '../../components/caution';
-import PhoneNumber from '../../components/phoneNumber';
+import InputBar from '../../components/inputBar'
+import CustomPicker from '../../components/customPicker'
+import NormalButton from '../../components/normalButton'
+import Caution from '../../components/caution'
+import PhoneNumber from '../../components/phoneNumber'
 
-import Colors from '../../constants/colors';
-import IconLibrary from '../../constants/iconLibrary';
-import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
+import Colors from '../../constants/colors'
+import IconLibrary from '../../constants/iconLibrary'
+import countriesAndCodes from '../../constants/coutriesAndCallingCodes'
 // const Actions = {
 
 // }
@@ -17,10 +17,10 @@ import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
 // const reducer = (state, action) => {
 // }
 
-const SignUpScreen = () => {
+const SignUpScreen = ({route}) => {
     // const [state, dispatch] = useReducer(reducer, {})
-    
-    let countries = [];
+    const selectedCode = route.params 
+    const countries = []
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
     })
@@ -72,23 +72,13 @@ const SignUpScreen = () => {
                         iconLibrary={IconLibrary.MaterialIcons}
                         iconName='place'
                         iconColor={Colors.buttonContainer}
-
+                        selectedElementAccordingToOtherFactors={selectedCode?.country_name}
                     />
-                    <PhoneNumber/>
 
-                    {/* <InputBar
-                            placeholder="Phone Number"
-                            leftIconLibrary={IconLibrary.MaterialIcons}
-                            leftIconName='phone-android'
-
-                            style={{width: '80%'}}
-                            default=''
-                        /> */}
-
+                    <PhoneNumber flag={selectedCode?.country_name.toLowerCase()} callingCode={selectedCode?.dialling_code} />
                 </View>
             </ScrollView>
             <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />
-            {/* <NormalButton title='Experience' style={styles.button} payload={countriesAndCodes} nextScreen='callingCodes' /> */}
         </KeyboardAvoidingView>
     )
 }

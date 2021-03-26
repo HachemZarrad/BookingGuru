@@ -13,7 +13,7 @@ const HotelDetails = ({route}) => {
     const isFavorite = favorites.some(favorite => favorite.longId === hotel._id);
     const icon = () => {
         if(isFavorite) return 'heart';
-        else return 'heart-o';
+        return 'heart-o';
     }
 
     const loadFavorites = useCallback(() => {

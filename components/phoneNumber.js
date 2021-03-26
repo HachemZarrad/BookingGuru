@@ -15,9 +15,9 @@ const PhoneNumber = props => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.flagAndCode} onPress={() => navigation.navigate('callingCodes')}>
-                <Icon library={IconLibrary.Flags} name='tunisia' />
-                <Text style={styles.callingCode}>(+216)</Text>
-                <Icon library={IconLibrary.AntDesign} name='caretdown' size={12} />
+                <Icon library={IconLibrary.Flags} name={props.flag ?? 'tunisia'} />
+                <Text style={styles.callingCode}>{props.callingCode ?? '(+216)'}</Text>
+                <Icon library={IconLibrary.AntDesign} name='caretdown' size={8} />
             </TouchableOpacity>
             <View style={styles.inputContainer}>
                 <InputBar
@@ -25,7 +25,6 @@ const PhoneNumber = props => {
                     placeholder="Phone Number"
                     leftIconLibrary={IconLibrary.MaterialIcons}
                     leftIconName='phone-android'
-                    leftIconColor={Colors.buttonContainer}
                     style={styles.input}
                 />
             </View>
@@ -46,33 +45,29 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 4,
         borderColor: Colors.toolbarColor,
+        margin: 5,
     },
     flagAndCode: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        // flex: 1,
         height: '100%',
-        borderRadius: 15,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
         width: '30%',
-        backgroundColor: 'grey'
-    },
-    flag: {
-
+        backgroundColor: '#d3d3d3'
     },
     callingCode: {
-        fontSize: 15,
-        // margin: 5,
-    },
-    input15: {
-        flex: 5,
-        alignItems: 'flex-end',
-        // backgroundColor: 'green',
+        fontSize: 13,
     },
     inputContainer: {
+        flex: 1,
         width: '70%',
+        borderLeftColor: Colors.toolbarColor,
+        borderLeftWidth: 3,
     },
     input: {
-        backgroundColor: 'green',
-        width: 220,
+        width: '100%',
         borderLeftWidth: 0,
         borderRightWidth: 0,
         margin: 0,
