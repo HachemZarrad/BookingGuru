@@ -38,7 +38,6 @@ const SignUpScreen = () => {
                         placeholder="First Name"
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
-                        leftIconColor={Colors.buttonContainer}
                         keyboardType='default'
                         default=''
                         error='Firstname must be at least three characters long'
@@ -49,7 +48,6 @@ const SignUpScreen = () => {
                         placeholder="Last Name"
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
-                        leftIconColor={Colors.buttonContainer}
                         keyboardType='default'
                         default=''
                         error='Lastname must be at least three characters long'
@@ -63,7 +61,6 @@ const SignUpScreen = () => {
                         required
                         email
                         error="Please enter a valid email address."
-                        leftIconColor={Colors.buttonContainer}
                         rightIconLibrary={IconLibrary.Foundation}
                         rightIconSize={15}
                         rightIconName='asterisk'
@@ -83,7 +80,7 @@ const SignUpScreen = () => {
                             placeholder="Phone Number"
                             leftIconLibrary={IconLibrary.MaterialIcons}
                             leftIconName='phone-android'
-                            leftIconColor={Colors.buttonContainer}
+
                             style={{width: '80%'}}
                             default=''
                         /> */}

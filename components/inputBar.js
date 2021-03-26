@@ -55,7 +55,7 @@ const InputBar = props => {
                 <Icon
                     library={props.leftIconLibrary}
                     name={props.leftIconName}
-                    color={props.leftIconColor}
+                    color={Colors.buttonContainer}
                     size={props.leftIconSize}
                     style={styles.leftIcon}
                 />
@@ -71,7 +71,7 @@ const InputBar = props => {
                 <Icon
                     library={props.rightIconLibrary}
                     name={props.rightIconName}
-                    color={props.rightIconColor}
+                    color={props.rightIconColor ?? Colors.buttonContainer}
                     size={props.rightIconSize}
                     onPress={props.rightIconFeature}
                     style={styles.rightIcon}
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         margin: 5,
         borderColor: Colors.toolbarColor,
+        
     },
     inputBar: {
         flex: 1
