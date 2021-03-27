@@ -10,16 +10,15 @@ import Colors from '../constants/colors'
 
 const CustomDatePicker = props => {
     
-    const minDate = new Date()
+    const minDate = props.dateOfBirth ?? new Date()
     const maxDate = new Date(`${minDate.getFullYear()+2}`)
 
     const [date, setDate] = useState(minDate);
     const [show, setShow] = useState(false);
     
     const icon = props.mode === 'date' ? 'calendar' : 'clockcircleo'
-    const dateToDisplay = `${date.getDate()+1}/${date.getMonth()+1}/${date.getFullYear()}`
-    const timeToDisplay = `${date.getHours()}:${date.getMinutes()}`
-    const finalDisplay = props.mode == 'date' ? dateToDisplay : timeToDisplay
+    const dateToDisplay = `${date?.getDate()+1}/${date?.getMonth()+1}/${date?.getFullYear()}`
+    const timeToDisplay = `${date?.getHours()}:${date?.getMinutes()}`
 
     const showPicker = () => {
         setShow(true);
@@ -39,7 +38,7 @@ const CustomDatePicker = props => {
                 color={Colors.buttonContainer}
                 style={styles.leftIcon}
             />
-            <Text style={styles.text}>{props.mode == 'date' ? dateToDisplay : timeToDisplay     }</Text>
+            <Text style={styles.text}>{props.mode == 'date' ? dateToDisplay : timeToDisplay}</Text>
             <Icon
                 library={IconLibrary.AntDesign}
                 name='caretdown'
