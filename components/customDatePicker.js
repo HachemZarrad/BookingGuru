@@ -9,10 +9,17 @@ import IconLibrary from '../constants/iconLibrary'
 import Colors from '../constants/colors'
 
 const CustomDatePicker = props => {
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [show, setShow] = useState(false);
+    
+    const minDate = new Date()
+    const maxDate = new Date(`${minDate.getFullYear()+2}`)
 
+    const [date, setDate] = useState(minDate);
+    const [show, setShow] = useState(false);
+    
     const icon = props.mode === 'date' ? 'calendar' : 'clockcircleo'
+    const dateToDisplay = `${date.getDate()+1}/${date.getMonth()+1}/${date.getFullYear()}`
+    const timeToDisplay = `${date.getHours()}:${date.getMinutes()}`
+    const finalDisplay = props.mode == 'date' ? dateToDisplay : timeToDisplay
 
     const showPicker = () => {
         setShow(true);
@@ -32,13 +39,13 @@ const CustomDatePicker = props => {
                 color={Colors.buttonContainer}
                 style={styles.leftIcon}
             />
-            <Text style={styles.text}>display date here</Text>
+            <Text style={styles.text}>{props.mode == 'date' ? dateToDisplay : timeToDisplay     }</Text>
             <Icon
                 library={IconLibrary.AntDesign}
                 name='caretdown'
                 color={Colors.buttonContainer}
                 style={styles.rightIcon}
-                size={12}
+                size={10}
                 color='grey'
             />
             {show && (
@@ -47,7 +54,9 @@ const CustomDatePicker = props => {
                     value={date}
                     mode={props.mode}
                     is24Hour={true}
-                    display="default"
+                    minimumDate={new Date()}
+                    maximumDate={maxDate}
+                    display='default'
                     onChange={onChange}
                 />
             )}
@@ -61,7 +70,6 @@ export default CustomDatePicker
 const styles = StyleSheet.create({
     pickerContainer: {
         flexDirection: 'row',
-        // justifyContent: 'flex-start',
         alignItems: 'center',
         width: '90%',
         height: 50,
@@ -79,6 +87,7 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
+        fontWeight: 'bold',
     }
 
 })
