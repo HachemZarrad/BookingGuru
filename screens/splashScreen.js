@@ -1,47 +1,83 @@
-import React, {useCallback, useEffect} from 'react'
+import React, { useCallback, useEffect } from 'react'
 import {
   StyleSheet, Text, View, Image, ActivityIndicator,
 } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import * as hotelsActions from '../store/actions/hotels'
-import * as ActionTypes from '../store/actions/actionTypes'
 
 import Colors from '../constants/colors'
+
+import * as hotelsActions from '../store/actions/hotels'
+import * as destinationsActions from '../store/actions/popularDestinations'
+import * as flightsActions from '../store/actions/flights'
+import * as trainsActions from '../store/actions/trains'
+import * as busesActions from '../store/actions/buses'
+import * as taxisActions from '../store/actions/taxis'
+// import * as FoodActions from '../store/actions/food'
 
 
 const SplashScreen = () => {
 
   const navigation = useNavigation()
   const dispatch = useDispatch()
-  const hotels = useSelector(state => state.hotels.hotels);
-  const loading = useSelector(state => state.hotels.loading);
-  const error = useSelector(state => state.hotels.error);
 
-  const loadHotels = useCallback(() => {
-      dispatch(hotelsActions.fetchHotels())
+  const hotelsLoading = useSelector(state => state.hotels.loading);
+  const hotelsError = useSelector(state => state.hotels.error);
+
+  const destinationsLoading = useSelector(state => state.popularDestinations.loading);
+  const destinationsError = useSelector(state => state.popularDestinations.error);
+
+  const flightsLoading = useSelector(state => state.flights.loading);
+  const flightsError = useSelector(state => state.flights.error);
+
+  const trainsLoading = useSelector(state => state.trains.loading);
+  const trainsError = useSelector(state => state.trains.error);
+
+  const busesLoading = useSelector(state => state.buses.loading);
+  const busesError = useSelector(state => state.buses.error);
+
+  const taxisLoading = useSelector(state => state.taxis.loading);
+  const taxisError = useSelector(state => state.taxis.error);
+
+  const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading
+  const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError
+  console.log('load',dataLoading)
+  console.log('error',dataError)
+
+  // const foodLoading = useSelector(state => state.food.loading);
+  // const foodError = useSelector(state => state.food.error);
+
+
+  const loadData = useCallback(() => {
+    dispatch(hotelsActions.fetchHotels())
+    dispatch(destinationsActions.fetchDestinations())
+    dispatch(flightsActions.fetchFlights())
+    dispatch(trainsActions.fetchTrains())
+    dispatch(busesActions.fetchBuses())
+    dispatch(taxisActions.fetchTaxis())
+    // dispatch(foodActions.fetchRestaurants())
   }, [dispatch])
 
   useEffect(() => {
-    loadHotels()
-  }, [loadHotels])
+    loadData()
+  }, [loadData])
 
   useEffect(() => {
-    if(!error && !loading && hotels) navigation.navigate('HomePage')
-  })
+    if (!dataLoading && !dataError) navigation.navigate('HomePage')
+  },[dataLoading, dataError])
 
-  const temp = () => {
-    navigation.navigate('HomePage')
-  }
 
   return (
-    <View 
+    <View
       style={styles.imageContainer}>
       <Image
         source={require('../assets/introLogo.png')}
         style={styles.image} />
-      <ActivityIndicator size="large" color="#00ff00" />
+      {dataLoading ? <ActivityIndicator size="large" color="#00ff00" />
+        : <Text>Check your internet connection bitch</Text>
+
+      }
     </View>
   )
 

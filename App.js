@@ -9,7 +9,7 @@ init()
     console.log('Initialized database');
   })
   .catch(err => {
-    console.log('Initializing db failed.');
+    console.log('Initializing db FAILED.');
     console.log(err);
   });
 
