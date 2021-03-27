@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native'
+
+import Colors from '../../constants/colors'
+
+import InputBar from '../../components/inputBar'
+import CustomButton from '../../components/customButton'
+import CustomPicker from '../../components/customPicker'
+import CustomDatePicker from '../../components/customDatePicker'
+import Title from '../../components/title'
+import Caution from '../../components/caution'
 
 
-import Colors from '../../constants/colors';
-
-import InputBar from '../../components/inputBar';
-import CustomButton from '../../components/customButton';
-import CustomPicker from '../../components/customPicker';
-import Title from '../../components/title';
-import Caution from '../../components/caution';
-
-
-const RESIDENCECHOICE = ['All Inclusive', 'Half Board']; 
-const BEDCHOICE = ['1 Bed', '2 Beds'];
+const RESIDENCECHOICE = ['All Inclusive', 'Half Board'] 
+const BEDCHOICE = ['1 Bed', '2 Beds']
 
 const PickUpRoomScreen = ({ route }) => {
 
-    const price = route.params;
-    const minDate = new Date();
-    const maxDate = new Date(`${minDate.getFullYear()+2}`);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const price = route.params
+    const minDate = new Date()
+    const maxDate = new Date(`${minDate.getFullYear()+2}`)
+    const [selectedDate, setSelectedDate] = useState(null)
     return (
         <View style={styles.container}>
             <ScrollView >
                 <Caution type='standar' style={styles.caution} caution={'Extra Fees Will Be Added According To Your Choices'} />
                 <Title title={'Arrival Date ?'} />
+                <CustomDatePicker mode='time'/>
                 {/* <DatePicker
                     style={{width: 200, marginBottom: 15}}
                     date={selectedDate}
