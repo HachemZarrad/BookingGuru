@@ -33,7 +33,7 @@ const CustomDatePicker = props => {
     return (
         <TouchableOpacity style={{...styles.pickerContainer, ...props.style}} onPress={showPicker}>
             <Icon
-                library={IconLibrary.AntDesign}
+                library={IconLibrary.Octicons}
                 name={icon}
                 color={Colors.buttonContainer}
                 style={styles.leftIcon}
@@ -45,7 +45,7 @@ const CustomDatePicker = props => {
                 color={Colors.buttonContainer}
                 style={styles.rightIcon}
                 size={10}
-                color='grey'
+                color={Colors.buttonContainer}
             />
             {show && (
                 <DateTimePicker
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         margin: 5
     },
     rightIcon: {
-        marginRight: 10,
+        marginRight: 18,
     },
     text: {
         flex: 1,

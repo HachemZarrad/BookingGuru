@@ -29,7 +29,9 @@ const CustomPicker = props => {
                 {...props}
                 selectedValue={selectedValue}
                 style={{ ...styles.picker, ...props.style }}
-                mode='dropdown'
+                mode='dialog'
+                prompt={props.prompt}
+                dropdownIconColor={Colors.buttonContainer}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
             >
                 {valuesList.map(value => {

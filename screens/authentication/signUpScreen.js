@@ -3,12 +3,14 @@ import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native
 
 import InputBar from '../../components/inputBar'
 import CustomPicker from '../../components/customPicker'
+import CustomDatePicker from '../../components/customDatePicker'
 import NormalButton from '../../components/normalButton'
 import Caution from '../../components/caution'
 import PhoneNumber from '../../components/phoneNumber'
 
 import Colors from '../../constants/colors'
 import IconLibrary from '../../constants/iconLibrary'
+import { GENDER, TITLE } from '../../constants/usefulLists'
 import countriesAndCodes from '../../constants/coutriesAndCallingCodes'
 // const Actions = {
 
@@ -17,9 +19,9 @@ import countriesAndCodes from '../../constants/coutriesAndCallingCodes'
 // const reducer = (state, action) => {
 // }
 
-const SignUpScreen = ({route}) => {
+const SignUpScreen = ({ route }) => {
     // const [state, dispatch] = useReducer(reducer, {})
-    const selectedCode = route.params 
+    const selectedCode = route.params
     const countries = []
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
@@ -67,15 +69,24 @@ const SignUpScreen = ({route}) => {
                         rightIconColor='red'
                     />
 
+                    <CustomDatePicker mode='date'/>
+                    
                     <CustomPicker
                         list={countries}
+                        prompt='Country'
                         iconLibrary={IconLibrary.MaterialIcons}
                         iconName='place'
                         iconColor={Colors.buttonContainer}
                         selectedElementAccordingToOtherFactors={selectedCode?.country_name}
                     />
-
                     <PhoneNumber flag={selectedCode?.country_name.toLowerCase()} callingCode={selectedCode?.dialling_code} />
+                    <CustomPicker
+                        list={GENDER}
+                        prompt='Gender'
+                        iconLibrary={IconLibrary.FontAwesome}
+                        iconName='intersex'
+                        iconColor={Colors.buttonContainer}
+                    />
                 </View>
             </ScrollView>
             <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />

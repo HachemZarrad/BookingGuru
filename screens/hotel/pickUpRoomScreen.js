@@ -2,6 +2,8 @@ import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 
 import Colors from '../../constants/colors'
+import IconLibrary from '../../constants/iconLibrary'
+import { RESIDENCECHOICE, BEDCHOICE } from '../../constants/usefulLists'
 
 import InputBar from '../../components/inputBar'
 import CustomButton from '../../components/customButton'
@@ -11,9 +13,6 @@ import Title from '../../components/title'
 import Caution from '../../components/caution'
 
 
-const RESIDENCECHOICE = ['All Inclusive', 'Half Board'] 
-const BEDCHOICE = ['1 Bed', '2 Beds']
-
 const PickUpRoomScreen = ({ route }) => {
 
     const price = route.params
@@ -22,15 +21,27 @@ const PickUpRoomScreen = ({ route }) => {
             <ScrollView >
                 <Caution type='standar' style={styles.caution} caution={'Extra Fees Will Be Added According To Your Choices'} />
                 <Title title={'Arrival Date ?'} />
-                <CustomDatePicker mode='date'/>
+                <CustomDatePicker mode='date' />
                 <Title title={'Arrival Time ?'} />
-                <CustomDatePicker mode='time'/>
+                <CustomDatePicker mode='time' />
                 <Title title={'Single Or Twin Room ?'} />
-                <CustomPicker style={styles.picker} list={BEDCHOICE} />
+                <CustomPicker
+                    list={BEDCHOICE}
+                    prompt='Choose Your Bed'
+                    iconLibrary={IconLibrary.FontAwesome}
+                    iconName='bed'
+                    iconColor={Colors.buttonContainer}
+                />
                 <Title title={'All Inclusive Or Half Board ?'} />
-                <CustomPicker style={styles.picker} list={RESIDENCECHOICE} />
+                <CustomPicker
+                    list={RESIDENCECHOICE}
+                    prompt='Choose Your Residence'
+                    iconLibrary={IconLibrary.MaterialIcons}
+                    iconName='all-inclusive'
+                    iconColor={Colors.buttonContainer}
+                />
                 <Title title={'Any Comments ?'} />
-                <InputBar numberOfLines={4} style={styles.commentBox } />
+                <InputBar numberOfLines={4} style={styles.commentBox} />
             </ScrollView>
             <CustomButton price={price} nextStep={'ValidateReservationScreen'} title={'Pick Up Plan'} />
         </View>
@@ -51,7 +62,7 @@ const styles = StyleSheet.create({
         height: 90,
         alignSelf: 'center'
     },
-    caution:{
+    caution: {
         height: 50,
     }
 })
