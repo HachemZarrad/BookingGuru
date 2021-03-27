@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native';
 
-import DatePicker from 'react-native-datepicker';
 
 import Colors from '../../constants/colors';
 
@@ -26,7 +25,7 @@ const PickUpRoomScreen = ({ route }) => {
             <ScrollView >
                 <Caution type='standar' style={styles.caution} caution={'Extra Fees Will Be Added According To Your Choices'} />
                 <Title title={'Arrival Date ?'} />
-                <DatePicker
+                {/* <DatePicker
                     style={{width: 200, marginBottom: 15}}
                     date={selectedDate}
                     mode="date"
@@ -54,7 +53,7 @@ const PickUpRoomScreen = ({ route }) => {
                         }
                     }}
                     onDateChange={date => setSelectedDate(date)}
-                />
+                /> */}
                 <Title title={'Single Or Twin Room ?'} />
                 <CustomPicker style={styles.picker} list={BEDCHOICE} />
                 <Title title={'All Inclusive Or Half Board ?'} />
