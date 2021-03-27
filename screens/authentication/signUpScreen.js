@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useCallback, useState } from 'react'
+import React, { useReducer, useEffect, useCallback } from 'react'
 import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native'
 
 import InputBar from '../../components/inputBar'
