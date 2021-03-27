@@ -3,6 +3,7 @@ import { baseUrl } from '../../constants/networking';
 
 
 export const fetchHotels = () => (dispatch) => {
+    dispatch({type: ActionTypes.HOTELS_LOADING})
     return fetch(`${baseUrl}hotels`)
      .then((response) => response.json())
      .then((hotels) => dispatch({type: ActionTypes.GET_HOTELS, payload: hotels}))

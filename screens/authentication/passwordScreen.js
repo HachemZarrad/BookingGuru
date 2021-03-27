@@ -37,9 +37,9 @@ const PasswordScreen = () => {
         dispatch({type: passwordCreationActions.VALIDATE_ONE_NUMBER, payload: password});
         dispatch({type: passwordCreationActions.VALIDATE_ONE_CAPITAL, payload: password});
         if(state.tenCharacters && state.oneNumber && state.oneCapital) {
-            dispatch({type: passwordCreationActions.ACCEPT_PASSWORD, payload: password});
+           return dispatch({type: passwordCreationActions.ACCEPT_PASSWORD, payload: password});
         }
-        else dispatch({type: passwordCreationActions.CANCEL_PASSWORD});
+        return dispatch({type: passwordCreationActions.CANCEL_PASSWORD});
     }
 
     const manageConfirmPassword = (retypedPassword) => {

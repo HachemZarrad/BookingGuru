@@ -14,7 +14,7 @@ import Title from '../components/title';
 
 import IntroductoryScreen from '../screens/introductoryScreen';
 import Home from '../screens/homeScreen';
-import LogoScreen from '../screens/logoScreen';
+import SplashScreen from '../screens/splashScreen';
 
 import Flights from '../screens/flight/flightsScreen';
 import FlightDetails from '../screens/flight/flightDetails';
@@ -249,7 +249,7 @@ const homeStackNavigator = createStackNavigator();
 export const HomeNavigator = () => {
     return (
         <homeStackNavigator.Navigator screenOptions={navigationOptions} >
-            <homeStackNavigator.Screen name="Logo" component={LogoScreen} />
+            <homeStackNavigator.Screen name="Splash" component={SplashScreen} />
             <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen} />
             <homeStackNavigator.Screen name="HomePage" component={Home} />
             <homeStackNavigator.Screen name="Authentication" component={AuthenticationNavigator} />

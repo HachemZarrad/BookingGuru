@@ -10,7 +10,7 @@ import PhoneNumber from '../../components/phoneNumber'
 
 import Colors from '../../constants/colors'
 import IconLibrary from '../../constants/iconLibrary'
-import { GENDER, TITLE } from '../../constants/usefulLists'
+import { GENDER } from '../../constants/usefulLists'
 import countriesAndCodes from '../../constants/coutriesAndCallingCodes'
 // const Actions = {
 
@@ -20,6 +20,7 @@ import countriesAndCodes from '../../constants/coutriesAndCallingCodes'
 // }
 
 const SignUpScreen = ({ route }) => {
+    
     // const [state, dispatch] = useReducer(reducer, {})
     const selectedCode = route.params
     const countries = []
@@ -69,15 +70,14 @@ const SignUpScreen = ({ route }) => {
                         rightIconColor='red'
                     />
 
-                    <CustomDatePicker mode='date'/>
-                    
+                    <CustomDatePicker mode='date' title='Date Of Birth'/>
+
                     <CustomPicker
                         list={countries}
                         prompt='Country'
                         iconLibrary={IconLibrary.MaterialIcons}
                         iconName='place'
                         iconColor={Colors.buttonContainer}
-                        selectedElementAccordingToOtherFactors={selectedCode?.country_name}
                     />
                     <PhoneNumber flag={selectedCode?.country_name.toLowerCase()} callingCode={selectedCode?.dialling_code} />
                     <CustomPicker
@@ -104,12 +104,10 @@ const styles = StyleSheet.create({
     form: {
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 10,
     },
     button: {
         alignSelf: 'center',
         marginVertical: 10,
     },
-    caution: {
-        marginBottom: 20,
-    }
 })

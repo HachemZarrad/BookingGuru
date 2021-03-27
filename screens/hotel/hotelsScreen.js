@@ -40,7 +40,7 @@ const Hotels = ({ route }) => {
 
   const loadHotels = useCallback(() => {
     if (filter) dispatch(hotelsActions.fetchHotelsAccordingToDestination(destination));
-    else dispatch(hotelsActions.fetchHotels());
+    dispatch(hotelsActions.fetchHotels());
   }, [dispatch, filter, destination]);
 
   useEffect(() => {

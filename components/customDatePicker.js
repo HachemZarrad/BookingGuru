@@ -9,15 +9,16 @@ import IconLibrary from '../constants/iconLibrary'
 import Colors from '../constants/colors'
 
 const CustomDatePicker = props => {
-    
+
     const minDate = props.dateOfBirth ?? new Date()
-    const maxDate = new Date(`${minDate.getFullYear()+2}`)
+    const maxDate = new Date(`${minDate.getFullYear() + 2}`)
 
     const [date, setDate] = useState(minDate);
     const [show, setShow] = useState(false);
-    
+    const [title, setTitle] = useState(props.title)
+
     const icon = props.mode === 'date' ? 'calendar' : 'clockcircleo'
-    const dateToDisplay = `${date?.getDate()+1}/${date?.getMonth()+1}/${date?.getFullYear()}`
+    const dateToDisplay = `${date?.getDate() + 1}/${date?.getMonth() + 1}/${date?.getFullYear()}`
     const timeToDisplay = `${date?.getHours()}:${date?.getMinutes()}`
 
     const showPicker = () => {
@@ -28,17 +29,22 @@ const CustomDatePicker = props => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
+        setTitle(null)
     };
 
     return (
-        <TouchableOpacity style={{...styles.pickerContainer, ...props.style}} onPress={showPicker}>
+        <TouchableOpacity style={{ ...styles.pickerContainer, ...props.style }} onPress={showPicker}>
             <Icon
                 library={IconLibrary.Octicons}
                 name={icon}
                 color={Colors.buttonContainer}
                 style={styles.leftIcon}
             />
-            <Text style={styles.text}>{props.mode == 'date' ? dateToDisplay : timeToDisplay}</Text>
+
+            {title ? <Text style={styles.title}>{title}</Text> :
+                <Text style={styles.date}>{props.mode == 'date' ? dateToDisplay : timeToDisplay}</Text>
+            }
+
             <Icon
                 library={IconLibrary.AntDesign}
                 name='caretdown'
@@ -59,7 +65,7 @@ const CustomDatePicker = props => {
                     onChange={onChange}
                 />
             )}
-            
+
         </TouchableOpacity>
     );
 }
@@ -84,9 +90,12 @@ const styles = StyleSheet.create({
     rightIcon: {
         marginRight: 18,
     },
-    text: {
+    date: {
         flex: 1,
         fontWeight: 'bold',
+    },
+    title: {
+        flex: 1,
     }
 
 })
