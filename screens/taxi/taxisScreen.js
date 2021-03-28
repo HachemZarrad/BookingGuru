@@ -1,37 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import * as ActionTypes from '../../store/actions/actionTypes';
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
+import * as ActionTypes from '../../store/actions/actionTypes'
+import { useSelector } from 'react-redux'
 
-import CustomList from '../../components/customList';
-import Toolbar from '../../components/toolbar';
+import CustomList from '../../components/customList'
+import Toolbar from '../../components/toolbar'
 
-import { baseUrl } from '../../constants/networking';
-import Colors from '../../constants/colors';
+import Colors from '../../constants/colors'
 
 
 const Taxis = () => {
 
-  const [taxis, setTaxis] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const taxis = useSelector(state => state.taxis.taxis)
+  const isLoading = useSelector(state => state.taxis.loading)
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
 
-    fetch(`${baseUrl}taxis`, { method: 'get', signal: signal })
-      .then((response) => response.json())
-      .then((json) => setTaxis(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-
-    return function cleanUp() {
-      console.log('Now aborting');
-      // Abort.
-      controller.abort()
-    }
-
-  }, []);
   return (
     <View style={styles.ParentContainer}>
       <Toolbar />
@@ -39,7 +23,7 @@ const Taxis = () => {
       <CustomList data={taxis} pressedElement='TaxiDetails' service={ActionTypes.GET_TAXIS} />
       )}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -48,6 +32,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
-});
+})
 
-export default Taxis;
+export default Taxis

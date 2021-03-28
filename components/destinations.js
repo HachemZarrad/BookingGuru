@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, ActivityIndicator,
    ScrollView, TouchableOpacity} from 'react-native';
-import {baseUrl} from '../constants/networking';
+
 import { useNavigation } from '@react-navigation/native';
 
+import { useSelector } from 'react-redux';
+
 const Destinations = () => {
-  
-    const [destinations, setDestinations] = useState([]);
-    const [isLoading, setLoading] = useState(true);
+    const destinations = useSelector(state => state.popularDestinations.destinations) 
+    const loading = useSelector(state => state.popularDestinations.loading) 
+    
+    // const [destinations, setDestinations] = useState(useSelector(state => state.popularDestinations.destinations));
+    // const [isLoading, setLoading] = useState(false);
     const navigation = useNavigation();
     // const filter = true;
 
-    useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
-        fetch(`${baseUrl}destinations`, {method: 'get', signal: signal})
-          .then((response) => response.json())
-          .then((json) => setDestinations(json))
-          .catch((error) => console.error(error))
-          .finally(() => setLoading(false));
-
-          return function cleanUp(){
-            console.log('Now aborting');
-            // Abort.
-            controller.abort()
-          }
-    
-      },[]);
-
       return(
         <View>
-             {isLoading ? <ActivityIndicator/> : (
+             {loading ? <ActivityIndicator/> : (
               <ScrollView horizontal={true} >
               {destinations.map(destination => {
                 return (
@@ -39,7 +26,7 @@ const Destinations = () => {
                     onPress={()=> navigation.navigate('Hotels',
                     {
                       screen: 'HotelsOverview',
-                      params: {destination: destination.name, filter: true},
+                      params: {destination: destination.name},
                     })
                       }>
                     <View>

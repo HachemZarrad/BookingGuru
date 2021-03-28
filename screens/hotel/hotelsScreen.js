@@ -27,29 +27,26 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Hotels = ({ route }) => {
 
-  const { destination, filter } = route.params;
+  const destination = route?.params?.destination;
   const [searchTerm, setSearchTerm] = useState('');
   const [shown, showHotels] = useState(false);
   const dispatch = useDispatch();
   const hotels = useSelector(state => state.hotels.hotels);
+  const hotelsAccordingToDestination = useSelector(state => state.hotels.hotelsAccordingToDestination)
   const loading = useSelector(state => state.hotels.loading);
   const error = useSelector(state => state.hotels.error);
   const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS));
   const navigation = useNavigation();
 
 
-  const loadHotels = useCallback(() => {
-    if (filter) dispatch(hotelsActions.fetchHotelsAccordingToDestination(destination));
-    dispatch(hotelsActions.fetchHotels());
-  }, [dispatch, filter, destination]);
 
   useEffect(() => {
-    loadHotels();
-  }, [loadHotels]);
+    if (destination) dispatch(hotelsActions.fetchHotelsAccordingToDestination(destination));
+  }, [dispatch, destination]);
 
   const searchBarHandler = (term) => {
-     setSearchTerm(term)
-     showHotels(true)
+    setSearchTerm(term)
+    showHotels(true)
   }
 
   return (
@@ -62,7 +59,7 @@ const Hotels = ({ route }) => {
           </TouchableOpacity>
           : null
         }
-        {filter ? null :
+        {destination ? null :
           <InputBar
             onChangeText={searchBarHandler}
             placeholder="search down here"
@@ -103,7 +100,9 @@ const Hotels = ({ route }) => {
 
       )}
       {loading ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor} /></View> : (
-        <CustomList data={hotels} pressedElement='HotelDetails' service={ActionTypes.GET_HOTELS} />
+        <CustomList data={destination ? hotelsAccordingToDestination : hotels}
+          pressedElement='HotelDetails'
+          service={ActionTypes.GET_HOTELS} />
       )}
     </View>
   );

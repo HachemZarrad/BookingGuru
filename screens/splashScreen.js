@@ -22,7 +22,7 @@ const SplashScreen = () => {
   const navigation = useNavigation()
   const dispatch = useDispatch()
 
-  const hotelsLoading = useSelector(state => state.hotels.loading);
+  let hotelsLoading = useSelector(state => state.hotels.loading);
   const hotelsError = useSelector(state => state.hotels.error);
 
   const destinationsLoading = useSelector(state => state.popularDestinations.loading);
@@ -40,23 +40,25 @@ const SplashScreen = () => {
   const taxisLoading = useSelector(state => state.taxis.loading);
   const taxisError = useSelector(state => state.taxis.error);
 
-  const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading
-  const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError
-  console.log('load',dataLoading)
-  console.log('error',dataError)
+  // const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading
+  // const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError
+  //
+  //
+  //
+  //
 
   // const foodLoading = useSelector(state => state.food.loading);
   // const foodError = useSelector(state => state.food.error);
 
 
   const loadData = useCallback(() => {
-    dispatch(hotelsActions.fetchHotels())
-    dispatch(destinationsActions.fetchDestinations())
-    dispatch(flightsActions.fetchFlights())
-    dispatch(trainsActions.fetchTrains())
-    dispatch(busesActions.fetchBuses())
-    dispatch(taxisActions.fetchTaxis())
-    // dispatch(foodActions.fetchRestaurants())
+      dispatch(hotelsActions.fetchHotels())
+      if (!hotelsError) dispatch(destinationsActions.fetchDestinations())
+      if (!destinationsError) dispatch(flightsActions.fetchFlights())
+      if (!flightsError) dispatch(trainsActions.fetchTrains())
+      if (!trainsError) dispatch(busesActions.fetchBuses())
+      if (!busesError) dispatch(taxisActions.fetchTaxis())
+      // dispatch(foodActions.fetchRestaurants())
   }, [dispatch])
 
   useEffect(() => {
@@ -64,9 +66,10 @@ const SplashScreen = () => {
   }, [loadData])
 
   useEffect(() => {
-    if (!dataLoading && !dataError) navigation.navigate('HomePage')
-  },[dataLoading, dataError])
+    // if (!taxisLoading && !taxisError) 
+    navigation.navigate('HomePage')
 
+  }, [taxisLoading, taxisError, loadData])
 
   return (
     <View
@@ -74,8 +77,9 @@ const SplashScreen = () => {
       <Image
         source={require('../assets/introLogo.png')}
         style={styles.image} />
-      {dataLoading ? <ActivityIndicator size="large" color="#00ff00" />
-        : <Text>Check your internet connection bitch</Text>
+      {hotelsError != null ? <Text>Check your internet connection bitch</Text>
+        :
+        <ActivityIndicator size="large" color="#00ff00" />
 
       }
     </View>

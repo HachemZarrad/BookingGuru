@@ -1,37 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
-import * as ActionTypes from '../../store/actions/actionTypes';
+import * as ActionTypes from '../../store/actions/actionTypes'
+import { useSelector } from 'react-redux'
+import Toolbar from '../../components/toolbar'
+import CustomList from '../../components/customList'
 
-import Toolbar from '../../components/toolbar';
-import CustomList from '../../components/customList';
-
-import { baseUrl } from '../../constants/networking';
-import Colors from '../../constants/colors';
+import Colors from '../../constants/colors'
 
 
 const Flights = () => {
 
-  const [flights, setFlights] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const flights = useSelector(state => state.flights.flights)
+  const isLoading = useSelector(state => state.flights.loading)
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-
-    fetch(`${baseUrl}flights`, { method: 'get', signal: signal })
-      .then((response) => response.json())
-      .then((json) => setFlights(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-
-    return function cleanUp() {
-      console.log('Now aborting');
-      // Abort.
-      controller.abort()
-    }
-
-  }, []);
   return (
     <View style={styles.ParentContainer}>
       <Toolbar />
@@ -39,7 +21,7 @@ const Flights = () => {
         <CustomList data={flights} pressedElement='FlightDetails' service={ActionTypes.GET_FLIGHTS} />
       )}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -48,6 +30,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
-});
+})
 
-export default Flights;
+export default Flights
