@@ -1,52 +1,51 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react'
 import {
   StyleSheet, View, Text, TouchableOpacity, ActivityIndicator,
   ScrollView
-} from 'react-native';
+} from 'react-native'
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'
 
-import Toolbar from '../../components/toolbar';
-import CustomList from '../../components/customList';
-import InputBar from '../../components/inputBar';
-import Icon from '../../components/icon';
+import Toolbar from '../../components/toolbar'
+import CustomList from '../../components/customList'
+import InputBar from '../../components/inputBar'
+import Icon from '../../components/icon'
 
-import IconLibrary from '../../constants/iconLibrary';
-import Colors from '../../constants/colors';
+import IconLibrary from '../../constants/iconLibrary'
+import Colors from '../../constants/colors'
 
-import { Avatar, Accessory } from 'react-native-elements';
+import { Avatar, Accessory } from 'react-native-elements'
 
 
 import { createFilter } from 'react-native-search-filter'
-const KEYS_TO_FILTERS = ['name', 'locality'];
+const KEYS_TO_FILTERS = ['name', 'locality']
 
-import * as hotelsActions from '../../store/actions/hotels';
-import * as ActionTypes from '../../store/actions/actionTypes';
-import { useDispatch, useSelector } from 'react-redux';
+import * as ActionTypes from '../../store/actions/actionTypes'
+import { useSelector } from 'react-redux'
 
 
 const Hotels = ({ route }) => {
 
-  const destination = route?.params?.destination;
-  const [searchTerm, setSearchTerm] = useState('');
-  const [shown, showHotels] = useState(false);
-  const dispatch = useDispatch();
-  const hotels = useSelector(state => state.hotels.hotels);
-  const hotelsAccordingToDestination = useSelector(state => state.hotels.hotelsAccordingToDestination)
-  const loading = useSelector(state => state.hotels.loading);
-  const error = useSelector(state => state.hotels.error);
-  const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS));
-  const navigation = useNavigation();
+  const navigation = useNavigation()
+  const destination = route?.params?.destination
 
+  const [searchTerm, setSearchTerm] = useState('')
+  const [shown, showHotels] = useState(false)
 
+  const hotels = useSelector(state => state.hotels.hotels)
+  const hotelsAccordingToDestination = hotels.filter(hotel => hotel.address.locality === destination) 
+  const loading = useSelector(state => state.hotels.loading)
+  const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
 
-  useEffect(() => {
-    if (destination) dispatch(hotelsActions.fetchHotelsAccordingToDestination(destination));
-  }, [dispatch, destination]);
 
   const searchBarHandler = (term) => {
     setSearchTerm(term)
     showHotels(true)
+  }
+
+  const backFromFilterList = () => {
+    showHotels(false)
+    setSearchTerm('')
   }
 
   return (
@@ -54,7 +53,7 @@ const Hotels = ({ route }) => {
       <Toolbar />
       <View style={styles.searchBar}>
         {shown ?
-          <TouchableOpacity onPress={() => { showHotels(false); setSearchTerm('') }} style={styles.backButton} >
+          <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >
             <Icon library={IconLibrary.FontAwesome5} name="arrow-left" />
           </TouchableOpacity>
           : null
@@ -75,7 +74,7 @@ const Hotels = ({ route }) => {
         }
       </View>
 
-      {loading || !shown ? <View style={styles.spinner}>{/* <ActivityIndicator color={Colors.toolbarColor}/> */}</View> : (
+      {loading || !shown ? null : (
         <ScrollView>
           {filteredHotels.map(hotel => {
             return (
@@ -105,7 +104,7 @@ const Hotels = ({ route }) => {
           service={ActionTypes.GET_HOTELS} />
       )}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -129,6 +128,6 @@ const styles = StyleSheet.create({
   input: {
     // width: 200
   }
-});
+})
 
-export default Hotels;
+export default Hotels

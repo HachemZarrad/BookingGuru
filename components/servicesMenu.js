@@ -11,6 +11,7 @@ const ServicesMenu = () => {
                 <TouchableOpacity onPress={()=> navigation.navigate('Hotels',
                  {
                     screen: 'HotelsOverview',
+                    params: {destination: null},
                   })
                 }>
                     <Image 

@@ -59,7 +59,7 @@ const navigationOptions = {
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor,
 };
 
-
+const filter = false
 const bookingDrawerNavigator = createDrawerNavigator();
 
 export const BookingDrawer = () => {
@@ -159,6 +159,7 @@ export const BookingDrawer = () => {
             <bookingDrawerNavigator.Screen
                 name='Home'
                 component={HomeNavigator}
+                initialParams={{destination: null}}
                 options={{
                     drawerIcon: props => (
                         <Icon

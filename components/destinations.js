@@ -7,13 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
 const Destinations = () => {
+  
     const destinations = useSelector(state => state.popularDestinations.destinations) 
     const loading = useSelector(state => state.popularDestinations.loading) 
     
-    // const [destinations, setDestinations] = useState(useSelector(state => state.popularDestinations.destinations));
-    // const [isLoading, setLoading] = useState(false);
     const navigation = useNavigation();
-    // const filter = true;
 
       return(
         <View>
