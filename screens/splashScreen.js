@@ -22,7 +22,7 @@ const SplashScreen = () => {
   const navigation = useNavigation()
   const dispatch = useDispatch()
 
-  let hotelsLoading = useSelector(state => state.hotels.loading);
+  const hotelsLoading = useSelector(state => state.hotels.loading);
   const hotelsError = useSelector(state => state.hotels.error);
 
   const destinationsLoading = useSelector(state => state.popularDestinations.loading);
@@ -40,36 +40,30 @@ const SplashScreen = () => {
   const taxisLoading = useSelector(state => state.taxis.loading);
   const taxisError = useSelector(state => state.taxis.error);
 
-  // const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading
-  // const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError
-  //
-  //
-  //
-  //
+  const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading
+  const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError
 
   // const foodLoading = useSelector(state => state.food.loading);
   // const foodError = useSelector(state => state.food.error);
 
 
   const loadData = useCallback(() => {
-      dispatch(hotelsActions.fetchHotels())
-      if (!hotelsError) dispatch(destinationsActions.fetchDestinations())
-      if (!destinationsError) dispatch(flightsActions.fetchFlights())
-      if (!flightsError) dispatch(trainsActions.fetchTrains())
-      if (!trainsError) dispatch(busesActions.fetchBuses())
-      if (!busesError) dispatch(taxisActions.fetchTaxis())
-      // dispatch(foodActions.fetchRestaurants())
+    dispatch(hotelsActions.fetchHotels())
+    dispatch(destinationsActions.fetchDestinations())
+    dispatch(flightsActions.fetchFlights())
+    dispatch(trainsActions.fetchTrains())
+    dispatch(busesActions.fetchBuses())
+    dispatch(taxisActions.fetchTaxis())
+    // dispatch(foodActions.fetchRestaurants())
   }, [dispatch])
 
   useEffect(() => {
     loadData()
   }, [loadData])
 
-  useEffect(() => {
-    // if (!taxisLoading && !taxisError) 
-    navigation.navigate('HomePage')
-
-  }, [taxisLoading, taxisError, loadData])
+  // useEffect(() => {
+  //   if (!dataLoading && !dataError) navigation.navigate('HomePage')
+  // }, [loadData])
 
   return (
     <View
@@ -77,10 +71,11 @@ const SplashScreen = () => {
       <Image
         source={require('../assets/introLogo.png')}
         style={styles.image} />
-      {hotelsError != null ? <Text>Check your internet connection bitch</Text>
-        :
-        <ActivityIndicator size="large" color="#00ff00" />
-
+      {dataError ? <Text style={styles.text}>Please check your internet connection</Text>
+        : <View>
+          <ActivityIndicator style={styles.spinner} size="large" color='gold' />
+          <Text style={styles.text}>Loading Our Services</Text>
+        </View>
       }
     </View>
   )
@@ -95,6 +90,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.toolbarColor
+  },
+  spinner: {
+
+  },
+  text: {
+    fontSize: 18
   },
   image: {
     // width: 345, no need for specific dimensions they ruin the image 
