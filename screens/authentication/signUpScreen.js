@@ -26,10 +26,12 @@ const SignUpScreen = ({ route }) => {
     // const [state, dispatch] = useReducer(reducer, {})
     const selectedCode = route.params
     const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes)
+    countriesAndCodes.sort()
     const countries = []
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
     })
+    // countries.sort()
 
     return (
         <KeyboardAvoidingView
