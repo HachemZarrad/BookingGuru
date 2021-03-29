@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect } from 'react'
 import {
-  StyleSheet, Text, View, Image, ActivityIndicator,
+  StyleSheet, Text, View, Image, ActivityIndicator, 
 } from 'react-native'
+
 
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -61,9 +62,9 @@ const SplashScreen = () => {
     loadData()
   }, [loadData])
 
-  // useEffect(() => {
-  //   if (!dataLoading && !dataError) navigation.navigate('HomePage')
-  // }, [loadData])
+  useEffect(() => {
+    if (!dataLoading && !dataError) navigation.navigate('HomePage')
+  }, [dataLoading, dataError])
 
   return (
     <View

@@ -33,7 +33,7 @@ const Hotels = ({ route }) => {
   const [shown, showHotels] = useState(false)
 
   const hotels = useSelector(state => state.hotels.hotels)
-  const hotelsAccordingToDestination = hotels.filter(hotel => hotel.address.locality === destination) 
+  const hotelsAccordingToDestination = hotels.filter(hotel => hotel.address.locality === destination)
   const loading = useSelector(state => state.hotels.loading)
   const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
 
@@ -67,7 +67,6 @@ const Hotels = ({ route }) => {
             leftIconName='search'
             leftIconColor={Colors.buttonContainer}
             leftIconSize={20}
-            value={searchTerm}
             searchBar
             style={styles.input}
           />
@@ -79,7 +78,7 @@ const Hotels = ({ route }) => {
           {filteredHotels.map(hotel => {
             return (
               <TouchableOpacity onPress={() => navigation.navigate('HotelDetails', hotel)} key={hotel._id}>
-                <View style={{ flexDirection: 'row', backgroundColor: '', margin: 6 }}>
+                <View style={styles.filteredList}>
                   <Avatar
                     source={{
                       uri: hotel.thumbnailUrl,
@@ -87,7 +86,7 @@ const Hotels = ({ route }) => {
                   >
                     <Accessory />
                   </Avatar>
-                  <View style={{ marginLeft: 10 }}>
+                  <View style={styles.hotelName}>
                     <Text>{hotel.name}</Text>
                   </View>
                 </View>
@@ -118,7 +117,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   backButton: {
-    marginRight: 20,
+    // marginRight: 20,
+    alignSelf: 'flex-start'
   },
   searchBar: {
     // flexDirection: 'row', 
@@ -127,7 +127,19 @@ const styles = StyleSheet.create({
   },
   input: {
     // width: 200
+  },
+  filteredList: {
+    flexDirection: 'row',
+    margin: 6,
+  },
+  hotelName: {
+    marginLeft: 10,
   }
+
+
+
+
+
 })
 
 export default Hotels
