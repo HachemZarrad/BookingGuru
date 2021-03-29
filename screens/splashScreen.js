@@ -16,6 +16,7 @@ import * as trainsActions from '../store/actions/trains'
 import * as busesActions from '../store/actions/buses'
 import * as taxisActions from '../store/actions/taxis'
 // import * as FoodActions from '../store/actions/food'
+import { fetchCountriesAndCallingCodes } from '../store/actions/countriesAndCodes'
 
 
 const SplashScreen = () => {
@@ -40,9 +41,12 @@ const SplashScreen = () => {
 
   const taxisLoading = useSelector(state => state.taxis.loading);
   const taxisError = useSelector(state => state.taxis.error);
+  
+  const countriesAndCodesLoading = useSelector(state => state.countriesAndCodes.loading);
+  const countriesAndCodesError = useSelector(state => state.countriesAndCodes.error);
 
-  const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading
-  const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError
+  const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading && countriesAndCodesLoading
+  const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError || countriesAndCodesError
 
   // const foodLoading = useSelector(state => state.food.loading);
   // const foodError = useSelector(state => state.food.error);
@@ -55,6 +59,7 @@ const SplashScreen = () => {
     dispatch(trainsActions.fetchTrains())
     dispatch(busesActions.fetchBuses())
     dispatch(taxisActions.fetchTaxis())
+    dispatch(fetchCountriesAndCallingCodes())
     // dispatch(foodActions.fetchRestaurants())
   }, [dispatch])
 

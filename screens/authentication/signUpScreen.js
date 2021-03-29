@@ -11,7 +11,9 @@ import PhoneNumber from '../../components/phoneNumber'
 import Colors from '../../constants/colors'
 import IconLibrary from '../../constants/iconLibrary'
 import { GENDER } from '../../constants/usefulLists'
-import countriesAndCodes from '../../constants/coutriesAndCallingCodes'
+import { useSelector } from 'react-redux'
+
+
 // const Actions = {
 
 // }
@@ -23,6 +25,7 @@ const SignUpScreen = ({ route }) => {
     
     // const [state, dispatch] = useReducer(reducer, {})
     const selectedCode = route.params
+    const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes)
     const countries = []
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
@@ -70,7 +73,7 @@ const SignUpScreen = ({ route }) => {
                         rightIconColor='red'
                     />
 
-                    <CustomDatePicker mode='date' title='Date Of Birth'/>
+                    <CustomDatePicker mode='date' title='Date Of Birth' />
 
                     <CustomPicker
                         list={countries}

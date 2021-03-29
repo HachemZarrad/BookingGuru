@@ -10,7 +10,7 @@ import busesReducer from './reducers/buses'
 import taxisReducer from './reducers/taxis'
 // import foodReducer from './reducers/food'
 import favoritesReducer from './reducers/favorites';
-import countriesReducer from './reducers/countriesAndCode';
+import countriesReducer from './reducers/countriesAndCodes';
 
 const rootReducer = combineReducers({
     hotels: hotelsReducer,

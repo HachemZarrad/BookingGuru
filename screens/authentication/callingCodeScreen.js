@@ -1,11 +1,14 @@
 import React from 'react'
-import { StyleSheet, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import * as ActionTypes from '../../store/actions/actionTypes'
+import { useSelector }  from 'react-redux'
+
 import CustomList from '../../components/customList'
-import countriesAndCodes from '../../constants/coutriesAndCallingCodes';
 
 const CallingCodeScreen = () => {
+    
+    const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes)
 
     return (
         <View style={styles.container}>

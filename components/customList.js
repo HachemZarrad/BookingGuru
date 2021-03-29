@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image} from 'react-native'
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,7 +10,6 @@ import Icon from './icon';
 
 import IconLibrary from '../constants/iconLibrary';
 import Colors from '../constants/colors';
-import iconLibrary from '../constants/iconLibrary';
 
 
 const DisplayAccordingToService = ({ service, item }) => {
@@ -77,7 +76,7 @@ const DisplayAccordingToService = ({ service, item }) => {
       return (
         <View style={styles.country}>
           <View style={styles.flag}>
-            <Icon library={iconLibrary.Flags} name={item.country_name.toLowerCase()} />
+            <Icon library={IconLibrary.Flags} name={item.country_name.toLowerCase()} />
             <Text style={styles.countryName}>{item.country_name.replace(/-/g, ' ')}</Text>
           </View>
           <Text style={styles.callingCode}>{item.dialling_code}</Text>
