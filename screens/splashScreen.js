@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import {
-  StyleSheet, Text, View, Image, ActivityIndicator, 
+  StyleSheet, Text, View, Image, ActivityIndicator,
 } from 'react-native'
 
 
@@ -17,7 +17,13 @@ import * as busesActions from '../store/actions/buses'
 import * as taxisActions from '../store/actions/taxis'
 // import * as FoodActions from '../store/actions/food'
 import { fetchCountriesAndCallingCodes } from '../store/actions/countriesAndCodes'
-
+/**
+ * TODO: -Add internet connection checker from netlify community package.
+ *  -Once ready load restaurants and food data here as well.
+ * 
+ * FIXME: Nothing to fix for the moment.
+ * @returns Initial Data
+ */
 
 const SplashScreen = () => {
 
@@ -41,7 +47,7 @@ const SplashScreen = () => {
 
   const taxisLoading = useSelector(state => state.taxis.loading);
   const taxisError = useSelector(state => state.taxis.error);
-  
+
   const countriesAndCodesLoading = useSelector(state => state.countriesAndCodes.loading);
   const countriesAndCodesError = useSelector(state => state.countriesAndCodes.error);
 
@@ -49,8 +55,7 @@ const SplashScreen = () => {
   const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError || countriesAndCodesError
 
   // const foodLoading = useSelector(state => state.food.loading);
-  // const foodError = useSelector(state => state.food.error);
-
+  // const foodError = useSelectolr(state => state.food.error);
 
   const loadData = useCallback(() => {
     dispatch(hotelsActions.fetchHotels())
@@ -59,7 +64,7 @@ const SplashScreen = () => {
     dispatch(trainsActions.fetchTrains())
     dispatch(busesActions.fetchBuses())
     dispatch(taxisActions.fetchTaxis())
-    dispatch(fetchCountriesAndCallingCodes())
+    dispatch(fetchCountriesAndCallingCodes)
     // dispatch(foodActions.fetchRestaurants())
   }, [dispatch])
 
@@ -68,7 +73,7 @@ const SplashScreen = () => {
   }, [loadData])
 
   useEffect(() => {
-    if (!dataLoading && !dataError) navigation.navigate('HomePage')
+    if (!dataLoading && !dataError) setTimeout(() => {navigation.navigate('HomePage')}, 4000);
   }, [dataLoading, dataError])
 
   return (
