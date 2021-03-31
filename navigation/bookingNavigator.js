@@ -51,6 +51,8 @@ import ReservationsList from '../screens/admin/reservationsList'
 import ReservationDetails from '../screens/admin/reservationDetails'
 import iconLibrary from '../constants/iconLibrary'
 
+
+
 const navigationOptions = {
     headerShown: false,
     headerStyle: {
@@ -78,24 +80,24 @@ export const BookingDrawer = () => {
                                     <Title title={'Hachem Zarrad'} style={{ marginTop: 30 }} />
                                 </View> */}
                                 <DrawerItem
-                                        inactiveTintColor= 'black'
-                                        // style={{marginTop:30}}
-                                        icon={() => (
-                                            <Icon
-                                                library={IconLibrary.AntDesign}
-                                                name="login" />
-                                        )}
-                                        label="Login Or Create Account"
-                                        onPress={() => { props.navigation.navigate('Authentication') }}
-                                    />
+                                    inactiveTintColor='black'
+                                    // style={{marginTop:30}}
+                                    icon={() => (
+                                        <Icon
+                                            library={IconLibrary.AntDesign}
+                                            name="login" />
+                                    )}
+                                    label="Login Or Create Account"
+                                    onPress={() => { props.navigation.navigate('Authentication') }}
+                                />
                                 <Drawer.Section >
-                                    <Title title='Services' style={{fontSize: 17, margin: 10}}/>
-                                    <DrawerItemList {...props}  />
+                                    <Title title='Services' style={{ fontSize: 17, margin: 10 }} />
+                                    <DrawerItemList {...props} />
                                 </Drawer.Section>
                                 <Drawer.Section>
-                                    <Title title='Favorites and Settings' style={{fontSize: 17, margin: 10}}/>
+                                    <Title title='Favorites and Settings' style={{ fontSize: 17, margin: 10 }} />
                                     <DrawerItem
-                                        inactiveTintColor= 'black'
+                                        inactiveTintColor='black'
                                         icon={() => (
                                             <Icon
                                                 library={IconLibrary.Ionicons}
@@ -107,7 +109,7 @@ export const BookingDrawer = () => {
                                         onPress={() => { props.navigation.navigate('Favorites') }}
                                     />
                                     <DrawerItem
-                                        inactiveTintColor= 'black'
+                                        inactiveTintColor='black'
                                         icon={() => (
                                             <Icon
                                                 library={IconLibrary.Ionicons}
@@ -119,31 +121,31 @@ export const BookingDrawer = () => {
                                     />
                                 </Drawer.Section>
                                 <Drawer.Section>
-                                    <Title title='Your Feedback Matters' style={{fontSize: 17, margin: 10}}/>
+                                    <Title title='Your Feedback Matters' style={{ fontSize: 17, margin: 10 }} />
                                     <DrawerItem
-                                        inactiveTintColor= 'black'
+                                        inactiveTintColor='black'
                                         icon={() => (
                                             <Icon
                                                 library={IconLibrary.MaterialIcons}
                                                 name="feedback"
-                                             />
+                                            />
                                         )}
                                         label="Rate Us"
                                         onPress={() => { props.navigation.navigate('Home') }}
                                     />
                                 </Drawer.Section>
-                                <Drawer.Section style={{marginTop: 20}}>
+                                <Drawer.Section style={{ marginTop: 20 }}>
                                     <DrawerItem
-                                            inactiveTintColor= 'black'
-                                            icon={() => (
-                                                <Icon
-                                                    library={IconLibrary.SimpleLineIcons}
-                                                    name="logout"
-                                                 />
-                                            )}
-                                            label="Logout"
-                                            onPress={() => { props.navigation.navigate('Home') }}
-                                        />
+                                        inactiveTintColor='black'
+                                        icon={() => (
+                                            <Icon
+                                                library={IconLibrary.SimpleLineIcons}
+                                                name="logout"
+                                            />
+                                        )}
+                                        label="Logout"
+                                        onPress={() => { props.navigation.navigate('Home') }}
+                                    />
                                 </Drawer.Section>
                             </ScrollView>
                         </SafeAreaView>
@@ -158,7 +160,7 @@ export const BookingDrawer = () => {
             <bookingDrawerNavigator.Screen
                 name='Home'
                 component={HomeNavigator}
-                initialParams={{destination: null}}
+                initialParams={{ destination: null }}
                 options={{
                     drawerIcon: props => (
                         <Icon
@@ -176,7 +178,7 @@ export const BookingDrawer = () => {
                         <Icon
                             library={IconLibrary.MaterialIcons}
                             name="hotel"
-                         />
+                        />
                     )
                 }}
             />
@@ -188,7 +190,7 @@ export const BookingDrawer = () => {
                         <Icon
                             library={IconLibrary.MaterialIcons}
                             name="flight"
-                         />
+                        />
                     )
                 }}
             />
@@ -253,8 +255,8 @@ export const HomeNavigator = () => {
             <homeStackNavigator.Screen name="Introductory" component={IntroductoryScreen} />
             <homeStackNavigator.Screen name="HomePage" component={Home} />
             <homeStackNavigator.Screen name="Authentication" component={AuthenticationNavigator} />
-            <homeStackNavigator.Screen name="Favorites" component={FavoriteScreen} options={{headerShown: true, headerTitle: 'Favorites'}}/>
-            <homeStackNavigator.Screen name="Notifications" component={NotificationsScreen} options={{headerShown: true, headerTitle: 'We Keep You Notified'}} />
+            <homeStackNavigator.Screen name="Favorites" component={FavoriteScreen} options={{ headerShown: true, headerTitle: 'Favorites' }} />
+            <homeStackNavigator.Screen name="Notifications" component={NotificationsScreen} options={{ headerShown: true, headerTitle: 'We Keep You Notified' }} />
         </homeStackNavigator.Navigator>
     )
 }
@@ -337,27 +339,27 @@ export const AuthenticationNavigator = () => {
             <AuthStackNavigator.Screen
                 name="Login"
                 component={LoginScreen}
-                
+
             />
             <AuthStackNavigator.Screen
                 name="SignUp"
                 component={SignUpScreen}
-                options={{headerShown: true, headerTitle: 'Sign Up'}}
+                options={{ headerShown: true, headerTitle: 'Sign Up' }}
             />
             <AuthStackNavigator.Screen
                 name="Password"
                 component={PasswordScreen}
-                options={{headerShown: true, headerTitle: 'Sign Up'}}
+                options={{ headerShown: true, headerTitle: 'Sign Up' }}
             />
             <AuthStackNavigator.Screen
                 name="callingCodes"
                 component={CallingCodesScreen}
-                options={{headerShown: true, headerTitle: 'Calling Code'}}
+                options={{ headerShown: true, headerTitle: 'Calling Code' }}
             />
             <AuthStackNavigator.Screen
                 name="Settings"
                 component={SettingsScreen}
-                options={{headerShown: true, headerTitle: 'Settings'}}
+                options={{ headerShown: true, headerTitle: 'Settings' }}
             />
         </AuthStackNavigator.Navigator>
     )

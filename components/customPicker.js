@@ -13,9 +13,9 @@ const CustomPicker = props => {
     const selectedElementAccordingToOtherFactors = props.selectedElementAccordingToOtherFactors
 
     useEffect(() => {
-       if(selectedElementAccordingToOtherFactors) setSelectedValue(selectedElementAccordingToOtherFactors) 
-    },[selectedElementAccordingToOtherFactors])
-    
+        if (selectedElementAccordingToOtherFactors) setSelectedValue(selectedElementAccordingToOtherFactors)
+    }, [selectedElementAccordingToOtherFactors])
+
     return (
         <View style={{ ...styles.border, ...props.style }}>
             <Icon

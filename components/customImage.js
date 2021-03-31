@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Image} from 'react-native';
 
-const CustomImage = () => {
+const CustomImage = props => {
     return(
         <View style={styles.container}>
             <Image 
-                source={require('../assets/vacation.jpg')}
+                {...props}
                 style={styles.image}/>
         </View>
     );

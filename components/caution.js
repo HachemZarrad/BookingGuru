@@ -8,15 +8,15 @@ import IconLibrary from '../constants/iconLibrary';
 
 const Caution = props => {
     return (
-        <View {...props} style={{...styles.container, ...props.style.container}}>
+        <View {...props} style={{ ...styles.container, ...props.style.container }}>
             {props.type == 'standar' ?
-                 <Icon library={IconLibrary.Octicons} name="stop" style={styles.icon} />
-            : props.bingo ? 
-                <Icon library={IconLibrary.FontAwesome5} name="check-circle"  color='green' style={styles.icon} />
-            :   <Icon library={IconLibrary.Feather} name="x-circle"  color={props.iconColor} style={styles.icon} />
+                <Icon library={IconLibrary.Octicons} name="stop" style={styles.icon} />
+                : props.bingo ?
+                    <Icon library={IconLibrary.FontAwesome5} name="check-circle" color='green' style={styles.icon} />
+                    : <Icon library={IconLibrary.Feather} name="x-circle" color={props.iconColor} style={styles.icon} />
             }
             <View style={styles.cautionContainer}>
-                <Text {...props} numberOfLines={6}  style={{...styles.caution, ...props.style.caution}} >{props.caution}</Text>
+                <Text {...props} numberOfLines={6} style={{ ...styles.caution, ...props.style.caution }} >{props.caution}</Text>
             </View>
         </View>
     )

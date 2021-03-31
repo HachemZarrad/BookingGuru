@@ -12,7 +12,7 @@ const Home = () => {
     <View style={styles.container}>
       <Toolbar />
       <ScrollView>
-        <CustomImage />
+        <CustomImage source={require('../assets/vacation.jpg')}/>
         <Title title={'Pick Up Your Plan Here'} />
         <View style={styles.servicesMenu}>
           <ServicesMenu />

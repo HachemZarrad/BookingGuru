@@ -10,8 +10,7 @@ import CustomList from '../../components/customList'
 import InputBar from '../../components/inputBar'
 import Icon from '../../components/icon'
 import CustomHeader from '../../components/customHeader'
-import Toolbar from '../../components/toolbar'
-
+import PlayWithData from '../../components/playWithData'
 import IconLibrary from '../../constants/iconLibrary'
 import Colors from '../../constants/colors'
 
@@ -52,6 +51,7 @@ const Hotels = ({ route }) => {
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Hotels Overview' />
+      <PlayWithData title='playing babe'/>
       <View style={styles.searchBar}>
         {shown ?
           <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >
