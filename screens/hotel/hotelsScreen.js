@@ -6,10 +6,11 @@ import {
 
 import { useNavigation } from '@react-navigation/native'
 
-import Toolbar from '../../components/toolbar'
 import CustomList from '../../components/customList'
 import InputBar from '../../components/inputBar'
 import Icon from '../../components/icon'
+import CustomHeader from '../../components/customHeader'
+import Toolbar from '../../components/toolbar'
 
 import IconLibrary from '../../constants/iconLibrary'
 import Colors from '../../constants/colors'
@@ -50,7 +51,7 @@ const Hotels = ({ route }) => {
 
   return (
     <View style={styles.ParentContainer}>
-      <Toolbar />
+      <CustomHeader ComponentTitle='Hotels Overview' />
       <View style={styles.searchBar}>
         {shown ?
           <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >

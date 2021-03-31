@@ -1,4 +1,4 @@
-import * as ActionTypes from '../actions/actionTypes';
+import * as ActionTypes from './actionTypes';
 import { baseUrl } from '../../constants/networking';
 
 

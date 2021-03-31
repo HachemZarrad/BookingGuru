@@ -1,55 +1,55 @@
-import React from 'react';
-import { Platform, SafeAreaView, View, ScrollView, Image, Button } from 'react-native';
+import React from 'react'
+import { Platform, SafeAreaView, View, ScrollView, Image, Button } from 'react-native'
 
-import { createStackNavigator, HeaderBackground } from '@react-navigation/stack';
-import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
-import { Drawer } from 'react-native-paper';
+import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
+import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
+import { Drawer } from 'react-native-paper'
 
-import Icon from '../components/icon';
+import Icon from '../components/icon'
 
-import IconLibrary from '../constants/iconLibrary';
-import Colors from '../constants/colors';
-import ProfileAvatar from '../components/profileAvatar';
-import Title from '../components/title';
+import IconLibrary from '../constants/iconLibrary'
+import Colors from '../constants/colors'
+import ProfileAvatar from '../components/profileAvatar'
+import Title from '../components/title'
 
-import IntroductoryScreen from '../screens/introductoryScreen';
-import Home from '../screens/homeScreen';
-import SplashScreen from '../screens/splashScreen';
+import IntroductoryScreen from '../screens/introductoryScreen'
+import Home from '../screens/homeScreen'
+import SplashScreen from '../screens/splashScreen'
 
-import Flights from '../screens/flight/flightsScreen';
-import FlightDetails from '../screens/flight/flightDetails';
+import Flights from '../screens/flight/flightsScreen'
+import FlightDetails from '../screens/flight/flightDetails'
 
-import Hotels from '../screens/hotel/hotelsScreen';
-import HotelDetails from '../screens/hotel/hotelDetails';
+import Hotels from '../screens/hotel/hotelsScreen'
+import HotelDetails from '../screens/hotel/hotelDetails'
 
-import ReservationScreen from '../screens/hotel/reservationScreen';
-import PickUpRoomScreen from '../screens/hotel/pickUpRoomScreen';
-import ValidateReservationScreen from '../screens/hotel/validateReservationScreen';
+import ReservationScreen from '../screens/hotel/reservationScreen'
+import PickUpRoomScreen from '../screens/hotel/pickUpRoomScreen'
+import ValidateReservationScreen from '../screens/hotel/validateReservationScreen'
 
-import Food from '../screens/food/foodScreen';
-import DishDetails from '../screens/food/dishDetails';
+import Food from '../screens/food/foodScreen'
+import DishDetails from '../screens/food/dishDetails'
 
-import Trains from '../screens/train/trainsScreen';
-import TrainDetails from '../screens/train/trainDetails';
+import Trains from '../screens/train/trainsScreen'
+import TrainDetails from '../screens/train/trainDetails'
 
-import Taxis from '../screens/taxi/taxisScreen';
-import TaxiDetails from '../screens/taxi/taxiDetails';
+import Taxis from '../screens/taxi/taxisScreen'
+import TaxiDetails from '../screens/taxi/taxiDetails'
 
-import Buses from '../screens/bus/busesScreen';
-import BusDetails from '../screens/bus/busDetails';
+import Buses from '../screens/bus/busesScreen'
+import BusDetails from '../screens/bus/busDetails'
 
-import FavoriteScreen from '../screens/favoritesScreen';
-import NotificationsScreen from '../screens/notificationsScreen';
+import FavoriteScreen from '../screens/favoritesScreen'
+import NotificationsScreen from '../screens/notificationsScreen'
 
-import SignUpScreen from '../screens/authentication/signUpScreen';
-import PasswordScreen from '../screens/authentication/passwordScreen';
-import LoginScreen from '../screens/authentication/loginScreen';
-import SettingsScreen from '../screens/authentication/settingsScreen';
-import CallingCodesScreen from '../screens/authentication/callingCodeScreen';
+import SignUpScreen from '../screens/authentication/signUpScreen'
+import PasswordScreen from '../screens/authentication/passwordScreen'
+import LoginScreen from '../screens/authentication/loginScreen'
+import SettingsScreen from '../screens/authentication/settingsScreen'
+import CallingCodesScreen from '../screens/authentication/callingCodeScreen'
 
-import ReservationsList from '../screens/admin/reservationsList';
-import ReservationDetails from '../screens/admin/reservationDetails';
-import iconLibrary from '../constants/iconLibrary';
+import ReservationsList from '../screens/admin/reservationsList'
+import ReservationDetails from '../screens/admin/reservationDetails'
+import iconLibrary from '../constants/iconLibrary'
 
 const navigationOptions = {
     headerShown: false,
@@ -57,10 +57,9 @@ const navigationOptions = {
         backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : ''
     },
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor,
-};
+}
 
-const filter = false
-const bookingDrawerNavigator = createDrawerNavigator();
+const bookingDrawerNavigator = createDrawerNavigator()
 
 export const BookingDrawer = () => {
     return (
@@ -149,7 +148,7 @@ export const BookingDrawer = () => {
                             </ScrollView>
                         </SafeAreaView>
                     </View>
-                );
+                )
             }}
             drawerContentOptions={{
                 activeTintColor: Colors.toolbarColor,
@@ -245,7 +244,7 @@ export const BookingDrawer = () => {
     )
 }
 
-const homeStackNavigator = createStackNavigator();
+const homeStackNavigator = createStackNavigator()
 
 export const HomeNavigator = () => {
     return (
@@ -257,25 +256,25 @@ export const HomeNavigator = () => {
             <homeStackNavigator.Screen name="Favorites" component={FavoriteScreen} options={{headerShown: true, headerTitle: 'Favorites'}}/>
             <homeStackNavigator.Screen name="Notifications" component={NotificationsScreen} options={{headerShown: true, headerTitle: 'We Keep You Notified'}} />
         </homeStackNavigator.Navigator>
-    );
+    )
 }
 
 
-const hotelsStackNavigator = createStackNavigator();
+const hotelsStackNavigator = createStackNavigator()
 
 export const HotelsNavigator = () => {
     return (
         <hotelsStackNavigator.Navigator screenOptions={navigationOptions}>
             <hotelsStackNavigator.Screen name="HotelsOverview" component={Hotels} />
-            <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails} />
+            <hotelsStackNavigator.Screen name="HotelDetails" component={HotelDetails} options={{ headerShown: true, headerTitle: 'Fill in your info' }} />
             <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info' }} />
             <hotelsStackNavigator.Screen name="PickUpRoomScreen" component={PickUpRoomScreen} options={{ headerShown: true, headerTitle: "What's your plan" }} />
             <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure' }} />
         </hotelsStackNavigator.Navigator>
-    );
+    )
 }
 
-const flightsStackNavigator = createStackNavigator();
+const flightsStackNavigator = createStackNavigator()
 
 export const FlightsNavigator = () => {
     return (
@@ -283,10 +282,10 @@ export const FlightsNavigator = () => {
             <flightsStackNavigator.Screen name="FlightsOverview" component={Flights} />
             <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails} />
         </flightsStackNavigator.Navigator>
-    );
+    )
 }
 
-const taxisStackNavigator = createStackNavigator();
+const taxisStackNavigator = createStackNavigator()
 
 export const TaxisNavigator = () => {
     return (
@@ -294,10 +293,10 @@ export const TaxisNavigator = () => {
             <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis} />
             <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails} />
         </taxisStackNavigator.Navigator>
-    );
+    )
 }
 
-const trainsStackNavigator = createStackNavigator();
+const trainsStackNavigator = createStackNavigator()
 
 export const TrainsNavigator = () => {
     return (
@@ -305,10 +304,10 @@ export const TrainsNavigator = () => {
             <trainsStackNavigator.Screen name="TrainsOverview" component={Trains} />
             <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails} />
         </trainsStackNavigator.Navigator>
-    );
+    )
 }
 
-const busesStackNavigator = createStackNavigator();
+const busesStackNavigator = createStackNavigator()
 
 export const BusesNavigator = () => {
     return (
@@ -316,10 +315,10 @@ export const BusesNavigator = () => {
             <busesStackNavigator.Screen name="BusesOverview" component={Buses} />
             <busesStackNavigator.Screen name="BusDetails" component={BusDetails} />
         </busesStackNavigator.Navigator>
-    );
+    )
 }
 
-const foodStackNavigator = createStackNavigator();
+const foodStackNavigator = createStackNavigator()
 
 export const FoodNavigator = () => {
     return (
@@ -327,10 +326,10 @@ export const FoodNavigator = () => {
             <foodStackNavigator.Screen name="FoodOverview" component={Food} />
             <foodStackNavigator.Screen name="DishDetails" component={DishDetails} />
         </foodStackNavigator.Navigator>
-    );
+    )
 }
 
-const AuthStackNavigator = createStackNavigator();
+const AuthStackNavigator = createStackNavigator()
 
 export const AuthenticationNavigator = () => {
     return (
@@ -361,10 +360,10 @@ export const AuthenticationNavigator = () => {
                 options={{headerShown: true, headerTitle: 'Settings'}}
             />
         </AuthStackNavigator.Navigator>
-    );
-};
+    )
+}
 
-const AdminStackNavigator = createStackNavigator();
+const AdminStackNavigator = createStackNavigator()
 
 export const AdminNavigator = () => {
     return (
@@ -378,7 +377,7 @@ export const AdminNavigator = () => {
                 component={ReservationDetails}
             />
         </AdminStackNavigator.Navigator>
-    );
-};
+    )
+}
 
 
