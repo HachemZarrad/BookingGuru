@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, { useReducer } from 'react'
 import { StyleSheet, View, TextInput, Text } from 'react-native'
 
 import Icon from './icon'
@@ -7,17 +7,17 @@ import Colors from '../constants/colors'
 
 const EMAILCHECK = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-const SET_INPUT_DIRTY = 'SET_INPUT_DIRTY';
-const INPUT_CHANGE = 'INPUT_CHANGE';
+const SET_INPUT_DIRTY = 'SET_INPUT_DIRTY'
+const INPUT_CHANGE = 'INPUT_CHANGE'
 
-const inputReducer = (action,inputState) => {
-    switch(action.type) {
+const inputReducer = (action, inputState) => {
+    switch (action.type) {
         case SET_INPUT_DIRTY:
-            return {...inputState, pristine: false};
+            return { ...inputState, pristine: false }
         case INPUT_CHANGE:
-            return {...inputState, isValid: action.payload.isValid, input: action.payload.value};
+            return { ...inputState, isValid: action.payload.isValid, input: action.payload.value }
         default:
-            return inputState;
+            return inputState
     }
 }
 
@@ -27,25 +27,25 @@ const InputBar = props => {
         pristine: true,
         isValid: props.isValid,
         value: props.value ? props.value : props.default
-        
+
     });
-    
+
     const textChangeHandler = text => {
         let isValid = true;
         if (props.required && text.trim().length === 0) {
-          isValid = false;
+            isValid = false;
         }
         if (props.email && !EMAILCHECK.test(text.toLowerCase())) {
-          isValid = false;
+            isValid = false;
         }
         if (props.minLength != null && text.length < props.minLength) {
-          isValid = false;
+            isValid = false;
         }
-        dispatch({ type: INPUT_CHANGE, payload: { value: text, isValid: isValid}});
-      };
-    
+        dispatch({ type: INPUT_CHANGE, payload: { value: text, isValid: isValid } });
+    };
+
     const makeDirty = () => {
-        dispatch({type: SET_INPUT_DIRTY });
+        dispatch({ type: SET_INPUT_DIRTY });
     }
 
 
@@ -57,15 +57,16 @@ const InputBar = props => {
                     name={props.leftIconName}
                     color={Colors.buttonContainer}
                     size={props.leftIconSize}
+                    onPress={props.leftIconFeature}
                     style={styles.leftIcon}
                 />
-                <TextInput 
-                    {...props} 
-                    placeholderTextColor="black" 
+                <TextInput
+                    {...props}
+                    placeholderTextColor="black"
                     style={{ ...styles.inputBar, ...props.style }}
                     value={inputState.value}
                     onBlur={makeDirty}
-                    onChangeText={props.searchBar || props.passwordCreation ? props.onChangeText: textChangeHandler}
+                    onChangeText={props.searchBar || props.passwordCreation ? props.onChangeText : textChangeHandler}
                 >
                 </TextInput>
                 <Icon
@@ -100,16 +101,17 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         margin: 5,
         borderColor: Colors.toolbarColor,
-        
+
     },
     inputBar: {
         flex: 1
     },
     leftIcon: {
-        margin: 5
+        margin: 5,
+        paddingRight: 5,
     },
     rightIcon: {
-        marginRight: 5
+        marginRight: 10
     },
     error: {
         marginLeft: 10,
@@ -119,5 +121,5 @@ const styles = StyleSheet.create({
     },
     errorContainer: {
         marginVertical: 5
-      },
+    },
 })

@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react'
-import { StyleSheet, Text, View,  KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 
 import Title from '../../components/title';
 import InputBar from '../../components/inputBar';
@@ -28,22 +28,22 @@ const PasswordScreen = () => {
         retypedPassword: '',
         retypedPasswordHiddden: true,
         passwordMatchConfirmed: false,
-        
+
     });
-    
+
     const manageColors = (password) => {
-        dispatch({type: passwordCreationActions.SET_PASSWORD_INPUT_DIRTY});
-        dispatch({type: passwordCreationActions.VALIDATE_TEN_CHARACTERS, payload: password});
-        dispatch({type: passwordCreationActions.VALIDATE_ONE_NUMBER, payload: password});
-        dispatch({type: passwordCreationActions.VALIDATE_ONE_CAPITAL, payload: password});
-        if(state.tenCharacters && state.oneNumber && state.oneCapital) {
-           return dispatch({type: passwordCreationActions.ACCEPT_PASSWORD, payload: password});
+        dispatch({ type: passwordCreationActions.SET_PASSWORD_INPUT_DIRTY });
+        dispatch({ type: passwordCreationActions.VALIDATE_TEN_CHARACTERS, payload: password });
+        dispatch({ type: passwordCreationActions.VALIDATE_ONE_NUMBER, payload: password });
+        dispatch({ type: passwordCreationActions.VALIDATE_ONE_CAPITAL, payload: password });
+        if (state.tenCharacters && state.oneNumber && state.oneCapital) {
+            return dispatch({ type: passwordCreationActions.ACCEPT_PASSWORD, payload: password });
         }
-        return dispatch({type: passwordCreationActions.CANCEL_PASSWORD});
+        return dispatch({ type: passwordCreationActions.CANCEL_PASSWORD });
     }
 
     const manageConfirmPassword = (retypedPassword) => {
-        dispatch({type: passwordCreationActions.CONFIRM_PASSWORD_MATCH, payload: retypedPassword});
+        dispatch({ type: passwordCreationActions.CONFIRM_PASSWORD_MATCH, payload: retypedPassword });
     }
 
     const manageSignUp = () => {

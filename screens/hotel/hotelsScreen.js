@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   StyleSheet, View, Text, TouchableOpacity, ActivityIndicator,
   ScrollView
@@ -31,11 +31,17 @@ const Hotels = ({ route }) => {
 
   const [searchTerm, setSearchTerm] = useState('')
   const [shown, showHotels] = useState(false)
+  const [backArrow, setBackArrow] = useState('')
 
   const hotels = useSelector(state => state.hotels.hotels)
   const hotelsAccordingToDestination = hotels.filter(hotel => hotel.address.locality === destination)
   const loading = useSelector(state => state.hotels.loading)
   const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
+
+
+  useEffect(() => {
+      if(shown) setBackArrow('arrow-left')
+  },[shown])
 
 
   const searchBarHandler = (term) => {
@@ -51,7 +57,7 @@ const Hotels = ({ route }) => {
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Hotels Overview' />
-      <PlayWithData title='playing babe'/>
+      <PlayWithData/>
       <View style={styles.searchBar}>
         {shown ?
           <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >
@@ -64,10 +70,13 @@ const Hotels = ({ route }) => {
             onChangeText={searchBarHandler}
             placeholder="search down here"
             keyboardType='default'
-            leftIconLibrary={IconLibrary.FontAwesome}
-            leftIconName='search'
-            leftIconColor={Colors.buttonContainer}
+            leftIconLibrary={IconLibrary.FontAwesome5}
+            leftIconName={backArrow}
             leftIconSize={20}
+            leftIconFeature={backFromFilterList}
+            rightIconLibrary={IconLibrary.FontAwesome5}
+            rightIconName='search'
+            rightIconSize={20}
             searchBar
             style={styles.input}
           />
@@ -124,7 +133,7 @@ const styles = StyleSheet.create({
   searchBar: {
     // flexDirection: 'row', 
     alignItems: 'center',
-    paddingBottom: 7
+    paddingTop: 5,
   },
   input: {
     // width: 200
