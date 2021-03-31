@@ -14,9 +14,14 @@ const sortingList = (list) => {
 }
 
 
-const PlayWithData = props => {
 
+const PlayWithData = props => {
+    
     const navigation = useNavigation()
+    
+    const goToCustomizeFiltersScreen = () => {
+        navigation.navigate('CustomizeFilters')
+    }
 
     return (
         <View style={styles.container}>
@@ -36,7 +41,7 @@ const PlayWithData = props => {
             <TouchableOpacity
                 {...props}
                 style={styles.button}
-            // onPress={}
+            onPress={goToCustomizeFiltersScreen}
             >
                 <Icon
                     library={IconLibrary.Entypo}
@@ -55,7 +60,6 @@ export default PlayWithData
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        // marginTop: 2,
     },
     textButton: {
         fontWeight: 'bold',

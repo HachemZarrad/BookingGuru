@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const CustomizeFiltersScreen = () => {
+const CustomizeFiltersScreen = props => {
     return (
         <View>
-            <Text></Text>
+            <Text>Filters Screen</Text>
         </View>
     )
 }

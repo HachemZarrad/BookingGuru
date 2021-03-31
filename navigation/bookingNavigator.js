@@ -5,10 +5,11 @@ import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import { Drawer } from 'react-native-paper'
 
-import Icon from '../components/icon'
-
 import IconLibrary from '../constants/iconLibrary'
 import Colors from '../constants/colors'
+import iconLibrary from '../constants/iconLibrary'
+
+import Icon from '../components/icon'
 import ProfileAvatar from '../components/profileAvatar'
 import Title from '../components/title'
 
@@ -40,6 +41,7 @@ import BusDetails from '../screens/bus/busDetails'
 
 import FavoriteScreen from '../screens/favoritesScreen'
 import NotificationsScreen from '../screens/notificationsScreen'
+import CustomizeFiltersScreen from '../screens/customizeFiltersScreen'
 
 import SignUpScreen from '../screens/authentication/signUpScreen'
 import PasswordScreen from '../screens/authentication/passwordScreen'
@@ -49,7 +51,6 @@ import CallingCodesScreen from '../screens/authentication/callingCodeScreen'
 
 import ReservationsList from '../screens/admin/reservationsList'
 import ReservationDetails from '../screens/admin/reservationDetails'
-import iconLibrary from '../constants/iconLibrary'
 
 
 
@@ -272,6 +273,7 @@ export const HotelsNavigator = () => {
             <hotelsStackNavigator.Screen name="ReservationScreen" component={ReservationScreen} options={{ headerShown: true, headerTitle: 'Fill in your info' }} />
             <hotelsStackNavigator.Screen name="PickUpRoomScreen" component={PickUpRoomScreen} options={{ headerShown: true, headerTitle: "What's your plan" }} />
             <hotelsStackNavigator.Screen name="ValidateReservationScreen" component={ValidateReservationScreen} options={{ headerShown: true, headerTitle: 'Are you sure' }} />
+            <hotelsStackNavigator.Screen name="CustomizeFilters" component={CustomizeFiltersScreen} options={{ headerShown: true, headerTitle: 'Set Your Own Filters' }} />
         </hotelsStackNavigator.Navigator>
     )
 }
@@ -283,6 +285,7 @@ export const FlightsNavigator = () => {
         <flightsStackNavigator.Navigator screenOptions={navigationOptions}>
             <flightsStackNavigator.Screen name="FlightsOverview" component={Flights} />
             <flightsStackNavigator.Screen name="FlightDetails" component={FlightDetails} />
+            <flightsStackNavigator.Screen name="CustomizeFilters" component={CustomizeFiltersScreen} options={{ headerShown: true, headerTitle: 'Set Your Own Filters' }} />
         </flightsStackNavigator.Navigator>
     )
 }
@@ -294,6 +297,7 @@ export const TaxisNavigator = () => {
         <taxisStackNavigator.Navigator screenOptions={navigationOptions}>
             <taxisStackNavigator.Screen name="TaxisOverview" component={Taxis} />
             <taxisStackNavigator.Screen name="TaxiDetails" component={TaxiDetails} />
+            <taxisStackNavigator.Screen name="CustomizeFilters" component={CustomizeFiltersScreen} options={{ headerShown: true, headerTitle: 'Set Your Own Filters' }} />
         </taxisStackNavigator.Navigator>
     )
 }
@@ -305,6 +309,7 @@ export const TrainsNavigator = () => {
         <trainsStackNavigator.Navigator screenOptions={navigationOptions}>
             <trainsStackNavigator.Screen name="TrainsOverview" component={Trains} />
             <trainsStackNavigator.Screen name="TrainDetails" component={TrainDetails} />
+            <trainsStackNavigator.Screen name="CustomizeFilters" component={CustomizeFiltersScreen} options={{ headerShown: true, headerTitle: 'Set Your Own Filters' }} />
         </trainsStackNavigator.Navigator>
     )
 }
@@ -316,6 +321,7 @@ export const BusesNavigator = () => {
         <busesStackNavigator.Navigator screenOptions={navigationOptions}>
             <busesStackNavigator.Screen name="BusesOverview" component={Buses} />
             <busesStackNavigator.Screen name="BusDetails" component={BusDetails} />
+            <busesStackNavigator.Screen name="CustomizeFilters" component={CustomizeFiltersScreen} options={{ headerShown: true, headerTitle: 'Set Your Own Filters' }} />
         </busesStackNavigator.Navigator>
     )
 }
@@ -327,6 +333,7 @@ export const FoodNavigator = () => {
         <foodStackNavigator.Navigator screenOptions={navigationOptions}>
             <foodStackNavigator.Screen name="FoodOverview" component={Food} />
             <foodStackNavigator.Screen name="DishDetails" component={DishDetails} />
+            <foodStackNavigator.Screen name="CustomizeFilters" component={CustomizeFiltersScreen} options={{ headerShown: true, headerTitle: 'Set Your Own Filters' }} />
         </foodStackNavigator.Navigator>
     )
 }

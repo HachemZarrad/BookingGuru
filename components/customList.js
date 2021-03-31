@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 250,
     backgroundColor: 'white',
-    margin: 10,
+    margin: 5,
     width: 340,
     borderRadius: 10,
     flex: 1,
