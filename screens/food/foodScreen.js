@@ -5,8 +5,8 @@ import * as ActionTypes from '../../store/actions/actionTypes';
 
 import CustomHeader from '../../components/customHeader';
 import CustomList from '../../components/customList';
+import PlayWithData from '../../components/playWithData'
 
-import { baseUrl } from '../../constants/networking';
 import Colors from '../../constants/colors';
 
 
@@ -15,26 +15,11 @@ const Food = () => {
   const [food, setFood] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
 
-    fetch(`${baseUrl}hotels`, { method: 'get', signal: signal })
-      .then((response) => response.json())
-      .then((json) => setFood(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-
-    return function cleanUp() {
-      console.log('Now aborting');
-      // Abort.
-      controller.abort()
-    }
-
-  }, []);
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Restaurants Overview'/>
+      <PlayWithData/>
       {isLoading ? <ActivityIndicator /> : (
         <CustomList data={food} pressedElement='DishDetails' service={ActionTypes.GET_FOOD} />
       )}

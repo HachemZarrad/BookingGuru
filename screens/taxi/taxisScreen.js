@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 
 import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
+import PlayWithData from '../../components/playWithData'
 
 import Colors from '../../constants/colors'
 
@@ -19,6 +20,7 @@ const Taxis = () => {
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Available Taxi List'/>
+      <PlayWithData/>
       {isLoading ? <ActivityIndicator /> : (
       <CustomList data={taxis} pressedElement='TaxiDetails' service={ActionTypes.GET_TAXIS} />
       )}
