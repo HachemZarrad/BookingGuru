@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet, View, Text, TouchableOpacity, ActivityIndicator,
   ScrollView
@@ -30,8 +30,7 @@ const Hotels = ({ route }) => {
   const destination = route?.params?.destination
 
   const [searchTerm, setSearchTerm] = useState('')
-  const [shown, showHotels] = useState(false)
-  const [backArrow, setBackArrow] = useState('')
+  const [showFileteredHotels, setShowFileterdHotels] = useState(false)
 
   const hotels = useSelector(state => state.hotels.hotels)
   const hotelsAccordingToDestination = hotels.filter(hotel => hotel.address.locality === destination)
@@ -39,51 +38,43 @@ const Hotels = ({ route }) => {
   const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
 
 
-  useEffect(() => {
-      if(shown) setBackArrow('arrow-left')
-  },[shown])
-
-
   const searchBarHandler = (term) => {
     setSearchTerm(term)
-    showHotels(true)
+    setShowFileterdHotels(true)
   }
 
   const backFromFilterList = () => {
-    showHotels(false)
+    setShowFileterdHotels(false)
     setSearchTerm('')
   }
 
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Hotels Overview' />
-      <PlayWithData/>
+      <PlayWithData />
       <View style={styles.searchBar}>
-        {shown ?
+        {showFileteredHotels && filteredHotels.length !== 0 ?
           <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >
-            <Icon library={IconLibrary.FontAwesome5} name="arrow-left" />
+            <Icon library={IconLibrary.FontAwesome5} name="arrow-left" size={20} />
           </TouchableOpacity>
           : null
         }
         {destination ? null :
-          <InputBar
-            onChangeText={searchBarHandler}
-            placeholder="search down here"
-            keyboardType='default'
-            leftIconLibrary={IconLibrary.FontAwesome5}
-            leftIconName={backArrow}
-            leftIconSize={20}
-            leftIconFeature={backFromFilterList}
-            rightIconLibrary={IconLibrary.FontAwesome5}
-            rightIconName='search'
-            rightIconSize={20}
-            searchBar
-            style={styles.input}
-          />
+          <View style={styles.input}>
+            <InputBar
+              onChangeText={searchBarHandler}
+              placeholder="   Search down here"
+              keyboardType='default'
+              rightIconLibrary={IconLibrary.FontAwesome5}
+              rightIconName='search'
+              rightIconSize={20}
+              searchBar
+            />
+          </View>
         }
       </View>
 
-      {loading || !shown ? null : (
+      {showFileteredHotels && filteredHotels.length !== 0 ? (
         <ScrollView>
           {filteredHotels.map(hotel => {
             return (
@@ -104,13 +95,16 @@ const Hotels = ({ route }) => {
             )
           })}
         </ScrollView>
+      )
+        : null
+      }
 
-
-      )}
       {loading ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor} /></View> : (
-        <CustomList data={destination ? hotelsAccordingToDestination : hotels}
-          pressedElement='HotelDetails'
-          service={ActionTypes.GET_HOTELS} />
+        <CustomList
+            data={destination ? hotelsAccordingToDestination : hotels}
+            pressedElement='HotelDetails'
+            service={ActionTypes.GET_HOTELS}
+        />
       )}
     </View>
   )
@@ -127,16 +121,19 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   backButton: {
-    // marginRight: 20,
-    alignSelf: 'flex-start'
+    padding: 15,
   },
   searchBar: {
-    // flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '100%',
+    height: 60,
     paddingTop: 5,
   },
   input: {
-    // width: 200
+    width: '98%',
+    alignItems: 'center'
   },
   filteredList: {
     flexDirection: 'row',
