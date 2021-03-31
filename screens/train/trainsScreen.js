@@ -4,7 +4,7 @@ import {StyleSheet, View,ActivityIndicator} from 'react-native'
 import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
 
-import Toolbar from '../../components/toolbar'
+import CustomHeader from '../../components/customHeader'
 import CustomList from '../../components/customList'
 
 import Colors from '../../constants/colors'
@@ -16,7 +16,7 @@ const Trains = () => {
 
   return (
     <View style={styles.ParentContainer}>
-      <Toolbar />
+      <CustomHeader ComponentTitle='Available Trains List'/>
       {isLoading ? <ActivityIndicator /> : (
       <CustomList data={trains} pressedElement='TrainDetails' service={ActionTypes.GET_TRAINS} />
 

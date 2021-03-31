@@ -5,7 +5,7 @@ import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
 
 import CustomList from '../../components/customList'
-import Toolbar from '../../components/toolbar'
+import CustomHeader from '../../components/customHeader'
 
 import Colors from '../../constants/colors'
 
@@ -18,7 +18,7 @@ const Taxis = () => {
 
   return (
     <View style={styles.ParentContainer}>
-      <Toolbar />
+      <CustomHeader ComponentTitle='Available Taxi List'/>
       {isLoading ? <ActivityIndicator /> : (
       <CustomList data={taxis} pressedElement='TaxiDetails' service={ActionTypes.GET_TAXIS} />
       )}

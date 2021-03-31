@@ -3,7 +3,7 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
 import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
-import Toolbar from '../../components/toolbar'
+import CustomHeader from '../../components/customHeader'
 import CustomList from '../../components/customList'
 
 import Colors from '../../constants/colors'
@@ -16,7 +16,7 @@ const Flights = () => {
 
   return (
     <View style={styles.ParentContainer}>
-      <Toolbar />
+      <CustomHeader ComponentTitle='Flights List'/>
       {isLoading ? <ActivityIndicator /> : (
         <CustomList data={flights} pressedElement='FlightDetails' service={ActionTypes.GET_FLIGHTS} />
       )}

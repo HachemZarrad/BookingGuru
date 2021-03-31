@@ -3,7 +3,7 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 
 import * as ActionTypes from '../../store/actions/actionTypes';
 
-import Toolbar from '../../components/toolbar';
+import CustomHeader from '../../components/customHeader';
 import CustomList from '../../components/customList';
 
 import { baseUrl } from '../../constants/networking';
@@ -34,7 +34,7 @@ const Food = () => {
   }, []);
   return (
     <View style={styles.ParentContainer}>
-      <Toolbar />
+      <CustomHeader ComponentTitle='Restaurants Overview'/>
       {isLoading ? <ActivityIndicator /> : (
         <CustomList data={food} pressedElement='DishDetails' service={ActionTypes.GET_FOOD} />
       )}
