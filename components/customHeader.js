@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: 60,
-        backgroundColor: Colors.toolbarColor,
+        backgroundColor: Platform.OS === 'android' ? Colors.toolbarColor : 'white',
     },
     arrowAndTitle: {
         flexDirection: 'row',

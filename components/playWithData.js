@@ -10,7 +10,7 @@ import Icon from '../components/icon'
 
 
 const sortingList = (list) => {
-
+    
 }
 
 
