@@ -7,7 +7,7 @@ import { HOTELS_SORTING_PROPERTIES } from '../constants/usefulLists'
 
 
 const CustomizeFiltersScreen = props => {
-    const [checked, setChecked] = useState('first');
+    const [checked, setChecked] = useState(HOTELS_SORTING_PROPERTIES[0]);
 
     return (
         <View style={styles.list}>
@@ -18,8 +18,8 @@ const CustomizeFiltersScreen = props => {
                         <RadioButton
                             data
                             value={property}
-                            status={checked === 'first' ? 'checked' : 'unchecked'}
-                            onPress={() => setChecked('first')}
+                            status={checked === property ? 'checked' : 'unchecked'}
+                            onPress={() => setChecked(property)}
                         />
                     </View>
                 )
@@ -33,15 +33,17 @@ export default CustomizeFiltersScreen
 
 const styles = StyleSheet.create({
     list: {
-        flex: 1,
-        backgroundColor: 'blue',
-        justifyContent: 'center',
-        alignItems: 'center',
+        width: 190,
+        // height: 190,
+        flex: 0.5,
     },
     radioButton: {
+        flex: 1,
+        backgroundColor: 'white',
+        padding: 10,
+        width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'space-around'
-        justifyContent: 'flex-end'
-    }
+        justifyContent: 'space-between',
+    },
 })
