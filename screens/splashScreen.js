@@ -64,7 +64,7 @@ const SplashScreen = () => {
     dispatch(trainsActions.fetchTrains())
     dispatch(busesActions.fetchBuses())
     dispatch(taxisActions.fetchTaxis())
-    dispatch(fetchCountriesAndCallingCodes)
+    dispatch(fetchCountriesAndCallingCodes())
     // dispatch(foodActions.fetchRestaurants())
   }, [dispatch])
 

@@ -1,28 +1,28 @@
 export const sortCategoricalDataAscendingly = (data, property) => {
-    data.sort((item1, item2) => {
-        if (item1 > item2) return 1
-        if (item1 < item2) return -1
+    return data.sort((currentItem, nextItem) => {
+        if (currentItem[property] > nextItem[property]) return 1
+        if (currentItem[property] < nextItem[property]) return -1
         return 0
     })
 }
 
 export const sortCategoricalDataDescendingly = (data, property) => {
-    data.sort((item1, item2) => {
-        if (item1 > item2) return 1
-        if (item1 < item2) return -1
+    return data.sort((currentItem, nextItem) => {
+        if (currentItem[property] > nextItem[property]) return 1
+        if (currentItem[property] < nextItem[property]) return -1
         return 0
     })
 }
 
 export const sortNumericalDataAscendingly = (data, property) => {
-    data.sort((currentItem, nextItem) => {
-        return currentItem - nextItem
+    return data.sort((currentItem, nextItem) => {
+        return currentItem[property] - nextItem[property]
     })
 }
 
 export const sortNumericalDataDescendingly = (data, property) => {
-    data.sort((currentItem, nextItem) => {
-        return nextItem - currentItem
+    return data.sort((currentItem, nextItem) => {
+        return nextItem[property] - currentItem[property]
     })
 }
 
