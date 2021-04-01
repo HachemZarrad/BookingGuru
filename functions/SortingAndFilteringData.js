@@ -8,8 +8,8 @@ export const sortCategoricalDataAscendingly = (data, property) => {
 
 export const sortCategoricalDataDescendingly = (data, property) => {
     return data.sort((currentItem, nextItem) => {
-        if (currentItem[property] > nextItem[property]) return 1
-        if (currentItem[property] < nextItem[property]) return -1
+        if (currentItem[property] > nextItem[property]) return -1
+        if (currentItem[property] < nextItem[property]) return 1
         return 0
     })
 }

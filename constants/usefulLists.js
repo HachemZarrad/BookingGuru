@@ -15,4 +15,4 @@ export const TAXIS_FILTERS = ['Large People Carrier' , 'Executive People Carrier
 export const FOOD_FILTERS = []
 
 //Properties According to Which User Can Sort Displayed Data
-export const SORTING_PROPERTIES = ['Rating (high to low)','Rating (low to high)','Guest Reviews','Price(low to high)', 'Price(high to low)']
+export const HOTELS_SORTING_PROPERTIES = ['Rating (high to low)','Rating (low to high)','Guest Reviews','Price(low to high)', 'Price(high to low)']
