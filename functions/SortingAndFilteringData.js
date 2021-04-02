@@ -30,6 +30,6 @@ export const sortNumericalDataDescendingly = (data, property) => {
 }
 
 
-export const filterData = (data, input, properties) => {
+export const filterDataByInput = (data, input, properties) => {
     return data.filter(createFilter(input, properties))
 }

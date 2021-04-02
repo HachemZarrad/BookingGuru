@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, Platform } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 
@@ -8,24 +8,14 @@ import InputBar from './inputBar'
 import Colors from '../constants/colors'
 import IconLibrary from '../constants/iconLibrary'
 
-import { filterData } from '../functions/sortingAndFilteringData'
 
-
-
-const KEYS_TO_FILTERS = ['name', 'locality']
 
 const CustomHeader = props => {
-
-    const [searchTerm, setSearchTerm] = useState('')
+    const {searchBarHandler, searchTerm, backFromFilterList, showFileteredHotels} = props
     const navigation = useNavigation()
 
     const backHome = () => {
         navigation.goBack()
-    }
-
-    const searchBarHandler = (term) => {
-        setSearchTerm(term)
-        setShowFileterdHotels(true)
     }
 
     return (
@@ -34,10 +24,11 @@ const CustomHeader = props => {
                 <InputBar
                     onChangeText={searchBarHandler}
                     placeholder="   Search down here"
+                    value={searchTerm}
                     keyboardType='default'
                     leftIconLibrary={IconLibrary.FontAwesome5}
                     leftIconName='arrow-left'
-                    leftIconFeature={backHome}
+                    leftIconFeature={showFileteredHotels ? backFromFilterList : backHome}
                     rightIconSize={20}
                     searchBar
                 />
