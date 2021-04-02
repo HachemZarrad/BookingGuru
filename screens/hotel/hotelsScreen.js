@@ -4,15 +4,12 @@ import {
   ScrollView
 } from 'react-native'
 
-import { Avatar, Accessory } from 'react-native-elements'
-
-import { useNavigation } from '@react-navigation/native'
-
 import CustomList from '../../components/customList'
 import InputBar from '../../components/inputBar'
 import Icon from '../../components/icon'
 import CustomHeader from '../../components/customHeader'
 import PlayWithData from '../../components/playWithData'
+import FilteredData from '../../components/filteredData'
 
 import IconLibrary from '../../constants/iconLibrary'
 import Colors from '../../constants/colors'
@@ -28,7 +25,6 @@ import { useSelector } from 'react-redux'
 
 const Hotels = ({ route }) => {
 
-  const navigation = useNavigation()
   const destination = route?.params?.destination
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -52,7 +48,7 @@ const Hotels = ({ route }) => {
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Hotels Overview' />
-      <PlayWithData sortingList={HOTELS_SORTING_PROPERTIES}/>
+      <PlayWithData sortingList={HOTELS_SORTING_PROPERTIES} />
       <View style={styles.searchBar}>
         {showFileteredHotels && filteredHotels.length !== 0 ?
           <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >
@@ -76,35 +72,16 @@ const Hotels = ({ route }) => {
       </View>
 
       {showFileteredHotels && filteredHotels.length !== 0 ? (
-        <ScrollView>
-          {filteredHotels.map(hotel => {
-            return (
-              <TouchableOpacity onPress={() => navigation.navigate('HotelDetails', hotel)} key={hotel._id}>
-                <View style={styles.filteredList}>
-                  <Avatar
-                    source={{
-                      uri: hotel.thumbnailUrl,
-                    }}
-                  >
-                    <Accessory />
-                  </Avatar>
-                  <View style={styles.hotelName}>
-                    <Text>{hotel.name}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )
-          })}
-        </ScrollView>
+        <FilteredData data={filteredHotels} nextScreen='HotelDetails' />
       )
         : null
       }
 
       {loading ? <View style={styles.spinner}><ActivityIndicator color={Colors.toolbarColor} /></View> : (
         <CustomList
-            data={destination ? hotelsAccordingToDestination : hotels}
-            pressedElement='HotelDetails'
-            service={ActionTypes.GET_HOTELS}
+          data={destination ? hotelsAccordingToDestination : hotels}
+          pressedElement='HotelDetails'
+          service={ActionTypes.GET_HOTELS}
         />
       )}
     </View>
