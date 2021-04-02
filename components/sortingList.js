@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
 import { RadioButton } from 'react-native-paper';
 
@@ -23,15 +23,18 @@ const SortingList = props => {
         <View style={styles.list}>
             {list.map((property) => {
                 return (
-                    <View style={styles.radioButton} key={property}>
+                    <TouchableOpacity
+                        style={styles.radioButton}
+                        key={property}
+                        onPress={() => confirmProperty(property)}
+                    >
                         <Text>{property}</Text>
                         <RadioButton
-                            data
                             value={property}
                             status={checked === property ? 'checked' : 'unchecked'}
                             onPress={() => confirmProperty(property)}
                         />
-                    </View>
+                    </TouchableOpacity>
                 )
             })
             }
