@@ -10,6 +10,7 @@ const FilteredData = props => {
     const { data, nextScreen } = props
     const navigation = useNavigation()
 
+
     return (
         <ScrollView>
             {data.map(entity => {

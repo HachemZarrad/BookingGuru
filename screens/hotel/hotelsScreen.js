@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import {
   StyleSheet, View, Text, TouchableOpacity, ActivityIndicator,
-  ScrollView
 } from 'react-native'
 
 import CustomList from '../../components/customList'
@@ -17,14 +16,14 @@ import { HOTELS_SORTING_PROPERTIES } from '../../constants/usefulLists'
 
 import { filterData } from '../../functions/sortingAndFilteringData'
 
-const KEYS_TO_FILTERS = ['name', 'locality']
 
 import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
 
+const KEYS_TO_FILTERS = ['name', 'locality']
 
 const Hotels = ({ route }) => {
-
+  
   const destination = route?.params?.destination
 
   const [searchTerm, setSearchTerm] = useState('')
