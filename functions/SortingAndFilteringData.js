@@ -1,3 +1,6 @@
+import { createFilter } from 'react-native-search-filter'
+
+
 export const sortCategoricalDataAscendingly = (data, property) => {
     return data.sort((currentItem, nextItem) => {
         if (currentItem[property] > nextItem[property]) return 1
@@ -27,6 +30,6 @@ export const sortNumericalDataDescendingly = (data, property) => {
 }
 
 
-export const filterData = (data, filter, property) => {
-
+export const filterData = (data, input, properties) => {
+    return data.filter(createFilter(input, properties))
 }

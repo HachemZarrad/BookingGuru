@@ -4,6 +4,8 @@ import {
   ScrollView
 } from 'react-native'
 
+import { Avatar, Accessory } from 'react-native-elements'
+
 import { useNavigation } from '@react-navigation/native'
 
 import CustomList from '../../components/customList'
@@ -16,10 +18,8 @@ import IconLibrary from '../../constants/iconLibrary'
 import Colors from '../../constants/colors'
 import { HOTELS_SORTING_PROPERTIES } from '../../constants/usefulLists'
 
-import { Avatar, Accessory } from 'react-native-elements'
+import { filterData } from '../../functions/sortingAndFilteringData'
 
-
-import { createFilter } from 'react-native-search-filter'
 const KEYS_TO_FILTERS = ['name', 'locality']
 
 import * as ActionTypes from '../../store/actions/actionTypes'
@@ -37,8 +37,7 @@ const Hotels = ({ route }) => {
   const hotels = useSelector(state => state.hotels.hotels)
   const hotelsAccordingToDestination = hotels.filter(hotel => hotel.address.locality === destination)
   const loading = useSelector(state => state.hotels.loading)
-  const filteredHotels = hotels.filter(createFilter(searchTerm, KEYS_TO_FILTERS))
-
+  const filteredHotels = filterData(hotels, searchTerm, KEYS_TO_FILTERS)
 
   const searchBarHandler = (term) => {
     setSearchTerm(term)
