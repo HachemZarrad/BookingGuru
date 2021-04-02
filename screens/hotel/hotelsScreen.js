@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet, View, ActivityIndicator,
-} from 'react-native'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
 import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
@@ -12,7 +10,6 @@ import Colors from '../../constants/colors'
 import { HOTELS_SORTING_PROPERTIES } from '../../constants/usefulLists'
 
 import { filterDataByInput } from '../../functions/sortingAndFilteringData'
-
 
 import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
@@ -49,7 +46,6 @@ const Hotels = ({ route }) => {
         showFileteredHotels={showFileteredHotels}
         searchTerm={searchTerm}
       />
-
       <PlayWithData sortingList={HOTELS_SORTING_PROPERTIES} />
       
       {showFileteredHotels && filteredHotels.length !== 0 ? (
@@ -74,11 +70,15 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     flex: 1,
+    // position: 'absolute',
   },
   spinner: {
     justifyContent: 'center',
     alignItems: 'center'
   },
+  list: {
+    // position: 'absolute'
+  }
 
 })
 

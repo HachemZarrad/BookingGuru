@@ -3,7 +3,6 @@ import {
   StyleSheet, Text, View, Image, ActivityIndicator,
 } from 'react-native'
 
-
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 

@@ -63,12 +63,14 @@ const PlayWithData = props => {
             </View>
 
             {!showList ? null : (
-                <SortingList
-                    list={sortingList}
-                    visibility={showSortingList}
-                    setInitial={saveSortingListStateAfterRerender}
-                    initial={sortingProperty}
-                />
+                <View style={styles.list}>
+                    <SortingList
+                        list={sortingList}
+                        visibility={showSortingList}
+                        setInitial={saveSortingListStateAfterRerender}
+                        initial={sortingProperty}
+                    />
+                </View>
             )
             }
         </View>
@@ -96,4 +98,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'pink',
     },
+    list: {
+        position: 'absolute',
+        zIndex: 40,
+        left: 20,
+        top:50,
+    
+    }
 })
