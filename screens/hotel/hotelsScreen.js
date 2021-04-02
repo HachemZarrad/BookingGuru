@@ -11,8 +11,10 @@ import InputBar from '../../components/inputBar'
 import Icon from '../../components/icon'
 import CustomHeader from '../../components/customHeader'
 import PlayWithData from '../../components/playWithData'
+
 import IconLibrary from '../../constants/iconLibrary'
 import Colors from '../../constants/colors'
+import { HOTELS_SORTING_PROPERTIES } from '../../constants/usefulLists'
 
 import { Avatar, Accessory } from 'react-native-elements'
 
@@ -51,7 +53,7 @@ const Hotels = ({ route }) => {
   return (
     <View style={styles.ParentContainer}>
       <CustomHeader ComponentTitle='Hotels Overview' />
-      <PlayWithData />
+      <PlayWithData sortingList={HOTELS_SORTING_PROPERTIES}/>
       <View style={styles.searchBar}>
         {showFileteredHotels && filteredHotels.length !== 0 ?
           <TouchableOpacity onPress={backFromFilterList} style={styles.backButton} >

@@ -73,7 +73,7 @@ const SplashScreen = () => {
   }, [loadData])
 
   useEffect(() => {
-    if (!dataLoading && !dataError) setTimeout(() => {navigation.navigate('HomePage')}, 4000);
+    if (!dataLoading && !dataError) setTimeout(() => {navigation.navigate('HomePage')}, 0);
   }, [dataLoading, dataError])
 
   return (

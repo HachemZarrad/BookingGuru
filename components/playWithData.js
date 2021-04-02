@@ -1,56 +1,76 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 
+import Icon from '../components/icon'
+import SortingList from '../components/sortingList'
+
 import Colors from '../constants/colors'
 import IconLibrary from '../constants/iconLibrary'
 
-import Icon from '../components/icon'
-
-
-const sortingList = (list) => {
-    
-}
 
 
 
 const PlayWithData = props => {
-    
+
+    const { sortingList } = props
+    const [showList, setShowList] = useState(false)
     const navigation = useNavigation()
-    
+    const [sortingProperty, setSortingProperty] = useState(null)
+
     const goToCustomizeFiltersScreen = () => {
         navigation.navigate('CustomizeFilters')
     }
 
+    const showSortingList = () => {
+        setShowList(!showList)
+    }
+
+    const saveSortingListStateAfterRerender = (property) => {
+        setSortingProperty(property)
+    }
+
     return (
-        <View style={styles.container}>
-            <TouchableOpacity
-                {...props}
-                style={styles.button}
-            // onPress={}
-            >
-                <Icon
-                    library={IconLibrary.FontAwesome5}
-                    name="sort-numeric-down"
-                    size={24}
-                    color='black'
+        <View>
+            <View style={styles.container}>
+                <TouchableOpacity
+                    {...props}
+                    style={styles.button}
+                    onPress={showSortingList}
+                >
+                    <Icon
+                        library={IconLibrary.FontAwesome5}
+                        name="sort-numeric-down"
+                        size={24}
+                        color='black'
+                    />
+                    <Text style={styles.textButton}>Sort Your List</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    {...props}
+                    style={styles.button}
+                    onPress={goToCustomizeFiltersScreen}
+                >
+                    <Icon
+                        library={IconLibrary.Entypo}
+                        name="funnel"
+                        size={24}
+                        color='black'
+                    />
+                    <Text style={styles.textButton}>Customize Filter</Text>
+                </TouchableOpacity>
+            </View>
+
+            {!showList ? null : (
+                <SortingList
+                    list={sortingList}
+                    visibility={showSortingList}
+                    setInitial={saveSortingListStateAfterRerender}
+                    initial={sortingProperty}
                 />
-                <Text style={styles.textButton}>Sort Your List</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                {...props}
-                style={styles.button}
-            onPress={goToCustomizeFiltersScreen}
-            >
-                <Icon
-                    library={IconLibrary.Entypo}
-                    name="funnel"
-                    size={24}
-                    color='black'
-                />
-                <Text style={styles.textButton}>Customize Filter</Text>
-            </TouchableOpacity>
+            )
+            }
         </View>
     )
 }
