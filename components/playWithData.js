@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
 
@@ -8,8 +8,6 @@ import SortingList from '../components/sortingList'
 
 import Colors from '../constants/colors'
 import IconLibrary from '../constants/iconLibrary'
-
-
 
 
 const PlayWithData = props => {
@@ -23,13 +21,15 @@ const PlayWithData = props => {
         navigation.navigate('CustomizeFilters')
     }
 
-    const showSortingList = () => {
+    const showOrHideSortingList = () => {
         setShowList(!showList)
     }
+
 
     const saveSortingListStateAfterRerender = (property) => {
         setSortingProperty(property)
     }
+
 
     return (
         <View>
@@ -37,7 +37,7 @@ const PlayWithData = props => {
                 <TouchableOpacity
                     {...props}
                     style={styles.button}
-                    onPress={showSortingList}
+                    onPress={showOrHideSortingList}
                 >
                     <Icon
                         library={IconLibrary.FontAwesome5}
@@ -61,18 +61,25 @@ const PlayWithData = props => {
                     <Text style={styles.textButton}>Customize Filter</Text>
                 </TouchableOpacity>
             </View>
-
-            {!showList ? null : (
+            <Modal
+                animationType='slide'
+                transparent={true}
+                visible={showList}
+                onRequestClose={() => {
+                    showOrHideSortingList;
+                }}
+            >
+            <TouchableOpacity style={styles.modalContainer} onPress={showOrHideSortingList}>
                 <View style={styles.list}>
                     <SortingList
                         list={sortingList}
-                        visibility={showSortingList}
+                        visibility={showOrHideSortingList}
                         setInitial={saveSortingListStateAfterRerender}
                         initial={sortingProperty}
                     />
                 </View>
-            )
-            }
+            </TouchableOpacity>
+            </Modal>
         </View>
     )
 }
@@ -98,11 +105,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'pink',
     },
+    modalContainer: {
+        flex: 1,
+        // backgroundColor: 'red',
+    },
     list: {
         position: 'absolute',
         zIndex: 40,
         left: 20,
-        top:50,
-    
+        top: 70,
+
     }
 })

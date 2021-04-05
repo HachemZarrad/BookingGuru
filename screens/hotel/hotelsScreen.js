@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux'
 
 const KEYS_TO_FILTERS = ['name', 'address.locality']
 
+
 const Hotels = ({ route }) => {
 
   const destination = route?.params?.destination
@@ -38,23 +39,28 @@ const Hotels = ({ route }) => {
     setShowFileterdHotels(false)
   }
 
+
+
   return (
-    <View style={styles.ParentContainer}>
+    <View style={styles.ParentContainer} >
       <CustomHeader
         searchBarHandler={searchBarHandler}
         backFromFilterList={backFromFilterList}
         showFileteredHotels={showFileteredHotels}
         searchTerm={searchTerm}
       />
-      <PlayWithData sortingList={HOTELS_SORTING_PROPERTIES} />
       
+      <PlayWithData
+        sortingList={HOTELS_SORTING_PROPERTIES}
+      />
+
       {showFileteredHotels && filteredHotels.length !== 0 ? (
         <FilteredData data={filteredHotels} nextScreen='HotelDetails' />
       )
         : null
       }
 
-      {loading ? <View style={styles.spinner}><ActivityIndicator size="large" color='gold' /></View> : (
+      {loading ? <ActivityIndicator size="large" color='gold' /> : (
         <CustomList
           data={destination ? hotelsAccordingToDestination : hotels}
           pressedElement='HotelDetails'
@@ -70,15 +76,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     flex: 1,
-    // position: 'absolute',
   },
   spinner: {
     justifyContent: 'center',
     alignItems: 'center'
   },
-  list: {
-    // position: 'absolute'
-  }
 
 })
 

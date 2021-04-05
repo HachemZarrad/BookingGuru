@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image} from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -79,7 +79,7 @@ const DisplayAccordingToService = ({ service, item }) => {
             <Icon library={IconLibrary.Flags} name={item.country_name.toLowerCase()} />
             <Text style={styles.countryName}>{item.country_name.replace(/-/g, ' ')}</Text>
           </View>
-          <Text style={styles.callingCode}>{item.dialling_code}</Text>
+          <Text style={styles.calllingCode}>{item.dialling_code}</Text>
         </View>
       )
     default:
@@ -88,7 +88,14 @@ const DisplayAccordingToService = ({ service, item }) => {
 }
 
 const CustomList = props => {
+
   const navigation = useNavigation();
+  const { pressedElement, service } = props
+
+  const handleItemClick = (pressedElement, item) => {
+    navigation.navigate(pressedElement, item)
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <FlatList
@@ -96,8 +103,8 @@ const CustomList = props => {
         // style={{}}
         keyExtractor={({ _id }) => _id.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => navigation.navigate(props.pressedElement, item)}>
-            <DisplayAccordingToService item={item} service={props.service} />
+          <TouchableOpacity onPress={() => handleItemClick(pressedElement, item)}>
+            <DisplayAccordingToService item={item} service={service} />
           </TouchableOpacity>
         )}
       />

@@ -32,6 +32,7 @@ const SortingList = props => {
                         <Text style={styles.text}>{property}</Text>
                         <RadioButton
                             value={property}
+                            color={Colors.button}
                             status={checked === property ? 'checked' : 'unchecked'}
                             onPress={() => confirmProperty(property)}
                         />
