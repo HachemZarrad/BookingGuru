@@ -12,7 +12,7 @@ import IconLibrary from '../constants/iconLibrary'
 
 const PlayWithData = props => {
 
-    const { sortingList } = props
+    const { sortingList, getSortingProperty } = props
     const [showList, setShowList] = useState(false)
     const navigation = useNavigation()
     const [sortingProperty, setSortingProperty] = useState(null)
@@ -28,6 +28,7 @@ const PlayWithData = props => {
 
     const saveSortingListStateAfterRerender = (property) => {
         setSortingProperty(property)
+        getSortingProperty(property)
     }
 
 
@@ -69,16 +70,16 @@ const PlayWithData = props => {
                     showOrHideSortingList;
                 }}
             >
-            <TouchableOpacity style={styles.modalContainer} onPress={showOrHideSortingList}>
-                <View style={styles.list}>
-                    <SortingList
-                        list={sortingList}
-                        visibility={showOrHideSortingList}
-                        setInitial={saveSortingListStateAfterRerender}
-                        initial={sortingProperty}
-                    />
-                </View>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.modalContainer} onPress={showOrHideSortingList}>
+                    <View style={styles.list}>
+                        <SortingList
+                            list={sortingList}
+                            visibility={showOrHideSortingList}
+                            setInitial={saveSortingListStateAfterRerender}
+                            initial={sortingProperty}
+                        />
+                    </View>
+                </TouchableOpacity>
             </Modal>
         </View>
     )
@@ -107,7 +108,6 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        // backgroundColor: 'red',
     },
     list: {
         position: 'absolute',

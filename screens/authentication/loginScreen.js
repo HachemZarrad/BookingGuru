@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         height: '40%',
         marginTop: 20,
+        
     },
     logoContainer: {
         alignItems: 'center',

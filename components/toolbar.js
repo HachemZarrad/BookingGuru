@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 110,
         justifyContent: 'space-around',
+        
     },
     logo: {
         width: '30%',
