@@ -35,11 +35,11 @@ const Home = () => {
       <Toolbar />
       <ScrollView>
         <CustomImage source={require('../assets/vacation.jpg')} />
-        <Title title={'Pick Up Your Plan Here'} />
+        <Title title='Pick Up Your Plan Here' />
         <View style={styles.servicesMenu}>
           <ServicesMenu />
         </View>
-        <Title title={'Popular Destinations'} />
+        <Title title='Popular Destinations' />
         <Destinations />
       </ScrollView>
     </View>

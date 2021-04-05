@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         width: 200,
         height: 280,
         backgroundColor: 'white',
+        borderRadius: 5,
         elevation: 40,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
