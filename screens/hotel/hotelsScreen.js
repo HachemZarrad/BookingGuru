@@ -30,6 +30,7 @@ const Hotels = ({ route }) => {
   const sortedHotels = sortHotelsData(hotels, sortingProperty)
   const hotelsAccordingToDestination = destination ? filterDataByInput(hotels, destination, 'address.locality') : []
   const filteredHotels = filterDataByInput(hotels, searchTerm, KEYS_TO_FILTERS)
+  
 
   const searchBarHandler = (term) => {
     setSearchTerm(term)
@@ -45,9 +46,6 @@ const Hotels = ({ route }) => {
     setSortingProperty(property)
   }
 
-  // useEffect(() => {
-  //   setHotels(sortHotelsData(hotels, sortingProperty))
-  // },[hotels, sortingProperty])
 
 
   return (
@@ -58,7 +56,7 @@ const Hotels = ({ route }) => {
         showFileteredHotels={showFileteredHotels}
         searchTerm={searchTerm}
       />
-    
+
       <PlayWithData
         sortingList={HOTELS_SORTING_PROPERTIES}
         getSortingProperty={getSortingProperty}
@@ -70,13 +68,14 @@ const Hotels = ({ route }) => {
         : null
       }
 
-      {loading ? <ActivityIndicator size="large" color='gold' /> : (
-        <CustomList
-          data={destination ? hotelsAccordingToDestination : sortedHotels}
-          pressedElement='HotelDetails'
-          service={ActionTypes.GET_HOTELS}
-        />
-      )}
+      {loading || sortedHotels?.length < hotels.length ?
+        <ActivityIndicator size="large" color='gold' /> : (
+          <CustomList
+            data={destination ? hotelsAccordingToDestination : sortedHotels}
+            pressedElement='HotelDetails'
+            service={ActionTypes.GET_HOTELS}
+          />
+        )}
     </View>
   )
 }
