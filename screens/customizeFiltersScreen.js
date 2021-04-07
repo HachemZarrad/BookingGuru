@@ -6,8 +6,13 @@ import { RadioButton, Checkbox } from 'react-native-paper';
 import NormalButton from '../components/normalButton'
 import Title from '../components/title'
 
-import { HOTELS_FILTERS } from '../constants/usefulLists'
+import { HOTELS_FILTERS, HOTELS_FILTERS1 } from '../constants/usefulLists'
 import Colors from '../constants/colors'
+
+
+
+
+
 
 const CustomizeFiltersScreen = props => {
 
@@ -24,27 +29,48 @@ const CustomizeFiltersScreen = props => {
     }
 
 
+    const Filter = () => {
+        return (
+            <View style={styles.list1}>
+                {HOTELS_FILTERS.map((track) => {
+                    return (
+                        <TouchableOpacity key={track} style={styles.radioButton}>
+                            <Text>{track}</Text>
+                            <Checkbox
+                                status={checked ? 'checked' : 'unchecked'}
+                                onPress={() => {
+                                    setChecked(!checked);
+                                }}
+                            />
+                        </TouchableOpacity>
+
+
+                    )
+                })
+                }
+            </View>
+        )
+    }
+
+
     return (
         <View style={styles.list}>
             {HOTELS_FILTERS.map((property) => {
                 return (
                     <TouchableOpacity
-                        style={styles.radioButton}
+                        style={styles.radioButton1}
                         key={property}
-                        // onPress={() => confirmProperty(property)}
+                    // onPress={() => confirmProperty(property)}
                     >
-                        <Text style={styles.text}>{property}</Text>
-                        <Checkbox
-                            // value={property}
-                            color={Colors.button}
-                            status={checked === property ? 'checked' : 'unchecked'}
-                            // onPress={() => confirmProperty(property)}
-                        />
+                        <Title title={property} />
+
+                        <Filter />
+
                     </TouchableOpacity>
                 )
             })
             }
-            <NormalButton title='Confirm' style={styles.button}/>
+            <NormalButton title='Confirm' style={styles.button} />
         </View>
     );
 }
@@ -52,9 +78,13 @@ const CustomizeFiltersScreen = props => {
 export default CustomizeFiltersScreen
 
 const styles = StyleSheet.create({
+    list1: {
+
+    },
     list: {
-        width: 200,
-        height: 280,
+        // width: 200,
+        // height: 280,
+        flex: 1,
         backgroundColor: 'white',
         borderRadius: 5,
         elevation: 40,
