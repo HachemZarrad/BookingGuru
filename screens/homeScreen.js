@@ -35,11 +35,11 @@ const Home = () => {
       <Toolbar />
       <ScrollView>
         <CustomImage source={require('../assets/vacation.jpg')} />
-        <Title title='Pick Up Your Plan Here' />
+        <Title title='Pick Up Your Plan Here' style={styles.title} />
         <View style={styles.servicesMenu}>
           <ServicesMenu />
         </View>
-        <Title title='Popular Destinations' />
+        <Title title='Popular Destinations' style={styles.title} />
         <Destinations />
       </ScrollView>
     </View>
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     paddingBottom: 40
+  },
+  title: {
+    marginBottom: 15,
   }
 });
 

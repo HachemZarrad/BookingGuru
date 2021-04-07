@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 
 import { RadioButton, Checkbox } from 'react-native-paper';
 
@@ -34,10 +34,11 @@ const CustomizeFiltersScreen = props => {
             <View style={styles.list1}>
                 {HOTELS_FILTERS.map((track) => {
                     return (
-                        <TouchableOpacity key={track} style={styles.radioButton}>
-                            <Text>{track}</Text>
+                        <TouchableOpacity key={track} style={styles.checkBox}>
+                            <Text style={styles.text}>{track}</Text>
                             <Checkbox
                                 status={checked ? 'checked' : 'unchecked'}
+                                color={Colors.button}
                                 onPress={() => {
                                     setChecked(!checked);
                                 }}
@@ -54,24 +55,23 @@ const CustomizeFiltersScreen = props => {
 
 
     return (
-        <View style={styles.list}>
-            {HOTELS_FILTERS.map((property) => {
-                return (
-                    <TouchableOpacity
-                        style={styles.radioButton1}
-                        key={property}
-                    // onPress={() => confirmProperty(property)}
-                    >
-                        <Title title={property} />
-
-                        <Filter />
-
-                    </TouchableOpacity>
-                )
-            })
-            }
-            <NormalButton title='Confirm' style={styles.button} />
-        </View>
+        <ScrollView>
+            <View style={styles.list}>
+                {HOTELS_FILTERS.map((property) => {
+                    return (
+                        <TouchableOpacity
+                            style={styles.checkBox1}
+                            key={property}
+                        >
+                            <Title title={property} />
+                            <Filter />
+                        </TouchableOpacity>
+                    )
+                })
+                }
+                <NormalButton title='Confirm' style={styles.button} />
+            </View>
+        </ScrollView>
     );
 }
 
@@ -79,32 +79,27 @@ export default CustomizeFiltersScreen
 
 const styles = StyleSheet.create({
     list1: {
-
+        width: '80%',
+        // marginLeft: 40,
+        // backgroundColor: 'red',
+        alignSelf: 'center',
+        marginBottom: 15,
     },
     list: {
-        // width: 200,
-        // height: 280,
-        flex: 1,
         backgroundColor: 'white',
-        borderRadius: 5,
-        elevation: 40,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 2,
-        shadowRadius: 10,
-    },
-    radioButton: {
-        flex: 1,
         padding: 10,
-        width: '100%',
+        // justifyContent: 'center',
+    },
+    checkBox: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
     text: {
-        color: 'black',
+        fontSize: 15
     },
     button: {
-
+        alignSelf :'center',
+        margin: 20,
     }
 })
