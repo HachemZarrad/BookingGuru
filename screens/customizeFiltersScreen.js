@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 
-import { RadioButton, Checkbox } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
+import { Checkbox } from 'react-native-paper';
+
+import HotelStars from '../components/hotelStars'
 import NormalButton from '../components/normalButton'
 import Title from '../components/title'
 
-import { HOTELS_FILTERS, HOTELS_FILTERS1 } from '../constants/usefulLists'
+import { HOTELS_FILTERS } from '../constants/usefulLists'
 import Colors from '../constants/colors'
 
 
+const CustomizeFiltersScreen = ({route}) => {
 
-
-
-
-const CustomizeFiltersScreen = props => {
-
-    const { list, visibility, setInitial, initial } = props
-    const [checked, setChecked] = useState(initial ? initial : HOTELS_FILTERS[0]);
+    const navigation = useNavigation()
+    const dataFilters = route?.params?.dataFilters
+    const [checked, setChecked] = useState(HOTELS_FILTERS[0]);
 
 
     const confirmProperty = (property) => {
@@ -29,13 +29,17 @@ const CustomizeFiltersScreen = props => {
     }
 
 
-    const Filter = () => {
+    const Filter = ({ property }) => {
         return (
-            <View style={styles.list1}>
-                {HOTELS_FILTERS.map((track) => {
+            <View style={styles.checkBoxContainer}>
+                {Object.values(HOTELS_FILTERS[property]).map((filter) => {
                     return (
-                        <TouchableOpacity key={track} style={styles.checkBox}>
-                            <Text style={styles.text}>{track}</Text>
+                        <TouchableOpacity key={filter} style={styles.checkBox}>
+                            {property === 'StarRating' ?
+                                <HotelStars rating={filter} />
+                                :
+                                <Text style={styles.text}>{filter}</Text>
+                            }
                             <Checkbox
                                 status={checked ? 'checked' : 'unchecked'}
                                 color={Colors.button}
@@ -44,8 +48,6 @@ const CustomizeFiltersScreen = props => {
                                 }}
                             />
                         </TouchableOpacity>
-
-
                     )
                 })
                 }
@@ -57,15 +59,15 @@ const CustomizeFiltersScreen = props => {
     return (
         <ScrollView>
             <View style={styles.list}>
-                {HOTELS_FILTERS.map((property) => {
+                {Object.keys(HOTELS_FILTERS).map((property) => {
                     return (
-                        <TouchableOpacity
-                            style={styles.checkBox1}
+                        <View
+                            // style={styles}
                             key={property}
                         >
                             <Title title={property} />
-                            <Filter />
-                        </TouchableOpacity>
+                            <Filter property={property} />
+                        </View>
                     )
                 })
                 }
@@ -78,17 +80,16 @@ const CustomizeFiltersScreen = props => {
 export default CustomizeFiltersScreen
 
 const styles = StyleSheet.create({
-    list1: {
+    checkBoxContainer: {
         width: '80%',
-        // marginLeft: 40,
         // backgroundColor: 'red',
-        alignSelf: 'center',
-        marginBottom: 15,
+        // marginBottom: 15,
+        // marginLeft: 20,
+        margin: 20,
     },
     list: {
         backgroundColor: 'white',
         padding: 10,
-        // justifyContent: 'center',
     },
     checkBox: {
         flexDirection: 'row',
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     button: {
-        alignSelf :'center',
+        alignSelf: 'center',
         margin: 20,
     }
 })
