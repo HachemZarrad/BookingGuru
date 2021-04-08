@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +12,7 @@ import Title from '../components/title'
 import Colors from '../constants/colors'
 
 
-const CustomizeFiltersScreen = ({route}) => {
+const CustomizeFiltersScreen = ({ route }) => {
 
     const navigation = useNavigation()
     const dataFilters = route?.params
@@ -27,9 +27,26 @@ const CustomizeFiltersScreen = ({route}) => {
         }, 500);
     }
 
+    const createObjectReducer = (data, property) => {
+        let reducer = new Object()
+        Object.values(data[property].data).map((filter) => {
+            return (
+                reducer[filter] = false
+            )
+        })
+        return reducer
+    }
+
 
     const Filter = ({ property }) => {
         const [checked, setChecked] = useState(null)
+
+        const multipleChoiceObject = createObjectReducer(dataFilters, property)
+        const multipleChoiceReducer = () => {
+
+        }
+        const [multipleChoice, dispatch] = useReducer(multipleChoiceReducer, multipleChoiceObject)
+
         return (
             <View style={styles.checkBoxContainer}>
                 {Object.values(dataFilters[property].data).map((filter) => {
@@ -40,11 +57,19 @@ const CustomizeFiltersScreen = ({route}) => {
                                 :
                                 <Text style={styles.text}>{filter}</Text>
                             }
-                            <Checkbox
-                                status={checked === filter ? 'checked' : 'unchecked'}
-                                color={Colors.button}
-                                onPress={() => setChecked(filter)}
-                            />
+                            {dataFilters[property].multipleSelection ?
+                                <Checkbox
+                                    status={multipleChoice[filter] ? 'checked' : 'unchecked'}
+                                    color={Colors.button}
+                                    // onPress={() => setChecked(filter)}
+                                />
+                                :
+                                <Checkbox
+                                    status={checked === filter ? 'checked' : 'unchecked'}
+                                    color={Colors.button}
+                                    onPress={() => setChecked(filter)}
+                                />
+                            }
                         </TouchableOpacity>
                     )
                 })
