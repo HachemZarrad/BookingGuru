@@ -12,13 +12,14 @@ import IconLibrary from '../constants/iconLibrary'
 
 const PlayWithData = props => {
 
-    const { sortingList, getSortingProperty } = props
+    const { sortingList, getSortingProperty, filtersList } = props
     const [showList, setShowList] = useState(false)
-    const navigation = useNavigation()
     const [sortingProperty, setSortingProperty] = useState(null)
 
+    const navigation = useNavigation()
+
     const goToCustomizeFiltersScreen = () => {
-        navigation.navigate('CustomizeFilters')
+        navigation.navigate('CustomizeFilters', filtersList)
     }
 
     const showOrHideSortingList = () => {
@@ -66,9 +67,7 @@ const PlayWithData = props => {
                 animationType='slide'
                 transparent={true}
                 visible={showList}
-                onRequestClose={() => {
-                    showOrHideSortingList;
-                }}
+                onRequestClose={showOrHideSortingList}
             >
                 <TouchableOpacity style={styles.modalContainer} onPress={showOrHideSortingList}>
                     <View style={styles.list}>

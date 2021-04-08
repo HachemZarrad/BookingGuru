@@ -7,7 +7,7 @@ import PlayWithData from '../../components/playWithData'
 import FilteredData from '../../components/filteredData'
 
 import Colors from '../../constants/colors'
-import { HOTELS_SORTING_PROPERTIES } from '../../constants/usefulLists'
+import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERS } from '../../constants/usefulLists'
 
 import { filterDataByInput, sortHotelsData } from '../../functions/sortingAndFilteringData'
 
@@ -60,6 +60,7 @@ const Hotels = ({ route }) => {
       <PlayWithData
         sortingList={HOTELS_SORTING_PROPERTIES}
         getSortingProperty={getSortingProperty}
+        filtersList={HOTELS_FILTERS}
       />
 
       {showFileteredHotels && filteredHotels.length !== 0 ? (

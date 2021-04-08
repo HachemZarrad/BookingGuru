@@ -9,15 +9,14 @@ import HotelStars from '../components/hotelStars'
 import NormalButton from '../components/normalButton'
 import Title from '../components/title'
 
-import { HOTELS_FILTERS } from '../constants/usefulLists'
 import Colors from '../constants/colors'
 
 
 const CustomizeFiltersScreen = ({route}) => {
 
     const navigation = useNavigation()
-    const dataFilters = route?.params?.dataFilters
-    const [checked, setChecked] = useState(HOTELS_FILTERS[0]);
+    const dataFilters = route?.params
+    // const [checked, setChecked] = useState(1)
 
 
     const confirmProperty = (property) => {
@@ -30,9 +29,10 @@ const CustomizeFiltersScreen = ({route}) => {
 
 
     const Filter = ({ property }) => {
+        const [checked, setChecked] = useState(null)
         return (
             <View style={styles.checkBoxContainer}>
-                {Object.values(HOTELS_FILTERS[property]).map((filter) => {
+                {Object.values(dataFilters[property].data).map((filter) => {
                     return (
                         <TouchableOpacity key={filter} style={styles.checkBox}>
                             {property === 'StarRating' ?
@@ -41,11 +41,9 @@ const CustomizeFiltersScreen = ({route}) => {
                                 <Text style={styles.text}>{filter}</Text>
                             }
                             <Checkbox
-                                status={checked ? 'checked' : 'unchecked'}
+                                status={checked === filter ? 'checked' : 'unchecked'}
                                 color={Colors.button}
-                                onPress={() => {
-                                    setChecked(!checked);
-                                }}
+                                onPress={() => setChecked(filter)}
                             />
                         </TouchableOpacity>
                     )
@@ -59,7 +57,7 @@ const CustomizeFiltersScreen = ({route}) => {
     return (
         <ScrollView>
             <View style={styles.list}>
-                {Object.keys(HOTELS_FILTERS).map((property) => {
+                {Object.keys(dataFilters).map((property) => {
                     return (
                         <View
                             // style={styles}
