@@ -15,19 +15,19 @@ import passwordCreationActions from '../../constants/passwordCreationActions'
 
 const PasswordScreen = () => {
     const [state, dispatch] = useReducer(passwordCreationReducer, {
-        pristine: true,
-        password: '',
-        passwordHidden: true,
-        tenCharacters: false,
-        tenCharactersColor: 'red',
-        oneNumber: false,
-        oneNumberColor: 'red',
-        oneCapital: false,
-        oneCapitalColor: 'red',
-        passwordAccepted: false,
-        retypedPassword: '',
-        retypedPasswordHiddden: true,
-        passwordMatchConfirmed: false,
+        "pristine": true,
+        "password": '',
+        "passwordHidden": true,
+        "tenCharacters": false,
+        "tenCharactersColor": 'red',
+        "oneNumber": false,
+        "oneNumberColor": 'red',
+        "oneCapital": false,
+        "oneCapitalColor": 'red',
+        "passwordAccepted": false,
+        "retypedPassword": '',
+        "retypedPasswordHiddden": true,
+        "passwordMatchConfirmed": false,
 
     });
 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, ActivityIndicator, Button } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
 import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'

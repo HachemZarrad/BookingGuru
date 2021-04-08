@@ -16,17 +16,17 @@ export const FOOD_FILTERS = []
 
 
 export const HOTELS_FILTERS = {
-    StarRating: {
-        data: [1, 2, 3, 4, 5],
-        multipleSelection: false
+    "StarRating": {
+        "data": [1, 2, 3, 4, 5],
+        "multipleSelection": true
     },
-    Price: {
-        data: ['10$_40$', '40$_60$', '60$_80$', '80$_100$'],
-        multipleSelection: false
+    "Price": {
+        "data": ['10$_40$', '40$_60$', '60$_80$', '80$_100$'],
+        "multipleSelection": false
     },
-    Features: {
-        data: ['Free Cancellation', 'Payment Preference', 'No CC Required'],
-        multipleSelection: true
+    "Features": {
+        "data": ['Free Cancellation', 'Payment Preference', 'No CC Required'],
+        "multipleSelection": true
     }
 }
 
