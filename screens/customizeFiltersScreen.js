@@ -28,13 +28,24 @@ const CustomizeFiltersScreen = ({ route }) => {
     }
 
     const createObjectReducer = (data, property) => {
-        let reducer = new Object()
+        let objectReducer = new Object()
         Object.values(data[property].data).map((filter) => {
             return (
-                reducer[filter] = false
+                objectReducer[filter] = false
             )
         })
-        return reducer
+        return objectReducer
+    }
+
+    const createObjectReducerActions = (data, property) => {
+        let objectReducerActions = new Object()
+        Object.values(data[property].data).map((filter) => {
+            return (
+                objectReducerActions[filter] = filter
+            )
+        })
+        return objectReducerActions
+        
     }
 
 
@@ -42,11 +53,20 @@ const CustomizeFiltersScreen = ({ route }) => {
         const [checked, setChecked] = useState(null)
 
         const multipleChoiceObject = createObjectReducer(dataFilters, property)
-        const multipleChoiceReducer = () => {
+        const multipleChoiceActions = createObjectReducerActions(dataFilters, property)
+
+        const multipleChoiceReducer = (state, action) => {
+            Object.values(multipleChoiceActions).forEach(multipleChoiceAction => {
+                if(multipleChoiceAction === action.type) return { ...state, [action.type]: ![action.type] }
+            });
 
         }
         const [multipleChoice, dispatch] = useReducer(multipleChoiceReducer, multipleChoiceObject)
+        const manageMultipleSelection = (filter) => {
+            dispatch({type: filter})
+        }
 
+        console.log('dfs', multipleChoice["Free Cancellation"])
         return (
             <View style={styles.checkBoxContainer}>
                 {Object.values(dataFilters[property].data).map((filter) => {
@@ -61,7 +81,7 @@ const CustomizeFiltersScreen = ({ route }) => {
                                 <Checkbox
                                     status={multipleChoice[filter] ? 'checked' : 'unchecked'}
                                     color={Colors.button}
-                                    // onPress={() => setChecked(filter)}
+                                    onPress={() => manageMultipleSelection(filter)}
                                 />
                                 :
                                 <Checkbox
