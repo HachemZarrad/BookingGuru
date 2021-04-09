@@ -17,15 +17,30 @@ export const FOOD_FILTERS = []
 
 export const HOTELS_FILTERS = {
     "StarRating": {
-        "data": [1, 2, 3, 4, 5],
+        "data": {
+            '1': false,
+            '2': false,
+            '3': false,
+            '4': false,
+            '5': false
+        },
         "multipleSelection": false
     },
     "Price": {
-        "data": ['10$_40$', '40$_60$', '60$_80$', '80$_100$'],
+        "data": {
+            '10$_40$': false,
+            '40$_60$': false,
+            '60$_80$': false,
+            '80$_100$': false
+        },
         "multipleSelection": false
     },
     "Features": {
-        "data": ['Free Cancellation', 'Payment Preference', 'No CC Required'],
+        "data": {
+            'Free Cancellation': false,
+            'Payment Preference': false,
+            'No CC Required': false,
+        },
         "multipleSelection": true
     }
 }

@@ -8,27 +8,18 @@ import HotelStars from '../components/hotelStars'
 import Colors from '../constants/colors'
 
 
-const createObjectReducer = (data, property) => {
-    let objectReducer = new Object()
-    Object.values(data[property].data).map((filter) => {
-        return (
-            objectReducer[filter] = false
-        )
-    })
-    return objectReducer
+const multipleChoiceReducer = (state, action) => {
+    return { ...state, [action.type]: !action.payload }
 }
+
 
 const Filters = props => {
 
     const { property, dataFilters } = props
+    
     const [checked, setChecked] = useState(null)
 
-    const multipleChoiceObject = createObjectReducer(dataFilters, property)
-
-    const multipleChoiceReducer = (state, action) => {
-        return { ...state, [action.type]: !action.payload }
-    }
-
+    const multipleChoiceObject = dataFilters[property].data
     const [multipleChoice, dispatchMultipleChoice] = useReducer(multipleChoiceReducer, multipleChoiceObject)
 
     const manageMultipleSelection = (filter, state) => {
@@ -41,7 +32,7 @@ const Filters = props => {
 
     return (
         <View style={styles.checkBoxContainer}>
-            {Object.values(dataFilters[property].data).map((filter) => {
+            {Object.keys(dataFilters[property].data).map((filter) => {
                 return (
                     <TouchableOpacity key={filter} style={styles.checkBox}>
                         {property === 'StarRating' ?
