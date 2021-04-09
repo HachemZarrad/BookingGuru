@@ -15,19 +15,22 @@ const multipleChoiceReducer = (state, action) => {
 
 const Filters = props => {
 
-    const { property, dataFilters } = props
-    
+    const { property, dataFilters, pickFilter } = props
+
     const [checked, setChecked] = useState(null)
 
-    const multipleChoiceObject = dataFilters[property].data
+    const multipleChoiceObject = {...dataFilters[property].data}
     const [multipleChoice, dispatchMultipleChoice] = useReducer(multipleChoiceReducer, multipleChoiceObject)
 
     const manageMultipleSelection = (filter, state) => {
         dispatchMultipleChoice({ type: filter, payload: state })
+        pickFilter(property, filter)
     }
 
     const manageSelection = (filter) => {
-        setChecked(filter)
+        if(checked === filter) setChecked(null)
+        else setChecked(filter)
+        pickFilter(property, filter)
     }
 
     return (

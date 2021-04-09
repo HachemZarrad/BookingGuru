@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native';
@@ -8,21 +8,22 @@ import Title from '../components/title'
 import Filters from '../components/filters'
 
 
-
 const CustomizeFiltersScreen = ({ route }) => {
 
     const navigation = useNavigation()
     const dataFilters = route?.params
-    // const [finalFilters, dispatchFinalFilters] = useReducer(finalFiltersReducer, {})
+    const pickedFilters = { ...dataFilters }
 
-
-    const confirmProperty = (property) => {
-        setChecked(property)
-        setInitial(property)
-        setTimeout(() => {
-            visibility()
-        }, 500);
+    const pickFilter = (property, filter) => {
+        if (!pickedFilters[property].multipleSelection) {
+            Object.keys(pickedFilters[property].data).forEach(key => {
+                if (key !== filter) pickedFilters[property].data[key] = false
+            })
+        }
+        pickedFilters[property].data[filter] = !pickedFilters[property].data[filter]
+        console.log('hey man stop cursing', dataFilters)
     }
+
 
 
     return (
@@ -36,6 +37,7 @@ const CustomizeFiltersScreen = ({ route }) => {
                                 <Filters
                                     property={property}
                                     dataFilters={dataFilters}
+                                    pickFilter={pickFilter}
                                 />
                             </View>
                         )
