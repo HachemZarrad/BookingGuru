@@ -18,7 +18,7 @@ export const FOOD_FILTERS = []
 export const HOTELS_FILTERS = {
     "StarRating": {
         "data": [1, 2, 3, 4, 5],
-        "multipleSelection": true
+        "multipleSelection": false
     },
     "Price": {
         "data": ['10$_40$', '40$_60$', '60$_80$', '80$_100$'],
