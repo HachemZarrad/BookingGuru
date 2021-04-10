@@ -20,6 +20,7 @@ const KEYS_TO_FILTERS = ['name', 'address.locality']
 const Hotels = ({ route }) => {
 
   const destination = route?.params?.destination
+  const pickedFilters = route?.params?.pickedFilters
 
   const [searchTerm, setSearchTerm] = useState('')
   const [showFileteredHotels, setShowFileterdHotels] = useState(false)

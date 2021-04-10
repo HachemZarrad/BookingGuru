@@ -1,32 +1,32 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
 const ServicesMenu = () => {
     const navigation = useNavigation();
-    return(
+    return (
         <View style={styles.frame}>
             <View style={styles.container}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Hotels',
-                 {
-                    screen: 'HotelsOverview',
-                    params: {destination: null},
-                  })
+                <TouchableOpacity onPress={() => navigation.navigate('Hotels',
+                    {
+                        screen: 'HotelsOverview',
+                        params: { destination: null },
+                    })
                 }>
-                    <Image 
+                    <Image
                         source={require('../assets/hotel.png')}
-                        style={styles.image}/>
+                        style={styles.image} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> navigation.navigate('Food')}> 
-                    <Image 
+                <TouchableOpacity onPress={() => navigation.navigate('Food')}>
+                    <Image
                         source={require('../assets/food.png')}
-                        style={styles.image}/>
+                        style={styles.image} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> navigation.navigate('Flights')}>
-                    <Image 
+                <TouchableOpacity onPress={() => navigation.navigate('Flights')}>
+                    <Image
                         source={require('../assets/airplane.png')}
-                        style={styles.image}/>
+                        style={styles.image} />
                 </TouchableOpacity>
             </View>
             <View style={styles.container}>
@@ -35,21 +35,21 @@ const ServicesMenu = () => {
                 <Text>Flight</Text>
             </View>
             <View style={styles.container}>
-              <TouchableOpacity onPress={()=> navigation.navigate('Trains')}>
-                <Image 
-                    source={require('../assets/train.png')}
-                    style={styles.image}/>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={()=> navigation.navigate('Buses')}>
-                <Image 
-                    source={require('../assets/bus.png')}
-                    style={styles.image}/>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={()=> navigation.navigate('Taxis')}>
-                <Image 
-                    source={require('../assets/taxi.png')}
-                    style={styles.image}/>
-              </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Trains')}>
+                    <Image
+                        source={require('../assets/train.png')}
+                        style={styles.image} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Buses')}>
+                    <Image
+                        source={require('../assets/bus.png')}
+                        style={styles.image} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Taxis')}>
+                    <Image
+                        source={require('../assets/taxi.png')}
+                        style={styles.image} />
+                </TouchableOpacity>
             </View>
             <View style={styles.container}>
                 <Text>Train</Text>
@@ -58,7 +58,7 @@ const ServicesMenu = () => {
             </View>
         </View>
     );
-    
+
 }
 
 const styles = StyleSheet.create({
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: '90%',
         borderRadius: 10,
-        
+
     }
 });
 

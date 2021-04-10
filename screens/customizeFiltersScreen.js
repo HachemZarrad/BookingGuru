@@ -1,8 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native';
-
 import NormalButton from '../components/normalButton'
 import Title from '../components/title'
 import Filters from '../components/filters'
@@ -10,7 +8,6 @@ import Filters from '../components/filters'
 
 const CustomizeFiltersScreen = ({ route }) => {
 
-    const navigation = useNavigation()
     const dataFilters = route?.params
     const pickedFilters = { ...dataFilters }
 
@@ -21,9 +18,7 @@ const CustomizeFiltersScreen = ({ route }) => {
             })
         }
         pickedFilters[property].data[filter] = !pickedFilters[property].data[filter]
-        console.log('hey man stop cursing', dataFilters)
     }
-
 
 
     return (
@@ -45,7 +40,12 @@ const CustomizeFiltersScreen = ({ route }) => {
                     }
                 </View>
             </ScrollView>
-            <NormalButton title='Confirm' style={styles.button} />
+            <NormalButton
+                title='Confirm'
+                nextScreen='HotelsOverview'
+                payload={pickedFilters}
+                style={styles.button}
+            />
         </View>
     );
 }

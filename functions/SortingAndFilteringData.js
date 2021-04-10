@@ -34,7 +34,21 @@ export const filterDataByInput = (data, input, properties) => {
     return data.filter(createFilter(input, properties))
 }
 
+export const filterDataByProperty = (data, pickedFilters ) => {
+    const properties = []
+    Object.entries(pickedFilters).map((item) => {
+        return {...properties, item}
+    })
+    properties.forEach((property) => {
+        Object.keys(pickedFilters[property].data).map(key => {
+            if(pickedFilters[property].data[key]) return data.filter(createFilter(key, property))
+        })
+    })
+}
 
+export const filterHotelsData = (data, pickedFilters) => {
+
+}
 
 export const sortHotelsData = (data, property) => {
     switch (property) {

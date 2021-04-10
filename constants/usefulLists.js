@@ -7,7 +7,6 @@ export const GENDER = ['Male', 'Female']
 export const TITLE = ['Mr.', 'Ms.']
 
 //Filters to guarantee better User Experience
-export const HOTELS_FILTERS1 = ['starRating', 'price', 'freeCancellation', 'paymentPreference', 'noCCRequired']
 export const FLIGHTS_FILTERS = ['destination', 'Airport']
 export const TRAINS_FILTERS = ['type', 'name', 'description', 'distance']
 export const BUSES_FILTERS = ['mode', 'line', 'direction', 'date', 'departure_time', 'operator_name']
