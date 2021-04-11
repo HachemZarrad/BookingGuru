@@ -13,7 +13,7 @@ export const BUSES_FILTERS = ['mode', 'line', 'direction', 'date', 'departure_ti
 export const TAXIS_FILTERS = ['Large People Carrier', 'Executive People Carrier', 'Luxury', 'Standar', 'People Carrier', 'Executive']
 export const FOOD_FILTERS = []
 
-export const HOTELS_FILTERING_PROPERTIES = ["starRating", "price", "features"]
+export const HOTELS_FILTERING_PROPERTIES = ["StarRating", "Price", "Features"]
 export const HOTELS_FILTERS = {
     "StarRating": {
         "data": {

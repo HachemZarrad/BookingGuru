@@ -1,5 +1,4 @@
 import { createFilter } from 'react-native-search-filter'
-import FilteredData from '../components/filteredData'
 import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERING_PROPERTIES } from '../constants/usefulLists'
 
 export const sortCategoricalDataAscendingly = (data, property) => {
@@ -35,42 +34,28 @@ export const filterDataByInput = (data, input, properties) => {
     return data.filter(createFilter(input, properties))
 }
 
-export const filterDataByProperty = (data, pickedFilters) => {
-    const properties = []
-    Object.entries(pickedFilters).map((item) => {
-        return { ...properties, item }
-    })
-    properties.forEach((property) => {
-        Object.keys(pickedFilters[property].data).map(key => {
-            if (pickedFilters[property].data[key]) return data.filter(createFilter(key, property))
+export const filterHotelsData = (pickedFilters, data) => {
+    let finalData = [...data]
+    HOTELS_FILTERING_PROPERTIES.forEach((property) => {
+        Object.values(pickedFilters[property].data).forEach(value => {
+            if (value) finalData = filterHotelsDataAccordingToProperty(finalData, property, value)
         })
     })
+    return finalData
 }
 
-export const filterHotelsData = (data, pickedFilters, property) => {
+export const filterHotelsDataAccordingToProperty = (data, property, propertyValue) => {
     switch (property) {
         case (HOTELS_FILTERING_PROPERTIES[0]):
-            Object.values(pickedFilters[property].data).forEach(value => {
-                if (value) return data.filter(createFilter(value, property.toLowerCase()))
-            })
+            return data.filter(createFilter(propertyValue, 'starRating'))
         case (HOTELS_FILTERING_PROPERTIES[1]):
-            Object.values(pickedFilters[property].data).forEach(value => {
-                if (value) {
-                    priceRange = value.split('_')
-                    const minPrice = parseInt(priceRange[0].replace('$', ''))
-                    const maxPrice = parseInt(priceRange[1].replace('$', ''))
-                    return data.filter(hotel => hotel.price >= minPrice && hotel.price <= maxPrice)
-                }
-            })
+            priceRange = propertyValue.split('_')
+            const minPrice = parseInt(priceRange[0].replace('$', ''))
+            const maxPrice = parseInt(priceRange[1].replace('$', ''))
+            return data.filter(hotel => hotel.price >= minPrice && hotel.price <= maxPrice)
         case (HOTELS_FILTERING_PROPERTIES[2]):
-            let FilteredData = []
-            Object.values(pickedFilters[property].data).forEach(value => {
-                if (value) {
-                    feature = value.toLowerCase().replace(/ /g, '')
-                    FilteredData = data.filter(hotel => hotel.features[feature])
-                }
-            })
-            return FilteredData
+            feature = propertyValue.toLowerCase().replace(/ /g, '')
+            return data.filter(hotel => hotel.features[feature])
     }
 }
 
