@@ -6,7 +6,7 @@ import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERS } from '../constants/usefulLi
 
 
 
-export const filterHotelsData = (hotels, pickedFilters) => {
+export const filterHotelsData = (hotels, pickedFilters = HOTELS_FILTERS) => {
     const starsFilter = handleStarsFilter(hotels, pickedFilters)
     const priceFilter = handlePriceFilter(starsFilter, pickedFilters)
     const featuresFilter = handleFeaturesFilter(priceFilter, pickedFilters)

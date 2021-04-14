@@ -98,9 +98,9 @@ const CustomList = props => {
 
   return (
     <View style={{ flex: 1 }}>
+      {props.data.length === 0 ? <View><Text>No Data Matches Your Filters</Text></View> : 
       <FlatList
         {...props}
-        // style={{}}
         keyExtractor={({ _id }) => _id.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => handleItemClick(pressedElement, item)}>
@@ -108,6 +108,7 @@ const CustomList = props => {
           </TouchableOpacity>
         )}
       />
+      }
     </View>
   )
 }

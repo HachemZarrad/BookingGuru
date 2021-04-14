@@ -13,6 +13,7 @@ const FitletredDataTrack = props => {
             <NormalButton
                 style={styles.clearButton}
                 title='Clear'
+                onPress={resetFunction}
             />
         </View>
     )

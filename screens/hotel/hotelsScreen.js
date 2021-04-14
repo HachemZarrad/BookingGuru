@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, ActivityIndicator, Text } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
 import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
@@ -25,7 +25,7 @@ const Hotels = ({ route }) => {
   const pickedFilters = route?.params?.pickedFilters
   // console.log('hey', pickedFilters)
   // console.log('have a look', HOTELS_FILTERS)
-  
+
 
   const [searchTerm, setSearchTerm] = useState('')
   const [showFileteredHotels, setShowFileterdHotels] = useState(false)
@@ -34,14 +34,14 @@ const Hotels = ({ route }) => {
   const hotels = useSelector(state => state.hotels.hotels)
   const loading = useSelector(state => state.hotels.loading)
   const customizedHotelsList = pickedFilters ? filterHotelsData(hotels, pickedFilters) : hotels
+  // const [customizedHotelsList, setCustomizedHotelsList] = useState(hotels)
 
-  const sortedHotels = customizedHotelsList.length === 0 ?
-    sortHotelsData(hotels, sortingProperty) :
-    sortHotelsData(customizedHotelsList, sortingProperty)
+  const sortedHotels = sortHotelsData(customizedHotelsList, sortingProperty)
 
   const hotelsAccordingToDestination = destination ? filterDataByInput(hotels, destination, 'address.locality') : []
   const filteredHotels = filterDataByInput(hotels, searchTerm, KEYS_TO_FILTERS)
 
+  
   const searchBarHandler = (term) => {
     setSearchTerm(term)
     setShowFileterdHotels(true)
@@ -55,6 +55,11 @@ const Hotels = ({ route }) => {
   const getSortingProperty = (property) => {
     setSortingProperty(property)
   }
+
+  const clearUserFilters = () => {
+    setCustomizedHotelsList(hotels)
+  }
+
 
 
 
@@ -79,7 +84,7 @@ const Hotels = ({ route }) => {
         : null
       }
 
-      {loading  ?
+      {loading ?
         <ActivityIndicator size="large" color='gold' /> : (
           <CustomList
             data={destination ? hotelsAccordingToDestination : sortedHotels}
@@ -91,6 +96,7 @@ const Hotels = ({ route }) => {
         <FitletredDataTrack
           data={customizedHotelsList}
           dataType='Hotels'
+          resetFunction={clearUserFilters}
         />
       }
     </View>
