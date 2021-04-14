@@ -5,11 +5,13 @@ import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
 import PlayWithData from '../../components/playWithData'
 import FilteredData from '../../components/filteredData'
+import FitletredDataTrack from '../../components/fitletredDataTrack'
 
 import Colors from '../../constants/colors'
 import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERS } from '../../constants/usefulLists'
 
-import { filterDataByInput, sortHotelsData, filterHotelsData } from '../../functions/sortingAndFilteringData'
+import { filterDataByInput } from '../../functions/sortingAndFilteringData'
+import { sortHotelsData, filterHotelsData } from '../../functions/hotelsFunctions'
 
 import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
@@ -21,6 +23,9 @@ const Hotels = ({ route }) => {
 
   const destination = route?.params?.destination
   const pickedFilters = route?.params?.pickedFilters
+  // console.log('hey', pickedFilters)
+  // console.log('have a look', HOTELS_FILTERS)
+  
 
   const [searchTerm, setSearchTerm] = useState('')
   const [showFileteredHotels, setShowFileterdHotels] = useState(false)
@@ -28,7 +33,7 @@ const Hotels = ({ route }) => {
 
   const hotels = useSelector(state => state.hotels.hotels)
   const loading = useSelector(state => state.hotels.loading)
-  const customizedHotelsList = pickedFilters ? filterHotelsData(pickedFilters, hotels) : []
+  const customizedHotelsList = pickedFilters ? filterHotelsData(hotels, pickedFilters) : hotels
 
   const sortedHotels = customizedHotelsList.length === 0 ?
     sortHotelsData(hotels, sortingProperty) :
@@ -36,7 +41,6 @@ const Hotels = ({ route }) => {
 
   const hotelsAccordingToDestination = destination ? filterDataByInput(hotels, destination, 'address.locality') : []
   const filteredHotels = filterDataByInput(hotels, searchTerm, KEYS_TO_FILTERS)
-
 
   const searchBarHandler = (term) => {
     setSearchTerm(term)
@@ -75,7 +79,7 @@ const Hotels = ({ route }) => {
         : null
       }
 
-      {loading || sortedHotels?.length < hotels.length ?
+      {loading  ?
         <ActivityIndicator size="large" color='gold' /> : (
           <CustomList
             data={destination ? hotelsAccordingToDestination : sortedHotels}
@@ -83,9 +87,12 @@ const Hotels = ({ route }) => {
             service={ActionTypes.GET_HOTELS}
           />
         )}
-        {
-          <View style={{backgroundColor: 'red'}}><Text>Result: {customizedHotelsList.length} Hotels</Text></View>
-        }
+      {customizedHotelsList.length === hotels.length ? null :
+        <FitletredDataTrack
+          data={customizedHotelsList}
+          dataType='Hotels'
+        />
+      }
     </View>
   )
 }

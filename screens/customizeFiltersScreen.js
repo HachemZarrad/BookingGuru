@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 
+import { useNavigation } from '@react-navigation/native'
+
 import NormalButton from '../components/normalButton'
 import Title from '../components/title'
 import Filters from '../components/filters'
@@ -9,7 +11,8 @@ import Filters from '../components/filters'
 const CustomizeFiltersScreen = ({ route }) => {
 
     const dataFilters = route?.params
-    const pickedFilters = { ...dataFilters }
+    const pickedFilters = JSON.parse(JSON.stringify(dataFilters))  
+    const navigation = useNavigation()
 
     const pickFilter = (property, filter) => {
         if (!pickedFilters[property].multipleSelection) {
@@ -18,6 +21,14 @@ const CustomizeFiltersScreen = ({ route }) => {
             })
         }
         pickedFilters[property].data[filter] = !pickedFilters[property].data[filter]
+    }
+
+    const dispatchPickedFilters = () => {
+        navigation.navigate('Hotels',
+        {
+            screen: 'HotelsOverview',
+            params: { pickedFilters: pickedFilters },
+        })
     }
 
 
@@ -42,8 +53,7 @@ const CustomizeFiltersScreen = ({ route }) => {
             </ScrollView>
             <NormalButton
                 title='Confirm'
-                nextScreen='HotelsOverview'
-                payload={pickedFilters}
+                onPress={dispatchPickedFilters}
                 style={styles.button}
             />
         </View>

@@ -2,14 +2,14 @@ import {
     adaptFilterKey, sortCategoricalDataAscendingly,
     sortNumericalDataAscendingly, sortNumericalDataDescendingly
 } from './sortingAndFilteringData'
-import { HOTELS_SORTING_PROPERTIES } from '../constants/usefulLists'
+import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERS } from '../constants/usefulLists'
 
 
 
-export const filterHotelsData = (hotels) => {
-    const starsFilter = handleStarsFilter(hotels)
-    const priceFilter = handlePriceFilter(starsFilter)
-    const featuresFilter = handleFeaturesFilter(priceFilter)
+export const filterHotelsData = (hotels, pickedFilters) => {
+    const starsFilter = handleStarsFilter(hotels, pickedFilters)
+    const priceFilter = handlePriceFilter(starsFilter, pickedFilters)
+    const featuresFilter = handleFeaturesFilter(priceFilter, pickedFilters)
     return featuresFilter
 }
 
