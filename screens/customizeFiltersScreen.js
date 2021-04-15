@@ -10,7 +10,8 @@ import Filters from '../components/filters'
 
 const CustomizeFiltersScreen = ({ route }) => {
 
-    const dataFilters = route?.params
+    const dataFilters = route?.params?.filtersList
+    const clear = route?.params?.clear
     const pickedFilters = JSON.parse(JSON.stringify(dataFilters))  
     const navigation = useNavigation()
 
@@ -52,7 +53,7 @@ const CustomizeFiltersScreen = ({ route }) => {
                 </View>
             </ScrollView>
             <NormalButton
-                title='Confirm'
+                title={clear ? 'Clear' : 'Confirm'}
                 onPress={dispatchPickedFilters}
                 style={styles.button}
             />

@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, ActivityIndicator } from 'react-native'
+
+import { useNavigation } from '@react-navigation/native'
 
 import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
@@ -21,11 +23,9 @@ const KEYS_TO_FILTERS = ['name', 'address.locality']
 
 const Hotels = ({ route }) => {
 
+  const navigation = useNavigation()
   const destination = route?.params?.destination
   const pickedFilters = route?.params?.pickedFilters
-  // console.log('hey', pickedFilters)
-  // console.log('have a look', HOTELS_FILTERS)
-
 
   const [searchTerm, setSearchTerm] = useState('')
   const [showFileteredHotels, setShowFileterdHotels] = useState(false)
@@ -33,14 +33,12 @@ const Hotels = ({ route }) => {
 
   const hotels = useSelector(state => state.hotels.hotels)
   const loading = useSelector(state => state.hotels.loading)
-  const customizedHotelsList = pickedFilters ? filterHotelsData(hotels, pickedFilters) : hotels
-  // const [customizedHotelsList, setCustomizedHotelsList] = useState(hotels)
+  const customizedHotelsList = filterHotelsData(hotels, pickedFilters)
 
   const sortedHotels = sortHotelsData(customizedHotelsList, sortingProperty)
 
   const hotelsAccordingToDestination = destination ? filterDataByInput(hotels, destination, 'address.locality') : []
   const filteredHotels = filterDataByInput(hotels, searchTerm, KEYS_TO_FILTERS)
-
   
   const searchBarHandler = (term) => {
     setSearchTerm(term)
@@ -57,10 +55,8 @@ const Hotels = ({ route }) => {
   }
 
   const clearUserFilters = () => {
-    setCustomizedHotelsList(hotels)
+    navigation.navigate('CustomizeFilters', {clear: true, filtersList: HOTELS_FILTERS})
   }
-
-
 
 
   return (
