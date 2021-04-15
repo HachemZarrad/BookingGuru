@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, ActivityIndicator } from 'react-native'
-
 
 import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
@@ -23,6 +22,7 @@ const KEYS_TO_FILTERS = ['name', 'address.locality']
 const Hotels = ({ route }) => {
 
   const destination = route?.params?.destination
+  const pickedFilters = route?.params?.pickedFilters
 
   const [searchTerm, setSearchTerm] = useState('')
   const [showFileteredHotels, setShowFileterdHotels] = useState(false)
@@ -37,6 +37,11 @@ const Hotels = ({ route }) => {
   const hotelsAccordingToDestination = destination ? filterDataByInput(hotels, destination, 'address.locality') : []
   const filteredHotels = filterDataByInput(hotels, searchTerm, KEYS_TO_FILTERS)
   
+  useEffect(() => {
+    if (JSON.stringify(pickedFilters) !== JSON.stringify(HOTELS_FILTERS)) setCustomizedHotelsList(filterHotelsData(hotels, pickedFilters))
+  }, [pickedFilters])
+  
+
   const searchBarHandler = (term) => {
     setSearchTerm(term)
     setShowFileterdHotels(true)
@@ -51,9 +56,6 @@ const Hotels = ({ route }) => {
     setSortingProperty(property)
   }
 
-  const applyUserFilters = (pickedFilters) => {
-    setCustomizedHotelsList(filterHotelsData(hotels, pickedFilters))
-  } 
 
   const clearUserFilters = () => {
     setCustomizedHotelsList(filterHotelsData(hotels, HOTELS_FILTERS))
@@ -73,7 +75,6 @@ const Hotels = ({ route }) => {
         sortingList={HOTELS_SORTING_PROPERTIES}
         getSortingProperty={getSortingProperty}
         filtersList={HOTELS_FILTERS}
-        applyUserFilters={applyUserFilters}
       />
 
       {showFileteredHotels && filteredHotels.length !== 0 ? (

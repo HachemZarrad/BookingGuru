@@ -18,7 +18,7 @@ const PlayWithData = props => {
     const navigation = useNavigation()
 
     const goToCustomizeFiltersScreen = () => {
-        navigation.navigate('CustomizeFilters', {filtersList: filtersList, applyUserFilters: applyUserFilters} )
+        navigation.navigate('CustomizeFilters', filtersList)
     }
 
     const showOrHideSortingList = () => {

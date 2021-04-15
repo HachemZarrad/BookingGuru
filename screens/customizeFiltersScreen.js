@@ -10,9 +10,7 @@ import Filters from '../components/filters'
 
 const CustomizeFiltersScreen = ({ route }) => {
 
-    const dataFilters = route?.params?.filtersList
-    // const clear = route?.params?.clear
-    const applyUserFilters = route?.params?.applyUserFilters
+    const dataFilters = route?.params
     const pickedFilters = JSON.parse(JSON.stringify(dataFilters))  
     const navigation = useNavigation()
 
@@ -26,10 +24,10 @@ const CustomizeFiltersScreen = ({ route }) => {
     }
 
     const dispatchPickedFilters = () => {
-        applyUserFilters(pickedFilters)
         navigation.navigate('Hotels',
         {
             screen: 'HotelsOverview',
+            params: { pickedFilters: pickedFilters },
         })
     }
 
