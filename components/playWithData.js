@@ -6,20 +6,19 @@ import { useNavigation } from '@react-navigation/native'
 import Icon from '../components/icon'
 import SortingList from '../components/sortingList'
 
-import Colors from '../constants/colors'
 import IconLibrary from '../constants/iconLibrary'
 
 
 const PlayWithData = props => {
 
-    const { sortingList, getSortingProperty, filtersList } = props
+    const { sortingList, getSortingProperty, filtersList, applyUserFilters } = props
     const [showList, setShowList] = useState(false)
     const [sortingProperty, setSortingProperty] = useState(null)
 
     const navigation = useNavigation()
 
     const goToCustomizeFiltersScreen = () => {
-        navigation.navigate('CustomizeFilters', {filtersList: filtersList} )
+        navigation.navigate('CustomizeFilters', {filtersList: filtersList, applyUserFilters: applyUserFilters} )
     }
 
     const showOrHideSortingList = () => {

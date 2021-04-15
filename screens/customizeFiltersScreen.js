@@ -11,7 +11,8 @@ import Filters from '../components/filters'
 const CustomizeFiltersScreen = ({ route }) => {
 
     const dataFilters = route?.params?.filtersList
-    const clear = route?.params?.clear
+    // const clear = route?.params?.clear
+    const applyUserFilters = route?.params?.applyUserFilters
     const pickedFilters = JSON.parse(JSON.stringify(dataFilters))  
     const navigation = useNavigation()
 
@@ -25,10 +26,10 @@ const CustomizeFiltersScreen = ({ route }) => {
     }
 
     const dispatchPickedFilters = () => {
+        applyUserFilters(pickedFilters)
         navigation.navigate('Hotels',
         {
             screen: 'HotelsOverview',
-            params: { pickedFilters: pickedFilters },
         })
     }
 
@@ -53,7 +54,7 @@ const CustomizeFiltersScreen = ({ route }) => {
                 </View>
             </ScrollView>
             <NormalButton
-                title={clear ? 'Clear' : 'Confirm'}
+                title='Confirm'
                 onPress={dispatchPickedFilters}
                 style={styles.button}
             />

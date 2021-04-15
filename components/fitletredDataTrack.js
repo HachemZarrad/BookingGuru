@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, button } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import Colors from '../constants/colors'
 import NormalButton from './normalButton'
@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
+        fontSize: 13.5,
     }
 })
