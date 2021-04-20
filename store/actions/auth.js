@@ -17,6 +17,7 @@ export const signUp = (creds) => async (dispatch) => {
         if(!response.ok) throw Error(response.err)
         AsyncStorage.setItem('token', response.token)
         AsyncStorage.setItem('creds', JSON.stringify(creds))
+        dispatch({type: ActionTypes.SIGN_UP_SUCCESS, payload: response})
     }
     catch(error) {
         dispatch({type: ActionTypes.SIGN_UP_FAILURE, payload: error})
