@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {StyleSheet, View,ActivityIndicator} from 'react-native'
+import { StyleSheet, View, ActivityIndicator } from 'react-native'
 
 import * as ActionTypes from '../../store/actions/actionTypes'
 import { useSelector } from 'react-redux'
@@ -12,15 +12,15 @@ import Colors from '../../constants/colors'
 
 const Trains = () => {
 
-  const trains = useSelector(state => state.trains.trains._W)
+  const trains = useSelector(state => state.trains.trains)
   const isLoading = useSelector(state => state.trains.loading)
 
   return (
     <View style={styles.ParentContainer}>
-      <CustomHeader ComponentTitle='Available Trains List'/>
-      <PlayWithData/>
+      <CustomHeader ComponentTitle='Available Trains List' />
+      <PlayWithData />
       {isLoading ? <ActivityIndicator /> : (
-      <CustomList data={trains} pressedElement='TrainDetails' service={ActionTypes.GET_TRAINS} />
+        <CustomList data={trains} pressedElement='TrainDetails' service={ActionTypes.GET_TRAINS} />
 
       )}
     </View>

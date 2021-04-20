@@ -28,7 +28,7 @@ const Hotels = ({ route }) => {
   const [showFileteredHotels, setShowFileterdHotels] = useState(false)
   const [sortingProperty, setSortingProperty] = useState(HOTELS_SORTING_PROPERTIES[0])
   
-  const hotels = useSelector(state => state.hotels.hotels._W)
+  const hotels = useSelector(state => state.hotels.hotels)
   const loading = useSelector(state => state.hotels.loading)
   const [customizedHotelsList, setCustomizedHotelsList] = useState(filterHotelsData(hotels, HOTELS_FILTERS))
 
