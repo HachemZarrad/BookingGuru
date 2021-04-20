@@ -2,23 +2,19 @@ import * as ActionTypes from '../actions/actionTypes';
 import { baseUrl } from '../../constants/networking';
 
 
-export const fetchHotels = () => (dispatch) => {
-    dispatch({ type: ActionTypes.HOTELS_LOADING })
-    return fetch(`${baseUrl}hotels`)
-        .then(response => {
-            if (response.ok) return response;
-            else {
-                let error = new Error('Error ' + response.status + ': ' + response.statusText);
-                error.response = response;
-                throw error;
-            }
-        },
-            error => {
-                let errmess = new Error(error.message);
-                throw errmess;
-            })
-        .then(response => response.json())
-        .then(hotels => dispatch({ type: ActionTypes.GET_HOTELS, payload: hotels }))
-        .catch(error => dispatch({ type: ActionTypes.HOTELS_FAILED, payload: error.message }))
 
+export const fetchHotels = () => {
+    return async (dispatch) => {
+        dispatch({ type: ActionTypes.HOTELS_LOADING })
+        try {
+            const response = await fetch(`${baseUrl}hotels`)
+            if (!response.ok) throw Error('What The Fuck')
+            const hotels = response.json()
+            dispatch({ type: ActionTypes.GET_HOTELS, payload: hotels })
+        }
+        catch (error) {
+            dispatch({ type: ActionTypes.HOTELS_FAILED, payload: error })
+            throw error
+        }
+    }
 }

@@ -12,7 +12,7 @@ import Colors from '../../constants/colors'
 
 const Trains = () => {
 
-  const trains = useSelector(state => state.trains.trains)
+  const trains = useSelector(state => state.trains.trains._W)
   const isLoading = useSelector(state => state.trains.loading)
 
   return (
