@@ -2,6 +2,7 @@ import { combineReducers, applyMiddleware, createStore } from 'redux';
 import Thunk from 'redux-thunk';
 import { logger } from 'redux-logger';
 
+import authenticationReducer from './reducers/auth'
 import hotelsReducer from './reducers/hotels';
 import popularDestinationsReducer from './reducers/popularDestinations'
 import flightsReducer from './reducers/flights'
@@ -13,6 +14,7 @@ import favoritesReducer from './reducers/favorites';
 import countriesReducer from './reducers/countriesAndCodes';
 
 const rootReducer = combineReducers({
+    auth: authenticationReducer,
     hotels: hotelsReducer,
     popularDestinations: popularDestinationsReducer, 
     flights: flightsReducer,

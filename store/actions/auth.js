@@ -5,12 +5,12 @@ import { baseUrl } from '../../constants/networking';
 
 let timer = 0
 
-const authentication = (type, payload) => (dispatch) => {
-    dispatch({ type: type, payload: payload })
+const authentication = (payload) => (dispatch) => {
+    dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: payload })
 }
 
 export const signUp = (creds) => async (dispatch) => {
-    dispatch({ type: ActionTypes.SIGN_UP_REQUEST, payload: creds })
+    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST, payload: creds })
     try {
         const response = await fetch(`${baseUrl}users/signup`, {
             method: 'POST',
@@ -22,10 +22,10 @@ export const signUp = (creds) => async (dispatch) => {
         if (!response.ok) throw Error(response.err)
         AsyncStorage.setItem('token', response.token)
         AsyncStorage.setItem('creds', JSON.stringify(creds))
-        dispatch({ type: ActionTypes.SIGN_UP_SUCCESS, payload: response })
+        authentication(response)
     }
     catch (error) {
-        dispatch({ type: ActionTypes.SIGN_UP_FAILURE, payload: error })
+        dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
 
     }
 }
@@ -33,7 +33,7 @@ export const signUp = (creds) => async (dispatch) => {
 
 
 export const login = (creds) => async (dispatch) => {
-    dispatch({ type: ActionTypes.LOGIN_REQUEST, payload: creds })
+    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST, payload: creds })
     try {
         const response = await fetch(`${baseUrl}users/login`, {
             method: 'POST',
@@ -45,10 +45,10 @@ export const login = (creds) => async (dispatch) => {
         if (!response.ok) throw Error(response.err)
         AsyncStorage.setItem('token', response.token)
         AsyncStorage.setItem('creds', JSON.stringify(creds))
-        dispatch({ type: ActionTypes.LOGIN_SUCCESS, payload: response })
+        dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: response })
     }
     catch (error) {
-        dispatch({ type: ActionTypes.LOGIN_FAILURE, payload: error })
+        dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
 
     }
 }
