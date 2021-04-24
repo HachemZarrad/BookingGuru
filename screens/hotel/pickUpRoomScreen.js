@@ -19,7 +19,7 @@ const PickUpRoomScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             <ScrollView >
-                <Caution type='standar' style={styles.caution} caution={'Extra Fees Will Be Added According To Your Choices'} />
+                <Caution type='standard' style={styles.caution} caution={'Extra Fees Will Be Added According To Your Choices'} />
                 <Title title={'Arrival Date ?'} />
                 <CustomDatePicker mode='date' />
                 <Title title={'Arrival Time ?'} />

@@ -5,7 +5,7 @@ import CustomList from '../../components/customList'
 import CustomHeader from '../../components/customHeader'
 import PlayWithData from '../../components/playWithData'
 import FilteredData from '../../components/filteredData'
-import FitletredDataTrack from '../../components/fitletredDataTrack'
+import FilteredDataTrack from '../../components/filteredDataTrack'
 
 import Colors from '../../constants/colors'
 import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERS } from '../../constants/usefulLists'
@@ -25,7 +25,7 @@ const Hotels = ({ route }) => {
   const pickedFilters = route?.params?.pickedFilters
 
   const [searchTerm, setSearchTerm] = useState('')
-  const [showFileteredHotels, setShowFileterdHotels] = useState(false)
+  const [showFilteredHotels, setShowFilteredHotels] = useState(false)
   const [sortingProperty, setSortingProperty] = useState(HOTELS_SORTING_PROPERTIES[0])
   
   const hotels = useSelector(state => state.hotels.hotels)
@@ -44,12 +44,12 @@ const Hotels = ({ route }) => {
 
   const searchBarHandler = (term) => {
     setSearchTerm(term)
-    setShowFileterdHotels(true)
+    setShowFilteredHotels(true)
   }
 
   const backFromFilterList = () => {
     setSearchTerm('')
-    setShowFileterdHotels(false)
+    setShowFilteredHotels(false)
   }
 
   const getSortingProperty = (property) => {
@@ -67,7 +67,7 @@ const Hotels = ({ route }) => {
       <CustomHeader
         searchBarHandler={searchBarHandler}
         backFromFilterList={backFromFilterList}
-        showFileteredHotels={showFileteredHotels}
+        showFilteredData={showFilteredHotels}
         searchTerm={searchTerm}
       />
 
@@ -77,7 +77,7 @@ const Hotels = ({ route }) => {
         filtersList={HOTELS_FILTERS}
       />
 
-      {showFileteredHotels && filteredHotels.length !== 0 ? (
+      {showFilteredHotels && filteredHotels.length !== 0 ? (
         <FilteredData data={filteredHotels} nextScreen='HotelDetails' />
       )
         : null
@@ -92,7 +92,7 @@ const Hotels = ({ route }) => {
           />
         )}
       {customizedHotelsList.length === hotels.length ? null :
-        <FitletredDataTrack
+        <FilteredDataTrack
           data={customizedHotelsList}
           dataType='Hotels'
           resetFunction={clearUserFilters}

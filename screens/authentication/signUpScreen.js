@@ -31,15 +31,14 @@ const SignUpScreen = ({ route }) => {
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
     })
-    // countries.sort()
 
     return (
         <KeyboardAvoidingView
             style={styles.screen}
             keyboardVerticalOffset={10}
         >
-            <Caution type='standar' style={{ container: styles.caution }} caution='Only your email is required for the moment but please consider
-                filling other fields to get full advantage of our services. Once registred you can alter those details in settings section.'/>
+            <Caution type='standard' style={{ container: styles.caution }} caution='Only your email is required for the moment but please consider
+                filling other fields to get full advantage of our services. Once registered you can alter those details in settings section.'/>
             <ScrollView >
                 <View style={styles.form}>
                     <InputBar

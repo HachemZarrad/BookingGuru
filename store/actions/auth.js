@@ -1,9 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import * as ActionTypes from '../actions/actionTypes';
-import { baseUrl } from '../../constants/networking';
+import * as ActionTypes from '../actions/actionTypes'
+import { baseUrl } from '../../constants/networking'
 
-let timer = 0
+let timer
 
 const authentication = (payload) => (dispatch) => {
     dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: payload })
@@ -20,8 +20,7 @@ export const signUp = (creds) => async (dispatch) => {
             body: JSON.stringify(creds)
         })
         if (!response.ok) throw Error(response.err)
-        AsyncStorage.setItem('token', response.token)
-        AsyncStorage.setItem('creds', JSON.stringify(creds))
+        saveDataToStorage(response.token, response.userDetails)
         authentication(response)
     }
     catch (error) {
@@ -31,9 +30,8 @@ export const signUp = (creds) => async (dispatch) => {
 }
 
 
-
 export const login = (creds) => async (dispatch) => {
-    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST, payload: creds })
+    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST })
     try {
         const response = await fetch(`${baseUrl}users/login`, {
             method: 'POST',
@@ -43,9 +41,9 @@ export const login = (creds) => async (dispatch) => {
             body: JSON.stringify(creds)
         })
         if (!response.ok) throw Error(response.err)
-        AsyncStorage.setItem('token', response.token)
-        AsyncStorage.setItem('creds', JSON.stringify(creds))
-        dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: response })
+        const data = await response.json()
+        saveDataToStorage(data.token, data.userDetails)
+        dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: data })
     }
     catch (error) {
         dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
@@ -56,12 +54,12 @@ export const login = (creds) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
     dispatch({ type: ActionTypes.LOGOUT_REQUEST, payload: creds })
-    try {
-        AsyncStorage.removeItem('token')
-        AsyncStorage.removeItem('creds')
-        dispatch({ type: ActionTypes.LOGOUT_SUCCESS })
-    }
-    catch (error) {
-        dispatch({ type: ActionTypes.LOGOUT_FAILURE, payload: error })
-    }
+    AsyncStorage.removeItem('token')
+    AsyncStorage.removeItem('userDetails')
+    dispatch({ type: ActionTypes.LOGOUT_SUCCESS })
+}
+
+const saveDataToStorage = (token, userDetails) => {
+    AsyncStorage.setItem('token', token)
+    AsyncStorage.setItem('userDetails', JSON.stringify(userDetails))
 }

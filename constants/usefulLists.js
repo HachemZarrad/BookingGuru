@@ -10,7 +10,7 @@ export const TITLE = ['Mr.', 'Ms.']
 export const FLIGHTS_FILTERS = ['destination', 'Airport']
 export const TRAINS_FILTERS = ['type', 'name', 'description', 'distance']
 export const BUSES_FILTERS = ['mode', 'line', 'direction', 'date', 'departure_time', 'operator_name']
-export const TAXIS_FILTERS = ['Large People Carrier', 'Executive People Carrier', 'Luxury', 'Standar', 'People Carrier', 'Executive']
+export const TAXIS_FILTERS = ['Large People Carrier', 'Executive People Carrier', 'Luxury', 'Standard', 'People Carrier', 'Executive']
 export const FOOD_FILTERS = []
 
 export const HOTELS_FILTERING_PROPERTIES = ["StarRating", "Price", "Features"]

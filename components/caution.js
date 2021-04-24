@@ -9,7 +9,7 @@ import IconLibrary from '../constants/iconLibrary';
 const Caution = props => {
     return (
         <View {...props} style={{ ...styles.container, ...props.style.container }}>
-            {props.type == 'standar' ?
+            {props.type == 'standard' ?
                 <Icon library={IconLibrary.Octicons} name="stop" style={styles.icon} />
                 : props.bingo ?
                     <Icon library={IconLibrary.FontAwesome5} name="check-circle" color='green' style={styles.icon} />

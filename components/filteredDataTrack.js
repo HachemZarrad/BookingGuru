@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/colors'
 import NormalButton from './normalButton'
 
-const FitletredDataTrack = props => {
+const FilteredDataTrack = props => {
     const { data, dataType, resetFunction } = props
     return (
         <View style={styles.banner}>
@@ -19,7 +19,7 @@ const FitletredDataTrack = props => {
     )
 }
 
-export default FitletredDataTrack
+export default FilteredDataTrack
 
 const styles = StyleSheet.create({
     banner: {

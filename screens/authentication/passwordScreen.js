@@ -26,7 +26,7 @@ const PasswordScreen = () => {
         "oneCapitalColor": 'red',
         "passwordAccepted": false,
         "retypedPassword": '',
-        "retypedPasswordHiddden": true,
+        "retypedPasswordHidden": true,
         "passwordMatchConfirmed": false,
 
     });
@@ -52,7 +52,7 @@ const PasswordScreen = () => {
 
     return (
         <View style={styles.screen} >
-            <Title title='Create a password according to our security standars' />
+            <Title title='Create a password according to our security standards' />
             <View style={styles.labelAndInput}>
                 <Text style={styles.label}>Password</Text>
                 <InputBar
@@ -79,10 +79,10 @@ const PasswordScreen = () => {
                     leftIconName='lock'
                     leftIconColor={Colors.buttonContainer}
                     rightIconLibrary={IconLibrary.Ionicons}
-                    rightIconName={state.retypedPasswordHiddden ? 'eye-off' : 'eye'}
+                    rightIconName={state.retypedPasswordHidden ? 'eye-off' : 'eye'}
                     rightIconColor={Colors.buttonContainer}
                     rightIconFeature={() => dispatch({ type: passwordCreationActions.SHOW_RETYPED_PASSWORD })}
-                    secureTextEntry={state.retypedPasswordHiddden}
+                    secureTextEntry={state.retypedPasswordHidden}
                     passwordCreation
                     onChangeText={manageConfirmPassword}
                     style={styles.input}

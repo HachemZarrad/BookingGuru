@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Colors from '../constants/colors'
 
-import * as hotelsActions from '../store/actions/hotels'
-import * as destinationsActions from '../store/actions/popularDestinations'
-import * as flightsActions from '../store/actions/flights'
-import * as trainsActions from '../store/actions/trains'
-import * as busesActions from '../store/actions/buses'
-import * as taxisActions from '../store/actions/taxis'
-// import * as FoodActions from '../store/actions/food'
+import { fetchHotels } from '../store/actions/hotels'
+import { fetchDestinations } from '../store/actions/popularDestinations'
+import { fetchFlights } from '../store/actions/flights'
+import { fetchTrains } from '../store/actions/trains'
+import { fetchBuses } from '../store/actions/buses'
+import { fetchTaxis } from '../store/actions/taxis'
+// import { fetchFood } from '../store/actions/food'
 import { fetchCountriesAndCallingCodes } from '../store/actions/countriesAndCodes'
 /**
  * TODO: -Add internet connection checker from netlify community package.
@@ -54,17 +54,17 @@ const SplashScreen = () => {
   const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError || countriesAndCodesError
 
   // const foodLoading = useSelector(state => state.food.loading);
-  // const foodError = useSelectolr(state => state.food.error);
+  // const foodError = useSelector(state => state.food.error);
 
   const loadData = useCallback(() => {
-    dispatch(hotelsActions.fetchHotels())
-    dispatch(destinationsActions.fetchDestinations())
-    dispatch(flightsActions.fetchFlights())
-    dispatch(trainsActions.fetchTrains())
-    dispatch(busesActions.fetchBuses())
-    dispatch(taxisActions.fetchTaxis())
+    dispatch(fetchHotels())
+    dispatch(fetchDestinations())
+    dispatch(fetchFlights())
+    dispatch(fetchTrains())
+    dispatch(fetchBuses())
+    dispatch(fetchTaxis())
     dispatch(fetchCountriesAndCallingCodes())
-    // dispatch(foodActions.fetchRestaurants())
+    // dispatch(fetchFood())
   }, [dispatch])
 
   useEffect(() => {
