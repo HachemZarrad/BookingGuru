@@ -22,7 +22,7 @@ import { useSelector } from 'react-redux'
 // }
 
 const SignUpScreen = ({ route }) => {
-    
+
     // const [state, dispatch] = useReducer(reducer, {})
     const selectedCode = route.params
     const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes)
@@ -43,6 +43,7 @@ const SignUpScreen = ({ route }) => {
                 <View style={styles.form}>
                     <InputBar
                         placeholder="First Name"
+                        checkInput
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
                         keyboardType='default'
@@ -53,6 +54,7 @@ const SignUpScreen = ({ route }) => {
                     />
                     <InputBar
                         placeholder="Last Name"
+                        checkInput
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
                         keyboardType='default'
@@ -63,6 +65,7 @@ const SignUpScreen = ({ route }) => {
 
                     <InputBar
                         placeholder="Email Address"
+                        checkInput
                         leftIconLibrary={IconLibrary.MaterialIcons}
                         leftIconName='email'
                         required

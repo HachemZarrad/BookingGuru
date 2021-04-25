@@ -9,7 +9,7 @@ import Colors from "../constants/colors"
 import IconLibrary from "../constants/iconLibrary"
 
 const CustomHeader = (props) => {
-  const {searchBarHandler,searchTerm,backFromFilterList,showFilteredData,} = props
+  const {searchBarHandler,backFromFilterList,showFilteredData} = props
   const navigation = useNavigation()
 
   const backHome = () => {
@@ -20,15 +20,14 @@ const CustomHeader = (props) => {
     <View style={styles.container}>
       <View style={styles.input}>
         <InputBar
-          onChangeText={searchBarHandler}
           placeholder="   Search down here"
-          value={searchTerm}
+          default=""
           keyboardType="default"
           leftIconLibrary={IconLibrary.FontAwesome5}
           leftIconName="arrow-left"
           leftIconFeature={showFilteredData ? backFromFilterList : backHome}
           rightIconSize={20}
-          searchBar
+          onChangeText={searchBarHandler}
         />
       </View>
     </View>

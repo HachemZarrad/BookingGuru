@@ -1,8 +1,11 @@
-import React, { useReducer } from 'react'
-import { StyleSheet, View, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import React, { useReducer, useEffect } from 'react'
+import {
+    StyleSheet, View, Image, TouchableOpacity,
+    KeyboardAvoidingView, Alert
+} from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import InputBar from '../../components/inputBar'
 import NormalButton from '../../components/normalButton'
@@ -32,11 +35,20 @@ const loginReducer = (state, action) => {
 const LoginScreen = () => {
     const navigation = useNavigation()
     const reduxDispatch = useDispatch()
+
+    const loginError = useSelector(state => state.auth.errMess)
+    const loadingLogin = useSelector(state => state.auth.loading)
+    console.log({loginError, loadingLogin})
+
     const [loginState, dispatch] = useReducer(loginReducer, {
         showPassword: false,
         email: '',
         password: ''
     })
+
+    useEffect(() => {
+        if(loginError) Alert.alert('Check your credentials!!', loginError, [{text: 'Okay'}])
+    }, [loginError])
 
 
     const getEmail = (email) => {
@@ -47,9 +59,13 @@ const LoginScreen = () => {
         dispatch({ type: GET_PASSWORD, payload: password })
     }
 
+    const showHidePassword = () => {
+        dispatch({ type: SHOW_PASSWORD })
+    }
+
     const handleLogin = () => {
         reduxDispatch(login({ username: loginState.email, password: loginState.password }))
-        navigation.navigate('HomePage')
+        if (!loadingLogin && !loginError) navigation.navigate('HomePage')
     }
 
     return (
@@ -74,8 +90,9 @@ const LoginScreen = () => {
                     placeholder='Email'
                     leftIconLibrary={IconLibrary.MaterialIcons}
                     leftIconName='email'
-                    passwordCreation
+                    checkInput
                     onChangeText={getEmail}
+                    error='Please Enter a valid Email'
                 />
                 <InputBar
                     placeholder='Password'
@@ -85,9 +102,8 @@ const LoginScreen = () => {
                     rightIconLibrary={IconLibrary.Ionicons}
                     rightIconName={loginState.showPassword ? 'eye' : 'eye-off'}
                     rightIconColor={Colors.buttonContainer}
-                    rightIconFeature={() => dispatch({ type: SHOW_PASSWORD })}
+                    rightIconFeature={showHidePassword}
                     secureTextEntry={!loginState.showPassword}
-                    passwordCreation
                     onChangeText={getPassword}
                 />
 

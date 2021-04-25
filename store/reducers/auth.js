@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
                 errMess: null
             }
         case ActionTypes.AUTHENTICATION_FAILURE:
-            return { ...state, loading: false, token: '', errMess: action.payload.err }
+            return { ...state, loading: false, token: '', errMess: action.payload}
 
         case ActionTypes.LOGOUT_REQUEST:
             return { ...state, loading: true }

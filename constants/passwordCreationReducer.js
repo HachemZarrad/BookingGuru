@@ -27,7 +27,7 @@ export default (state, action) => {
             return { ...state, oneCapital: confirm, oneCapitalColor: confirm ? 'green' : 'red' };
         }
         case (Actions.SHOW_RETYPED_PASSWORD):
-            return { ...state, retypedPasswordHiddden: !state.retypedPasswordHiddden };
+            return { ...state, retypedPasswordHidden: !state.retypedPasswordHidden };
         case (Actions.ACCEPT_PASSWORD):
             return { ...state, password: action.payload };
         case (Actions.CANCEL_PASSWORD):

@@ -27,7 +27,7 @@ const Hotels = ({ route }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [showFilteredHotels, setShowFilteredHotels] = useState(false)
   const [sortingProperty, setSortingProperty] = useState(HOTELS_SORTING_PROPERTIES[0])
-  
+
   const hotels = useSelector(state => state.hotels.hotels)
   const loading = useSelector(state => state.hotels.loading)
   const [customizedHotelsList, setCustomizedHotelsList] = useState(filterHotelsData(hotels, HOTELS_FILTERS))
@@ -36,16 +36,17 @@ const Hotels = ({ route }) => {
 
   const hotelsAccordingToDestination = destination ? filterDataByInput(hotels, destination, 'address.locality') : []
   const filteredHotels = filterDataByInput(hotels, searchTerm, KEYS_TO_FILTERS)
-  
+
   useEffect(() => {
     if (JSON.stringify(pickedFilters) !== JSON.stringify(HOTELS_FILTERS)) setCustomizedHotelsList(filterHotelsData(hotels, pickedFilters))
   }, [pickedFilters])
-  
+
 
   const searchBarHandler = (term) => {
     setSearchTerm(term)
     setShowFilteredHotels(true)
   }
+
 
   const backFromFilterList = () => {
     setSearchTerm('')
@@ -68,7 +69,6 @@ const Hotels = ({ route }) => {
         searchBarHandler={searchBarHandler}
         backFromFilterList={backFromFilterList}
         showFilteredData={showFilteredHotels}
-        searchTerm={searchTerm}
       />
 
       <PlayWithData

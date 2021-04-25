@@ -31,6 +31,14 @@ const PasswordScreen = () => {
 
     });
 
+    const showHidePassword = () => {
+        dispatch({ type: passwordCreationActions.SHOW_PASSWORD })
+    }
+
+    const showHideRetypedPassword = () => {
+        dispatch({ type: passwordCreationActions.SHOW_RETYPED_PASSWORD })
+    }
+
     const manageColors = (password) => {
         dispatch({ type: passwordCreationActions.SET_PASSWORD_INPUT_DIRTY });
         dispatch({ type: passwordCreationActions.VALIDATE_TEN_CHARACTERS, payload: password });
@@ -62,7 +70,7 @@ const PasswordScreen = () => {
                     rightIconLibrary={IconLibrary.Ionicons}
                     rightIconName={state.passwordHidden ? 'eye-off' : 'eye'}
                     rightIconColor={Colors.buttonContainer}
-                    rightIconFeature={() => dispatch({ type: passwordCreationActions.SHOW_PASSWORD })}
+                    rightIconFeature={showHidePassword}
                     secureTextEntry={state.passwordHidden}
                     passwordCreation
                     onChangeText={manageColors}
@@ -81,7 +89,7 @@ const PasswordScreen = () => {
                     rightIconLibrary={IconLibrary.Ionicons}
                     rightIconName={state.retypedPasswordHidden ? 'eye-off' : 'eye'}
                     rightIconColor={Colors.buttonContainer}
-                    rightIconFeature={() => dispatch({ type: passwordCreationActions.SHOW_RETYPED_PASSWORD })}
+                    rightIconFeature={showHideRetypedPassword}
                     secureTextEntry={state.retypedPasswordHidden}
                     passwordCreation
                     onChangeText={manageConfirmPassword}

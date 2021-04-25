@@ -32,23 +32,22 @@ export const signUp = (creds) => async (dispatch) => {
 
 export const login = (creds) => async (dispatch) => {
     dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST })
-    try {
-        const response = await fetch(`${baseUrl}users/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(creds)
-        })
-        if (!response.ok) throw Error(response.err)
-        const data = await response.json()
-        saveDataToStorage(data.token, data.userDetails)
-        authentication(data)
-    }
-    catch (error) {
+    const response = await fetch(`${baseUrl}users/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(creds)
+    })
+    if (!response.ok) {
+        const dataError = await response.json()
+        const error = dataError.err.message
         dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
-
+        throw Error(error)
     }
+    const data = await response.json()
+    saveDataToStorage(data.token, data.userDetails)
+    authentication(data)
 }
 
 

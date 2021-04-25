@@ -25,35 +25,34 @@ const inputReducer = (action, inputState) => {
 const InputBar = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
         pristine: true,
-        isValid: true,
+        isValid: props.valid ? props.valid : false,
         value: props.default ? props.default : ''
-
     });
 
-    useEffect(() => {
-        if (inputState.pristine) props.onInputChange(inputState.value, inputState.isValid)
-    }, [inputState, props.onInputChange])
+    // useEffect(() => {
+    //     if (!inputState.pristine) props.onInputChange(inputState.value)
+    // }, [inputState, props.onInputChange])
 
 
-    const textChangeHandler = text => {
-        let isValid = true;
+    const textChangeHandler = (text) => {
+        let isValid = true
         if (props.required && text.trim().length === 0) {
-            isValid = false;
+            isValid = false
         }
         if (props.email && !EMAILCHECK.test(text.toLowerCase())) {
-            isValid = false;
+            isValid = false
         }
         if (props.minLength != null && text.length < props.minLength) {
-            isValid = false;
+            isValid = false
         }
         if (props.maxLength != null && text.length > props.maxLength) {
-            isValid = false;
+            isValid = false
         }
-        dispatch({ type: INPUT_CHANGE, payload: { value: text, isValid: isValid } });
-    };
+        dispatch({ type: INPUT_CHANGE, payload: { value: text, isValid: isValid } })
+    }
 
     const makeDirty = () => {
-        dispatch({ type: SET_INPUT_DIRTY });
+        dispatch({ type: SET_INPUT_DIRTY })
     }
 
 
@@ -74,7 +73,7 @@ const InputBar = props => {
                     style={{ ...styles.inputBar, ...props.style }}
                     value={inputState.value}
                     onBlur={makeDirty}
-                    onChangeText={props.searchBar || props.passwordCreation ? props.onChangeText : textChangeHandler}
+                    onChange={textChangeHandler}
                 >
                 </TextInput>
                 <Icon
@@ -86,7 +85,7 @@ const InputBar = props => {
                     style={styles.rightIcon}
                 />
             </View>
-            {!inputState.pristine && !inputState.isValid && !props.passwordCreation &&
+            {!inputState.pristine && !inputState.isValid && props.checkInput && 
                 <View style={styles.errorContainer}>
                     <Text style={styles.error}>{props.error}</Text>
                 </View>
