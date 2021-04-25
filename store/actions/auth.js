@@ -10,7 +10,7 @@ const authentication = (payload) => (dispatch) => {
 }
 
 export const signUp = (creds) => async (dispatch) => {
-    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST, payload: creds })
+    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST })
     try {
         const response = await fetch(`${baseUrl}users/signup`, {
             method: 'POST',
@@ -20,12 +20,12 @@ export const signUp = (creds) => async (dispatch) => {
             body: JSON.stringify(creds)
         })
         if (!response.ok) throw Error(response.err)
-        saveDataToStorage(response.token, response.userDetails)
-        authentication(response)
+        const data = await response.json()
+        saveDataToStorage(data.token, data.userDetails)
+        authentication(data)
     }
     catch (error) {
         dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
-
     }
 }
 
@@ -43,7 +43,7 @@ export const login = (creds) => async (dispatch) => {
         if (!response.ok) throw Error(response.err)
         const data = await response.json()
         saveDataToStorage(data.token, data.userDetails)
-        dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: data })
+        authentication(data)
     }
     catch (error) {
         dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
@@ -53,7 +53,7 @@ export const login = (creds) => async (dispatch) => {
 
 
 export const logout = () => (dispatch) => {
-    dispatch({ type: ActionTypes.LOGOUT_REQUEST, payload: creds })
+    dispatch({ type: ActionTypes.LOGOUT_REQUEST })
     AsyncStorage.removeItem('token')
     AsyncStorage.removeItem('userDetails')
     dispatch({ type: ActionTypes.LOGOUT_SUCCESS })

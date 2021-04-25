@@ -1,16 +1,16 @@
 import React, { useReducer } from 'react'
 import { StyleSheet, View, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native';
-import { useSelector, useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 
-import InputBar from '../../components/inputBar';
-import NormalButton from '../../components/normalButton';
-import Title from '../../components/title';
-import Icon from '../../components/icon';
+import InputBar from '../../components/inputBar'
+import NormalButton from '../../components/normalButton'
+import Title from '../../components/title'
+import Icon from '../../components/icon'
 
-import IconLibrary from '../../constants/iconLibrary';
-import Colors from '../../constants/colors';
+import IconLibrary from '../../constants/iconLibrary'
+import Colors from '../../constants/colors'
 
 import { login } from '../../store/actions/auth'
 
@@ -30,7 +30,7 @@ const loginReducer = (state, action) => {
 }
 
 const LoginScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     const reduxDispatch = useDispatch()
     const [loginState, dispatch] = useReducer(loginReducer, {
         showPassword: false,
@@ -38,23 +38,18 @@ const LoginScreen = () => {
         password: ''
     })
 
-    const response = useSelector(state => state.auth.useDetails)
-    const token = useSelector(state => state.auth.token)
 
     const getEmail = (email) => {
         dispatch({ type: GET_EMAIL, payload: email })
-        console.log({ email })
     }
 
     const getPassword = (password) => {
         dispatch({ type: GET_PASSWORD, payload: password })
-        console.log({ password })
     }
 
     const handleLogin = () => {
         reduxDispatch(login({ username: loginState.email, password: loginState.password }))
-        console.log({ token, response })
-        // console.log({loginState})
+        navigation.navigate('HomePage')
     }
 
     return (

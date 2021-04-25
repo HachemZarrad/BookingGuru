@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { StyleSheet, View, TextInput, Text } from 'react-native'
 
 import Icon from './icon'
@@ -25,10 +25,15 @@ const inputReducer = (action, inputState) => {
 const InputBar = props => {
     const [inputState, dispatch] = useReducer(inputReducer, {
         pristine: true,
-        isValid: props.isValid,
-        value: props.value ? props.value : props.default
+        isValid: true,
+        value: props.default ? props.default : ''
 
     });
+
+    useEffect(() => {
+        if (inputState.pristine) props.onInputChange(inputState.value, inputState.isValid)
+    }, [inputState, props.onInputChange])
+
 
     const textChangeHandler = text => {
         let isValid = true;
@@ -39,6 +44,9 @@ const InputBar = props => {
             isValid = false;
         }
         if (props.minLength != null && text.length < props.minLength) {
+            isValid = false;
+        }
+        if (props.maxLength != null && text.length > props.maxLength) {
             isValid = false;
         }
         dispatch({ type: INPUT_CHANGE, payload: { value: text, isValid: isValid } });
@@ -64,7 +72,7 @@ const InputBar = props => {
                     {...props}
                     placeholderTextColor="black"
                     style={{ ...styles.inputBar, ...props.style }}
-                    // value={inputState.value}
+                    value={inputState.value}
                     onBlur={makeDirty}
                     onChangeText={props.searchBar || props.passwordCreation ? props.onChangeText : textChangeHandler}
                 >
