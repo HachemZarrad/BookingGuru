@@ -16,6 +16,11 @@ import { fetchBuses } from '../store/actions/buses'
 import { fetchTaxis } from '../store/actions/taxis'
 // import { fetchFood } from '../store/actions/food'
 import { fetchCountriesAndCallingCodes } from '../store/actions/countriesAndCodes'
+
+import dataFetchReducer from '../constants/splashScreenReducer'
+import fetchingActions from '../constants/splashScreenActions'
+
+
 /**
  * TODO: -Add internet connection checker from netlify community package.
  *  -Once ready load restaurants and food data here as well.
@@ -27,7 +32,24 @@ import { fetchCountriesAndCallingCodes } from '../store/actions/countriesAndCode
 const SplashScreen = () => {
 
   const navigation = useNavigation()
-  const dispatch = useDispatch()
+  const reduxDispatch = useDispatch()
+
+  const [dataState, dispatch] = useReducer(dataFetchReducer, {
+    hotelsLoading: false,
+    hotelsError: null,
+    destinationsLoading: false,
+    destinationsError: null,
+    flightsLoading: false,
+    flightsError: null,
+    trainsLoading: false,
+    trainsError: null,
+    busesLoading: false,
+    busesError: null,
+    taxisLoading: false,
+    taxisError: null,
+    countriesAndCodesLoading: false,
+    countriesAndCodesError: null,
+  })
 
   const hotelsLoading = useSelector(state => state.hotels.loading);
   const hotelsError = useSelector(state => state.hotels.error);
@@ -56,23 +78,35 @@ const SplashScreen = () => {
   // const foodLoading = useSelector(state => state.food.loading);
   // const foodError = useSelector(state => state.food.error);
 
+  const fetchData = async(action, loading, error) => {
+    dispatch({ type: error, payload: null })
+    dispatch({ type: loading, payload: true })
+    try {
+      await reduxDispatch(action())
+    }
+    catch (error) {
+      dispatch({ type: error, payload: error.message })
+      dispatch({ type: loading, payload: false })
+    }
+  }
+
   const loadData = useCallback(() => {
-    dispatch(fetchHotels())
-    dispatch(fetchDestinations())
-    dispatch(fetchFlights())
-    dispatch(fetchTrains())
-    dispatch(fetchBuses())
-    dispatch(fetchTaxis())
-    dispatch(fetchCountriesAndCallingCodes())
-    // dispatch(fetchFood())
-  }, [dispatch])
+    reduxDispatch(fetchHotels())
+    reduxDispatch(fetchDestinations())
+    reduxDispatch(fetchFlights())
+    reduxDispatch(fetchTrains())
+    reduxDispatch(fetchBuses())
+    reduxDispatch(fetchTaxis())
+    reduxDispatch(fetchCountriesAndCallingCodes())
+    // reduxDispatch(fetchFood())
+  }, [reduxDispatch])
 
   useEffect(() => {
     loadData()
   }, [loadData])
 
   useEffect(() => {
-    if (!dataLoading && !dataError) setTimeout(() => {navigation.navigate('HomePage')}, 0)
+    if (!dataLoading && !dataError) setTimeout(() => { navigation.navigate('HomePage') }, 0)
   }, [dataLoading, dataError])
 
   return (
