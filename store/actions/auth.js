@@ -31,7 +31,6 @@ export const signUp = (creds) => async (dispatch) => {
 
 
 export const login = (creds) => async (dispatch) => {
-    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST })
     const response = await fetch(`${baseUrl}users/login`, {
         method: 'POST',
         headers: {
@@ -42,12 +41,11 @@ export const login = (creds) => async (dispatch) => {
     if (!response.ok) {
         const dataError = await response.json()
         const error = dataError.err.message
-        dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
-        throw Error(error)
+        throw new Error(error)
     }
     const data = await response.json()
+    dispatch(authentication(data))
     saveDataToStorage(data.token, data.userDetails)
-    authentication(data)
 }
 
 

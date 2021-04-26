@@ -20,6 +20,7 @@ import { login } from '../../store/actions/auth'
 const SHOW_PASSWORD = 'SHOW_PASSWORD'
 const GET_EMAIL = 'GET_EMAIL'
 const GET_PASSWORD = 'GET_PASSWORD'
+const LOADING_LOGIN = 'LOADING_LOGIN'
 
 const loginReducer = (state, action) => {
     switch (action.type) {
@@ -29,6 +30,8 @@ const loginReducer = (state, action) => {
             return { ...state, email: action.payload }
         case GET_PASSWORD:
             return { ...state, password: action.payload }
+        case LOADING_LOGIN:
+            return { ...state, loading: action.payload }
     }
 }
 
@@ -36,20 +39,17 @@ const LoginScreen = () => {
     const navigation = useNavigation()
     const reduxDispatch = useDispatch()
 
-    const loginError = useSelector(state => state.auth.errMess)
-    const loadingLogin = useSelector(state => state.auth.loading)
-    console.log({loginError, loadingLogin})
-
     const [loginState, dispatch] = useReducer(loginReducer, {
         showPassword: false,
         email: '',
-        password: ''
+        password: '',
+        loading: false,
     })
 
-    useEffect(() => {
-        if(loginError) Alert.alert('Check your credentials!!', loginError, [{text: 'Okay'}])
-    }, [loginError])
 
+    const goHome = () => {
+        navigation.navigate('HomePage')
+    }
 
     const getEmail = (email) => {
         dispatch({ type: GET_EMAIL, payload: email })
@@ -63,9 +63,20 @@ const LoginScreen = () => {
         dispatch({ type: SHOW_PASSWORD })
     }
 
-    const handleLogin = () => {
-        reduxDispatch(login({ username: loginState.email, password: loginState.password }))
-        if (!loadingLogin && !loginError) navigation.navigate('HomePage')
+    const handleLogin = async () => {
+        dispatch({ type: LOADING_LOGIN, payload: true })
+        try {
+            await reduxDispatch(login(
+                {
+                    username: loginState.email,
+                    password: loginState.password
+                }))
+            goHome()
+        }
+        catch (error) {
+            dispatch({ type: LOADING_LOGIN, payload: false })
+            Alert.alert('Check your credentials!!', error.message, [{ text: 'Okay' }])
+        }
     }
 
     return (
@@ -75,7 +86,7 @@ const LoginScreen = () => {
             behavior='height'
         >
             <View style={styles.topBar}>
-                <TouchableOpacity style={styles.backButton} onPress={() => { navigation.navigate('Home', { screen: 'HomePage' }) }} >
+                <TouchableOpacity style={styles.backButton} onPress={goHome} >
                     <Icon library={IconLibrary.FontAwesome5} name="arrow-left" size={22} />
                 </TouchableOpacity>
                 <View style={styles.logoContainer}>
