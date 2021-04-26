@@ -21,6 +21,7 @@ const SHOW_PASSWORD = 'SHOW_PASSWORD'
 const GET_EMAIL = 'GET_EMAIL'
 const GET_PASSWORD = 'GET_PASSWORD'
 const LOADING_LOGIN = 'LOADING_LOGIN'
+const LOGIN_ERROR = 'LOGIN_ERROR'
 
 const loginReducer = (state, action) => {
     switch (action.type) {
@@ -32,6 +33,8 @@ const loginReducer = (state, action) => {
             return { ...state, password: action.payload }
         case LOADING_LOGIN:
             return { ...state, loading: action.payload }
+        case LOGIN_ERROR:
+            return { ...state, error: action.payload }
     }
 }
 
@@ -44,7 +47,13 @@ const LoginScreen = () => {
         email: '',
         password: '',
         loading: false,
+        error: null
     })
+
+
+    useEffect(() => {
+        if(loginState.error) Alert.alert('Check your credentials!!', loginState.error, [{ text: 'Okay' }])
+    },[loginState.error])
 
 
     const goHome = () => {
@@ -64,6 +73,7 @@ const LoginScreen = () => {
     }
 
     const handleLogin = async () => {
+        dispatch({ type: LOGIN_ERROR, payload: null })
         dispatch({ type: LOADING_LOGIN, payload: true })
         try {
             await reduxDispatch(login(
@@ -74,8 +84,8 @@ const LoginScreen = () => {
             goHome()
         }
         catch (error) {
+            dispatch({ type: LOGIN_ERROR, payload: error.message})
             dispatch({ type: LOADING_LOGIN, payload: false })
-            Alert.alert('Check your credentials!!', error.message, [{ text: 'Okay' }])
         }
     }
 

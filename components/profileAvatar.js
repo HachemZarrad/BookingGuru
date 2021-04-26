@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 const ProfileAvatar = props => {
     return (
         <View style={styles.avatar}>
-            <Text style={styles.name}>HZ</Text>
+            <Text style={styles.name}>{props.acronym}</Text>
         </View>
     )
 }

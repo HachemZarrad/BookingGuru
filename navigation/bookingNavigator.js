@@ -1,6 +1,8 @@
 import React from 'react'
 import { Platform, SafeAreaView, View, ScrollView, Image, Button } from 'react-native'
 
+import { useSelector } from 'react-redux'
+
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import { Drawer } from 'react-native-paper'
@@ -52,8 +54,6 @@ import CallingCodesScreen from '../screens/authentication/callingCodeScreen'
 import ReservationsList from '../screens/admin/reservationsList'
 import ReservationDetails from '../screens/admin/reservationDetails'
 
-
-
 const navigationOptions = {
     headerShown: false,
     headerStyle: {
@@ -62,9 +62,23 @@ const navigationOptions = {
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.toolbarColor,
 }
 
+const getAcronymName = (firstLetter, secondLetter) => {
+    return firstLetter.concat(secondLetter).toUpperCase()
+}
+
 const bookingDrawerNavigator = createDrawerNavigator()
 
 export const BookingDrawer = () => {
+
+    const userDetails = useSelector(state => state.auth.userDetails)
+    const token = useSelector(state => state.auth.token)
+    const email = userDetails?.username ? userDetails.username : 'BG'
+    const firstName = userDetails?.firstname ? userDetails.firstname : ''
+    const lastName = userDetails?.lastname ? userDetails.lastname : ''
+    const fullName = `${firstName} ${lastName}`
+    const acronymName = firstName && lastName ? getAcronymName(firstName[0], lastName[0]) : getAcronymName(email[0], email[1])
+
+
     return (
         <bookingDrawerNavigator.Navigator
             drawerStyle={{
@@ -76,21 +90,24 @@ export const BookingDrawer = () => {
                     <View style={{ flex: 1, paddingTop: 20 }}>
                         <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
                             <ScrollView>
-                                {/* <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
-                                    <ProfileAvatar />
-                                    <Title title={'Hachem Zarrad'} style={{ marginTop: 30 }} />
-                                </View> */}
-                                <DrawerItem
-                                    inactiveTintColor='black'
-                                    // style={{marginTop:30}}
-                                    icon={() => (
-                                        <Icon
-                                            library={IconLibrary.AntDesign}
-                                            name="login" />
-                                    )}
-                                    label="Login Or Create Account"
-                                    onPress={() => { props.navigation.navigate('Authentication') }}
-                                />
+                                {!token ? null :
+                                    <View style={{ flexDirection: 'row', paddingBottom: 20 }}>
+                                        <ProfileAvatar acronym={acronymName} />
+                                        <Title title={fullName} style={{ marginTop: 30 }} />
+                                    </View>
+                                }
+                                {token ? null :
+                                    <DrawerItem
+                                        inactiveTintColor='black'
+                                        icon={() => (
+                                            <Icon
+                                                library={IconLibrary.AntDesign}
+                                                name="login" />
+                                        )}
+                                        label="Login Or Create Account"
+                                        onPress={() => { props.navigation.navigate('Authentication') }}
+                                    />
+                                }
                                 <Drawer.Section >
                                     <Title title='Services' style={{ fontSize: 17, margin: 10 }} />
                                     <DrawerItemList {...props} />
@@ -109,17 +126,19 @@ export const BookingDrawer = () => {
                                         label="Favorites"
                                         onPress={() => { props.navigation.navigate('Favorites') }}
                                     />
-                                    <DrawerItem
-                                        inactiveTintColor='black'
-                                        icon={() => (
-                                            <Icon
-                                                library={IconLibrary.Ionicons}
-                                                name="settings"
-                                            />
-                                        )}
-                                        label="Settings"
-                                        onPress={() => { props.navigation.navigate('Home') }}
-                                    />
+                                    {token ? null :
+                                        <DrawerItem
+                                            inactiveTintColor='black'
+                                            icon={() => (
+                                                <Icon
+                                                    library={IconLibrary.Ionicons}
+                                                    name="settings"
+                                                />
+                                            )}
+                                            label="Settings"
+                                            onPress={() => { props.navigation.navigate('Home') }}
+                                        />
+                                    }
                                 </Drawer.Section>
                                 <Drawer.Section>
                                     <Title title='Your Feedback Matters' style={{ fontSize: 17, margin: 10 }} />
@@ -135,19 +154,21 @@ export const BookingDrawer = () => {
                                         onPress={() => { props.navigation.navigate('Home') }}
                                     />
                                 </Drawer.Section>
-                                <Drawer.Section style={{ marginTop: 20 }}>
-                                    <DrawerItem
-                                        inactiveTintColor='black'
-                                        icon={() => (
-                                            <Icon
-                                                library={IconLibrary.SimpleLineIcons}
-                                                name="logout"
-                                            />
-                                        )}
-                                        label="Logout"
-                                        onPress={() => { props.navigation.navigate('Home') }}
-                                    />
-                                </Drawer.Section>
+                                {!token ? null :
+                                    <Drawer.Section style={{ marginTop: 20 }}>
+                                        <DrawerItem
+                                            inactiveTintColor='black'
+                                            icon={() => (
+                                                <Icon
+                                                    library={IconLibrary.SimpleLineIcons}
+                                                    name="logout"
+                                                />
+                                            )}
+                                            label="Logout"
+                                            onPress={() => { props.navigation.navigate('Home') }}
+                                        />
+                                    </Drawer.Section>
+                                }
                             </ScrollView>
                         </SafeAreaView>
                     </View>

@@ -1,5 +1,5 @@
 import { createFilter } from 'react-native-search-filter'
-import { HOTELS_SORTING_PROPERTIES, HOTELS_FILTERING_PROPERTIES } from '../constants/usefulLists'
+
 
 export const sortCategoricalDataAscendingly = (data, property) => {
     return data.sort((currentItem, nextItem) => {

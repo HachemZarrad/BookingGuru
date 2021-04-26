@@ -17,8 +17,8 @@ const Flights = () => {
 
   return (
     <View style={styles.ParentContainer}>
-      <CustomHeader ComponentTitle='Flights List'/>
-      <PlayWithData/>
+      <CustomHeader ComponentTitle='Flights List' />
+      <PlayWithData />
       {isLoading ? <ActivityIndicator /> : (
         <CustomList data={flights} pressedElement='FlightDetails' service={ActionTypes.GET_FLIGHTS} />
       )}

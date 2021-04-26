@@ -48,7 +48,7 @@ const SignUpScreen = ({ route }) => {
                         leftIconName='user'
                         keyboardType='default'
                         default=''
-                        error='Firstname must be at least three characters long'
+                        error='FirstName must be at least three characters long'
                         minLength={3}
 
                     />
@@ -59,7 +59,7 @@ const SignUpScreen = ({ route }) => {
                         leftIconName='user'
                         keyboardType='default'
                         default=''
-                        error='Lastname must be at least three characters long'
+                        error='LastName must be at least three characters long'
                         minLength={3}
                     />
 

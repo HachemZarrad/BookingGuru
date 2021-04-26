@@ -5,9 +5,6 @@ import { baseUrl } from '../../constants/networking'
 
 let timer
 
-const authentication = (payload) => (dispatch) => {
-    dispatch({ type: ActionTypes.AUTHENTICATION_SUCCESS, payload: payload })
-}
 
 export const signUp = (creds) => async (dispatch) => {
     dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST })
@@ -22,7 +19,7 @@ export const signUp = (creds) => async (dispatch) => {
         if (!response.ok) throw Error(response.err)
         const data = await response.json()
         saveDataToStorage(data.token, data.userDetails)
-        authentication(data)
+        authentication(data.token, data.userDetails)
     }
     catch (error) {
         dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
@@ -44,7 +41,7 @@ export const login = (creds) => async (dispatch) => {
         throw new Error(error)
     }
     const data = await response.json()
-    dispatch(authentication(data))
+    dispatch({ type: ActionTypes.AUTHENTICATION, token: data.token, userDetails: data.userDetails})
     saveDataToStorage(data.token, data.userDetails)
 }
 
