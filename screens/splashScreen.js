@@ -31,6 +31,7 @@ const SplashScreen = () => {
 
   const hotelsLoading = useSelector(state => state.hotels.loading);
   const hotelsError = useSelector(state => state.hotels.error);
+  console.log('hoteEeE',hotelsError)
 
   const destinationsLoading = useSelector(state => state.popularDestinations.loading);
   const destinationsError = useSelector(state => state.popularDestinations.error);
