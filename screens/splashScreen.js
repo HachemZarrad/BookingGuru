@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 import {
   StyleSheet, Text, View, Image, ActivityIndicator,
 } from 'react-native'
@@ -31,7 +31,6 @@ const SplashScreen = () => {
 
   const hotelsLoading = useSelector(state => state.hotels.loading);
   const hotelsError = useSelector(state => state.hotels.error);
-  console.log('hoteEeE',hotelsError)
 
   const destinationsLoading = useSelector(state => state.popularDestinations.loading);
   const destinationsError = useSelector(state => state.popularDestinations.error);
