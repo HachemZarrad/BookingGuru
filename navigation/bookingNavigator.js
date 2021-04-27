@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, SafeAreaView, View, ScrollView, Image, Button } from 'react-native'
+import { Platform, SafeAreaView, View, ScrollView } from 'react-native'
 
 import { useSelector } from 'react-redux'
 

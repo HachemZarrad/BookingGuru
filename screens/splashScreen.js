@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import Colors from '../constants/colors'
 
@@ -14,11 +14,11 @@ import { fetchFlights } from '../store/actions/flights'
 import { fetchTrains } from '../store/actions/trains'
 import { fetchBuses } from '../store/actions/buses'
 import { fetchTaxis } from '../store/actions/taxis'
-// import { fetchFood } from '../store/actions/food'
 import { fetchCountriesAndCallingCodes } from '../store/actions/countriesAndCodes'
+// import { fetchFood } from '../store/actions/food'
 
-import dataFetchReducer from '../constants/splashScreenReducer'
-import fetchingActions from '../constants/splashScreenActions'
+import reducer from '../constants/splashScreenReducer'
+import Actions from '../constants/splashScreenActions'
 
 
 /**
@@ -34,7 +34,7 @@ const SplashScreen = () => {
   const navigation = useNavigation()
   const reduxDispatch = useDispatch()
 
-  const [dataState, dispatch] = useReducer(dataFetchReducer, {
+  const [dataState, dispatch] = useReducer(reducer, {
     hotelsLoading: false,
     hotelsError: null,
     destinationsLoading: false,
@@ -47,58 +47,36 @@ const SplashScreen = () => {
     busesError: null,
     taxisLoading: false,
     taxisError: null,
-    countriesAndCodesLoading: false,
-    countriesAndCodesError: null,
+    countries_CodesLoading: false,
+    countries_CodesError: null,
   })
 
-  const hotelsLoading = useSelector(state => state.hotels.loading);
-  const hotelsError = useSelector(state => state.hotels.error);
 
-  const destinationsLoading = useSelector(state => state.popularDestinations.loading);
-  const destinationsError = useSelector(state => state.popularDestinations.error);
+  const dataLoading = dataState.hotelsLoading && dataState.destinationsLoading && dataState.flightsLoading && dataState.trainsLoading && dataState.busesLoading && dataState.taxisLoading && dataState.countries_CodesLoading
+  const dataError = !!dataState.hotelsError || !!dataState.destinationsError || !!dataState.flightsError || !!dataState.trainsError || !!dataState.busesError || !!dataState.taxisError || !!dataState.countries_CodesError
 
-  const flightsLoading = useSelector(state => state.flights.loading);
-  const flightsError = useSelector(state => state.flights.error);
+  console.log({ dataLoading, dataError })
 
-  const trainsLoading = useSelector(state => state.trains.loading);
-  const trainsError = useSelector(state => state.trains.error);
-
-  const busesLoading = useSelector(state => state.buses.loading);
-  const busesError = useSelector(state => state.buses.error);
-
-  const taxisLoading = useSelector(state => state.taxis.loading);
-  const taxisError = useSelector(state => state.taxis.error);
-
-  const countriesAndCodesLoading = useSelector(state => state.countriesAndCodes.loading);
-  const countriesAndCodesError = useSelector(state => state.countriesAndCodes.error);
-
-  const dataLoading = hotelsLoading && destinationsLoading && flightsLoading && trainsLoading && busesLoading && taxisLoading && countriesAndCodesLoading
-  const dataError = hotelsError || destinationsError || flightsError || trainsError || busesError || taxisError || countriesAndCodesError
-
-  // const foodLoading = useSelector(state => state.food.loading);
-  // const foodError = useSelector(state => state.food.error);
-
-  const fetchData = async(action, loading, error) => {
-    dispatch({ type: error, payload: null })
-    dispatch({ type: loading, payload: true })
+  const fetchData = async (action, loadingType, errorType) => {
+    dispatch({ type: errorType, payload: null })
+    dispatch({ type: loadingType, payload: true })
     try {
       await reduxDispatch(action())
     }
     catch (error) {
-      dispatch({ type: error, payload: error.message })
-      dispatch({ type: loading, payload: false })
+      dispatch({ type: errorType, payload: error.message })
+      dispatch({ type: loadingType, payload: false })
     }
   }
 
   const loadData = useCallback(() => {
-    reduxDispatch(fetchHotels())
-    reduxDispatch(fetchDestinations())
-    reduxDispatch(fetchFlights())
-    reduxDispatch(fetchTrains())
-    reduxDispatch(fetchBuses())
-    reduxDispatch(fetchTaxis())
-    reduxDispatch(fetchCountriesAndCallingCodes())
-    // reduxDispatch(fetchFood())
+    fetchData(fetchHotels, Actions.HOTELS_LOADING, Actions.HOTELS_ERROR)
+    fetchData(fetchDestinations, Actions.DESTINATIONS_LOADING, Actions.DESTINATIONS_ERROR)
+    fetchData(fetchFlights, Actions.FLIGHTS_LOADING, Actions.FLIGHTS_ERROR)
+    fetchData(fetchTrains, Actions.TRAINS_LOADING, Actions.TRAINS_ERROR)
+    fetchData(fetchBuses, Actions.BUSES_LOADING, Actions.BUSES_ERROR)
+    fetchData(fetchTaxis, Actions.TAXIS_LOADING, Actions.TAXIS_ERROR)
+    fetchData(fetchCountriesAndCallingCodes, Actions.COUNTRIES_CODES_LOADING, Actions.COUNTRIES_CODES_ERROR)
   }, [reduxDispatch])
 
   useEffect(() => {
@@ -115,8 +93,8 @@ const SplashScreen = () => {
       <Image
         source={require('../assets/introLogo.png')}
         style={styles.image} />
-      {dataError ? <Text style={styles.text}>Please check your internet connection</Text>
-        : <View>
+      {dataError ? <Text style={styles.text}>Please check your internet connection</Text> :
+        <View>
           <ActivityIndicator style={styles.spinner} size="large" color='gold' />
           <Text style={styles.text}>Loading Our Services</Text>
         </View>
