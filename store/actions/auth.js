@@ -6,29 +6,8 @@ import { baseUrl } from '../../constants/networking'
 let timer
 
 
-export const signUp = (creds) => async (dispatch) => {
-    dispatch({ type: ActionTypes.AUTHENTICATION_REQUEST })
-    try {
-        const response = await fetch(`${baseUrl}users/signup`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(creds)
-        })
-        if (!response.ok) throw Error(response.err)
-        const data = await response.json()
-        saveDataToStorage(data.token, data.userDetails)
-        authentication(data.token, data.userDetails)
-    }
-    catch (error) {
-        dispatch({ type: ActionTypes.AUTHENTICATION_FAILURE, payload: error })
-    }
-}
-
-
-export const login = (creds) => async (dispatch) => {
-    const response = await fetch(`${baseUrl}users/login`, {
+export const authenticate = (creds, type) => async (dispatch) => {
+    const response = await fetch(`${baseUrl}users/${type}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -41,19 +20,14 @@ export const login = (creds) => async (dispatch) => {
         throw new Error(error)
     }
     const data = await response.json()
-    dispatch({ type: ActionTypes.AUTHENTICATION, token: data.token, userDetails: data.userDetails})
-    saveDataToStorage(data.token, data.userDetails)
+    dispatch({ type: ActionTypes.AUTHENTICATION, token: data.token, userDetails: data.userDetails })
+    AsyncStorage.setItem('token', data.token)
+    AsyncStorage.setItem('userDetails', JSON.stringify(data.userDetails))
 }
-
 
 export const logout = () => (dispatch) => {
-    dispatch({ type: ActionTypes.LOGOUT_REQUEST })
     AsyncStorage.removeItem('token')
     AsyncStorage.removeItem('userDetails')
-    dispatch({ type: ActionTypes.LOGOUT_SUCCESS })
+    dispatch({ type: ActionTypes.LOGOUT })
 }
 
-const saveDataToStorage = (token, userDetails) => {
-    AsyncStorage.setItem('token', token)
-    AsyncStorage.setItem('userDetails', JSON.stringify(userDetails))
-}

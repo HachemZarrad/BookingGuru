@@ -62,30 +62,29 @@ const SplashScreen = () => {
     }
     catch (error) {
       dispatch({ type: errorType, payload: error.message })
+      Alert.alert('Something Went Wrong!!', error.message, [{ text: 'Okay' }])
+
     }
     dispatch({ type: loadingType, payload: false })
   }
 
   const loadData = () => {
-    try {
-      fetchData(fetchHotels, Actions.HOTELS_LOADING, Actions.HOTELS_ERROR)
-      fetchData(fetchDestinations, Actions.DESTINATIONS_LOADING, Actions.DESTINATIONS_ERROR)
-      fetchData(fetchFlights, Actions.FLIGHTS_LOADING, Actions.FLIGHTS_ERROR)
-      fetchData(fetchTrains, Actions.TRAINS_LOADING, Actions.TRAINS_ERROR)
-      fetchData(fetchBuses, Actions.BUSES_LOADING, Actions.BUSES_ERROR)
-      fetchData(fetchTaxis, Actions.TAXIS_LOADING, Actions.TAXIS_ERROR)
-      fetchData(fetchCountriesAndCallingCodes, Actions.COUNTRIES_CODES_LOADING, Actions.COUNTRIES_CODES_ERROR)
-    }
-    catch (error) {
-      Alert.alert('Something Went Wrong!!', error.message, [{ text: 'Okay' }])
-    }
+    fetchData(fetchHotels, Actions.HOTELS_LOADING, Actions.HOTELS_ERROR)
+    fetchData(fetchDestinations, Actions.DESTINATIONS_LOADING, Actions.DESTINATIONS_ERROR)
+    fetchData(fetchFlights, Actions.FLIGHTS_LOADING, Actions.FLIGHTS_ERROR)
+    fetchData(fetchTrains, Actions.TRAINS_LOADING, Actions.TRAINS_ERROR)
+    fetchData(fetchBuses, Actions.BUSES_LOADING, Actions.BUSES_ERROR)
+    fetchData(fetchTaxis, Actions.TAXIS_LOADING, Actions.TAXIS_ERROR)
+    fetchData(fetchCountriesAndCallingCodes, Actions.COUNTRIES_CODES_LOADING, Actions.COUNTRIES_CODES_ERROR)
   }
 
   useEffect(() => {
     loadData()
-    if (!dataLoading && !dataError) setTimeout(() => { navigation.navigate('HomePage') }, 0)
-  }, [reduxDispatch, dataLoading, dataError])
+  }, [reduxDispatch])
 
+  useEffect(() => {
+    if (!dataLoading && !dataError) setTimeout(() => { navigation.navigate('HomePage') }, 0)
+  }, [dataLoading, dataError])
 
   return (
     <View

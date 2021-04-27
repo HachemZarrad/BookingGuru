@@ -15,7 +15,7 @@ import Icon from '../../components/icon'
 import IconLibrary from '../../constants/iconLibrary'
 import Colors from '../../constants/colors'
 
-import { login } from '../../store/actions/auth'
+import { authenticate } from '../../store/actions/auth'
 
 const SHOW_PASSWORD = 'SHOW_PASSWORD'
 const GET_EMAIL = 'GET_EMAIL'
@@ -52,8 +52,8 @@ const LoginScreen = () => {
 
 
     useEffect(() => {
-        if(loginState.error) Alert.alert('Check your credentials!!', loginState.error, [{ text: 'Okay' }])
-    },[loginState.error])
+        if (loginState.error) Alert.alert('Check your credentials!!', loginState.error, [{ text: 'Okay' }])
+    }, [loginState.error])
 
 
     const goHome = () => {
@@ -76,15 +76,11 @@ const LoginScreen = () => {
         dispatch({ type: LOGIN_ERROR, payload: null })
         dispatch({ type: LOADING_LOGIN, payload: true })
         try {
-            await reduxDispatch(login(
-                {
-                    username: loginState.email,
-                    password: loginState.password
-                }))
+            await reduxDispatch(authenticate({username: loginState.email, password: loginState.password},'login'))
             goHome()
         }
         catch (error) {
-            dispatch({ type: LOGIN_ERROR, payload: error.message})
+            dispatch({ type: LOGIN_ERROR, payload: error.message })
             dispatch({ type: LOADING_LOGIN, payload: false })
         }
     }
