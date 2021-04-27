@@ -69,7 +69,7 @@ const SplashScreen = () => {
     }
   }
 
-  const loadData = useCallback(() => {
+  const loadData = () => {
     fetchData(fetchHotels, Actions.HOTELS_LOADING, Actions.HOTELS_ERROR)
     fetchData(fetchDestinations, Actions.DESTINATIONS_LOADING, Actions.DESTINATIONS_ERROR)
     fetchData(fetchFlights, Actions.FLIGHTS_LOADING, Actions.FLIGHTS_ERROR)
@@ -77,11 +77,11 @@ const SplashScreen = () => {
     fetchData(fetchBuses, Actions.BUSES_LOADING, Actions.BUSES_ERROR)
     fetchData(fetchTaxis, Actions.TAXIS_LOADING, Actions.TAXIS_ERROR)
     fetchData(fetchCountriesAndCallingCodes, Actions.COUNTRIES_CODES_LOADING, Actions.COUNTRIES_CODES_ERROR)
-  }, [reduxDispatch])
+  }
 
   useEffect(() => {
     loadData()
-  }, [loadData])
+  }, [reduxDispatch])
 
   useEffect(() => {
     if (!dataLoading && !dataError) setTimeout(() => { navigation.navigate('HomePage') }, 0)
