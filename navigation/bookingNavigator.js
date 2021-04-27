@@ -1,11 +1,15 @@
 import React from 'react'
 import { Platform, SafeAreaView, View, ScrollView } from 'react-native'
 
-import { useSelector } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+import { useSelector, useDispatch } from 'react-redux'
 
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerItemList, DrawerItem } from '@react-navigation/drawer'
 import { Drawer } from 'react-native-paper'
+
+import { logout } from '../store/actions/auth'
 
 import IconLibrary from '../constants/iconLibrary'
 import Colors from '../constants/colors'
@@ -70,14 +74,21 @@ const bookingDrawerNavigator = createDrawerNavigator()
 
 export const BookingDrawer = () => {
 
+    const reduxDispatch = useDispatch()
+
     const userDetails = useSelector(state => state.auth.userDetails)
-    const token = useSelector(state => state.auth.token)
+    const token = useSelector(state => state.auth.token)    
+    // const token = AsyncStorage.getItem('token')
     const email = userDetails?.username ? userDetails.username : 'BG'
     const firstName = userDetails?.firstname ? userDetails.firstname : ''
     const lastName = userDetails?.lastname ? userDetails.lastname : ''
     const fullName = `${firstName} ${lastName}`
     const acronymName = firstName && lastName ? getAcronymName(firstName[0], lastName[0]) : getAcronymName(email[0], email[1])
 
+    const logoutUser = props => {
+        reduxDispatch(logout())
+        props.navigation.navigate('HomePage')
+    }
 
     return (
         <bookingDrawerNavigator.Navigator
@@ -165,7 +176,7 @@ export const BookingDrawer = () => {
                                                 />
                                             )}
                                             label="Logout"
-                                            onPress={() => { props.navigation.navigate('Home') }}
+                                            onPress={() => logoutUser(props)}
                                         />
                                     </Drawer.Section>
                                 }

@@ -16,6 +16,7 @@ export default (state = initialState, action) => {
 
         case ActionTypes.LOGOUT:
             return initialState 
+
         default:
             return state
     }
