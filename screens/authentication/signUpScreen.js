@@ -14,12 +14,6 @@ import { GENDER } from '../../constants/usefulLists'
 import { useSelector } from 'react-redux'
 
 
-// const Actions = {
-
-// }
-
-// const reducer = (state, action) => {
-// }
 
 const SignUpScreen = ({ route }) => {
 
@@ -57,20 +51,23 @@ const SignUpScreen = ({ route }) => {
                         checkInput
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
+                        email
                         keyboardType='default'
                         default=''
                         error='LastName must be at least three characters long'
                         minLength={3}
                     />
-
+                    
                     <InputBar
                         placeholder="Email Address"
                         checkInput
+                        email
+                        // required
+                        error="Please enter a valid email address."
+                        default=''
+                        keyboardType='default'
                         leftIconLibrary={IconLibrary.MaterialIcons}
                         leftIconName='email'
-                        required
-                        email
-                        error="Please enter a valid email address."
                         rightIconLibrary={IconLibrary.Foundation}
                         rightIconSize={15}
                         rightIconName='asterisk'

@@ -105,9 +105,10 @@ const LoginScreen = () => {
                 <Title title='Login' style={styles.title} />
                 <InputBar
                     placeholder='Email'
+                    checkInput
+                    email
                     leftIconLibrary={IconLibrary.MaterialIcons}
                     leftIconName='email'
-                    checkInput
                     onChangeText={getEmail}
                     error='Please Enter a valid Email'
                 />

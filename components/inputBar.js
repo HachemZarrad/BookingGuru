@@ -34,8 +34,9 @@ const InputBar = props => {
     // }, [inputState, props.onInputChange])
 
 
-    const textChangeHandler = (text) => {
+    const textChangeHandler = (input) => {
         let isValid = true
+        const text = String(input)
         if (props.required && text.trim().length === 0) {
             isValid = false
         }

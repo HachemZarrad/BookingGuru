@@ -1,8 +1,6 @@
 import React from 'react'
 import { Platform, SafeAreaView, View, ScrollView } from 'react-native'
 
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
 import { useSelector, useDispatch } from 'react-redux'
 
 import { createStackNavigator, HeaderBackground } from '@react-navigation/stack'
@@ -78,7 +76,6 @@ export const BookingDrawer = () => {
 
     const userDetails = useSelector(state => state.auth.userDetails)
     const token = useSelector(state => state.auth.token)    
-    // const token = AsyncStorage.getItem('token')
     const email = userDetails?.username ? userDetails.username : 'BG'
     const firstName = userDetails?.firstname ? userDetails.firstname : ''
     const lastName = userDetails?.lastname ? userDetails.lastname : ''

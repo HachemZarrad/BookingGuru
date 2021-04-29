@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, ScrollView, BackHandler, Alert } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native'
+
 import CustomImage from '../components/customImage';
 import Title from '../components/title';
 import ServicesMenu from '../components/servicesMenu';
 import Toolbar from '../components/toolbar';
+
 import Colors from '../constants/colors';
 import Destinations from '../components/destinations';
 
 const Home = () => {
 
+  const navigation = useNavigation()
+
   useEffect(() => {
     const backAction = () => {
-      Alert.alert("That's All !", "Exit App?", [
+      if (navigation.isFocused()) Alert.alert("That's All !", "Exit App?", [
         {
           text: "Cancel",
           onPress: () => null,
@@ -19,7 +25,7 @@ const Home = () => {
         },
         { text: "YES", onPress: () => BackHandler.exitApp() }
       ]);
-      return true;
+      if (navigation.isFocused()) return true
     };
 
     const backHandler = BackHandler.addEventListener(

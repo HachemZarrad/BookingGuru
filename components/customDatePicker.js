@@ -17,7 +17,7 @@ const CustomDatePicker = props => {
     const [show, setShow] = useState(false);
     const [title, setTitle] = useState(props.title)
 
-    const icon = props.mode === 'date' ? 'calendar' : 'clockcircleo'
+    const icon = props.mode === 'date' ? 'calendar' : 'clock'
     const dateToDisplay = `${date?.getDate() + 1}/${date?.getMonth() + 1}/${date?.getFullYear()}`
     const timeToDisplay = `${date?.getHours()}:${date?.getMinutes()}`
 
