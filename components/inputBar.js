@@ -1,46 +1,26 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, TextInput, Text } from 'react-native'
 
 import Icon from './icon'
 
 import Colors from '../constants/colors'
 
-const EMAILCHECK = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-const SET_INPUT_DIRTY = 'SET_INPUT_DIRTY'
-const INPUT_CHANGE = 'INPUT_CHANGE'
-
-const inputReducer = (action, inputState) => {
-    switch (action.type) {
-        case SET_INPUT_DIRTY:
-            return { ...inputState, pristine: false }
-        case INPUT_CHANGE:
-            return { ...inputState, isValid: action.payload.isValid, input: action.payload.value }
-        default:
-            return inputState
-    }
-}
-
 
 const InputBar = props => {
-    const [inputState, dispatch] = useReducer(inputReducer, {
-        pristine: true,
-        isValid: props.valid ? props.valid : false,
-        value: props.default ? props.default : ''
-    });
 
-    // useEffect(() => {
-    //     if (!inputState.pristine) props.onInputChange(inputState.value)
-    // }, [inputState, props.onInputChange])
+    const [pristine, setPristine] = useState(true)
+    const [inputValue, setInputValue] = useState('')
+
+    const { onInputChange } = props
 
 
-    const textChangeHandler = (input) => {
+    const textChangeHandler = (text) => {
         let isValid = true
-        const text = String(input)
+        const emailRegex = /^[/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (props.required && text.trim().length === 0) {
             isValid = false
         }
-        if (props.email && !EMAILCHECK.test(text.toLowerCase())) {
+        if (props.email && !emailRegex.test(text.toLowerCase())) {
             isValid = false
         }
         if (props.minLength != null && text.length < props.minLength) {
@@ -49,11 +29,12 @@ const InputBar = props => {
         if (props.maxLength != null && text.length > props.maxLength) {
             isValid = false
         }
-        dispatch({ type: INPUT_CHANGE, payload: { value: text, isValid: isValid } })
+        setInputValue(text)
+        onInputChange(text, isValid)
     }
 
     const makeDirty = () => {
-        dispatch({ type: SET_INPUT_DIRTY })
+        setPristine(false)
     }
 
 
@@ -72,9 +53,9 @@ const InputBar = props => {
                     {...props}
                     placeholderTextColor="black"
                     style={{ ...styles.inputBar, ...props.style }}
-                    value={inputState.value}
+                    value={inputValue}
                     onBlur={makeDirty}
-                    onChange={textChangeHandler}
+                    onChangeText={textChangeHandler}
                 >
                 </TextInput>
                 <Icon
@@ -86,7 +67,7 @@ const InputBar = props => {
                     style={styles.rightIcon}
                 />
             </View>
-            {!inputState.pristine && !inputState.isValid && props.checkInput && 
+            {!pristine && !props.validity && props.checkInput &&
                 <View style={styles.errorContainer}>
                     <Text style={styles.error}>{props.error}</Text>
                 </View>

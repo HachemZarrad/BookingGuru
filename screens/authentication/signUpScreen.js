@@ -41,6 +41,7 @@ const SignUpScreen = ({ route }) => {
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
                         keyboardType='default'
+                        returnKeyType="next"
                         default=''
                         error='FirstName must be at least three characters long'
                         minLength={3}
@@ -51,8 +52,8 @@ const SignUpScreen = ({ route }) => {
                         checkInput
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
-                        email
                         keyboardType='default'
+                        returnKeyType="next"
                         default=''
                         error='LastName must be at least three characters long'
                         minLength={3}
@@ -62,7 +63,8 @@ const SignUpScreen = ({ route }) => {
                         placeholder="Email Address"
                         checkInput
                         email
-                        // required
+                        required
+                        returnKeyType="next"
                         error="Please enter a valid email address."
                         default=''
                         keyboardType='default'
