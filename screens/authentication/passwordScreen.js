@@ -73,7 +73,7 @@ const PasswordScreen = () => {
                     rightIconFeature={showHidePassword}
                     secureTextEntry={state.passwordHidden}
                     passwordCreation
-                    onChangeText={manageColors}
+                    onInputChange={manageColors}
                     style={styles.input}
                 />
             </View>
@@ -92,7 +92,7 @@ const PasswordScreen = () => {
                     rightIconFeature={showHideRetypedPassword}
                     secureTextEntry={state.retypedPasswordHidden}
                     passwordCreation
-                    onChangeText={manageConfirmPassword}
+                    onInputChange={manageConfirmPassword}
                     style={styles.input}
                 />
             </View>

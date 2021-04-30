@@ -27,7 +27,7 @@ const CustomHeader = (props) => {
           leftIconName="arrow-left"
           leftIconFeature={showFilteredData ? backFromFilterList : backHome}
           rightIconSize={20}
-          onChangeText={searchBarHandler}
+          onInputChange={searchBarHandler}
         />
       </View>
     </View>

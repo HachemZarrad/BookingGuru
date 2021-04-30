@@ -44,7 +44,7 @@ const SignUpScreen = ({ route }) => {
                         returnKeyType="next"
                         default=''
                         error='FirstName must be at least three characters long'
-                        minLength={3}
+                        maxLength={3}
 
                     />
                     <InputBar
@@ -64,6 +64,7 @@ const SignUpScreen = ({ route }) => {
                         checkInput
                         email
                         required
+                        // validity={}
                         returnKeyType="next"
                         error="Please enter a valid email address."
                         default=''

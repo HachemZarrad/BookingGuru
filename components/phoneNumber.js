@@ -23,6 +23,10 @@ const PhoneNumber = props => {
                 <InputBar
                     {...props}
                     placeholder="Phone Number"
+                    checkInput
+                    minLength={7}
+                    maxLength={15}
+                    error='Invalid Phone Number'
                     leftIconLibrary={IconLibrary.MaterialIcons}
                     leftIconName='phone-android'
                     style={styles.input}
