@@ -1,5 +1,7 @@
-import React, { useReducer, useEffect, useCallback } from 'react'
+import React, { useReducer } from 'react'
 import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native'
+
+import { useSelector } from 'react-redux'
 
 import InputBar from '../../components/inputBar'
 import CustomPicker from '../../components/customPicker'
@@ -10,14 +12,29 @@ import PhoneNumber from '../../components/phoneNumber'
 
 import Colors from '../../constants/colors'
 import IconLibrary from '../../constants/iconLibrary'
-import { GENDER } from '../../constants/usefulLists'
-import { useSelector } from 'react-redux'
+import Actions from '../../constants/signUpActions'
+import signUpReducer from '../../constants/signUpReducer'
 
 
 
 const SignUpScreen = ({ route }) => {
 
-    // const [state, dispatch] = useReducer(reducer, {})
+    const [state, dispatch] = useReducer(signUpReducer, {
+        firstName: '',
+        lastName: '',
+        email: '',
+        birthDate: '',
+        country: '',
+        PhoneNumber: '',
+    })
+
+
+    const getInput = (input, validity, type) => {
+        dispatch({type: type, payload: input})
+        if(type === "GET_EMAIL") dispatch({type: Actions.GET_EMAIL_VALIDITY, payload: validity})
+    }
+    
+
     const selectedCode = route.params
     const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes)
     countriesAndCodes.sort()
@@ -58,7 +75,7 @@ const SignUpScreen = ({ route }) => {
                         error='LastName must be at least three characters long'
                         minLength={3}
                     />
-                    
+
                     <InputBar
                         placeholder="Email Address"
                         checkInput
@@ -87,13 +104,7 @@ const SignUpScreen = ({ route }) => {
                         iconColor={Colors.buttonContainer}
                     />
                     <PhoneNumber flag={selectedCode?.country_name.toLowerCase()} callingCode={selectedCode?.dialling_code} />
-                    <CustomPicker
-                        list={GENDER}
-                        prompt='Gender'
-                        iconLibrary={IconLibrary.FontAwesome}
-                        iconName='intersex'
-                        iconColor={Colors.buttonContainer}
-                    />
+
                 </View>
             </ScrollView>
             <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />
