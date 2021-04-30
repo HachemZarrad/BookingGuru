@@ -24,6 +24,7 @@ const PhoneNumber = props => {
                     {...props}
                     placeholder="Phone Number"
                     checkInput
+                    keyboardType='number-pad'
                     minLength={7}
                     maxLength={15}
                     error='Invalid Phone Number'

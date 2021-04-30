@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
 
 import Title from '../../components/title';
@@ -11,9 +11,20 @@ import IconLibrary from '../../constants/iconLibrary';
 import passwordCreationReducer from '../../constants/passwordCreationReducer';
 import passwordCreationActions from '../../constants/passwordCreationActions'
 
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+
+import { authenticate } from '../../store/actions/auth'
 
 
-const PasswordScreen = () => {
+const PasswordScreen = ({ route }) => {
+
+    const userData = route.params
+    const reduxDispatch = useDispatch()
+    const navigation = useNavigation()
+
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
     const [state, dispatch] = useReducer(passwordCreationReducer, {
         "pristine": true,
         "password": '',
@@ -54,8 +65,18 @@ const PasswordScreen = () => {
         dispatch({ type: passwordCreationActions.CONFIRM_PASSWORD_MATCH, payload: retypedPassword });
     }
 
-    const manageSignUp = () => {
-
+    const manageSignUp = async () => {
+        if (state.passwordMatchConfirmed) userData.password = state.password
+        setLoading(true)
+        setError(null)
+        try {
+            await reduxDispatch(authenticate(userData, 'signup'))
+            navigation.navigate('Home')
+        }
+        catch (error) {
+            setLoading(false)
+            setError(error.message)
+        }
     }
 
     return (
@@ -96,7 +117,11 @@ const PasswordScreen = () => {
                     style={styles.input}
                 />
             </View>
-            <NormalButton title='Register' style={styles.button} />
+            <NormalButton
+                title='Register'
+                style={styles.button}
+                onPress={manageSignUp}
+            />
         </View>
     )
 }

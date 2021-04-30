@@ -51,7 +51,15 @@ const SignUpScreen = ({ route }) => {
     }
 
     const confirm = () => {
-        navigation.navigate('Password')
+        const userData = {
+            "firstName": state.firstName,
+            "lastName": state.lastName,
+            "username": state.email,
+            "birthDate": state.birthDate,
+            "country": state.country,
+            "phoneNumber": state.phoneNumber,
+        }
+        navigation.navigate('Password', userData)
     }
 
     const alert = () => {
@@ -67,7 +75,7 @@ const SignUpScreen = ({ route }) => {
     }
 
     const validInputs = () => {
-        const nonRequiredInputsState = state.firstNameValidity || state.lastNameValidity || state.phoneNumber
+        const nonRequiredInputsState = state.firstNameValidity && state.lastNameValidity && state.phoneNumber
         if (!nonRequiredInputsState) alert()
         else confirm()
     }
@@ -85,9 +93,10 @@ const SignUpScreen = ({ route }) => {
                     <InputBar
                         placeholder="First Name"
                         checkInput
-                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_FIRST_NAME, Actions.FIRST_NAME_VALIDITY)}
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.FIRST_NAME, Actions.FIRST_NAME_VALIDITY)}
                         minLength={3}
                         error='FirstName must be at least three characters long'
+                        validity={state.firstNameValidity}
                         returnKeyType="next"
                         keyboardType='default'
                         default=''
@@ -98,10 +107,11 @@ const SignUpScreen = ({ route }) => {
                     <InputBar
                         placeholder="Last Name"
                         checkInput
-                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_LAST_NAME, Actions.LAST_NAME_VALIDITY)}
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.LAST_NAME, Actions.LAST_NAME_VALIDITY)}
                         default=''
                         minLength={3}
                         error='LastName must be at least three characters long'
+                        validity={state.lastNameValidity}
                         keyboardType='default'
                         returnKeyType="next"
                         leftIconLibrary={IconLibrary.Entypo}
@@ -113,7 +123,7 @@ const SignUpScreen = ({ route }) => {
                         checkInput
                         email
                         required
-                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_EMAIL, Actions.EMAIL_VALIDITY)}
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.EMAIL, Actions.EMAIL_VALIDITY)}
                         validity={state.emailValidity}
                         returnKeyType="next"
                         error="Please enter a valid email address."
@@ -139,7 +149,8 @@ const SignUpScreen = ({ route }) => {
                     <PhoneNumber
                         flag={selectedCode?.country_name.toLowerCase()}
                         callingCode={selectedCode?.dialling_code}
-                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_PHONE_NUMBER, Actions.PHONE_NUMBER_VALIDITY)}
+                        validity={state.phoneNumberValidity}
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.PHONE_NUMBER, Actions.PHONE_NUMBER_VALIDITY)}
                     />
 
                 </View>
