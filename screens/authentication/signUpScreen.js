@@ -21,19 +21,16 @@ const SignUpScreen = ({ route }) => {
 
     const [state, dispatch] = useReducer(signUpReducer, {
         firstName: '',
+        firstNameValidity: false,
         lastName: '',
+        lastNameValidity: false,
         email: '',
+        emailValidity: false,
         birthDate: '',
         country: '',
-        PhoneNumber: '',
+        phoneNumber: '',
+        phoneNumberValidity: false
     })
-
-
-    const getInput = (input, validity, type) => {
-        dispatch({type: type, payload: input})
-        if(type === "GET_EMAIL") dispatch({type: Actions.GET_EMAIL_VALIDITY, payload: validity})
-    }
-    
 
     const selectedCode = route.params
     const countriesAndCodes = useSelector(state => state.countriesAndCodes.countriesAndCodes)
@@ -42,6 +39,17 @@ const SignUpScreen = ({ route }) => {
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
     })
+    
+
+    const getInput = (input, validity, type, validityType) => {
+        dispatch({ type: type, payload: input })
+        dispatch({ type: validityType, payload: validity })
+    }
+    
+    const validInputs = () => {
+        
+    }
+
 
     return (
         <KeyboardAvoidingView
@@ -55,25 +63,27 @@ const SignUpScreen = ({ route }) => {
                     <InputBar
                         placeholder="First Name"
                         checkInput
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_FIRST_NAME, Actions.FIRST_NAME_VALIDITY)}
+                        minLength={3}
+                        error='FirstName must be at least three characters long'
+                        returnKeyType="next"
+                        keyboardType='default'
+                        default=''
                         leftIconLibrary={IconLibrary.Entypo}
                         leftIconName='user'
-                        keyboardType='default'
-                        returnKeyType="next"
-                        default=''
-                        error='FirstName must be at least three characters long'
-                        maxLength={3}
 
                     />
                     <InputBar
                         placeholder="Last Name"
                         checkInput
-                        leftIconLibrary={IconLibrary.Entypo}
-                        leftIconName='user'
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_LAST_NAME, Actions.LAST_NAME_VALIDITY)}
+                        default=''
+                        minLength={3}
+                        error='LastName must be at least three characters long'
                         keyboardType='default'
                         returnKeyType="next"
-                        default=''
-                        error='LastName must be at least three characters long'
-                        minLength={3}
+                        leftIconLibrary={IconLibrary.Entypo}
+                        leftIconName='user'
                     />
 
                     <InputBar
@@ -81,7 +91,8 @@ const SignUpScreen = ({ route }) => {
                         checkInput
                         email
                         required
-                        // validity={}
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_EMAIL, Actions.EMAIL_VALIDITY)}
+                        validity={state.emailValidity}
                         returnKeyType="next"
                         error="Please enter a valid email address."
                         default=''
@@ -103,11 +114,20 @@ const SignUpScreen = ({ route }) => {
                         iconName='place'
                         iconColor={Colors.buttonContainer}
                     />
-                    <PhoneNumber flag={selectedCode?.country_name.toLowerCase()} callingCode={selectedCode?.dialling_code} />
+                    <PhoneNumber
+                        flag={selectedCode?.country_name.toLowerCase()}
+                        callingCode={selectedCode?.dialling_code}
+                        onInputChange={(text, validity) => getInput(text, validity, Actions.GET_PHONE_NUMBER, Actions.PHONE_NUMBER_VALIDITY)}
+                    />
 
                 </View>
             </ScrollView>
-            <NormalButton title='Sign Up' style={styles.button} nextScreen='Password' />
+            <NormalButton
+                title='Sign Up'
+                style={styles.button}
+                nextScreen='Password'
+                disabled={!state.emailValidity}
+            />
         </KeyboardAvoidingView>
     )
 }
