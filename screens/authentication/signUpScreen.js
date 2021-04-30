@@ -1,5 +1,7 @@
 import React, { useReducer } from 'react'
-import { StyleSheet, View, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, ScrollView, KeyboardAvoidingView, Alert } from 'react-native'
+
+import { useNavigation } from '@react-navigation/native'
 
 import { useSelector } from 'react-redux'
 
@@ -18,6 +20,8 @@ import signUpReducer from '../../constants/signUpReducer'
 
 
 const SignUpScreen = ({ route }) => {
+
+    const navigation = useNavigation()
 
     const [state, dispatch] = useReducer(signUpReducer, {
         firstName: '',
@@ -39,15 +43,33 @@ const SignUpScreen = ({ route }) => {
     countriesAndCodes.map(country => {
         countries.push(country.country_name)
     })
-    
+
 
     const getInput = (input, validity, type, validityType) => {
         dispatch({ type: type, payload: input })
         dispatch({ type: validityType, payload: validity })
     }
-    
+
+    const confirm = () => {
+        navigation.navigate('Password')
+    }
+
+    const alert = () => {
+        Alert.alert("Invalid Input!!", 'Some fields are missing or poorly filled in, are you sure you wanna proceed ?'
+            , [
+                {
+                    text: "No",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "YES", onPress: () => confirm() }
+            ]);
+    }
+
     const validInputs = () => {
-        
+        const nonRequiredInputsState = state.firstNameValidity || state.lastNameValidity || state.phoneNumber
+        if (!nonRequiredInputsState) alert()
+        else confirm()
     }
 
 
@@ -125,7 +147,7 @@ const SignUpScreen = ({ route }) => {
             <NormalButton
                 title='Sign Up'
                 style={styles.button}
-                nextScreen='Password'
+                onPress={validInputs}
                 disabled={!state.emailValidity}
             />
         </KeyboardAvoidingView>
