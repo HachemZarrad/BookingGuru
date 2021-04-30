@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView, Alert } from 'react-native'
 
 import Title from '../../components/title';
 import InputBar from '../../components/inputBar';
@@ -73,9 +73,10 @@ const PasswordScreen = ({ route }) => {
             await reduxDispatch(authenticate(userData, 'signup'))
             navigation.navigate('Home')
         }
-        catch (error) {
+        catch (err) {
             setLoading(false)
-            setError(error.message)
+            setError(err.message)
+            Alert.alert('Check your credentials!!', error, [{ text: 'Okay' }])
         }
     }
 
@@ -120,6 +121,7 @@ const PasswordScreen = ({ route }) => {
             <NormalButton
                 title='Register'
                 style={styles.button}
+                disabled={!state.passwordMatchConfirmed}
                 onPress={manageSignUp}
             />
         </View>
